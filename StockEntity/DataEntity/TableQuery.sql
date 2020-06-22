@@ -1,35 +1,37 @@
-﻿CREATE TABLE ProductMaster ( 
-	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	Name				TEXT 
-)
+﻿---- Create Tables on SQLite
 
-CREATE TABLE Dealer (
-	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	Name				TEXT NOT NULL,
-	Address				TEXT,
-	Email				TEXT,
-	Mobile				TEXT,
-	Remarks				Text
-)
+--CREATE TABLE ProductDetail ( 
+--	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+--	Name				TEXT 
+--)
 
-CREATE TABLE Bill (
-	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	DealerId			INTEGER NOT NULL,
-	BillDate			TEXT NOT NULL,
-	BillEntryDate		TEXT NOT NULL,
-	TotalAmount			REAL NOT NULL,
-	Remarks				TEXT,
-	FOREIGN KEY (DealerId) REFERENCES Dealer(Id)
-)
+--CREATE TABLE Dealer (
+--	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+--	Name				TEXT NOT NULL,
+--	Address				TEXT,
+--	Email				TEXT,
+--	Mobile				TEXT,
+--	Remarks				Text
+--)
 
-CREATE TABLE BillDetail (
-	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	BillId				INTEGER NOT NULL,
-	ProductId			TEXT NOT NULL,
-	TotalAmount			REAL NOT NULL,
-	QuantityInBox		INTEGER ,
-	TotalBoxes			INTEGER,
-	TotalQuantity		INTEGER,
-	FOREIGN KEY (BillId) REFERENCES Bill(Id)
-	FOREIGN KEY (ProductId) REFERENCES ProductMaster(Id)
-)
+--CREATE TABLE Bill (
+--	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+--	DealerId			INTEGER NOT NULL,
+--	BillDate			TEXT NOT NULL,
+--	BillEntryDate		TEXT NOT NULL,
+--	TotalAmount			REAL NOT NULL,
+--	Remarks				TEXT,
+--	FOREIGN KEY (DealerId) REFERENCES Dealer(Id)
+--)
+
+--CREATE TABLE BillDetail (
+--	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+--	BillId				INTEGER NOT NULL,
+--	ProductId			TEXT NOT NULL,
+--	TotalAmount			REAL NOT NULL,
+--	QuantityInBox		INTEGER ,
+--	TotalBoxes			INTEGER,
+--	TotalQuantity		INTEGER,
+--	FOREIGN KEY (BillId) REFERENCES Bill(Id)
+--	FOREIGN KEY (ProductId) REFERENCES ProductMaster(Id)
+--)

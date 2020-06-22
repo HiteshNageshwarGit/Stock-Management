@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace StockEntity.Entity
 {
-    public class BillDetail : BaseEntity
+    public partial class BillDetail : BaseEntity
     {
-        //public int Id { get; set; }
         public int BillId { get; set; }
         public int ProductId { get; set; }
         public float TotalAmount { get; set; }

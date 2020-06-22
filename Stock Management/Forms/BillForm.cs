@@ -33,10 +33,10 @@ namespace Stock_Management.Forms
 
         private void BillForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CallerForm.Name == "BillListForm")
+            if (CallerForm.Name == "DealerListForm")
             {
                 DealerListForm dealerForm = (DealerListForm)CallerForm;
-                dealerForm.LoadBillList();
+                dealerForm.LoadBillList(Bill.DealerId);
             }
         }
 
@@ -47,6 +47,9 @@ namespace Stock_Management.Forms
 
         private void EditBill()
         {
+           
+
+
             if (Dealer.Id == 0)
             {
                 MessageBox.Show("Dealer ID not found");
@@ -65,13 +68,13 @@ namespace Stock_Management.Forms
                     {
                         Bill = billRepo.GetByID(Bill.Id);
                         lblEntyDate.Text = Bill.BillEntryDate.ToString();
-                        dtBillDate.Value = Bill.BillDate;
+                        dtBillDate.Value = DateHelper.GetDateObject(Bill.BillDate);
                         txtTotalAmount.Text = Convert.ToString(Bill.TotalAmount);
                         txtRemarks.Text = Bill.Remarks;
                     }
                     else
                     {
-                        lblEntyDate.Text = new DateTime().ToString();
+                        lblEntyDate.Text = DateHelper.GetTodayDateString();
                     }
                 }
             }
@@ -81,8 +84,8 @@ namespace Stock_Management.Forms
         {
             float totalAmout;
             Bill.DealerId = Dealer.Id;
-            Bill.BillEntryDate = new DateTime();
-            Bill.BillDate = dtBillDate.Value;
+            Bill.BillEntryDate = lblEntyDate.Text;
+            Bill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
             if (float.TryParse(txtTotalAmount.Text, out totalAmout))
             {
                 Bill.TotalAmount = totalAmout;

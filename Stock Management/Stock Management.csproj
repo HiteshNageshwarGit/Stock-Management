@@ -117,11 +117,11 @@
     <Compile Include="Forms\DealerForm.Designer.cs">
       <DependentUpon>DealerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\DealerList.cs">
+    <Compile Include="Forms\DealerListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DealerList.Designer.cs">
-      <DependentUpon>DealerList.cs</DependentUpon>
+    <Compile Include="Forms\DealerListForm.Designer.cs">
+      <DependentUpon>DealerListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -143,8 +143,8 @@
     <EmbeddedResource Include="Forms\DealerForm.resx">
       <DependentUpon>DealerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DealerList.resx">
-      <DependentUpon>DealerList.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DealerListForm.resx">
+      <DependentUpon>DealerListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

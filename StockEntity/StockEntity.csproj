@@ -51,23 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityX\BaseListEntity.cs" />
-    <Compile Include="EntityX\BillList.cs" />
+    <Compile Include="EntityX\Bill.cs" />
+    <Compile Include="EntityX\BillDetail.cs" />
+    <Compile Include="EntityX\Dealer.cs" />
+    <Compile Include="EntityX\ProductDetail.cs" />
+    <Compile Include="Helper\DateHelper.cs" />
     <Compile Include="Repository\BillRepository.cs" />
     <Compile Include="Repository\DealerRepository.cs" />
     <Compile Include="Repository\IBaseRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="DataEntity\StockDBContext.cs" />
-    <Compile Include="Repository\IUnitOfWork.cs" />
-    <Compile Include="Repository\UnitOfWork.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
     <Compile Include="Helper\Message.cs" />
     <Compile Include="Entity\Bill.cs" />
     <Compile Include="Entity\BillDetail.cs" />
     <Compile Include="Entity\Dealer.cs" />
     <Compile Include="Entity\History.cs" />
-    <Compile Include="Entity\ProductMaster.cs" />
+    <Compile Include="Entity\ProductDetail.cs" />
     <Compile Include="Helper\ValidationState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

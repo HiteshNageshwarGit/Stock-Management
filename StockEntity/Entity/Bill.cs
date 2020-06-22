@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace StockEntity.Entity
 {
-    public class Bill : BaseEntity
+    public partial class Bill : BaseEntity
     {
-        //public int Id { get; set; }
         public int DealerId { get; set; }
-        public DateTime BillDate { get; set; }
-        public DateTime BillEntryDate { get; set; }
+        public string BillDate { get; set; }
+        public string BillEntryDate { get; set; }
         public float TotalAmount { get; set; }
         public string Remarks { get; set; }
+        
     }
 }

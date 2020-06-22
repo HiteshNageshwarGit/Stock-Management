@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace StockEntity.Entity
 {
-    public class Dealer : BaseEntity
+    public partial class Dealer : BaseEntity
     {
-        //public int Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string Email { get; set; }

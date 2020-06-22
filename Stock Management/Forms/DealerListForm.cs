@@ -18,48 +18,57 @@ namespace Stock_Management.Forms
         BillRepository billRepo = new BillRepository();
         List<Dealer> dealerList;
         List<Bill> billList;
+        int SelectedDealerId;
         public DealerListForm()
         {
             InitializeComponent();
             dgvDealerList.AutoGenerateColumns = false;
-            ColMore.UseColumnTextForLinkValue = true; // To show "Details" text on button
-            ColBills.UseColumnTextForLinkValue = true; // To show "Bills" text on button
+            ColDealerShowLink.UseColumnTextForLinkValue = true; // To show "Details" text on button
+
+            dgvBillList.AutoGenerateColumns = false;
+            ColBillShowLink.UseColumnTextForLinkValue = true;
             LoadDealerList();
         }
 
         private void btnAddDealer_Click(object sender, EventArgs e)
         {
-            openDealerDetails(0);
+            openDealerForm(0);
         }
 
         private void dgvDealerList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == -1)
+            if (e.RowIndex == -1)
             {
                 return;
             }
 
             int dealerId = ((Dealer)dgvDealerList.Rows[e.RowIndex].DataBoundItem).Id;
-            if (dgvDealerList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToLower() == "Details".ToLower())
-            {
-                openDealerDetails(dealerId);
-            }
-            else if (dgvDealerList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToLower() == "Add Bill".ToLower())
-            {
-                opeBillDetails(dealerId);
+            SelectedDealerId = dealerId;
+            lblDealerName.Text = ((Dealer)dgvDealerList.Rows[e.RowIndex].DataBoundItem).Name;
+            LoadBillList(dealerId);
+
+            if (e.ColumnIndex != -1 && dgvDealerList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToLower() == "Details".ToLower())
+            {                
+                openDealerForm(dealerId);
             }
         }
         private void dgvBillList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == -1)
+            if (e.RowIndex == -1)
             {
                 return;
             }
-            int dealerId = ((Dealer)dgvDealerList.Rows[e.RowIndex].DataBoundItem).Id;
-            if (dgvDealerList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToLower() == "Add Breakups".ToLower())
+
+            int billId = ((Dealer)dgvBillList.Rows[e.RowIndex].DataBoundItem).Id;
+            if (e.ColumnIndex != -1 && dgvBillList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToLower() == "Details".ToLower())
             {
-                //openDealerDetails(dealerId);
+                opeBillForm(SelectedDealerId, billId);
             }
+        }
+
+        private void btnAddBill_Click(object sender, EventArgs e)
+        {           
+            opeBillForm(SelectedDealerId, 0);
         }
 
         internal void LoadDealerList()
@@ -68,22 +77,17 @@ namespace Stock_Management.Forms
             dgvDealerList.DataSource = dealerList;
         }
 
-        internal void LoadBillList()
+        internal void LoadBillList(int dealerId)
         {
-            billList = billRepo.GetBillList();
+            billList = billRepo.GetBillList(dealerId);
             dgvBillList.DataSource = billList;
         }
 
-        private void openDealerDetails(int dealerId)
+        private void openDealerForm(int dealerId)
         {
-            //pnlForDealerDetails.Visible = true;
             DealerForm dealerForm = new DealerForm();
             dealerForm.callerForm = this;
             dealerForm.dealer.Id = dealerId;
-            //dealerForm.TopLevel = false;
-            //pnlForDealerDetails.Controls.Add(dealerForm);
-            //dealerForm.FormBorderStyle = FormBorderStyle.None;
-            //dealerForm.Dock = DockStyle.Fill;
             dealerForm.MdiParent = this.ParentForm;
             dealerForm.MaximizeBox = false;
             dealerForm.MinimizeBox = false;
@@ -92,23 +96,19 @@ namespace Stock_Management.Forms
             dealerForm.Show();
         }
 
-        private void opeBillDetails(int dealerId)
+        private void opeBillForm(int dealerId, int billId)
         {
-            //pnlForDealerDetails.Visible = true;
-            BillForm dealerForm = new BillForm();
-            dealerForm.CallerForm = this;
-            dealerForm.Dealer.Id = dealerId;
-            dealerForm.MdiParent = ParentForm;
-            dealerForm.MaximizeBox = false;
-            dealerForm.MinimizeBox = false;
-            dealerForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            dealerForm.WindowState = FormWindowState.Normal;
-            dealerForm.Show();
-        }
-
-        private void OpenDealersBills()
-        {
-
+            BillForm billForm = new BillForm();
+            billForm.CallerForm = this;
+            billForm.Dealer.Id = dealerId;
+            billForm.Bill.Id = billId;
+            billForm.Bill.DealerId = dealerId;
+            billForm.MdiParent = ParentForm;
+            billForm.MaximizeBox = false;
+            billForm.MinimizeBox = false;
+            billForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            billForm.WindowState = FormWindowState.Normal;
+            billForm.Show();
         }
 
 

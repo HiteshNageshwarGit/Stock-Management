@@ -11,7 +11,6 @@ namespace StockEntity.Entity
 {
     public class BaseEntity
     {
-        //[Browsable(false)]
         public int Id { get; set; }
 
         [NotMapped]
