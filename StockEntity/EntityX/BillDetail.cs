@@ -9,7 +9,6 @@ namespace StockEntity.Entity
     public partial class BillDetail
     {
         public Bill Bill { get; set; }
-
-        public ProductDetail ProductDetail { get; set; }
+        //public ProductDetail ProductDetail { get; set; }
     }
 }

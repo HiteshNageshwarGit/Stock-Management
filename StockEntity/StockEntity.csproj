@@ -56,6 +56,7 @@
     <Compile Include="EntityX\Dealer.cs" />
     <Compile Include="EntityX\ProductDetail.cs" />
     <Compile Include="Helper\DateHelper.cs" />
+    <Compile Include="Repository\BillDetailRepository.cs" />
     <Compile Include="Repository\BillRepository.cs" />
     <Compile Include="Repository\DealerRepository.cs" />
     <Compile Include="Repository\IBaseRepository.cs" />

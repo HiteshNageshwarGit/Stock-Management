@@ -39,6 +39,7 @@ namespace StockEntity
         public DbSet<ProductDetail> ProductMasters { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
         public DbSet<Bill> Bills { get; set; }
+        public DbSet<BillDetail> BillDetail { get; set; }
 
     }
 }

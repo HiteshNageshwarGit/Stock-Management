@@ -16,7 +16,7 @@ namespace Stock_Management.Forms
     public partial class BillForm : Form
     {
         BillRepository billRepo = new BillRepository();
-        DealerRepository dealerRepo = new DealerRepository();
+        //DealerRepository dealerRepo = new DealerRepository();
         public Form CallerForm { get; set; }
         public Bill Bill = new Bill();
         public Dealer Dealer = new Dealer();
@@ -36,7 +36,7 @@ namespace Stock_Management.Forms
             if (CallerForm.Name == "DealerListForm")
             {
                 DealerListForm dealerForm = (DealerListForm)CallerForm;
-                dealerForm.LoadBillList(Bill.DealerId);
+                dealerForm.LoadBillList();
             }
         }
 
@@ -47,36 +47,33 @@ namespace Stock_Management.Forms
 
         private void EditBill()
         {
-           
-
-
             if (Dealer.Id == 0)
             {
                 MessageBox.Show("Dealer ID not found");
             }
             else
             {
-                Dealer = dealerRepo.GetByID(Dealer.Id);
-                if (Dealer == null)
+                //Dealer = dealerRepo.GetByID(Dealer.Id);
+                //if (Dealer == null)
+                //{
+                //    MessageBox.Show("Dealer details not found");
+                //}
+                //else
+                //{
+                lblDealerName.Text = Dealer.Name;
+                if (Bill.Id != 0)
                 {
-                    MessageBox.Show("Dealer details not found");
+                    //Bill = billRepo.GetByID(Bill.Id);
+                    lblEntyDate.Text = Bill.EntryDate.ToString();
+                    dtBillDate.Value = DateHelper.GetDateObject(Bill.BillDate);
+                    txtTotalAmount.Text = Convert.ToString(Bill.TotalAmount);
+                    txtRemarks.Text = Bill.Remarks;
                 }
                 else
                 {
-                    lblDealerName.Text = Dealer.Name;
-                    if (Bill.Id != 0)
-                    {
-                        Bill = billRepo.GetByID(Bill.Id);
-                        lblEntyDate.Text = Bill.BillEntryDate.ToString();
-                        dtBillDate.Value = DateHelper.GetDateObject(Bill.BillDate);
-                        txtTotalAmount.Text = Convert.ToString(Bill.TotalAmount);
-                        txtRemarks.Text = Bill.Remarks;
-                    }
-                    else
-                    {
-                        lblEntyDate.Text = DateHelper.GetTodayDateString();
-                    }
+                    lblEntyDate.Text = DateHelper.GetTodayDateString();
                 }
+                //}
             }
         }
 
@@ -84,7 +81,7 @@ namespace Stock_Management.Forms
         {
             float totalAmout;
             Bill.DealerId = Dealer.Id;
-            Bill.BillEntryDate = lblEntyDate.Text;
+            Bill.EntryDate = lblEntyDate.Text;
             Bill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
             if (float.TryParse(txtTotalAmount.Text, out totalAmout))
             {

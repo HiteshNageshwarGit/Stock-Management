@@ -10,7 +10,7 @@ namespace StockEntity.Entity
     {
         public int DealerId { get; set; }
         public string BillDate { get; set; }
-        public string BillEntryDate { get; set; }
+        public string EntryDate { get; set; }
         public float TotalAmount { get; set; }
         public string Remarks { get; set; }
         

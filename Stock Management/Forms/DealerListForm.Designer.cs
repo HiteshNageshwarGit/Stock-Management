@@ -34,20 +34,21 @@
             this.btnAddDealer = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDealerList = new System.Windows.Forms.DataGridView();
-            this.dgvBillList = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnAddBill = new System.Windows.Forms.Button();
-            this.lblDealerName = new System.Windows.Forms.Label();
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDealerShowLink = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.dgvBillList = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnAddBill = new System.Windows.Forms.Button();
+            this.lblDealerName = new System.Windows.Forms.Label();
             this.ColBillDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CollTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColEntryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBillShowLink = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.ColShowBillDetails = new System.Windows.Forms.DataGridViewLinkColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDealerList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillList)).BeginInit();
             this.SuspendLayout();
@@ -94,6 +95,45 @@
             this.dgvDealerList.TabIndex = 0;
             this.dgvDealerList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDealerList_CellClick);
             // 
+            // ColName
+            // 
+            this.ColName.DataPropertyName = "Name";
+            this.ColName.HeaderText = "Dealer Name";
+            this.ColName.Name = "ColName";
+            this.ColName.ReadOnly = true;
+            this.ColName.Width = 200;
+            // 
+            // ColMobile
+            // 
+            this.ColMobile.DataPropertyName = "Mobile";
+            this.ColMobile.HeaderText = "Mobile";
+            this.ColMobile.Name = "ColMobile";
+            this.ColMobile.ReadOnly = true;
+            // 
+            // ColEmail
+            // 
+            this.ColEmail.DataPropertyName = "Email";
+            this.ColEmail.HeaderText = "Email";
+            this.ColEmail.Name = "ColEmail";
+            this.ColEmail.ReadOnly = true;
+            // 
+            // ColAddress
+            // 
+            this.ColAddress.DataPropertyName = "Address";
+            this.ColAddress.HeaderText = "Address";
+            this.ColAddress.Name = "ColAddress";
+            this.ColAddress.ReadOnly = true;
+            this.ColAddress.Width = 250;
+            // 
+            // ColDealerShowLink
+            // 
+            this.ColDealerShowLink.DataPropertyName = "Id";
+            this.ColDealerShowLink.HeaderText = "Show";
+            this.ColDealerShowLink.Name = "ColDealerShowLink";
+            this.ColDealerShowLink.ReadOnly = true;
+            this.ColDealerShowLink.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColDealerShowLink.Text = "Details";
+            // 
             // dgvBillList
             // 
             this.dgvBillList.AllowUserToAddRows = false;
@@ -112,7 +152,8 @@
             this.CollTotalAmount,
             this.ColEntryDate,
             this.ColRemarks,
-            this.ColBillShowLink});
+            this.ColBillShowLink,
+            this.ColShowBillDetails});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -168,45 +209,6 @@
             this.lblDealerName.TabIndex = 6;
             this.lblDealerName.Text = "Dealer Name";
             // 
-            // ColName
-            // 
-            this.ColName.DataPropertyName = "Name";
-            this.ColName.HeaderText = "Dealer Name";
-            this.ColName.Name = "ColName";
-            this.ColName.ReadOnly = true;
-            this.ColName.Width = 200;
-            // 
-            // ColMobile
-            // 
-            this.ColMobile.DataPropertyName = "Mobile";
-            this.ColMobile.HeaderText = "Mobile";
-            this.ColMobile.Name = "ColMobile";
-            this.ColMobile.ReadOnly = true;
-            // 
-            // ColEmail
-            // 
-            this.ColEmail.DataPropertyName = "Email";
-            this.ColEmail.HeaderText = "Email";
-            this.ColEmail.Name = "ColEmail";
-            this.ColEmail.ReadOnly = true;
-            // 
-            // ColAddress
-            // 
-            this.ColAddress.DataPropertyName = "Address";
-            this.ColAddress.HeaderText = "Address";
-            this.ColAddress.Name = "ColAddress";
-            this.ColAddress.ReadOnly = true;
-            this.ColAddress.Width = 250;
-            // 
-            // ColDealerShowLink
-            // 
-            this.ColDealerShowLink.DataPropertyName = "Id";
-            this.ColDealerShowLink.HeaderText = "Show";
-            this.ColDealerShowLink.Name = "ColDealerShowLink";
-            this.ColDealerShowLink.ReadOnly = true;
-            this.ColDealerShowLink.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColDealerShowLink.Text = "Details";
-            // 
             // ColBillDate
             // 
             this.ColBillDate.DataPropertyName = "BillDate";
@@ -236,6 +238,15 @@
             this.ColBillShowLink.HeaderText = "Action";
             this.ColBillShowLink.Name = "ColBillShowLink";
             this.ColBillShowLink.Text = "Add Breakups";
+            // 
+            // ColShowBillDetails
+            // 
+            this.ColShowBillDetails.DataPropertyName = "Id";
+            this.ColShowBillDetails.HeaderText = "Show";
+            this.ColShowBillDetails.Name = "ColShowBillDetails";
+            this.ColShowBillDetails.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColShowBillDetails.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.ColShowBillDetails.Text = "Details";
             // 
             // DealerListForm
             // 
@@ -276,5 +287,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColEntryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColRemarks;
         private System.Windows.Forms.DataGridViewLinkColumn ColBillShowLink;
+        private System.Windows.Forms.DataGridViewLinkColumn ColShowBillDetails;
     }
 }
