@@ -3,9 +3,11 @@ using System;
 
 namespace StockEntity.Entity
 {
-    public partial class ProductDetail : BaseEntity
+    public partial class Product : BaseEntity
     {
         public string Name { get; set; }
+        public string Code { get; set; }
+        public string Color { get; set; }
 
         public void ValidateProductMaster()
         {

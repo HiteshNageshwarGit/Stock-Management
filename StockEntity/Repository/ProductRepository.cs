@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StockEntity.Repository
 {
-    public class ProductRepository : BaseRepository<ProductDetail>
+    public class ProductRepository : BaseRepository<Product>
     {
         public ProductRepository() : base()
         {

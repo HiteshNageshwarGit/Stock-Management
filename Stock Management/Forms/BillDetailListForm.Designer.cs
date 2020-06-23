@@ -30,6 +30,7 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnAddBillBreakup = new System.Windows.Forms.Button();
             this.dgvBillDetailList = new System.Windows.Forms.DataGridView();
             this.ColProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2.SuspendLayout();
@@ -47,6 +48,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnAddBillBreakup);
             this.groupBox2.Controls.Add(this.dgvBillDetailList);
             this.groupBox2.Location = new System.Drawing.Point(13, 165);
             this.groupBox2.Name = "groupBox2";
@@ -54,6 +56,16 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bill Breakup";
+            // 
+            // btnAddBillBreakup
+            // 
+            this.btnAddBillBreakup.Location = new System.Drawing.Point(640, 19);
+            this.btnAddBillBreakup.Name = "btnAddBillBreakup";
+            this.btnAddBillBreakup.Size = new System.Drawing.Size(129, 31);
+            this.btnAddBillBreakup.TabIndex = 1;
+            this.btnAddBillBreakup.Text = "Add Breakup";
+            this.btnAddBillBreakup.UseVisualStyleBackColor = true;
+            this.btnAddBillBreakup.Click += new System.EventHandler(this.btnAddBillBreakup_Click);
             // 
             // dgvBillDetailList
             // 
@@ -70,7 +82,7 @@
             // 
             // ColProduct
             // 
-            this.ColProduct.DataPropertyName = "ProductDetail.Name";
+            this.ColProduct.DataPropertyName = "Product";
             this.ColProduct.HeaderText = "Product";
             this.ColProduct.Name = "ColProduct";
             this.ColProduct.ReadOnly = true;
@@ -95,6 +107,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvBillDetailList;
+        private System.Windows.Forms.Button btnAddBillBreakup;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProduct;
     }
 }

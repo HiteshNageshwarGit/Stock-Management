@@ -1,22 +1,17 @@
-﻿using StockEntity.Helper;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace StockEntity.Entity
 {
-    public partial class Bill
+    public partial class Product
     {
-        public Dealer Dealer { get; set; }
-
         public override string ToString()
         {
-            return BillDate;
+            return Name;
         }
+        //public BillDetail BillDetail { get; set; }
     }
-
-    
 }

@@ -18,7 +18,8 @@ namespace StockEntity.Repository
 
         public List<BillDetail> GetBillDetailList(int billId)
         {
-            var dd = dbSet.ToList();
+            var dd = dbSet.Include(x=>x.Product).ToList();
+            // dbSet.Include(x=>x.Product). ToList();
             //Where(x => x.BillId == billId).ToList();
             //OrderByDescending(x => x.EntryDate).ToList();
             return dd;

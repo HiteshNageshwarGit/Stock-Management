@@ -128,16 +128,15 @@ namespace Stock_Management.Forms
             BillDetailListForm billDetailListForm = new BillDetailListForm();
             billDetailListForm.Bill = selectedBill;
             billDetailListForm.MdiParent = ParentForm;
-            billDetailListForm.MaximizeBox = false;
+            billDetailListForm.MaximizeBox = true;
             billDetailListForm.MinimizeBox = false;
-            billDetailListForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //billDetailListForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            //billDetailListForm.WindowState = FormWindowState.Normal;
+
+
+            billDetailListForm.FormBorderStyle = FormBorderStyle.None;
             billDetailListForm.WindowState = FormWindowState.Normal;
-
-
-            //billDetailListForm.FormBorderStyle = FormBorderStyle.FixedDialog;
-            //billDetailListForm.WindowState = FormWindowState.Maximized;
-            //billDetailListForm.Dock = DockStyle.Fill;
-
+            billDetailListForm.Dock = DockStyle.Fill;
 
             billDetailListForm.Show();
         }

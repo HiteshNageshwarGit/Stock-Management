@@ -8,5 +8,9 @@ namespace StockEntity.Entity
 {
     public partial class Dealer
     {
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

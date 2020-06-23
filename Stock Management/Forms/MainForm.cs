@@ -17,8 +17,7 @@ namespace Stock_Management
     public partial class MainForm : Form
     {
 
-        DealerListForm dealerListForm;
-        BillListForm billListForm;
+        DealerListForm dealerListForm;        
         public MainForm()
         {
             InitializeComponent();
@@ -74,11 +73,11 @@ namespace Stock_Management
 
         private void billListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (billListForm == null || billListForm.IsDisposed)
-            {
-                billListForm = new BillListForm();
-            }
-            OpenForm(billListForm);
+            //if (billListForm == null || billListForm.IsDisposed)
+            //{
+            //    billListForm = new BillListForm();
+            //}
+            //OpenForm(billListForm);
         }
 
 

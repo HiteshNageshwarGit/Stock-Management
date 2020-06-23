@@ -12,7 +12,5 @@ namespace StockEntity.Entity
         public string BillDate { get; set; }
         public string EntryDate { get; set; }
         public float TotalAmount { get; set; }
-        public string Remarks { get; set; }
-        
     }
 }

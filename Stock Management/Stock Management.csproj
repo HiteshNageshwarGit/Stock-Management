@@ -93,6 +93,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\BillDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BillDetailForm.Designer.cs">
+      <DependentUpon>BillDetailForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BillDetailListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,12 +110,6 @@
     </Compile>
     <Compile Include="Forms\BillForm.Designer.cs">
       <DependentUpon>BillForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\BillListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BillListForm.Designer.cs">
-      <DependentUpon>BillListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DealerForm.cs">
       <SubType>Form</SubType>
@@ -131,14 +131,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\BillDetailForm.resx">
+      <DependentUpon>BillDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BillDetailListForm.resx">
       <DependentUpon>BillDetailListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\BillForm.resx">
       <DependentUpon>BillForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BillListForm.resx">
-      <DependentUpon>BillListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DealerForm.resx">
       <DependentUpon>DealerForm.cs</DependentUpon>

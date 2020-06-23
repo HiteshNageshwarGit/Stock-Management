@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StockEntity.Entity
 {
-    public partial class ProductDetail
-    {
+    public partial class ProductProperty
+    {       
     }
 }

@@ -12,6 +12,7 @@ namespace StockEntity.Entity
     public class BaseEntity
     {
         public int Id { get; set; }
+        public string Remarks { get; set; }
 
         [NotMapped]
         public ValidationState EntityState { get; set; }
