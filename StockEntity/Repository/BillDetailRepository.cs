@@ -16,6 +16,18 @@ namespace StockEntity.Repository
 
         }
 
+        public void Save(BillDetail billDetail)
+        {
+            if (billDetail.Id == 0)
+            {
+                Add(billDetail);
+            }
+            else
+            {
+                Update(billDetail);
+            }
+        }
+
         public List<BillDetail> GetBillDetailList(int billId)
         {
             var dd = dbSet.Include(x=>x.Product).ToList();

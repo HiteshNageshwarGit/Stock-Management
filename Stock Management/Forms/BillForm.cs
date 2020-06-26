@@ -1,26 +1,17 @@
-﻿using StockEntity.Entity;
+﻿using Stock_Management.Shared;
+using StockEntity.Entity;
 using StockEntity.Helper;
-using StockEntity.Repository;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class BillForm : Form
+    public partial class BillForm : BaseForm
     {
-        BillRepository billRepo = new BillRepository();
-        //DealerRepository dealerRepo = new DealerRepository();
-        public Form CallerForm { get; set; }
-        public Bill Bill = new Bill();
-        public Dealer Dealer = new Dealer();
-
+        public Bill bill;
+        Dealer dealer;
+        public int DealerId;
+        public int BillId;
         public BillForm()
         {
             InitializeComponent();
@@ -33,10 +24,13 @@ namespace Stock_Management.Forms
 
         private void BillForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CallerForm.Name == "DealerListForm")
+            if (CallerForm == null)
             {
-                DealerListForm dealerForm = (DealerListForm)CallerForm;
-                dealerForm.LoadBillList();
+                return;
+            }
+            else if (CallerForm.Name == "DealerListForm")
+            {
+                ((DealerListForm)CallerForm).LoadBillList();
             }
         }
 
@@ -47,50 +41,45 @@ namespace Stock_Management.Forms
 
         private void EditBill()
         {
-            if (Dealer.Id == 0)
+            //lblDealerName.Text = Session.DealerName;
+            dealer = Session.DealerRepo.GetByID(DealerId);
+            if (dealer == null)
             {
-                MessageBox.Show("Dealer ID not found");
+                MessageBox.Show("Dealer details not found");
+                Close();
+                return;
+            }
+            lblDealerName.Text = dealer.Name;
+
+            if (BillId != 0)
+            {
+                bill = Session.BillRepo.GetByID(BillId);
+                lblEntyDate.Text = bill.EntryDate.ToString();
+                dtBillDate.Value = DateHelper.GetDateObject(bill.BillDate);
+                txtTotalAmount.Text = Convert.ToString(bill.TotalAmount);
+                txtRemarks.Text = bill.Remarks;
             }
             else
             {
-                //Dealer = dealerRepo.GetByID(Dealer.Id);
-                //if (Dealer == null)
-                //{
-                //    MessageBox.Show("Dealer details not found");
-                //}
-                //else
-                //{
-                lblDealerName.Text = Dealer.Name;
-                if (Bill.Id != 0)
-                {
-                    //Bill = billRepo.GetByID(Bill.Id);
-                    lblEntyDate.Text = Bill.EntryDate.ToString();
-                    dtBillDate.Value = DateHelper.GetDateObject(Bill.BillDate);
-                    txtTotalAmount.Text = Convert.ToString(Bill.TotalAmount);
-                    txtRemarks.Text = Bill.Remarks;
-                }
-                else
-                {
-                    lblEntyDate.Text = DateHelper.GetTodayDateString();
-                }
-                //}
+                bill = new Bill();
+                lblEntyDate.Text = DateHelper.GetTodayDateString();
             }
         }
 
         private void SaveBill()
         {
             float totalAmout;
-            Bill.DealerId = Dealer.Id;
-            Bill.EntryDate = lblEntyDate.Text;
-            Bill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
+            bill.DealerId = dealer.Id;
+            bill.EntryDate = lblEntyDate.Text;
+            bill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
             if (float.TryParse(txtTotalAmount.Text, out totalAmout))
             {
-                Bill.TotalAmount = totalAmout;
+                bill.TotalAmount = totalAmout;
             }
-            Bill.Remarks = txtRemarks.Text;
-            if (Bill.EntityState.State == ValidationState.SUCCESS)
+            bill.Remarks = txtRemarks.Text;
+            if (bill.EntityState.State == ValidationState.SUCCESS)
             {
-                billRepo.Add(Bill);
+                Session.BillRepo.Save(bill);
                 Close();
             }
         }

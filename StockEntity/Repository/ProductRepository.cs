@@ -14,5 +14,21 @@ namespace StockEntity.Repository
         {
 
         }
+        public void Save(Product product)
+        {
+            if (product.Id == 0)
+            {
+                Add(product);
+            }
+            else
+            {
+                Update(product);
+            }
+        }
+
+        public List<Product> GetProductList()
+        {
+            return this.dbSet.OrderBy(x => x.Name).ToList();
+        }
     }
 }

@@ -1,11 +1,7 @@
 ﻿using StockEntity.DataEntity;
 using StockEntity.Entity;
-using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockEntity.Repository
 {
@@ -16,11 +12,17 @@ namespace StockEntity.Repository
 
         }
 
-        //public Bill GetBill(int billId)
-        //{
-        //    var dd = dbSet.Where(x => x.Dealer.Id ==1).ToList();
-        //    return null;
-        //}
+        public void Save(Bill bill)
+        {
+            if (bill.Id == 0)
+            {
+                Add(bill);
+            }
+            else
+            {
+                Update(bill);
+            }
+        }
 
         public List<Bill> GetBillList(int dealerId)
         {

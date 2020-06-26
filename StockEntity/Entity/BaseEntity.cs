@@ -19,7 +19,7 @@ namespace StockEntity.Entity
 
         public BaseEntity()
         {
-            this.EntityState = new ValidationState();
+            EntityState = new ValidationState();
         }
     }
 }

@@ -1,18 +1,15 @@
-﻿using StockEntity.Entity;
+﻿using Stock_Management.Shared;
+using StockEntity.Entity;
 using StockEntity.Helper;
-using StockEntity.Repository;
 using System;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class DealerForm : Form
+    public partial class DealerForm : BaseForm
     {
-        public Form callerForm { get; set; }
-        public Dealer dealer = new Dealer();
-        //public int DealerId { get; set; }
-        DealerRepository dealerRepo = new DealerRepository();
-     
+        Dealer dealer;
+        public int DealerId;
         public DealerForm()
         {
             InitializeComponent();
@@ -24,11 +21,13 @@ namespace Stock_Management.Forms
 
         private void DealerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (callerForm.Name == "DealerListForm")
+            if (CallerForm == null)
             {
-                DealerListForm dealerForm = (DealerListForm)callerForm;
-                dealerForm.LoadDealerList();
-            
+                return;
+            }
+            else if (CallerForm.Name == "DealerListForm")
+            {
+                ((DealerListForm)CallerForm).LoadDealerList();
             }
         }
         private void btnSaveDealer_Click(object sender, EventArgs e)
@@ -38,14 +37,18 @@ namespace Stock_Management.Forms
 
         private void EditDealer()
         {
-            if (dealer.Id != 0)
+            if (DealerId != 0)
             {
-                dealer = dealerRepo.GetByID(dealer.Id);
-                this.txtDealerName.Text = dealer.Name;
-                this.txtAddress.Text = dealer.Address;
-                this.txtMobile.Text = dealer.Mobile;
-                this.txtEmail.Text = dealer.Email;
-                this.txtRemarks.Text = dealer.Remarks;
+                dealer = Session.DealerRepo.GetByID(DealerId);
+                txtDealerName.Text = dealer.Name;
+                txtAddress.Text = dealer.Address;
+                txtMobile.Text = dealer.Mobile;
+                txtEmail.Text = dealer.Email;
+                txtRemarks.Text = dealer.Remarks;
+            }
+            else
+            {
+                dealer = new Dealer();
             }
         }
 
@@ -59,9 +62,9 @@ namespace Stock_Management.Forms
             dealer.ValidateDealer();
             if (dealer.EntityState.State == ValidationState.SUCCESS)
             {
-                dealerRepo.Save(dealer);
-                this.Close();
+                Session.DealerRepo.Save(dealer);
+                Close();
             }
-        }       
+        }
     }
 }

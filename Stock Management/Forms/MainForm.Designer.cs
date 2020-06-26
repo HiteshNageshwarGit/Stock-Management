@@ -29,89 +29,52 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addBillToolStripMenuItemfffffffff = new System.Windows.Forms.ToolStripMenuItem();
-            this.dealersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dealerListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.billToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addBillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addBillDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.billListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dealerListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.productListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem,
-            this.dealersToolStripMenuItem,
-            this.billToolStripMenuItem});
+            this.reportsToolStripMenuItem,
+            this.adminToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(949, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // testToolStripMenuItem
+            // reportsToolStripMenuItem
             // 
-            this.testToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addBillToolStripMenuItemfffffffff});
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
-            this.testToolStripMenuItem.Text = "Test";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.dealersToolStripMenuItem_Click);
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.reportsToolStripMenuItem.Text = "Reports";
             // 
-            // addBillToolStripMenuItemfffffffff
+            // adminToolStripMenuItem
             // 
-            this.addBillToolStripMenuItemfffffffff.Name = "addBillToolStripMenuItemfffffffff";
-            this.addBillToolStripMenuItemfffffffff.Size = new System.Drawing.Size(115, 22);
-            this.addBillToolStripMenuItemfffffffff.Text = "Add Bill";
-            this.addBillToolStripMenuItemfffffffff.Click += new System.EventHandler(this.addBillToolStripMenuItem_Click);
+            this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dealerListToolStripMenuItem1,
+            this.productListToolStripMenuItem1});
+            this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.adminToolStripMenuItem.Text = "Admin";
             // 
-            // dealersToolStripMenuItem
+            // dealerListToolStripMenuItem1
             // 
-            this.dealersToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dealerListToolStripMenuItem});
-            this.dealersToolStripMenuItem.Name = "dealersToolStripMenuItem";
-            this.dealersToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.dealersToolStripMenuItem.Text = "Dealers";
+            this.dealerListToolStripMenuItem1.Name = "dealerListToolStripMenuItem1";
+            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.dealerListToolStripMenuItem1.Text = "Dealer List";
+            this.dealerListToolStripMenuItem1.Click += new System.EventHandler(this.dealerListToolStripMenuItem_Click);
             // 
-            // dealerListToolStripMenuItem
+            // productListToolStripMenuItem1
             // 
-            this.dealerListToolStripMenuItem.Name = "dealerListToolStripMenuItem";
-            this.dealerListToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.dealerListToolStripMenuItem.Text = "Dealer List";
-            this.dealerListToolStripMenuItem.Click += new System.EventHandler(this.dealerListToolStripMenuItem_Click);
-            // 
-            // billToolStripMenuItem
-            // 
-            this.billToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.billListToolStripMenuItem,
-            this.addBillToolStripMenuItem,
-            this.addBillDetailsToolStripMenuItem});
-            this.billToolStripMenuItem.Name = "billToolStripMenuItem";
-            this.billToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-            this.billToolStripMenuItem.Text = "Bill";
-            // 
-            // addBillToolStripMenuItem
-            // 
-            this.addBillToolStripMenuItem.Name = "addBillToolStripMenuItem";
-            this.addBillToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addBillToolStripMenuItem.Text = "Add Bill";
-            this.addBillToolStripMenuItem.Click += new System.EventHandler(this.addBillToolStripMenuItem_Click);
-            // 
-            // addBillDetailsToolStripMenuItem
-            // 
-            this.addBillDetailsToolStripMenuItem.Name = "addBillDetailsToolStripMenuItem";
-            this.addBillDetailsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.addBillDetailsToolStripMenuItem.Text = "Add Bill Details";
-            // 
-            // billListToolStripMenuItem
-            // 
-            this.billListToolStripMenuItem.Name = "billListToolStripMenuItem";
-            this.billListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.billListToolStripMenuItem.Text = "Bill List";
-            this.billListToolStripMenuItem.Click += new System.EventHandler(this.billListToolStripMenuItem_Click);
+            this.productListToolStripMenuItem1.Name = "productListToolStripMenuItem1";
+            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.productListToolStripMenuItem1.Text = "Product List";
+            this.productListToolStripMenuItem1.Click += new System.EventHandler(this.productListToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -133,14 +96,10 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addBillToolStripMenuItemfffffffff;
-        private System.Windows.Forms.ToolStripMenuItem dealersToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem dealerListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem billToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addBillToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addBillDetailsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem billListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dealerListToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem productListToolStripMenuItem1;
     }
 }
 

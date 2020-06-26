@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StockEntity.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,19 @@ namespace StockEntity.Entity
         {
             return Name;
         }
-        //public BillDetail BillDetail { get; set; }
+
+        public void ValidateProduct()
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage = Message.Required;
+            }
+            else if (Name.Length > 50)
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage = Message.MaxLength50;
+            }
+        }
     }
 }
