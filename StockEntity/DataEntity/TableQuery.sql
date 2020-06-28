@@ -38,7 +38,7 @@ CREATE TABLE Bill (
 	FOREIGN KEY (DealerId) REFERENCES Dealer(Id)
 )
 
-CREATE TABLE BillDetail (
+CREATE TABLE BillBreakup (
 	Id					INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	BillId				INTEGER NOT NULL,
 	ProductId			INTEGER NOT NULL,
@@ -63,5 +63,5 @@ INSERT INTO Dealer (Name, Address, Email, Mobile, Remarks)
 INSERT INTO Bill (DealerId, BillDate, EntryDate, TotalAmount, Remarks)
 			VALUES (1, '2020-03-25', '2020-03-28', 12.32, 'Rem bill 1')
 
-INSERT INTO BillDetail (BillId, ProductId, TotalAmount, QuantityInBox, TotalBoxes, TotalQuantity, UnitPrice, EntryDate, Remarks)
+INSERT INTO BillBreakup (BillId, ProductId, TotalAmount, QuantityInBox, TotalBoxes, TotalQuantity, UnitPrice, EntryDate, Remarks)
 			VALUES (1, 1, 12.32, 2, 3, 6, 6.16, '2020-03-30', 'Rem Bil Details 1')

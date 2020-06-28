@@ -39,7 +39,7 @@ namespace Stock_Management.Forms
         {
             if (DealerId != 0)
             {
-                dealer = Session.DealerRepo.GetByID(DealerId);
+                dealer = SharedRepo.DealerRepo.GetByID(DealerId);
                 txtDealerName.Text = dealer.Name;
                 txtAddress.Text = dealer.Address;
                 txtMobile.Text = dealer.Mobile;
@@ -62,7 +62,7 @@ namespace Stock_Management.Forms
             dealer.ValidateDealer();
             if (dealer.EntityState.State == ValidationState.SUCCESS)
             {
-                Session.DealerRepo.Save(dealer);
+                SharedRepo.DealerRepo.Save(dealer);
                 Close();
             }
         }

@@ -16,6 +16,9 @@ namespace StockEntity
         private StockDBContext() : base("name = StockDBContext")
         {
         }
+        private StockDBContext(string dbFilePath) : base(dbFilePath)
+        {
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -39,7 +42,7 @@ namespace StockEntity
         public DbSet<Product> ProductMasters { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
         public DbSet<Bill> Bills { get; set; }
-        public DbSet<BillDetail> BillDetail { get; set; }
+        public DbSet<BillBreakup> BillBreakup { get; set; }
 
     }
 }

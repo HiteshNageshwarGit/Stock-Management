@@ -5,6 +5,7 @@ namespace Stock_Management.Forms
     public class BaseForm : Form
     {
         public BaseForm CallerForm { get; set; }
+     
         public void ShowFormAsMDIChild(Form parentForm, Form childForm)
         {
             FormCollection formCollection = Application.OpenForms;
@@ -23,6 +24,9 @@ namespace Stock_Management.Forms
             }
             parentForm.IsMdiContainer = true;
             childForm.MdiParent = parentForm;
+            childForm.MaximizeBox = false;
+            childForm.MinimizeBox = false;
+            childForm.ShowInTaskbar = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
             childForm.WindowState = FormWindowState.Normal;
             childForm.Dock = DockStyle.Fill;
@@ -36,6 +40,8 @@ namespace Stock_Management.Forms
             childForm.MaximizeBox = false;
             childForm.MinimizeBox = false;
             childForm.ShowInTaskbar = false;
+            childForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            childForm.StartPosition = FormStartPosition.CenterParent;
             childForm.ShowDialog();
         }
 
@@ -54,20 +60,21 @@ namespace Stock_Management.Forms
                 return "";
             }
         }
-
-        //internal void NumberTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        //public static void ApplySkin(GroupBox parent)
         //{
-        //    // Verify that the pressed key isn't CTRL or any non-numeric digit
-        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+        //    foreach (Control ctrl in parent.Controls)
         //    {
-        //        e.Handled = true;
-        //    }
+        //        if (ctrl is Label)
+        //        {
+        //            Label lable = (Label)ctrl;
+        //            lable.BackColor = System.Drawing.SystemColors.Control;
+        //            lable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        //            lable.ForeColor = System.Drawing.Color.Teal;
+        //            lable.Size = new System.Drawing.Size(60, 20);
+        //        }
 
-        //    // If you want, you can allow decimal (float) numbers
-        //    if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-        //    {
-        //        e.Handled = true;
         //    }
         //}
+
     }
 }

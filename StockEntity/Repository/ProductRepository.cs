@@ -1,10 +1,7 @@
 ﻿using StockEntity.DataEntity;
 using StockEntity.Entity;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockEntity.Repository
 {
@@ -26,9 +23,9 @@ namespace StockEntity.Repository
             }
         }
 
-        public List<Product> GetProductList()
+        public List<Product> GetProductList(string productName)
         {
-            return this.dbSet.OrderBy(x => x.Name).ToList();
+            return dbSet.Where(x => x.Name.ToLower().Contains(productName.ToLower()) || productName =="").OrderBy(x => x.Name).ToList();
         }
     }
 }

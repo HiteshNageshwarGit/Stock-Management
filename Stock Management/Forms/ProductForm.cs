@@ -13,10 +13,13 @@ namespace Stock_Management.Forms
         public ProductForm()
         {
             InitializeComponent();
+            this.EnumerateChildren();
         }
 
         private void ProductForm_Load(object sender, EventArgs e)
         {
+            //ApplySkin(groupBox1);
+            
             EditProduct();
         }
 
@@ -30,7 +33,7 @@ namespace Stock_Management.Forms
             {
 
             }
-            else if (CallerForm.Name == "BillDetailListForm")
+            else if (CallerForm.Name == "BillBreakupListForm")
             {
 
             }
@@ -59,7 +62,7 @@ namespace Stock_Management.Forms
             }
             else
             {
-                product = Session.ProductRepository.GetByID(ProductId);
+                product = SharedRepo.ProductRepository.GetByID(ProductId);
                 if (product == null)
                 {
                     MessageBox.Show("Product not found");
@@ -86,7 +89,7 @@ namespace Stock_Management.Forms
             product.ValidateProduct();
             if (product.EntityState.State == ValidationState.SUCCESS)
             {
-                Session.ProductRepository.Save(product);
+                SharedRepo.ProductRepository.Save(product);
                 Close();
             }
             else

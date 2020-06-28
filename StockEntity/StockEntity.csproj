@@ -51,14 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityX\Bill.cs" />
-    <Compile Include="EntityX\BillDetail.cs" />
-    <Compile Include="EntityX\Dealer.cs" />
-    <Compile Include="EntityX\Product.cs" />
-    <Compile Include="EntityX\ProductProperty.cs" />
     <Compile Include="Entity\ProductProperty.cs" />
     <Compile Include="Helper\DateHelper.cs" />
-    <Compile Include="Helper\NumberHelper.cs" />
     <Compile Include="Repository\BillDetailRepository.cs" />
     <Compile Include="Repository\BillRepository.cs" />
     <Compile Include="Repository\DealerRepository.cs" />

@@ -15,6 +15,9 @@ namespace Stock_Management.Forms
         public BillForm()
         {
             InitializeComponent();
+            dtBillDate.CustomFormat = DateHelper.DATE_FORMAT;
+            dtBillEntryDate.CustomFormat = DateHelper.DATE_FORMAT;
+            this.EnumerateChildren();
         }
 
         private void BillForm_Load(object sender, EventArgs e)
@@ -42,46 +45,47 @@ namespace Stock_Management.Forms
         private void EditBill()
         {
             //lblDealerName.Text = Session.DealerName;
-            dealer = Session.DealerRepo.GetByID(DealerId);
+            dealer = SharedRepo.DealerRepo.GetByID(DealerId);
             if (dealer == null)
             {
                 MessageBox.Show("Dealer details not found");
                 Close();
                 return;
             }
-            lblDealerName.Text = dealer.Name;
+            //lblDealerName.Text = dealer.Name;
+            txtDealerName.Text = dealer.Name;
 
             if (BillId != 0)
             {
-                bill = Session.BillRepo.GetByID(BillId);
-                lblEntyDate.Text = bill.EntryDate.ToString();
+                bill = SharedRepo.BillRepo.GetByID(BillId);
+                dtBillEntryDate.Value = DateHelper.GetDateObject(bill.EntryDate);
+                // lblEntyDate.Text = bill.EntryDate.ToString();
                 dtBillDate.Value = DateHelper.GetDateObject(bill.BillDate);
-                txtTotalAmount.Text = Convert.ToString(bill.TotalAmount);
+                numBillAmount.Value = bill.TotalAmount;
                 txtRemarks.Text = bill.Remarks;
             }
             else
             {
                 bill = new Bill();
-                lblEntyDate.Text = DateHelper.GetTodayDateString();
+                dtBillEntryDate.Value = DateHelper.GetTodayDateObject();
+                //lblEntyDate.Text = DateHelper.GetTodayDateString();
             }
         }
 
         private void SaveBill()
         {
-            float totalAmout;
             bill.DealerId = dealer.Id;
-            bill.EntryDate = lblEntyDate.Text;
+            bill.EntryDate = DateHelper.GetDateString(dtBillEntryDate.Value); //lblEntyDate.Text;
             bill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
-            if (float.TryParse(txtTotalAmount.Text, out totalAmout))
-            {
-                bill.TotalAmount = totalAmout;
-            }
+            bill.TotalAmount = numBillAmount.Value;
             bill.Remarks = txtRemarks.Text;
             if (bill.EntityState.State == ValidationState.SUCCESS)
             {
-                Session.BillRepo.Save(bill);
+                SharedRepo.BillRepo.Save(bill);
                 Close();
             }
         }
+
+
     }
 }

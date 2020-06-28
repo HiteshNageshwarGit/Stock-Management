@@ -24,6 +24,22 @@ namespace Stock_Management.Forms
 
             LoadProductList();
         }
+        private void ProductListForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (CallerForm == null)
+            {
+                return;
+            }
+            else if (selectedProduct != null && CallerForm.Name == "BillBreakupForm")
+            {
+                ((BillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
+            }
+        }
+
+        private void txtSearchProduct_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            LoadProductList();
+        }
 
         private void btnAddNewProduct_Click(object sender, EventArgs e)
         {
@@ -32,14 +48,13 @@ namespace Stock_Management.Forms
             ShowFormAsDialog(this, productForm);
         }
 
-        public void LoadProductList()
-        {
-            productList = Session.ProductRepository.GetProductList();
-            dgvProductList.DataSource = productList;
-        }
 
         private void dgvProductList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            {
+                return;
+            }
             selectedProduct = (Product)dgvProductList.Rows[e.RowIndex].DataBoundItem;
             if (GetSelectedCellText(dgvProductList, e) == "Details")
             {
@@ -49,20 +64,14 @@ namespace Stock_Management.Forms
             }
             else if (GetSelectedCellText(dgvProductList, e) == "Select")
             {
-                Close(); // close form and on closing call BillDetailForm method to set product Id and Name
+                Close(); // close form and on closing call BillBreakupForm method to set product Id and Name
             }
         }
 
-        private void ProductListForm_FormClosing(object sender, FormClosingEventArgs e)
+        public void LoadProductList()
         {
-            if (CallerForm == null)
-            {
-                return;
-            }
-            else if (selectedProduct != null && CallerForm.Name == "BillDetailForm")
-            {
-                ((BillDetailForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
-            }
+            productList = SharedRepo.ProductRepository.GetProductList(txtSearchProduct.Text.Trim());
+            dgvProductList.DataSource = productList;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using StockEntity.DataEntity;
 using StockEntity.Entity;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace StockEntity.Repository
@@ -26,19 +27,8 @@ namespace StockEntity.Repository
 
         public List<Bill> GetBillList(int dealerId)
         {
-            return this.dbSet.Where(x => x.DealerId == dealerId).OrderByDescending(x => x.BillDate).ToList();
+            var dd = dbSet.Where(x => x.DealerId == dealerId).Include(x => x.BillBreakupList).ToList();
+            return dd;
         }
-
-
-
-        //public Bill GetBill(int dealerId)
-        //{
-        //    string query = " SELECT 	B.Id, DealerId, D.Name AS DealerName, BillDate, BillEntryDate, TotalAmount, B.Remarks ";
-        //    query += " FROM BILL B ";
-        //    query += " INNER JOIN Dealer D ON D.Id = B.Id";
-        //    query += " WHERE B.Id = 1	";
-        //    Bill kk=  dbSet.SqlQuery(query).Single();
-        //    return kk;
-        //}
     }
 }

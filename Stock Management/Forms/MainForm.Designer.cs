@@ -43,7 +43,7 @@
             this.adminToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(949, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -65,14 +65,14 @@
             // dealerListToolStripMenuItem1
             // 
             this.dealerListToolStripMenuItem1.Name = "dealerListToolStripMenuItem1";
-            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
             this.dealerListToolStripMenuItem1.Text = "Dealer List";
             this.dealerListToolStripMenuItem1.Click += new System.EventHandler(this.dealerListToolStripMenuItem_Click);
             // 
             // productListToolStripMenuItem1
             // 
             this.productListToolStripMenuItem1.Name = "productListToolStripMenuItem1";
-            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
             this.productListToolStripMenuItem1.Text = "Product List";
             this.productListToolStripMenuItem1.Click += new System.EventHandler(this.productListToolStripMenuItem_Click);
             // 
@@ -80,11 +80,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(949, 517);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Management";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

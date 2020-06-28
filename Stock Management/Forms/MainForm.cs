@@ -12,7 +12,7 @@ namespace Stock_Management
         public MainForm()
         {
             InitializeComponent();
-            Session.InitializeSession();
+            SharedRepo.InitializeSession();
         }
 
         private void dealerListToolStripMenuItem_Click(object sender, EventArgs e)

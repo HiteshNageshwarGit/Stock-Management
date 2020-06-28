@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockEntity.Helper
 {
     public class DateHelper
     {
-        public static DateTime GetDateObject(string yyyy_MM_dd)
+       public static string DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+        public static DateTime GetDateObject(string yyyy_MM_dd_HH_mm_ss)
         {
-            return DateTime.ParseExact(yyyy_MM_dd, "yyyy-MM-dd", null);
+            return DateTime.ParseExact(yyyy_MM_dd_HH_mm_ss, DATE_FORMAT, null);
         }
 
         public static string GetDateString(DateTime date)
         {
-            return date.ToString("yyyy-MM-dd");
+            return date.ToString(DATE_FORMAT);
         }
 
         public static DateTime GetTodayDateObject()
@@ -25,7 +22,7 @@ namespace StockEntity.Helper
 
         public static string GetTodayDateString()
         {
-            return DateTime.Today.ToString("yyyy-MM-dd");
+            return DateTime.Now.ToString(DATE_FORMAT);
         }
     }
 }

@@ -17,12 +17,14 @@ namespace Stock_Management.Forms
         public DealerListForm()
         {
             InitializeComponent();
+            this.EnumerateChildren();
+
             dgvDealerList.AutoGenerateColumns = false;
             ColDealerShowLink.UseColumnTextForLinkValue = true; // To show "Details" text on button
 
             dgvBillList.AutoGenerateColumns = false;
             ColBillShowLink.UseColumnTextForLinkValue = true;
-            ColShowBillDetails.UseColumnTextForLinkValue = true;
+            ColShowBillBreakups.UseColumnTextForLinkValue = true;
             LoadDealerList();
 
             EnableAddBillButton();// initially no dealer is selected, so button should be disabled
@@ -45,9 +47,12 @@ namespace Stock_Management.Forms
 
         private void dgvDealerList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            {
+                return;
+            }
+
             selectedDealer = ((Dealer)dgvDealerList.Rows[e.RowIndex].DataBoundItem);
-            //Session.DealerId = selectedDealer.Id;
-            //Session.DealerName = selectedDealer.Name;
 
             DealerForm dealerForm = new DealerForm();
             dealerForm.DealerId = selectedDealer.Id;
@@ -64,6 +69,11 @@ namespace Stock_Management.Forms
         }
         private void dgvBillList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
+            {
+                return;
+            }
+
             selectedBillId = ((Bill)dgvBillList.Rows[e.RowIndex].DataBoundItem).Id;
 
             if (GetSelectedCellText(dgvBillList, e) == "Details")
@@ -75,23 +85,23 @@ namespace Stock_Management.Forms
             }
             else if (GetSelectedCellText(dgvBillList, e) == "Add Breakups")
             {
-                BillDetailListForm billDetailListForm = new BillDetailListForm();
-                billDetailListForm.BillId = selectedBillId;
-                ShowFormAsMDIChild(ParentForm, billDetailListForm);
+                BillBreakupListForm BillBreakupListForm = new BillBreakupListForm();
+                BillBreakupListForm.BillId = selectedBillId;
+                ShowFormAsMDIChild(ParentForm, BillBreakupListForm);
             }
         }
 
 
         internal void LoadDealerList()
         {
-            dealerList = Session.DealerRepo.GetDealerList(); // dealerRepo.GetDealerList();
+            dealerList = SharedRepo.DealerRepo.GetDealerList(); // dealerRepo.GetDealerList();
             dgvDealerList.DataSource = dealerList;
         }
 
         internal void LoadBillList()
         {
             lblDealerName.Text = selectedDealer.Name;
-            billList = Session.BillRepo.GetBillList(selectedDealer.Id);
+            billList = SharedRepo.BillRepo.GetBillList(selectedDealer.Id);
             dgvBillList.DataSource = billList;
         }
 
