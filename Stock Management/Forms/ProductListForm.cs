@@ -70,7 +70,7 @@ namespace Stock_Management.Forms
 
         public void LoadProductList()
         {
-            productList = SharedRepo.ProductRepository.GetProductList(txtSearchProduct.Text.Trim());
+            productList = SharedRepo.ProductRepo.GetProductList(txtSearchProduct.Text.Trim());
             dgvProductList.DataSource = productList;
         }
     }

@@ -53,6 +53,12 @@ CREATE TABLE BillBreakup (
 	FOREIGN KEY (ProductId) REFERENCES Product(Id)
 )
 
+CREATE TABLE KeyValue (
+	Id	INTEGER NOT NULL,
+	Key	TEXT NOT NULL,
+	Value	TEXT NOT NULL,
+	PRIMARY KEY(Id AUTOINCREMENT)
+);
 
 INSERT INTO Product ( Name, Code, Color, Remarks) 
 				VALUES ('Prod 101', 'PROD101', 'Red', 'Rem 101')
@@ -65,3 +71,11 @@ INSERT INTO Bill (DealerId, BillDate, EntryDate, TotalAmount, Remarks)
 
 INSERT INTO BillBreakup (BillId, ProductId, TotalAmount, QuantityInBox, TotalBoxes, TotalQuantity, UnitPrice, EntryDate, Remarks)
 			VALUES (1, 1, 12.32, 2, 3, 6, 6.16, '2020-03-30', 'Rem Bil Details 1')
+
+INSERT INTO KeyValue(Key, Value) 
+			VALUES('DBVersion', '1')
+
+INSERT INTO KeyValue(Key, Value) 
+			VALUES('AdminUser', 'Admin')
+INSERT INTO KeyValue(Key, Value) 
+			VALUES('AdminPassword', 'Passw0rd')

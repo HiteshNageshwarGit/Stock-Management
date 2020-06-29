@@ -39,6 +39,7 @@ namespace StockEntity
             return instance;
         }
 
+        public DbSet<KeyValue> KeyValues { get; set; }
         public DbSet<Product> ProductMasters { get; set; }
         public DbSet<Dealer> Dealers { get; set; }
         public DbSet<Bill> Bills { get; set; }

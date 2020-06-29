@@ -62,7 +62,7 @@ namespace Stock_Management.Forms
             }
             else
             {
-                product = SharedRepo.ProductRepository.GetByID(ProductId);
+                product = SharedRepo.ProductRepo.GetByID(ProductId);
                 if (product == null)
                 {
                     MessageBox.Show("Product not found");
@@ -89,7 +89,7 @@ namespace Stock_Management.Forms
             product.ValidateProduct();
             if (product.EntityState.State == ValidationState.SUCCESS)
             {
-                SharedRepo.ProductRepository.Save(product);
+                SharedRepo.ProductRepo.Save(product);
                 Close();
             }
             else

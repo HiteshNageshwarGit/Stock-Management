@@ -1,6 +1,10 @@
 ﻿using Stock_Management.Forms;
 using Stock_Management.Shared;
+using StockEntity.Helper;
 using System;
+using System.Configuration;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Stock_Management
 {
@@ -13,6 +17,53 @@ namespace Stock_Management
         {
             InitializeComponent();
             SharedRepo.InitializeSession();
+        }
+
+        private void InitializeApplicatoin()
+        {
+            try
+            {
+                if (!DBValidator.IsDBFileAvailable(AppDomain.CurrentDomain.BaseDirectory))
+                {
+                    MessageBox.Show("Please check DB file in app folder and it is not in read only mode");
+                    Close();
+                }
+                else if (!IsDBCompitable())
+                {
+                    MessageBox.Show("Current Database is not compitable, please update Database");
+                }
+                else if (string.IsNullOrWhiteSpace(SharedRepo.UserRole))
+                {
+                    LoginForm loginForm = new LoginForm();
+                    ShowFormAsDialog(this, loginForm);
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong. \n " + ex.Message);
+            }
+        }
+
+        internal void On_User_Login(bool isLoginSucceeded)
+        {
+            if (isLoginSucceeded)
+            {
+                ShowAdminRelatedMenuItems();
+                InitializeApplicatoin();
+            }
+            else
+            {
+                Close();
+            }
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            InitializeApplicatoin();
         }
 
         private void dealerListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,5 +83,43 @@ namespace Stock_Management
             }
             ShowFormAsMDIChild(this, productListForm);
         }
+
+        private void ShowAdminRelatedMenuItems()
+        {
+            if (SharedRepo.UserRole == SharedRepo.AdminUser)
+            {
+                //menuAdmin.Visible = true;
+                //menuLogin.Visible = false;
+            }
+            else
+            {
+                //menuAdmin.Visible = false;
+                //menuLogin.Visible = true;
+            }
+        }
+
+        private bool IsDBCompitable()
+        {
+            var ff = SharedRepo.ProductRepo.GetProductList("");
+            string compitableDBVersion = ConfigurationManager.AppSettings["CompitableDBVersions"];
+            if (!string.IsNullOrWhiteSpace(compitableDBVersion))
+            {
+                string[] arr = compitableDBVersion.Split(',');
+                if (arr.Length > 0)
+                {
+                    string dbVersion = SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBVersion).Value;
+                    if (dbVersion != null && dbVersion.Length > 0)
+                    {
+                        if (arr.Contains(dbVersion))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        
     }
 }

@@ -51,10 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\KeyValue.cs" />
     <Compile Include="Entity\ProductProperty.cs" />
     <Compile Include="Helper\DateHelper.cs" />
+    <Compile Include="Helper\DBValidator.cs" />
     <Compile Include="Repository\BillDetailRepository.cs" />
     <Compile Include="Repository\BillRepository.cs" />
+    <Compile Include="Repository\KeyValueRepository.cs" />
     <Compile Include="Repository\DealerRepository.cs" />
     <Compile Include="Repository\IBaseRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
