@@ -54,7 +54,7 @@
     <Compile Include="Entity\KeyValue.cs" />
     <Compile Include="Entity\ProductProperty.cs" />
     <Compile Include="Helper\DateHelper.cs" />
-    <Compile Include="Helper\DBValidator.cs" />
+    <Compile Include="Helper\DBFileHelper.cs" />
     <Compile Include="Repository\BillDetailRepository.cs" />
     <Compile Include="Repository\BillRepository.cs" />
     <Compile Include="Repository\KeyValueRepository.cs" />

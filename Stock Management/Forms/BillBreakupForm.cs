@@ -2,9 +2,7 @@
 using StockEntity.Entity;
 using StockEntity.Helper;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms

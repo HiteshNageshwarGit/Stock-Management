@@ -1,5 +1,6 @@
 ﻿using Stock_Management.Forms;
 using Stock_Management.Shared;
+using StockEntity.Entity;
 using StockEntity.Helper;
 using System;
 using System.Configuration;
@@ -16,14 +17,13 @@ namespace Stock_Management
         public MainForm()
         {
             InitializeComponent();
-            SharedRepo.InitializeSession();
         }
 
         private void InitializeApplicatoin()
         {
             try
             {
-                if (!DBValidator.IsDBFileAvailable(AppDomain.CurrentDomain.BaseDirectory))
+                if (!DBFileHelper.IsDBFileAvailable(AppDomain.CurrentDomain.BaseDirectory))
                 {
                     MessageBox.Show("Please check DB file in app folder and it is not in read only mode");
                     Close();
@@ -39,7 +39,19 @@ namespace Stock_Management
                 }
                 else
                 {
-
+                    // If  file backup is success then only delete old files 
+                    KeyValue keyValue = SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBBackupDir);
+                    if (keyValue != null)
+                    {
+                        if (DBFileHelper.BackupDBFile(AppDomain.CurrentDomain.BaseDirectory, keyValue.Value))
+                        {
+                            DBFileHelper.DeleteOldBackupFiles(keyValue.Value);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Taking DB backup failed to " + SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBBackupDir).Value);
+                        }
+                    }
                 }
             }
             catch (Exception ex)
@@ -63,6 +75,7 @@ namespace Stock_Management
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            SharedRepo.InitializeSession();
             InitializeApplicatoin();
         }
 
@@ -120,6 +133,6 @@ namespace Stock_Management
             return false;
         }
 
-        
+
     }
 }

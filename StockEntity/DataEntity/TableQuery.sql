@@ -72,10 +72,14 @@ INSERT INTO Bill (DealerId, BillDate, EntryDate, TotalAmount, Remarks)
 INSERT INTO BillBreakup (BillId, ProductId, TotalAmount, QuantityInBox, TotalBoxes, TotalQuantity, UnitPrice, EntryDate, Remarks)
 			VALUES (1, 1, 12.32, 2, 3, 6, 6.16, '2020-03-30', 'Rem Bil Details 1')
 
+			
 INSERT INTO KeyValue(Key, Value) 
-			VALUES('DBVersion', '1')
-
+			VALUES('DBBackupDir', 'D:\StockDBBackup')
 INSERT INTO KeyValue(Key, Value) 
 			VALUES('AdminUser', 'Admin')
 INSERT INTO KeyValue(Key, Value) 
 			VALUES('AdminPassword', 'Passw0rd')
+
+-- Update DB version when making changes in DB schema or including post deployment script
+INSERT INTO KeyValue(Key, Value) 
+			VALUES('DBVersion', '1') 
