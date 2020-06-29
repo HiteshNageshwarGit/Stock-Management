@@ -1,11 +1,6 @@
-﻿using StockEntity.DataEntity;
-using StockEntity.Entity;
-using System;
+﻿using StockEntity.Entity;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StockEntity.Repository
 {

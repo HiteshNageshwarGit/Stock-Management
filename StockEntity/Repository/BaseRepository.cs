@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using StockEntity.DataEntity;
 using System.Data.Entity;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace StockEntity.DataEntity
+namespace StockEntity.Repository
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {

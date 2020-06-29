@@ -1,5 +1,4 @@
-﻿using StockEntity.DataEntity;
-using StockEntity.Entity;
+﻿using StockEntity.Entity;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
