@@ -17,12 +17,22 @@ namespace StockEntity.Helper
 
         public static DateTime GetTodayDateObject()
         {
-            return DateTime.Today;
+            return DateTime.Now;
         }
 
         public static string GetTodayDateString()
         {
             return DateTime.Now.ToString(DATE_FORMAT);
+        }
+
+        public static string GetTodayDateString_yyyyMMddHHmmss()
+        {
+            return DateTime.Now.ToString("yyyyMMddHHmmss");
+        }
+
+        public static DateTime GetDateObject_yyyyMMddHHmmss(string yyyyMMddHHmmss)
+        {
+            return DateTime.ParseExact(yyyyMMddHHmmss, "yyyyMMddHHmmss", null);
         }
     }
 }

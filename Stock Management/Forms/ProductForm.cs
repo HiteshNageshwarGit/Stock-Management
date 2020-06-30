@@ -18,8 +18,6 @@ namespace Stock_Management.Forms
 
         private void ProductForm_Load(object sender, EventArgs e)
         {
-            //ApplySkin(groupBox1);
-            
             EditProduct();
         }
 
@@ -40,7 +38,6 @@ namespace Stock_Management.Forms
             else if (CallerForm.Name == "ProductListForm")
             {
                 ((ProductListForm)CallerForm).LoadProductList();
-
             }
         }
 
@@ -67,7 +64,6 @@ namespace Stock_Management.Forms
                 {
                     MessageBox.Show("Product not found");
                     EnableControls(false);
-                    //Close();
                 }
                 else
                 {
@@ -81,21 +77,25 @@ namespace Stock_Management.Forms
 
         private void SaveProduct()
         {
+
             product.Name = txtName.Text;
             product.Code = txtCode.Text;
             product.Color = txtColor.Text;
             product.Remarks = txtRemarks.Text;
 
             product.ValidateProduct();
-            if (product.EntityState.State == ValidationState.SUCCESS)
-            {
-                SharedRepo.ProductRepo.Save(product);
-                Close();
-            }
-            else
+            if (product.EntityState.State != ValidationState.SUCCESS)
             {
                 MessageBox.Show(product.EntityState.StateMessage, "Error");
+                return;
             }
+            if (SharedRepo.ProductRepo.DoesProductNameExists(product))
+            {
+                MessageBox.Show("Product name already exists", "Error");
+                return;
+            }
+            SharedRepo.ProductRepo.Save(product);
+            Close();
         }
     }
 }

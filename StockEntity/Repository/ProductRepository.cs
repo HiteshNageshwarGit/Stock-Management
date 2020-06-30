@@ -1,5 +1,4 @@
-﻿using StockEntity.DataEntity;
-using StockEntity.Entity;
+﻿using StockEntity.Entity;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,10 +21,27 @@ namespace StockEntity.Repository
                 Update(product);
             }
         }
+        public bool DoesProductNameExists(Product product)
+        {
+            Product existingProduct = dbSet.Where(x => (x.Id != product.Id && x.Name.Trim().ToLower() == product.Name.Trim().ToLower())).FirstOrDefault();
+            if (existingProduct == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public Product GetProduct(string productName)
+        {
+            return dbSet.Where(x => x.Name.Trim().ToLower().Contains(productName.Trim().ToLower())).FirstOrDefault();
+        }
 
         public List<Product> GetProductList(string productName)
         {
-            return dbSet.Where(x => x.Name.ToLower().Contains(productName.ToLower()) || productName =="").OrderBy(x => x.Name).ToList();
+            return dbSet.Where(x => x.Name.ToLower().Contains(productName.ToLower()) || productName == "").OrderBy(x => x.Name).ToList();
         }
     }
 }

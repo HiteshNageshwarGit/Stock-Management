@@ -27,6 +27,11 @@ namespace Stock_Management.Forms
 
         }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         internal void LoadBillBreakupList()
         {
             Bill bill = SharedRepo.BillRepo.GetByID(BillId);
@@ -51,6 +56,7 @@ namespace Stock_Management.Forms
 
             BillBreakupsList = SharedRepo.BillBreakupRepo.GetBillBreakupList(BillId);
             dgvBillBreakupList.DataSource = BillBreakupsList;
+            dgvBillBreakupList.ClearSelection();
         }
 
         private void btnAddBillBreakup_Click(object sender, EventArgs e)
@@ -58,9 +64,9 @@ namespace Stock_Management.Forms
             BillBreakupForm BillBreakupForm = new BillBreakupForm();
             BillBreakupForm.BillId = BillId;
             BillBreakupForm.BillBreakupId = 0;
-            ShowFormAsDialog(this, BillBreakupForm);
+            ShowFormAsFixedDialog(this, BillBreakupForm);
         }
 
-
+       
     }
 }

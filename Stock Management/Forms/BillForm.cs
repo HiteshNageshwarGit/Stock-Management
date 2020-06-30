@@ -79,11 +79,14 @@ namespace Stock_Management.Forms
             bill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
             bill.TotalAmount = numBillAmount.Value;
             bill.Remarks = txtRemarks.Text;
-            if (bill.EntityState.State == ValidationState.SUCCESS)
+            bill.ValidateBill();
+            if (bill.EntityState.State != ValidationState.SUCCESS)
             {
-                SharedRepo.BillRepo.Save(bill);
-                Close();
+                MessageBox.Show(bill.EntityState.StateMessage);
+                return;
             }
+            SharedRepo.BillRepo.Save(bill);
+            Close();
         }
 
 

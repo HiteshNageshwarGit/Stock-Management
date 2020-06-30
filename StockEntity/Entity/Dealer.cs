@@ -17,16 +17,16 @@ namespace StockEntity.Entity
         }
         public void ValidateDealer()
         {
-            this.EntityState.State = ValidationState.SUCCESS;
-            if (String.IsNullOrWhiteSpace(this.Name))
+            EntityState.State = ValidationState.SUCCESS;
+            if (string.IsNullOrWhiteSpace(this.Name))
             {
-                this.EntityState.State = ValidationState.ERROR;
-                this.EntityState.StateMessage = Message.Required;
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage = "Name is a " + Message.Required;
             }
-            else if (this.Name.Length > 50)
+            else if (Name.Length > 50)
             {
-                this.EntityState.State = ValidationState.ERROR;
-                this.EntityState.StateMessage = Message.MaxLength50;
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage = Message.MaxLength50;
             }
         }
     }

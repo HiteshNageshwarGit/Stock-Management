@@ -19,22 +19,24 @@ namespace Stock_Management.Forms
             InitializeComponent();
             this.EnumerateChildren();
 
-            dgvDealerList.AutoGenerateColumns = false;
-            ColDealerShowLink.UseColumnTextForLinkValue = true; // To show "Details" text on button
+            //dgvDealerList.AutoGenerateColumns = false;
+            //dgvDealerList.ClearSelection();
+            //ColDealerShowLink.UseColumnTextForLinkValue = true; // To show "Details" text on button
 
-            dgvBillList.AutoGenerateColumns = false;
-            ColBillShowLink.UseColumnTextForLinkValue = true;
-            ColShowBillBreakups.UseColumnTextForLinkValue = true;
-            LoadDealerList();
+            //dgvBillList.AutoGenerateColumns = false;
+            //dgvBillList.ClearSelection();
+            //ColBillShowLink.UseColumnTextForLinkValue = true;
+            //ColShowBillBreakups.UseColumnTextForLinkValue = true;
+            //LoadDealerList();
 
-            EnableAddBillButton();// initially no dealer is selected, so button should be disabled
+            //EnableAddBillButton();// initially no dealer is selected, so button should be disabled
         }
 
         private void btnAddDealer_Click(object sender, EventArgs e)
         {
             DealerForm dealerForm = new DealerForm();
             dealerForm.DealerId = 0;
-            ShowFormAsDialog(this, dealerForm);
+            ShowFormAsFixedDialog(this, dealerForm);
         }
 
         private void btnAddBill_Click(object sender, EventArgs e)
@@ -42,7 +44,7 @@ namespace Stock_Management.Forms
             BillForm billForm = new BillForm();
             billForm.DealerId = selectedDealer.Id;
             billForm.BillId = 0;
-            ShowFormAsDialog(this, billForm);
+            ShowFormAsFixedDialog(this, billForm);
         }
 
         private void dgvDealerList_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -58,7 +60,7 @@ namespace Stock_Management.Forms
             dealerForm.DealerId = selectedDealer.Id;
             if (GetSelectedCellText(dgvDealerList, e) == "Details")
             {
-                ShowFormAsDialog(this, dealerForm);
+                ShowFormAsFixedDialog(this, dealerForm);
             }
             else
             {
@@ -81,13 +83,13 @@ namespace Stock_Management.Forms
                 BillForm billForm = new BillForm();
                 billForm.DealerId = selectedDealer.Id;
                 billForm.BillId = selectedBillId;
-                ShowFormAsDialog(this, billForm);
+                ShowFormAsFixedDialog(this, billForm);
             }
             else if (GetSelectedCellText(dgvBillList, e) == "Add Breakups")
             {
-                BillBreakupListForm BillBreakupListForm = new BillBreakupListForm();
-                BillBreakupListForm.BillId = selectedBillId;
-                ShowFormAsMDIChild(ParentForm, BillBreakupListForm);
+                BillBreakupListForm billBreakupForm = new BillBreakupListForm();
+                billBreakupForm.BillId = selectedBillId;
+                ShowFormResizableAsDialog(this, billBreakupForm);
             }
         }
 
@@ -96,13 +98,15 @@ namespace Stock_Management.Forms
         {
             dealerList = SharedRepo.DealerRepo.GetDealerList(); // dealerRepo.GetDealerList();
             dgvDealerList.DataSource = dealerList;
+            dgvDealerList.ClearSelection();
         }
 
         internal void LoadBillList()
         {
-            lblDealerName.Text = selectedDealer.Name;
+            txtDealerName.Text = selectedDealer.Name;
             billList = SharedRepo.BillRepo.GetBillList(selectedDealer.Id);
             dgvBillList.DataSource = billList;
+            dgvBillList.ClearSelection();
         }
 
         public void EnableAddBillButton()
@@ -117,6 +121,17 @@ namespace Stock_Management.Forms
             }
         }
 
+        private void DealerListForm_Shown(object sender, EventArgs e)
+        {
+            dgvDealerList.AutoGenerateColumns = false;
+            ColDealerShowLink.UseColumnTextForLinkValue = true; // To show "Details" text on button
 
+            dgvBillList.AutoGenerateColumns = false;
+            ColBillShowLink.UseColumnTextForLinkValue = true;
+            ColShowBillBreakups.UseColumnTextForLinkValue = true;
+            LoadDealerList();
+
+            EnableAddBillButton();// initially no dealer is selected, so button should be disabled
+        }
     }
 }

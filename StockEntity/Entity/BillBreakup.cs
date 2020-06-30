@@ -46,6 +46,12 @@ namespace StockEntity.Entity
                 EntityState.State = ValidationState.ERROR;
                 EntityState.StateMessage += "\n Could not found Product Id";
             }
+
+            if (TotalAmount <= 0)
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage += "\n Amount should be greater than 0";
+            }
         }
     }
 }

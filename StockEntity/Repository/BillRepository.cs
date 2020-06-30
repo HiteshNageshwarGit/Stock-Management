@@ -26,7 +26,7 @@ namespace StockEntity.Repository
 
         public List<Bill> GetBillList(int dealerId)
         {
-            var dd = dbSet.Where(x => x.DealerId == dealerId).Include(x => x.BillBreakupList).ToList();
+            var dd = dbSet.Where(x => x.DealerId == dealerId).Include(x => x.BillBreakupList).OrderBy(x => x.BillDate).ToList();
             return dd;
         }
     }

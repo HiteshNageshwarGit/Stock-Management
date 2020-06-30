@@ -1,7 +1,7 @@
-﻿using StockEntity.DataEntity;
-using StockEntity.Entity;
+﻿using StockEntity.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 namespace StockEntity.Repository
 {
@@ -21,6 +21,19 @@ namespace StockEntity.Repository
             else
             {
                 Update(dealer);
+            }
+        }
+
+        public bool DoesDelaerNameExists(Dealer dealer)
+        {
+            Dealer existingDealer = dbSet.Where(x => (x.Id != dealer.Id && x.Name.Trim().ToLower() == dealer.Name.Trim().ToLower())).FirstOrDefault();
+            if (existingDealer == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

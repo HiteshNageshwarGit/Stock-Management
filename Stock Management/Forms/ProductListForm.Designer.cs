@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.dgvProductList = new System.Windows.Forms.DataGridView();
-            this.btnAddNewProduct = new System.Windows.Forms.Button();
-            this.txtSearchProduct = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColColor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDetails = new System.Windows.Forms.DataGridViewLinkColumn();
             this.ColSelect = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.btnAddNewProduct = new System.Windows.Forms.Button();
+            this.txtSearchProduct = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -60,14 +60,58 @@
             this.ColColor,
             this.ColDetails,
             this.ColSelect});
-            this.dgvProductList.Location = new System.Drawing.Point(3, 3);
+            this.dgvProductList.Location = new System.Drawing.Point(-1, 3);
             this.dgvProductList.Name = "dgvProductList";
             this.dgvProductList.ReadOnly = true;
             this.dgvProductList.RowHeadersVisible = false;
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductList.Size = new System.Drawing.Size(652, 374);
+            this.dgvProductList.Size = new System.Drawing.Size(660, 378);
             this.dgvProductList.TabIndex = 1;
             this.dgvProductList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductList_CellClick);
+            // 
+            // ColName
+            // 
+            this.ColName.DataPropertyName = "Name";
+            this.ColName.FillWeight = 1F;
+            this.ColName.HeaderText = "Name";
+            this.ColName.Name = "ColName";
+            this.ColName.ReadOnly = true;
+            // 
+            // ColCode
+            // 
+            this.ColCode.DataPropertyName = "Code";
+            this.ColCode.FillWeight = 1F;
+            this.ColCode.HeaderText = "Code";
+            this.ColCode.Name = "ColCode";
+            this.ColCode.ReadOnly = true;
+            // 
+            // ColColor
+            // 
+            this.ColColor.DataPropertyName = "Color";
+            this.ColColor.FillWeight = 1F;
+            this.ColColor.HeaderText = "Color";
+            this.ColColor.Name = "ColColor";
+            this.ColColor.ReadOnly = true;
+            // 
+            // ColDetails
+            // 
+            this.ColDetails.DataPropertyName = "Id";
+            this.ColDetails.FillWeight = 1F;
+            this.ColDetails.HeaderText = "Details";
+            this.ColDetails.Name = "ColDetails";
+            this.ColDetails.ReadOnly = true;
+            this.ColDetails.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColDetails.Text = "Details";
+            // 
+            // ColSelect
+            // 
+            this.ColSelect.DataPropertyName = "Id";
+            this.ColSelect.FillWeight = 1F;
+            this.ColSelect.HeaderText = "Select";
+            this.ColSelect.Name = "ColSelect";
+            this.ColSelect.ReadOnly = true;
+            this.ColSelect.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColSelect.Text = "Select";
             // 
             // btnAddNewProduct
             // 
@@ -123,50 +167,6 @@
             this.splitContainer1.Size = new System.Drawing.Size(660, 438);
             this.splitContainer1.SplitterDistance = 52;
             this.splitContainer1.TabIndex = 1;
-            // 
-            // ColName
-            // 
-            this.ColName.DataPropertyName = "Name";
-            this.ColName.FillWeight = 1F;
-            this.ColName.HeaderText = "Name";
-            this.ColName.Name = "ColName";
-            this.ColName.ReadOnly = true;
-            // 
-            // ColCode
-            // 
-            this.ColCode.DataPropertyName = "Code";
-            this.ColCode.FillWeight = 1F;
-            this.ColCode.HeaderText = "Code";
-            this.ColCode.Name = "ColCode";
-            this.ColCode.ReadOnly = true;
-            // 
-            // ColColor
-            // 
-            this.ColColor.DataPropertyName = "Color";
-            this.ColColor.FillWeight = 1F;
-            this.ColColor.HeaderText = "Color";
-            this.ColColor.Name = "ColColor";
-            this.ColColor.ReadOnly = true;
-            // 
-            // ColDetails
-            // 
-            this.ColDetails.DataPropertyName = "Id";
-            this.ColDetails.FillWeight = 1F;
-            this.ColDetails.HeaderText = "Details";
-            this.ColDetails.Name = "ColDetails";
-            this.ColDetails.ReadOnly = true;
-            this.ColDetails.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColDetails.Text = "Details";
-            // 
-            // ColSelect
-            // 
-            this.ColSelect.DataPropertyName = "Id";
-            this.ColSelect.FillWeight = 1F;
-            this.ColSelect.HeaderText = "Select";
-            this.ColSelect.Name = "ColSelect";
-            this.ColSelect.ReadOnly = true;
-            this.ColSelect.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.ColSelect.Text = "Select";
             // 
             // ProductListForm
             // 

@@ -5,7 +5,7 @@ namespace Stock_Management.Forms
     public class BaseForm : Form
     {
         public BaseForm CallerForm { get; set; }
-     
+
         public void ShowFormAsMDIChild(Form parentForm, Form childForm)
         {
             FormCollection formCollection = Application.OpenForms;
@@ -34,13 +34,22 @@ namespace Stock_Management.Forms
             childForm.Focus();
         }
 
-        public void ShowFormAsDialog(BaseForm parentForm, BaseForm childForm)
+        public void ShowFormAsFixedDialog(BaseForm parentForm, BaseForm childForm)
         {
             childForm.CallerForm = parentForm;
             childForm.MaximizeBox = false;
             childForm.MinimizeBox = false;
             childForm.ShowInTaskbar = false;
             childForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            childForm.StartPosition = FormStartPosition.CenterParent;
+            childForm.ShowDialog();
+        }
+
+        public void ShowFormResizableAsDialog(BaseForm parentForm, BaseForm childForm)
+        {
+            childForm.CallerForm = parentForm;
+            childForm.MinimizeBox = false;
+            childForm.ShowInTaskbar = false;
             childForm.StartPosition = FormStartPosition.CenterParent;
             childForm.ShowDialog();
         }
@@ -60,21 +69,5 @@ namespace Stock_Management.Forms
                 return "";
             }
         }
-        //public static void ApplySkin(GroupBox parent)
-        //{
-        //    foreach (Control ctrl in parent.Controls)
-        //    {
-        //        if (ctrl is Label)
-        //        {
-        //            Label lable = (Label)ctrl;
-        //            lable.BackColor = System.Drawing.SystemColors.Control;
-        //            lable.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        //            lable.ForeColor = System.Drawing.Color.Teal;
-        //            lable.Size = new System.Drawing.Size(60, 20);
-        //        }
-
-        //    }
-        //}
-
     }
 }

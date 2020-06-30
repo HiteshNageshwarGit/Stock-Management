@@ -35,7 +35,7 @@ namespace Stock_Management
                 else if (string.IsNullOrWhiteSpace(SharedRepo.UserRole))
                 {
                     LoginForm loginForm = new LoginForm();
-                    ShowFormAsDialog(this, loginForm);
+                    ShowFormAsFixedDialog(this, loginForm);
                 }
                 else
                 {
@@ -71,6 +71,11 @@ namespace Stock_Management
             {
                 Close();
             }
+        }
+
+        private void On_Menu_Selectoin_Change()
+        {
+            
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -132,7 +137,5 @@ namespace Stock_Management
             }
             return false;
         }
-
-
     }
 }

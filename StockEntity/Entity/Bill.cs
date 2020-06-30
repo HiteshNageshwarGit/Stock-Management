@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using StockEntity.Helper;
+using System.Collections.Generic;
 using System.Text;
 
 namespace StockEntity.Entity
@@ -16,6 +17,16 @@ namespace StockEntity.Entity
 
         public ICollection<BillBreakup> BillBreakupList { get; set; }
 
+        public void ValidateBill()
+        {
+            if (TotalAmount <= 0)
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage = "Bill amount should be greate than 0";
+            }
+
+
+        }
         public override string ToString()
         {
             StringBuilder str = new StringBuilder(BillDate + " ( Rs. " + TotalAmount + " )");

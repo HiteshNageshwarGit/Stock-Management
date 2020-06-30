@@ -8,7 +8,7 @@ namespace StockEntity.Helper
 {
     public class Message
     {
-        public static string Required = "Required Field";
-        public static string MaxLength50 = "Max length 50";
+        public static string Required = "required field";
+        public static string MaxLength50 = "max length 50";
     }
 }

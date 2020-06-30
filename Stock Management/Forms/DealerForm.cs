@@ -60,11 +60,18 @@ namespace Stock_Management.Forms
             dealer.Email = txtEmail.Text;
             dealer.Remarks = txtRemarks.Text;
             dealer.ValidateDealer();
-            if (dealer.EntityState.State == ValidationState.SUCCESS)
+            if (dealer.EntityState.State != ValidationState.SUCCESS)
             {
-                SharedRepo.DealerRepo.Save(dealer);
-                Close();
+                MessageBox.Show(dealer.EntityState.StateMessage, "Error");
+                return;
             }
+            if (SharedRepo.DealerRepo.DoesDelaerNameExists(dealer))
+            {
+                MessageBox.Show("Dealer name already exists", "Error");
+                return;
+            }
+            SharedRepo.DealerRepo.Save(dealer);
+            Close();
         }
     }
 }

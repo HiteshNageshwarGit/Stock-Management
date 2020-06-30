@@ -37,7 +37,7 @@ namespace Stock_Management.Forms
         private void btnSearchProduct_Click(object sender, EventArgs e)
         {
             ProductListForm productListForm = new ProductListForm();
-            ShowFormAsDialog(this, productListForm);
+            ShowFormAsFixedDialog(this, productListForm);
         }
 
         private void AmountAndQuantity_Changed(object sender, EventArgs e)
@@ -65,21 +65,6 @@ namespace Stock_Management.Forms
             SaveBillBreakup();
         }
 
-        //internal void NumberTextBox_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-        //    // Verify that the pressed key isn't CTRL or any non-numeric digit
-        //    if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-        //    {
-        //        e.Handled = true;
-        //    }
-
-        //    // If you want, you can allow decimal (float) numbers
-        //    if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-        //    {
-        //        e.Handled = true;
-        //    }
-        //}
-
         internal void OnProductSelect(int produectId, string productName)
         {
             BillBreakup.ProductId = produectId;
@@ -88,7 +73,6 @@ namespace Stock_Management.Forms
 
         private void EditBillBreakuDetail()
         {
-            //lblDealerName.Text = Session.DealerName;
             Bill bill = SharedRepo.BillRepo.GetByID(BillId);
             if (bill == null)
             {
@@ -130,6 +114,8 @@ namespace Stock_Management.Forms
             BillBreakup.TotalQuantity = (int)numTotalQuantity.Value;
             BillBreakup.UnitPrice = Math.Round(numUnitPrice.Value,2);
             BillBreakup.ValidateBillBreakup();
+
+
             if (BillBreakup.EntityState.State == ValidationState.SUCCESS)
             {
                 SharedRepo.BillBreakupRepo.Save(BillBreakup);
@@ -140,59 +126,5 @@ namespace Stock_Management.Forms
                 MessageBox.Show(BillBreakup.EntityState.StateMessage);
             }
         }
-
-
-
-        //private void CalculateTotalQuantityUnitPrice()
-        //{
-        //    try
-        //    {
-        //        if (numTotalAmount.Value == 0)
-        //        {
-        //            numUnitPrice.Value = 0;
-        //        }
-        //        else
-        //        {
-        //            numTotalQuantity.Value = numTotalBoxes.Value * numQuantityInABox.Value;
-        //            numUnitPrice.Value = numTotalAmount.Value / numTotalQuantity.Value;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //}
-
-        //private void ValidateNumber()
-        //{
-        //    if (!NumberHelper.IsValidNumber(txtBillBreakupAmount.Text))
-        //    {
-        //        BillBreakup.EntityState.State = ValidationState.ERROR;
-        //        BillBreakup.EntityState.StateMessage += "Bill details amount is not a valid number";
-        //    }
-        //    if (!NumberHelper.IsValidNumber(txtTotalBoxes.Text))
-        //    {
-        //        BillBreakup.EntityState.State = ValidationState.ERROR;
-        //        BillBreakup.EntityState.StateMessage += "Total boxes is not a valid number";
-        //    }
-        //    if (!NumberHelper.IsValidNumber(txtQuantityInBox.Text))
-        //    {
-        //        BillBreakup.EntityState.State = ValidationState.ERROR;
-        //        BillBreakup.EntityState.StateMessage += "Quantity in a box is not a valid number";
-        //    }
-        //    if (!NumberHelper.IsValidNumber(txtTotalQuantity.Text))
-        //    {
-        //        BillBreakup.EntityState.State = ValidationState.ERROR;
-        //        BillBreakup.EntityState.StateMessage += "Total Quanity is not a valid number";
-        //    }
-        //    if (!NumberHelper.IsValidNumber(txtUnitPrice.Text))
-        //    {
-        //        BillBreakup.EntityState.State = ValidationState.ERROR;
-        //        BillBreakup.EntityState.StateMessage += "Unit Price a valid number";
-        //    }
-        //}
-
-
-
     }
 }

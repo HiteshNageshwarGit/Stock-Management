@@ -22,6 +22,16 @@ namespace Stock_Management.Forms
             ColDetails.UseColumnTextForLinkValue = true;
             ColSelect.UseColumnTextForLinkValue = true;
 
+            if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "BillBreakupForm")
+            {
+                ColSelect.Visible = true;
+            }
+            else
+            {
+                ColSelect.Visible = false;
+            }
+
+
             LoadProductList();
         }
         private void ProductListForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -45,7 +55,7 @@ namespace Stock_Management.Forms
         {
             ProductForm productForm = new ProductForm();
             productForm.ProductId = 0;
-            ShowFormAsDialog(this, productForm);
+            ShowFormAsFixedDialog(this, productForm);
         }
 
 
@@ -60,7 +70,7 @@ namespace Stock_Management.Forms
             {
                 ProductForm productForm = new ProductForm();
                 productForm.ProductId = selectedProduct.Id;
-                ShowFormAsDialog(this, productForm);
+                ShowFormAsFixedDialog(this, productForm);
             }
             else if (GetSelectedCellText(dgvProductList, e) == "Select")
             {
@@ -72,6 +82,7 @@ namespace Stock_Management.Forms
         {
             productList = SharedRepo.ProductRepo.GetProductList(txtSearchProduct.Text.Trim());
             dgvProductList.DataSource = productList;
+            dgvProductList.ClearSelection();
         }
     }
 }

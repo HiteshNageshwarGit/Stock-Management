@@ -16,7 +16,7 @@ namespace StockEntity.Helper
 
         public ValidationState()
         {
-            this.State = ValidationState.SUCCESS;
+            State = ValidationState.SUCCESS;
 
         }
     }

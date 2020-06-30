@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.InteropServices;
 
 namespace StockEntity.Helper
 {
@@ -25,8 +24,8 @@ namespace StockEntity.Helper
                 string sourceFilePath = Path.Combine(dbDirPath, DBFileName);
                 if (File.Exists(sourceFilePath))
                 {
-                    string destFilePath = DateHelper.GetTodayDateString() + "_" + DBFileName;
-                    destFilePath = Path.Combine(destDirPath, destFilePath.Replace(':', '_'));
+                    string destFilePath = DateHelper.GetTodayDateString_yyyyMMddHHmmss() + "_" + DBFileName;
+                    destFilePath = Path.Combine(destDirPath, destFilePath);
                     File.Copy(sourceFilePath, destFilePath);
                     if (File.Exists(destFilePath))
                     {
@@ -44,25 +43,26 @@ namespace StockEntity.Helper
             try
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(destDirPath);
-                foreach (FileInfo fileInfo in dirInfo.GetFiles())
+                if (dirInfo.GetFiles().Length > 30) // if no backup in last 30 days then keep minimum 300 files in the folder, date doesn't matter
                 {
-                    try
+                    foreach (FileInfo fileInfo in dirInfo.GetFiles())
                     {
-                        if (fileInfo.Exists)
+                        try
                         {
-                            string datePart = fileInfo.Name.Substring(0, fileInfo.Name.IndexOf("_"));
-                            datePart = datePart.Replace('_', ':');
-                            DateTime fileBackupDate = DateHelper.GetDateObject(datePart);
-                            DateTime todaysDate = DateHelper.GetTodayDateObject();
-                            if ((todaysDate - fileBackupDate).TotalDays > 31)
+                            if (fileInfo.Exists)
                             {
-
-                                File.Delete(fileInfo.FullName);
+                                string datePart = fileInfo.Name.Substring(0, fileInfo.Name.IndexOf("_"));
+                                DateTime fileBackupDate = DateHelper.GetDateObject_yyyyMMddHHmmss(datePart);
+                                DateTime todaysDate = DateHelper.GetTodayDateObject();
+                                if ((todaysDate - fileBackupDate).TotalDays > 31)
+                                {
+                                    File.Delete(fileInfo.FullName);
+                                }
                             }
                         }
-                    }
-                    catch (Exception ex)
-                    {
+                        catch (Exception ex)
+                        {
+                        }
                     }
                 }
             }
