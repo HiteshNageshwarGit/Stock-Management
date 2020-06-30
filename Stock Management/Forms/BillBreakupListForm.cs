@@ -53,6 +53,7 @@ namespace Stock_Management.Forms
             txtTotalBillAmount.Text = bill.TotalAmount.ToString();
             txtTotalBreakupCount.Text = bill.BillBreakupList.Count.ToString();
             txtTotalBreakupAmount.Text = bill.BillBreakupList.Sum(x => x.TotalAmount).ToString();
+            txtRemarks.Text = bill.Remarks;
 
             BillBreakupsList = SharedRepo.BillBreakupRepo.GetBillBreakupList(BillId);
             dgvBillBreakupList.DataSource = BillBreakupsList;
@@ -67,6 +68,6 @@ namespace Stock_Management.Forms
             ShowFormAsFixedDialog(this, BillBreakupForm);
         }
 
-       
+
     }
 }

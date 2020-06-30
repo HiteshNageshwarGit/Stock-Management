@@ -37,7 +37,6 @@
             this.Col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColBillDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -49,9 +48,8 @@
             this.txtTotalBreakupCount = new System.Windows.Forms.TextBox();
             this.txtTotalBreakupAmount = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.txtRemarks = new System.Windows.Forms.RichTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -66,7 +64,7 @@
             this.groupBox2.Controls.Add(this.dgvBillBreakupList);
             this.groupBox2.Location = new System.Drawing.Point(13, 223);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(659, 227);
+            this.groupBox2.Size = new System.Drawing.Size(739, 407);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bill Breakup";
@@ -75,7 +73,7 @@
             // 
             this.btnAddBillBreakup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddBillBreakup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddBillBreakup.Location = new System.Drawing.Point(523, 16);
+            this.btnAddBillBreakup.Location = new System.Drawing.Point(603, 16);
             this.btnAddBillBreakup.Name = "btnAddBillBreakup";
             this.btnAddBillBreakup.Size = new System.Drawing.Size(130, 28);
             this.btnAddBillBreakup.TabIndex = 1;
@@ -98,14 +96,13 @@
             this.ColQuantityInBox,
             this.Col,
             this.ColTotalQuantity,
-            this.ColUnitPrice,
-            this.ColBillDate});
+            this.ColUnitPrice});
             this.dgvBillBreakupList.Location = new System.Drawing.Point(6, 53);
             this.dgvBillBreakupList.Name = "dgvBillBreakupList";
             this.dgvBillBreakupList.ReadOnly = true;
             this.dgvBillBreakupList.RowHeadersVisible = false;
             this.dgvBillBreakupList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBillBreakupList.Size = new System.Drawing.Size(647, 168);
+            this.dgvBillBreakupList.Size = new System.Drawing.Size(727, 348);
             this.dgvBillBreakupList.TabIndex = 0;
             // 
             // ColProduct
@@ -155,14 +152,6 @@
             this.ColUnitPrice.HeaderText = "Unit Price";
             this.ColUnitPrice.Name = "ColUnitPrice";
             this.ColUnitPrice.ReadOnly = true;
-            // 
-            // ColBillDate
-            // 
-            this.ColBillDate.DataPropertyName = "Bill";
-            this.ColBillDate.FillWeight = 1F;
-            this.ColBillDate.HeaderText = "Bill";
-            this.ColBillDate.Name = "ColBillDate";
-            this.ColBillDate.ReadOnly = true;
             // 
             // label8
             // 
@@ -261,7 +250,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.richTextBox1);
+            this.groupBox3.Controls.Add(this.txtRemarks);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Controls.Add(this.txtTotalBreakupAmount);
             this.groupBox3.Controls.Add(this.txtTotalBreakupCount);
@@ -273,22 +262,22 @@
             this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Location = new System.Drawing.Point(12, 23);
+            this.groupBox3.Location = new System.Drawing.Point(12, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(660, 198);
+            this.groupBox3.Size = new System.Drawing.Size(660, 209);
             this.groupBox3.TabIndex = 5;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dealer And Bill Details";
             // 
-            // richTextBox1
+            // txtRemarks
             // 
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(100, 120);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(554, 60);
-            this.richTextBox1.TabIndex = 19;
-            this.richTextBox1.Text = "";
+            this.txtRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtRemarks.Enabled = false;
+            this.txtRemarks.Location = new System.Drawing.Point(100, 120);
+            this.txtRemarks.Name = "txtRemarks";
+            this.txtRemarks.Size = new System.Drawing.Size(554, 60);
+            this.txtRemarks.TabIndex = 19;
+            this.txtRemarks.Text = "";
             // 
             // label2
             // 
@@ -300,28 +289,14 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Bill Remarks";
             // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(642, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(28, 23);
-            this.btnClose.TabIndex = 6;
-            this.btnClose.Text = "X";
-            this.btnClose.UseVisualStyleBackColor = true;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
             // BillBreakupListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 462);
-            this.Controls.Add(this.btnClose);
+            this.ClientSize = new System.Drawing.Size(764, 642);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
-            this.MinimumSize = new System.Drawing.Size(700, 500);
+            this.MinimumSize = new System.Drawing.Size(750, 550);
             this.Name = "BillBreakupListForm";
             this.Text = "Bill Breakup List";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BillBreakupListForm_FormClosing);
@@ -349,7 +324,7 @@
         private System.Windows.Forms.TextBox txtTotalBreakupCount;
         private System.Windows.Forms.TextBox txtTotalBreakupAmount;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox txtRemarks;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalAmount;
@@ -357,7 +332,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Col;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColUnitPrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColBillDate;
-        private System.Windows.Forms.Button btnClose;
     }
 }

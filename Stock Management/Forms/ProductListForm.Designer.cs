@@ -65,7 +65,7 @@
             this.dgvProductList.ReadOnly = true;
             this.dgvProductList.RowHeadersVisible = false;
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductList.Size = new System.Drawing.Size(660, 378);
+            this.dgvProductList.Size = new System.Drawing.Size(660, 428);
             this.dgvProductList.TabIndex = 1;
             this.dgvProductList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductList_CellClick);
             // 
@@ -164,7 +164,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvProductList);
-            this.splitContainer1.Size = new System.Drawing.Size(660, 438);
+            this.splitContainer1.Size = new System.Drawing.Size(660, 488);
             this.splitContainer1.SplitterDistance = 52;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -172,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 462);
+            this.ClientSize = new System.Drawing.Size(684, 512);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "ProductListForm";
