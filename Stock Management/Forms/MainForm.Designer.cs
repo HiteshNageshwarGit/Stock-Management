@@ -33,6 +33,8 @@
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dealerListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.productListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuCustomerList = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSellProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +51,8 @@
             // 
             // reportsToolStripMenuItem
             // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuSellProduct});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
@@ -57,7 +61,8 @@
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dealerListToolStripMenuItem1,
-            this.productListToolStripMenuItem1});
+            this.productListToolStripMenuItem1,
+            this.menuCustomerList});
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.adminToolStripMenuItem.Text = "Admin";
@@ -65,16 +70,30 @@
             // dealerListToolStripMenuItem1
             // 
             this.dealerListToolStripMenuItem1.Name = "dealerListToolStripMenuItem1";
-            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
             this.dealerListToolStripMenuItem1.Text = "Dealer List";
             this.dealerListToolStripMenuItem1.Click += new System.EventHandler(this.dealerListToolStripMenuItem_Click);
             // 
             // productListToolStripMenuItem1
             // 
             this.productListToolStripMenuItem1.Name = "productListToolStripMenuItem1";
-            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
             this.productListToolStripMenuItem1.Text = "Product List";
             this.productListToolStripMenuItem1.Click += new System.EventHandler(this.productListToolStripMenuItem_Click);
+            // 
+            // menuCustomerList
+            // 
+            this.menuCustomerList.Name = "menuCustomerList";
+            this.menuCustomerList.Size = new System.Drawing.Size(147, 22);
+            this.menuCustomerList.Text = "Customer List";
+            this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
+            // 
+            // menuSellProduct
+            // 
+            this.menuSellProduct.Name = "menuSellProduct";
+            this.menuSellProduct.Size = new System.Drawing.Size(180, 22);
+            this.menuSellProduct.Text = "Sell";
+            this.menuSellProduct.Click += new System.EventHandler(this.menuSellProduct_Click);
             // 
             // MainForm
             // 
@@ -88,6 +107,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Management";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -103,6 +123,8 @@
         private System.Windows.Forms.ToolStripMenuItem adminToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem dealerListToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem productListToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem menuCustomerList;
+        private System.Windows.Forms.ToolStripMenuItem menuSellProduct;
     }
 }
 

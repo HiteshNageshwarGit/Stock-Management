@@ -1,7 +1,6 @@
 ﻿using StockEntity.Entity;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 
 namespace StockEntity.Repository
 {
@@ -39,7 +38,7 @@ namespace StockEntity.Repository
 
         public List<Dealer> GetDealerList()
         {
-            return this.dbSet.OrderBy(x => x.Name).ToList();
+            return dbSet.OrderBy(x => x.Name).ToList();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Stock_Management
 
         DealerListForm dealerListForm;
         ProductListForm productListForm;
+        SellForm sellForm;
         public MainForm()
         {
             InitializeComponent();
@@ -75,31 +76,65 @@ namespace Stock_Management
 
         private void On_Menu_Selectoin_Change()
         {
-            
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
             SharedRepo.InitializeSession();
-            InitializeApplicatoin();
+            //CloseMDIChildForms(this);
+            //if (sellForm == null || sellForm.IsDisposed)
+            //{
+            //    sellForm = new SellForm();
+            //}
+            //ShowFormAsMDIChild(this, sellForm);
+            //SharedRepo.InsertDummyData();
         }
 
         private void dealerListToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CloseMDIChildForms(this);
             if (dealerListForm == null || dealerListForm.IsDisposed)
             {
                 dealerListForm = new DealerListForm();
             }
+            dealerListForm.PERSON_TYPE = Person.DEALER;
+            ShowFormAsMDIChild(this, dealerListForm);
+        }
+        private void menuCustomerList_Click(object sender, EventArgs e)
+        {
+            CloseMDIChildForms(this);
+            if (dealerListForm == null || dealerListForm.IsDisposed)
+            {
+                dealerListForm = new DealerListForm();
+            }
+            dealerListForm.PERSON_TYPE = Person.CUSTOMER;
             ShowFormAsMDIChild(this, dealerListForm);
         }
 
         private void productListToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            CloseMDIChildForms(this);
             if (productListForm == null || productListForm.IsDisposed)
             {
                 productListForm = new ProductListForm();
             }
             ShowFormAsMDIChild(this, productListForm);
+        }
+
+        private void menuSellProduct_Click(object sender, EventArgs e)
+        {
+            CloseMDIChildForms(this);
+            if (sellForm == null || sellForm.IsDisposed)
+            {
+                sellForm = new SellForm();
+            }
+            ShowFormAsMDIChild(this, sellForm);
         }
 
         private void ShowAdminRelatedMenuItems()
@@ -118,7 +153,7 @@ namespace Stock_Management
 
         private bool IsDBCompitable()
         {
-            var ff = SharedRepo.ProductRepo.GetProductList("");
+            var ff = SharedRepo.ProductRepo.GetProductListForAdmin("");
             string compitableDBVersion = ConfigurationManager.AppSettings["CompitableDBVersions"];
             if (!string.IsNullOrWhiteSpace(compitableDBVersion))
             {
@@ -137,5 +172,7 @@ namespace Stock_Management
             }
             return false;
         }
+
+       
     }
 }

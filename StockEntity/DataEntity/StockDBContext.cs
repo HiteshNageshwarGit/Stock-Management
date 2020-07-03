@@ -35,10 +35,13 @@ namespace StockEntity
         }
 
         public DbSet<KeyValue> KeyValues { get; set; }
-        public DbSet<Product> ProductMasters { get; set; }
-        public DbSet<Dealer> Dealers { get; set; }
-        public DbSet<Bill> Bills { get; set; }
-        public DbSet<BillBreakup> BillBreakup { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Dealer> Dealers { get; set; }        
+        public DbSet<DealerBill> DealerBills { get; set; }
+        public DbSet<DealerBillBreakup> DealerBillBreakups { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<CustomerBill> CustomerBills { get; set; }
+        public DbSet<CustomerBillBreakup> CustomerBillBreakups { get; set; }
 
     }
 }

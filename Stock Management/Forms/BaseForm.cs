@@ -6,22 +6,27 @@ namespace Stock_Management.Forms
     {
         public BaseForm CallerForm { get; set; }
 
-        public void ShowFormAsMDIChild(Form parentForm, Form childForm)
+        public void CloseMDIChildForms(Form parentForm)
         {
             FormCollection formCollection = Application.OpenForms;
             if (formCollection != null && formCollection.Count > 0)
             {
                 foreach (Form formItem in formCollection)
                 {
-                    if (formItem.Name != parentForm.Name && formItem.Name != childForm.Name)
+                    if (formItem.Name != parentForm.Name
+                        //&& formItem.Name != childForm.Name
+                        )
                     {
-                        //frm.Close();
-                        //frm.Dispose();
-                        formItem.Hide();
+                        formItem.Close();
+                        formItem.Dispose();
+                        //formItem.Hide();
                         break;
                     }
                 }
             }
+        }
+        public void ShowFormAsMDIChild(Form parentForm, Form childForm)
+        {
             parentForm.IsMdiContainer = true;
             childForm.MdiParent = parentForm;
             childForm.MaximizeBox = false;
@@ -51,6 +56,7 @@ namespace Stock_Management.Forms
             childForm.MinimizeBox = false;
             childForm.ShowInTaskbar = false;
             childForm.StartPosition = FormStartPosition.CenterParent;
+            childForm.WindowState = parentForm.MdiParent.WindowState; // if main form is maximized then dialog also should open in maximise state
             childForm.ShowDialog();
         }
 
@@ -62,7 +68,7 @@ namespace Stock_Management.Forms
             }
             else if (e.ColumnIndex != -1)
             {
-                return dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                return (dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value == null ? "" : dataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
             }
             else
             {

@@ -37,6 +37,8 @@
             this.Col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColUnitSellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColDetail = new System.Windows.Forms.DataGridViewLinkColumn();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -96,7 +98,9 @@
             this.ColQuantityInBox,
             this.Col,
             this.ColTotalQuantity,
-            this.ColUnitPrice});
+            this.ColUnitPrice,
+            this.ColUnitSellingPrice,
+            this.ColDetail});
             this.dgvBillBreakupList.Location = new System.Drawing.Point(6, 53);
             this.dgvBillBreakupList.Name = "dgvBillBreakupList";
             this.dgvBillBreakupList.ReadOnly = true;
@@ -104,6 +108,7 @@
             this.dgvBillBreakupList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvBillBreakupList.Size = new System.Drawing.Size(727, 348);
             this.dgvBillBreakupList.TabIndex = 0;
+            this.dgvBillBreakupList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillBreakupList_CellContentClick);
             // 
             // ColProduct
             // 
@@ -152,6 +157,22 @@
             this.ColUnitPrice.HeaderText = "Unit Price";
             this.ColUnitPrice.Name = "ColUnitPrice";
             this.ColUnitPrice.ReadOnly = true;
+            // 
+            // ColUnitSellingPrice
+            // 
+            this.ColUnitSellingPrice.DataPropertyName = "UnitSellPrice";
+            this.ColUnitSellingPrice.FillWeight = 1F;
+            this.ColUnitSellingPrice.HeaderText = "Sell Price";
+            this.ColUnitSellingPrice.Name = "ColUnitSellingPrice";
+            this.ColUnitSellingPrice.ReadOnly = true;
+            // 
+            // ColDetail
+            // 
+            this.ColDetail.FillWeight = 1F;
+            this.ColDetail.HeaderText = "Action";
+            this.ColDetail.Name = "ColDetail";
+            this.ColDetail.ReadOnly = true;
+            this.ColDetail.Text = "Details";
             // 
             // label8
             // 
@@ -273,6 +294,7 @@
             // 
             this.txtRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRemarks.Enabled = false;
+            this.txtRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRemarks.Location = new System.Drawing.Point(100, 120);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(554, 60);
@@ -332,5 +354,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Col;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColUnitPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColUnitSellingPrice;
+        private System.Windows.Forms.DataGridViewLinkColumn ColDetail;
     }
 }

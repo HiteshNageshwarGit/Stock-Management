@@ -43,26 +43,32 @@ namespace StockEntity.Helper
             try
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(destDirPath);
-                if (dirInfo.GetFiles().Length > 30) // if no backup in last 30 days then keep minimum 300 files in the folder, date doesn't matter
+                if (dirInfo.GetFiles().Length <= 31) // if no backup in last 30 days then keep minimum 300 files in the folder, date doesn't matter
                 {
-                    foreach (FileInfo fileInfo in dirInfo.GetFiles())
+                    return;
+                }
+                foreach (FileInfo fileInfo in dirInfo.GetFiles())
+                {
+                    if (dirInfo.GetFiles().Length <= 31) // Keep same da 31 files
                     {
-                        try
+                        break;
+                    }
+                    try
+                    {
+                        if (fileInfo.Exists)
                         {
-                            if (fileInfo.Exists)
+                            string datePart = fileInfo.Name.Substring(0, fileInfo.Name.IndexOf("_"));
+                            DateTime fileBackupDate = DateHelper.GetDateObject_yyyyMMddHHmmss(datePart);
+                            DateTime todaysDate = DateHelper.GetTodayDateObject();
+                            if ((todaysDate - fileBackupDate).TotalDays > 31)
                             {
-                                string datePart = fileInfo.Name.Substring(0, fileInfo.Name.IndexOf("_"));
-                                DateTime fileBackupDate = DateHelper.GetDateObject_yyyyMMddHHmmss(datePart);
-                                DateTime todaysDate = DateHelper.GetTodayDateObject();
-                                if ((todaysDate - fileBackupDate).TotalDays > 31)
-                                {
-                                    File.Delete(fileInfo.FullName);
-                                }
+
+                                File.Delete(fileInfo.FullName);
                             }
                         }
-                        catch (Exception ex)
-                        {
-                        }
+                    }
+                    catch (Exception ex)
+                    {
                     }
                 }
             }

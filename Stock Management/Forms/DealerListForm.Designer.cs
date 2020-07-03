@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnAddDealer = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvDealerList = new System.Windows.Forms.DataGridView();
@@ -88,6 +89,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDealerList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDealerList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvDealerList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDealerList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColName,
@@ -95,6 +97,15 @@
             this.ColEmail,
             this.ColAddress,
             this.ColDealerShowLink});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDealerList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDealerList.Location = new System.Drawing.Point(-1, 44);
             this.dgvDealerList.MinimumSize = new System.Drawing.Size(0, 140);
             this.dgvDealerList.MultiSelect = false;
@@ -102,7 +113,7 @@
             this.dgvDealerList.ReadOnly = true;
             this.dgvDealerList.RowHeadersVisible = false;
             this.dgvDealerList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDealerList.Size = new System.Drawing.Size(660, 148);
+            this.dgvDealerList.Size = new System.Drawing.Size(660, 152);
             this.dgvDealerList.TabIndex = 0;
             this.dgvDealerList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDealerList_CellClick);
             // 
@@ -141,7 +152,7 @@
             // ColDealerShowLink
             // 
             this.ColDealerShowLink.DataPropertyName = "Id";
-            this.ColDealerShowLink.FillWeight = 2F;
+            this.ColDealerShowLink.FillWeight = 1F;
             this.ColDealerShowLink.HeaderText = "Show";
             this.ColDealerShowLink.Name = "ColDealerShowLink";
             this.ColDealerShowLink.ReadOnly = true;
@@ -156,14 +167,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBillList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBillList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvBillList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBillList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvBillList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBillList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColBillDate,
@@ -172,37 +184,38 @@
             this.ColRemarks,
             this.ColBillShowLink,
             this.ColShowBillBreakups});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBillList.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBillList.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvBillList.Location = new System.Drawing.Point(-1, 56);
             this.dgvBillList.MinimumSize = new System.Drawing.Size(0, 200);
             this.dgvBillList.Name = "dgvBillList";
             this.dgvBillList.ReadOnly = true;
             this.dgvBillList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBillList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBillList.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvBillList.RowHeadersVisible = false;
             this.dgvBillList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBillList.Size = new System.Drawing.Size(660, 200);
+            this.dgvBillList.Size = new System.Drawing.Size(660, 230);
             this.dgvBillList.TabIndex = 0;
             this.dgvBillList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillList_CellClick);
             // 
             // ColBillDate
             // 
             this.ColBillDate.DataPropertyName = "BillDate";
-            this.ColBillDate.FillWeight = 1F;
+            this.ColBillDate.FillWeight = 2F;
             this.ColBillDate.HeaderText = "Bill Date";
             this.ColBillDate.Name = "ColBillDate";
             this.ColBillDate.ReadOnly = true;
@@ -210,7 +223,7 @@
             // CollTotalAmount
             // 
             this.CollTotalAmount.DataPropertyName = "TotalAmount";
-            this.CollTotalAmount.FillWeight = 1F;
+            this.CollTotalAmount.FillWeight = 2F;
             this.CollTotalAmount.HeaderText = "Total Amount";
             this.CollTotalAmount.Name = "CollTotalAmount";
             this.CollTotalAmount.ReadOnly = true;
@@ -219,7 +232,7 @@
             // 
             this.ColEntryDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColEntryDate.DataPropertyName = "EntryDate";
-            this.ColEntryDate.FillWeight = 1F;
+            this.ColEntryDate.FillWeight = 2F;
             this.ColEntryDate.HeaderText = "Bill Entry Date";
             this.ColEntryDate.Name = "ColEntryDate";
             this.ColEntryDate.ReadOnly = true;
@@ -227,7 +240,7 @@
             // ColRemarks
             // 
             this.ColRemarks.DataPropertyName = "Remarks";
-            this.ColRemarks.FillWeight = 1F;
+            this.ColRemarks.FillWeight = 2F;
             this.ColRemarks.HeaderText = "Remarks";
             this.ColRemarks.Name = "ColRemarks";
             this.ColRemarks.ReadOnly = true;
@@ -317,6 +330,7 @@
             this.MinimumSize = new System.Drawing.Size(700, 500);
             this.Name = "DealerListForm";
             this.Text = "Dealer List";
+            this.Load += new System.EventHandler(this.DealerListForm_Load);
             this.Shown += new System.EventHandler(this.DealerListForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDealerList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillList)).EndInit();
@@ -338,12 +352,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnAddBill;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TextBox txtDealerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColMobile;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColEmail;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColAddress;
         private System.Windows.Forms.DataGridViewLinkColumn ColDealerShowLink;
-        private System.Windows.Forms.TextBox txtDealerName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColBillDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn CollTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColEntryDate;

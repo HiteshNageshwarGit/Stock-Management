@@ -8,10 +8,13 @@ namespace Stock_Management.Forms
 {
     public partial class BillForm : BaseForm
     {
-        public Bill bill;
+        public int PERSON_TYPE { get; set; }
+        public int BILL_ID { get; set; }
+
+        public DealerBill dealerBill;
         Dealer dealer;
         public int DealerId;
-        public int BillId;
+        
         public BillForm()
         {
             InitializeComponent();
@@ -55,18 +58,18 @@ namespace Stock_Management.Forms
             //lblDealerName.Text = dealer.Name;
             txtDealerName.Text = dealer.Name;
 
-            if (BillId != 0)
+            if (BILL_ID != 0)
             {
-                bill = SharedRepo.BillRepo.GetByID(BillId);
-                dtBillEntryDate.Value = DateHelper.GetDateObject(bill.EntryDate);
+                dealerBill = SharedRepo.DealerBillRepo.GetByID(BILL_ID);
+                dtBillEntryDate.Value = DateHelper.GetDateObject(dealerBill.EntryDate);
                 // lblEntyDate.Text = bill.EntryDate.ToString();
-                dtBillDate.Value = DateHelper.GetDateObject(bill.BillDate);
-                numBillAmount.Value = bill.TotalAmount;
-                txtRemarks.Text = bill.Remarks;
+                dtBillDate.Value = DateHelper.GetDateObject(dealerBill.BillDate);
+                numBillAmount.Value = dealerBill.TotalAmount;
+                txtRemarks.Text = dealerBill.Remarks;
             }
             else
             {
-                bill = new Bill();
+                dealerBill = new DealerBill();
                 dtBillEntryDate.Value = DateHelper.GetTodayDateObject();
                 //lblEntyDate.Text = DateHelper.GetTodayDateString();
             }
@@ -74,18 +77,19 @@ namespace Stock_Management.Forms
 
         private void SaveBill()
         {
-            bill.DealerId = dealer.Id;
-            bill.EntryDate = DateHelper.GetDateString(dtBillEntryDate.Value); //lblEntyDate.Text;
-            bill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
-            bill.TotalAmount = numBillAmount.Value;
-            bill.Remarks = txtRemarks.Text;
-            bill.ValidateBill();
-            if (bill.EntityState.State != ValidationState.SUCCESS)
+            dealerBill.EntityState = new ValidationState();
+            dealerBill.DealerId = dealer.Id;
+            dealerBill.EntryDate = DateHelper.GetDateString(dtBillEntryDate.Value); //lblEntyDate.Text;
+            dealerBill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
+            dealerBill.TotalAmount = numBillAmount.Value;
+            dealerBill.Remarks = txtRemarks.Text;
+            dealerBill.ValidateBill();
+            if (dealerBill.EntityState.State != ValidationState.SUCCESS)
             {
-                MessageBox.Show(bill.EntityState.StateMessage);
+                MessageBox.Show(dealerBill.EntityState.StateMessage);
                 return;
             }
-            SharedRepo.BillRepo.Save(bill);
+            SharedRepo.DealerBillRepo.Save((DealerBill)dealerBill);
             Close();
         }
 

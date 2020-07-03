@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace StockEntity.Repository
 {
-    public class BillBreakupRepository : BaseRepository<BillBreakup>
+    public class DealerBillBreakupRepository : BaseRepository<DealerBillBreakup>
     {
-        public BillBreakupRepository() : base()
+        public DealerBillBreakupRepository() : base()
         {
 
         }
 
-        public void Save(BillBreakup BillBreakup)
+        public void Save(DealerBillBreakup BillBreakup)
         {
             if (BillBreakup.Id == 0)
             {
@@ -23,9 +23,9 @@ namespace StockEntity.Repository
             }
         }
 
-        public List<BillBreakup> GetBillBreakupList(int billId)
+        public List<DealerBillBreakup> GetBillBreakupList(int billId)
         {
-            return dbSet.Where(x => x.BillId == billId).ToList();
+            return dbSet.Where(x => x.DealerBillId == billId).ToList();
         }
     }
 }

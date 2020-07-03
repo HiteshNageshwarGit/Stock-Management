@@ -77,7 +77,7 @@ namespace Stock_Management.Forms
 
         private void SaveProduct()
         {
-
+            product.EntityState = new ValidationState();
             product.Name = txtName.Text;
             product.Code = txtCode.Text;
             product.Color = txtColor.Text;

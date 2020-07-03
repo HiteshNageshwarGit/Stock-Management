@@ -43,6 +43,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numUnitSellingPrice = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.txtSelectedProductName = new System.Windows.Forms.TextBox();
             this.numUnitPrice = new System.Windows.Forms.NumericUpDown();
             this.numTotalQuantity = new System.Windows.Forms.NumericUpDown();
@@ -58,6 +60,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitSellingPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantityInABox)).BeginInit();
@@ -213,6 +216,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.numUnitSellingPrice);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtSelectedProductName);
             this.groupBox2.Controls.Add(this.numUnitPrice);
             this.groupBox2.Controls.Add(this.numTotalQuantity);
@@ -236,6 +241,36 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bill Breakup Details";
             // 
+            // numUnitSellingPrice
+            // 
+            this.numUnitSellingPrice.BackColor = System.Drawing.SystemColors.Window;
+            this.numUnitSellingPrice.DecimalPlaces = 2;
+            this.numUnitSellingPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUnitSellingPrice.Location = new System.Drawing.Point(347, 220);
+            this.numUnitSellingPrice.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numUnitSellingPrice.Minimum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            -2147483648});
+            this.numUnitSellingPrice.Name = "numUnitSellingPrice";
+            this.numUnitSellingPrice.Size = new System.Drawing.Size(221, 23);
+            this.numUnitSellingPrice.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(344, 200);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(119, 15);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Unit Selling Price";
+            // 
             // txtSelectedProductName
             // 
             this.txtSelectedProductName.Enabled = false;
@@ -248,6 +283,7 @@
             // numUnitPrice
             // 
             this.numUnitPrice.DecimalPlaces = 2;
+            this.numUnitPrice.Enabled = false;
             this.numUnitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUnitPrice.Location = new System.Drawing.Point(347, 160);
             this.numUnitPrice.Maximum = new decimal(new int[] {
@@ -267,6 +303,7 @@
             // 
             // numTotalQuantity
             // 
+            this.numTotalQuantity.Enabled = false;
             this.numTotalQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numTotalQuantity.Location = new System.Drawing.Point(347, 102);
             this.numTotalQuantity.Maximum = new decimal(new int[] {
@@ -349,6 +386,7 @@
             // 
             // txtBillBreakupRemarks
             // 
+            this.txtBillBreakupRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBillBreakupRemarks.Location = new System.Drawing.Point(9, 280);
             this.txtBillBreakupRemarks.Name = "txtBillBreakupRemarks";
             this.txtBillBreakupRemarks.Size = new System.Drawing.Size(315, 96);
@@ -431,6 +469,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUnitSellingPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantityInABox)).EndInit();
@@ -470,5 +509,7 @@
         private System.Windows.Forms.TextBox txtTotalBreakupAmount;
         private System.Windows.Forms.TextBox txtTotalBreakupCount;
         private System.Windows.Forms.TextBox txtSelectedProductName;
+        private System.Windows.Forms.NumericUpDown numUnitSellingPrice;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -8,42 +8,52 @@ namespace Stock_Management.Forms
 {
     public partial class DealerListForm : BaseForm
     {
-        List<Dealer> dealerList;
-        List<Bill> billList;
-        Dealer selectedDealer;
-        // Bill selectedBill;
-        int selectedBillId;
+        public int PERSON_TYPE { get; set; } // Can be Dealer or Customer
+        private Person selectedePerson;
+        private int selectedBillId;
 
         public DealerListForm()
         {
             InitializeComponent();
-            this.EnumerateChildren();
+            //this.EnumerateChildren();
+        }
 
-            //dgvDealerList.AutoGenerateColumns = false;
-            //dgvDealerList.ClearSelection();
-            //ColDealerShowLink.UseColumnTextForLinkValue = true; // To show "Details" text on button
-
-            //dgvBillList.AutoGenerateColumns = false;
-            //dgvBillList.ClearSelection();
-            //ColBillShowLink.UseColumnTextForLinkValue = true;
-            //ColShowBillBreakups.UseColumnTextForLinkValue = true;
-            //LoadDealerList();
-
-            //EnableAddBillButton();// initially no dealer is selected, so button should be disabled
+        private void DealerListForm_Load(object sender, EventArgs e)
+        {
+            if (PERSON_TYPE == Person.DEALER)
+            {
+                Text = "Dealer";
+                btnAddDealer.Text = "Add Dealer";
+            }
+            else if (PERSON_TYPE == Person.CUSTOMER)
+            {
+                Text = "Customer";
+                btnAddDealer.Text = "Add Customer";
+                EnableAddBillButton();
+            }
+            else
+            {
+                Text = "Unknown";
+                btnAddDealer.Text = "Add";
+                EnableFormControls(false);
+                return;
+            }
         }
 
         private void btnAddDealer_Click(object sender, EventArgs e)
         {
             DealerForm dealerForm = new DealerForm();
-            dealerForm.DealerId = 0;
+            dealerForm.PERSON_ID = 0;
+            dealerForm.PERSON_TYPE = PERSON_TYPE;
             ShowFormAsFixedDialog(this, dealerForm);
         }
 
         private void btnAddBill_Click(object sender, EventArgs e)
         {
             BillForm billForm = new BillForm();
-            billForm.DealerId = selectedDealer.Id;
-            billForm.BillId = 0;
+
+            billForm.DealerId = selectedePerson.Id;
+            billForm.BILL_ID = 0;
             ShowFormAsFixedDialog(this, billForm);
         }
 
@@ -54,10 +64,11 @@ namespace Stock_Management.Forms
                 return;
             }
 
-            selectedDealer = ((Dealer)dgvDealerList.Rows[e.RowIndex].DataBoundItem);
+            selectedePerson = ((Person)dgvDealerList.Rows[e.RowIndex].DataBoundItem);
 
             DealerForm dealerForm = new DealerForm();
-            dealerForm.DealerId = selectedDealer.Id;
+            dealerForm.PERSON_TYPE = PERSON_TYPE;
+            dealerForm.PERSON_ID = selectedePerson.Id;
             if (GetSelectedCellText(dgvDealerList, e) == "Details")
             {
                 ShowFormAsFixedDialog(this, dealerForm);
@@ -81,14 +92,14 @@ namespace Stock_Management.Forms
             if (GetSelectedCellText(dgvBillList, e) == "Details")
             {
                 BillForm billForm = new BillForm();
-                billForm.DealerId = selectedDealer.Id;
-                billForm.BillId = selectedBillId;
+                billForm.DealerId = selectedePerson.Id;
+                billForm.BILL_ID = selectedBillId;
                 ShowFormAsFixedDialog(this, billForm);
             }
             else if (GetSelectedCellText(dgvBillList, e) == "Add Breakups")
             {
                 BillBreakupListForm billBreakupForm = new BillBreakupListForm();
-                billBreakupForm.BillId = selectedBillId;
+                billBreakupForm.DEALER_BILL_ID = selectedBillId;
                 ShowFormResizableAsDialog(this, billBreakupForm);
             }
         }
@@ -96,22 +107,43 @@ namespace Stock_Management.Forms
 
         internal void LoadDealerList()
         {
-            dealerList = SharedRepo.DealerRepo.GetDealerList(); // dealerRepo.GetDealerList();
-            dgvDealerList.DataSource = dealerList;
+            if (PERSON_TYPE == Person.DEALER)
+            {
+                List<Dealer> dealerList = SharedRepo.DealerRepo.GetDealerList();
+                dgvDealerList.DataSource = dealerList;
+            }
+            else if (PERSON_TYPE == Person.CUSTOMER)
+            {
+                List<Customer> dealerList = SharedRepo.CustomerRepo.GetCustomerList();
+                dgvDealerList.DataSource = dealerList;
+            }
             dgvDealerList.ClearSelection();
         }
 
         internal void LoadBillList()
         {
-            txtDealerName.Text = selectedDealer.Name;
-            billList = SharedRepo.BillRepo.GetBillList(selectedDealer.Id);
-            dgvBillList.DataSource = billList;
+            txtDealerName.Text = selectedePerson.Name;
+            if (PERSON_TYPE == Person.DEALER)
+            {
+                List<DealerBill> billList = SharedRepo.DealerBillRepo.GetBillList(selectedePerson.Id);
+                dgvBillList.DataSource = billList;
+            }
+            else if (PERSON_TYPE == Person.CUSTOMER)
+            {
+
+            }
             dgvBillList.ClearSelection();
         }
 
         public void EnableAddBillButton()
         {
-            if (selectedDealer == null || selectedDealer.Id == 0)
+            if (PERSON_TYPE == Person.CUSTOMER)
+            {
+                btnAddBill.Enabled = false;
+                return;
+            }
+
+            if (selectedePerson == null || selectedePerson.Id == 0)
             {
                 btnAddBill.Enabled = false;
             }
@@ -133,5 +165,15 @@ namespace Stock_Management.Forms
 
             EnableAddBillButton();// initially no dealer is selected, so button should be disabled
         }
+
+        private void EnableFormControls(bool enable)
+        {
+            btnAddBill.Enabled = enable;
+            btnAddBill.Enabled = enable;
+            dgvDealerList.Enabled = enable;
+            dgvBillList.Enabled = enable;
+        }
+
+
     }
 }

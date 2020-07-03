@@ -12,7 +12,7 @@ namespace StockEntity.Repository
                
         public KeyValue GetKeyValue(string key)
         {
-            var dd = dbSet.Where(x => x.Key == key).SingleOrDefault();
+            var dd = dbSet.Where(x => x.Key == key).FirstOrDefault();
             return dd;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using StockEntity.Entity;
+using StockEntity.EntityX;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,14 +35,39 @@ namespace StockEntity.Repository
             }
         }
 
-        public Product GetProduct(string productName)
+        public Product GetProductForAdmin(string productName)
         {
             return dbSet.Where(x => x.Name.Trim().ToLower().Contains(productName.Trim().ToLower())).FirstOrDefault();
         }
 
-        public List<Product> GetProductList(string productName)
+        public List<Product> GetProductListForAdmin(string productName)
         {
             return dbSet.Where(x => x.Name.ToLower().Contains(productName.ToLower()) || productName == "").OrderBy(x => x.Name).ToList();
+        }
+
+        public List<ProductWithPrice> GetProductListForSelling(string productName)
+        {
+            List<ProductWithPrice> productLisForReport = (List<ProductWithPrice>)(from P in context.Products
+                                                                 where (P.Name.Contains(productName) || productName == "")
+                                                                 join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
+                                                                 join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
+                                                                 join D in context.Dealers on DB.DealerId equals D.Id
+
+                                                                 select new ProductWithPrice
+                                                                 {
+                                                                     ProductName = P.Name,
+                                                                     DealerName = D.Name,
+                                                                     BillDate = DB.BillDate,
+                                                                     TotalQuantity = DBB.TotalQuantity,
+                                                                     RemainigQuantity = DBB.RemainigQuantity,
+                                                                     UnitSellPrice = DBB.UnitSellPrice,
+                                                                     UnitPrice = DBB.UnitPrice,
+                                                                     //UnitPriceIncode = ProductWithPrice.GetPriceInCode(DBB.UnitPrice),
+                                                                     DealerBillBreakupId = DBB.Id
+
+                                                                 }).Take(100).ToList();
+            return productLisForReport;
+
         }
     }
 }

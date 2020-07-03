@@ -51,15 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityX\ProductWithPrice.cs" />
+    <Compile Include="Entity\Customer.cs" />
+    <Compile Include="Entity\CustomerBill.cs" />
+    <Compile Include="Entity\CustomerBillBreakup.cs" />
+    <Compile Include="Entity\DealerBill.cs" />
+    <Compile Include="Entity\DealerBillBreakup.cs" />
     <Compile Include="Entity\KeyValue.cs" />
+    <Compile Include="Entity\Person.cs" />
     <Compile Include="Entity\ProductProperty.cs" />
     <Compile Include="Helper\DateHelper.cs" />
     <Compile Include="Helper\DBFileHelper.cs" />
     <Compile Include="Repository\BillDetailRepository.cs" />
-    <Compile Include="Repository\BillRepository.cs" />
+    <Compile Include="Repository\DealerBillRepository.cs" />
     <Compile Include="Repository\KeyValueRepository.cs" />
     <Compile Include="Repository\DealerRepository.cs" />
     <Compile Include="Repository\IBaseRepository.cs" />
+    <Compile Include="Repository\CustomerRepository.cs" />
+    <Compile Include="Repository\PersonRepository.cs" />
     <Compile Include="Repository\ProductRepository.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="DataEntity\StockDBContext.cs" />

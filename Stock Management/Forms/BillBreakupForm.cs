@@ -9,7 +9,7 @@ namespace Stock_Management.Forms
 {
     public partial class BillBreakupForm : BaseForm
     {
-        BillBreakup BillBreakup;
+        DealerBillBreakup dealerBillBreakup;
         public int BillId;
         public int BillBreakupId;
         public BillBreakupForm()
@@ -50,9 +50,9 @@ namespace Stock_Management.Forms
                 }
                 else
                 {
-                    numTotalQuantity.Value = numTotalBoxes.Value * numQuantityInABox.Value;
                     numUnitPrice.Value = numTotalAmount.Value / numTotalQuantity.Value;
                 }
+                numTotalQuantity.Value = numTotalBoxes.Value * numQuantityInABox.Value;
             }
             catch (Exception ex)
             {
@@ -67,13 +67,13 @@ namespace Stock_Management.Forms
 
         internal void OnProductSelect(int produectId, string productName)
         {
-            BillBreakup.ProductId = produectId;
+            dealerBillBreakup.ProductId = produectId;
             txtSelectedProductName.Text = productName;
         }
 
         private void EditBillBreakuDetail()
         {
-            Bill bill = SharedRepo.BillRepo.GetByID(BillId);
+            DealerBill bill = SharedRepo.DealerBillRepo.GetByID(BillId);
             if (bill == null)
             {
                 MessageBox.Show("Bill not found");
@@ -90,40 +90,54 @@ namespace Stock_Management.Forms
             txtDealerName.Text = bill.Dealer.Name;
             txtBillDate.Text = bill.BillDate;
             txtTotalBillAmount.Text = bill.TotalAmount.ToString();
-            txtTotalBreakupCount.Text = bill.BillBreakupList.Count.ToString();
-            txtTotalBreakupAmount.Text = bill.BillBreakupList.Sum(x => x.TotalAmount).ToString();
+            txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
+            txtTotalBreakupAmount.Text = bill.DealerBillBreakupList.Sum(x => x.TotalAmount).ToString();
 
             if (BillBreakupId != 0)
             {
-                BillBreakup = SharedRepo.BillBreakupRepo.GetByID(BillBreakupId);
+                dealerBillBreakup = SharedRepo.DealerBillBreakupRepo.GetByID(BillBreakupId);
+                if (dealerBillBreakup == null)
+                {
+                    btnSaveBillBreakups.Enabled = false;
+                    return;
+                }
+                else
+                {
+                    numTotalAmount.Value = dealerBillBreakup.TotalAmount;
+                    numTotalBoxes.Value = dealerBillBreakup.TotalBoxes;
+                    numQuantityInABox.Value = dealerBillBreakup.QuantityInBox;
+                    numTotalQuantity.Value = dealerBillBreakup.TotalQuantity;
+                    numUnitPrice.Value = dealerBillBreakup.UnitPrice;
+                    numUnitSellingPrice.Value = dealerBillBreakup.UnitSellPrice;
+                }
             }
             else
             {
-                BillBreakup = new BillBreakup();
-                BillBreakup.BillId = BillId;
-                BillBreakup.EntryDate = DateHelper.GetTodayDateString();
+                dealerBillBreakup = new DealerBillBreakup();
+                dealerBillBreakup.DealerBillId = BillId;
+                dealerBillBreakup.EntryDate = DateHelper.GetTodayDateString();
             }
         }
 
         private void SaveBillBreakup()
         {
-            BillBreakup.EntityState = new ValidationState();
-            BillBreakup.TotalAmount = numTotalAmount.Value;
-            BillBreakup.QuantityInBox = (int)numQuantityInABox.Value;
-            BillBreakup.TotalBoxes = (int)numTotalBoxes.Value;
-            BillBreakup.TotalQuantity = (int)numTotalQuantity.Value;
-            BillBreakup.UnitPrice = Math.Round(numUnitPrice.Value,2);
-            BillBreakup.ValidateBillBreakup();
+            dealerBillBreakup.EntityState = new ValidationState();
+            dealerBillBreakup.TotalAmount = numTotalAmount.Value;
+            dealerBillBreakup.QuantityInBox = (int)numQuantityInABox.Value;
+            dealerBillBreakup.TotalBoxes = (int)numTotalBoxes.Value;
+            dealerBillBreakup.TotalQuantity = (int)numTotalQuantity.Value;
+            dealerBillBreakup.UnitPrice = Math.Round(numUnitPrice.Value, 2);
+            dealerBillBreakup.UnitSellPrice = numUnitSellingPrice.Value;
+            dealerBillBreakup.ValidateDealerBillBreakup();
 
-
-            if (BillBreakup.EntityState.State == ValidationState.SUCCESS)
+            if (dealerBillBreakup.EntityState.State == ValidationState.SUCCESS)
             {
-                SharedRepo.BillBreakupRepo.Save(BillBreakup);
+                SharedRepo.DealerBillBreakupRepo.Save(dealerBillBreakup);
                 Close();
             }
             else
             {
-                MessageBox.Show(BillBreakup.EntityState.StateMessage);
+                MessageBox.Show(dealerBillBreakup.EntityState.StateMessage);
             }
         }
     }
