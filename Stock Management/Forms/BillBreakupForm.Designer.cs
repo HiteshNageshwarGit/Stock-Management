@@ -58,6 +58,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.numAvailableQuantity = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitSellingPrice)).BeginInit();
@@ -66,6 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numQuantityInABox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalBoxes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalAmount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAvailableQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSaveBillBreakups
@@ -216,6 +219,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.numAvailableQuantity);
+            this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.numUnitSellingPrice);
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.txtSelectedProductName);
@@ -244,9 +249,8 @@
             // numUnitSellingPrice
             // 
             this.numUnitSellingPrice.BackColor = System.Drawing.SystemColors.Window;
-            this.numUnitSellingPrice.DecimalPlaces = 2;
             this.numUnitSellingPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUnitSellingPrice.Location = new System.Drawing.Point(347, 220);
+            this.numUnitSellingPrice.Location = new System.Drawing.Point(347, 280);
             this.numUnitSellingPrice.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -265,7 +269,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(344, 200);
+            this.label7.Location = new System.Drawing.Point(344, 260);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(119, 15);
             this.label7.TabIndex = 21;
@@ -285,7 +289,7 @@
             this.numUnitPrice.DecimalPlaces = 2;
             this.numUnitPrice.Enabled = false;
             this.numUnitPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numUnitPrice.Location = new System.Drawing.Point(347, 160);
+            this.numUnitPrice.Location = new System.Drawing.Point(347, 220);
             this.numUnitPrice.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -330,6 +334,11 @@
             // 
             this.numQuantityInABox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numQuantityInABox.Location = new System.Drawing.Point(9, 220);
+            this.numQuantityInABox.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numQuantityInABox.Minimum = new decimal(new int[] {
             1,
             0,
@@ -344,11 +353,17 @@
             0,
             0});
             this.numQuantityInABox.ValueChanged += new System.EventHandler(this.AmountAndQuantity_Changed);
+            this.numQuantityInABox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AmountChanging);
             // 
             // numTotalBoxes
             // 
             this.numTotalBoxes.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numTotalBoxes.Location = new System.Drawing.Point(9, 160);
+            this.numTotalBoxes.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numTotalBoxes.Minimum = new decimal(new int[] {
             1,
             0,
@@ -363,10 +378,10 @@
             0,
             0});
             this.numTotalBoxes.ValueChanged += new System.EventHandler(this.AmountAndQuantity_Changed);
+            this.numTotalBoxes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AmountChanging);
             // 
             // numTotalAmount
             // 
-            this.numTotalAmount.DecimalPlaces = 2;
             this.numTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numTotalAmount.Location = new System.Drawing.Point(9, 100);
             this.numTotalAmount.Maximum = new decimal(new int[] {
@@ -383,6 +398,7 @@
             this.numTotalAmount.Size = new System.Drawing.Size(315, 24);
             this.numTotalAmount.TabIndex = 16;
             this.numTotalAmount.ValueChanged += new System.EventHandler(this.AmountAndQuantity_Changed);
+            this.numTotalAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AmountChanging);
             // 
             // txtBillBreakupRemarks
             // 
@@ -407,7 +423,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(344, 140);
+            this.label10.Location = new System.Drawing.Point(344, 200);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(70, 15);
             this.label10.TabIndex = 12;
@@ -453,6 +469,41 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Total Amount";
             // 
+            // numAvailableQuantity
+            // 
+            this.numAvailableQuantity.BackColor = System.Drawing.SystemColors.Control;
+            this.numAvailableQuantity.Enabled = false;
+            this.numAvailableQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numAvailableQuantity.Location = new System.Drawing.Point(347, 160);
+            this.numAvailableQuantity.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAvailableQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numAvailableQuantity.Name = "numAvailableQuantity";
+            this.numAvailableQuantity.Size = new System.Drawing.Size(221, 23);
+            this.numAvailableQuantity.TabIndex = 24;
+            this.numAvailableQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(344, 140);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(121, 15);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Available Quantity";
+            // 
             // BillBreakupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,6 +526,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numQuantityInABox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalBoxes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalAmount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAvailableQuantity)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -511,5 +563,7 @@
         private System.Windows.Forms.TextBox txtSelectedProductName;
         private System.Windows.Forms.NumericUpDown numUnitSellingPrice;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numAvailableQuantity;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -6,17 +6,16 @@ namespace StockEntity.Entity
     {
         #region Entity Properties           
         public string BillDate { get; set; }
-        public string EntryDate { get; set; }
         public decimal TotalAmount { get; set; }
         #endregion
 
-        public void ValidateBill()
+        public void Validate()
         {            
             if (TotalAmount <= 0)
             {
                 EntityState.State = ValidationState.ERROR;
-                EntityState.StateMessage = "Bill amount should be greate than 0";
-            }
+                EntityState.StateMessage += "\n Bill amount should be greate than 0";
+            }           
         }
 
     }

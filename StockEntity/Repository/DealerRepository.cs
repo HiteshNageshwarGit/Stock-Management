@@ -36,6 +36,31 @@ namespace StockEntity.Repository
             }
         }
 
+        public bool DoesDefaulDealerNameExist()
+        {
+            if (GetDefaultDealer() == null)
+            {
+                Add(new Dealer() { Name = Person.DEFAULT_NAME });
+                if (GetDefaultDealer() == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public Dealer GetDefaultDealer()
+        {
+            return dbSet.Where(x => x.Name.ToLower() == Person.DEFAULT_NAME.ToLower()).FirstOrDefault();
+        }
+
         public List<Dealer> GetDealerList()
         {
             return dbSet.OrderBy(x => x.Name).ToList();

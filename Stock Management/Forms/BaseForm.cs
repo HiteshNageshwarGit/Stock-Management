@@ -6,6 +6,13 @@ namespace Stock_Management.Forms
     {
         public BaseForm CallerForm { get; set; }
 
+        public void NumericFieldKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) // Only numeric values are allowed
+            {
+                e.Handled = true;
+            }
+        }
         public void CloseMDIChildForms(Form parentForm)
         {
             FormCollection formCollection = Application.OpenForms;

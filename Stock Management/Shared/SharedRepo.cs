@@ -16,13 +16,13 @@ namespace Stock_Management.Shared
         public const string GeneralUser = "GeneralUser";
         public static string UserRole { get; set; }
         #region Properties
-
         public static KeyValueRepository keyValueRepo { get; private set; }
         public static ProductRepository ProductRepo { get; private set; }
         public static DealerRepository DealerRepo { get; private set; }
         public static CustomerRepository CustomerRepo { get; private set; }
         public static DealerBillRepository DealerBillRepo { get; private set; }
         public static DealerBillBreakupRepository DealerBillBreakupRepo { get; private set; }
+        
         #endregion        
 
         public static void InitializeSession()
@@ -33,6 +33,8 @@ namespace Stock_Management.Shared
             DealerBillRepo = new DealerBillRepository();
             DealerBillBreakupRepo = new DealerBillBreakupRepository();
             ProductRepo = new ProductRepository();
+
+            //InsertDummyData();
         }
 
         public static void InsertDummyData()
@@ -41,7 +43,7 @@ namespace Stock_Management.Shared
             {
                 ProductRepo.Add(new Product()
                 {
-                    Name = "Product Number " + i,
+                    Name = "Product Number 100" + i,
                     Code = "PROD" + i,
                     Remarks = "Remarks are auto update for " + i
                 });
@@ -51,7 +53,7 @@ namespace Stock_Management.Shared
             {
                 Dealer dealer = new Dealer()
                 {
-                    Name = "Dealer Number " + i,
+                    Name = "Dealer Number 200" + i,
                     Address = "Dealer Address " + i,
                     Mobile = "987456321" + i
                 };
@@ -62,7 +64,7 @@ namespace Stock_Management.Shared
                     {
                         DealerId = dealer.Id,
                         BillDate = DateHelper.GetTodayDateString(),
-                        TotalAmount = 500 + (3 * new Random().Next(1, 10)),
+                        TotalAmount = 500 + (3 * new Random().Next(1, 110)),
                         EntryDate = DateHelper.GetTodayDateString(),
                         Remarks = "Dealer bill remark " + i
                     };
@@ -80,11 +82,11 @@ namespace Stock_Management.Shared
                             DealerBillBreakup dealerBillBreakup = new DealerBillBreakup()
                             {
                                 DealerBillId = dealerBill.Id,
-                                TotalAmount = 50 + (2 * new Random().Next(1, 10)),
+                                TotalAmount = 50 + (2 * new Random().Next(1, 110)),
                                 EntryDate = DateHelper.GetTodayDateString(),
                                 ProductId = product.Id,
                                 TotalBoxes = 1,
-                                TotalQuantity = 1,
+                                TotalQuantity = 10,
                                 UnitPrice = 50 + (3 * i),
                                 QuantityInBox = 1,
                                 Remarks = "Deaelr bill breakup remarks " + i

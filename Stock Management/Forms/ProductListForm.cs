@@ -48,6 +48,10 @@ namespace Stock_Management.Forms
 
         private void txtSearchProduct_KeyPress(object sender, KeyPressEventArgs e)
         {
+            
+        }
+        private void txtSearchProduct_KeyUp(object sender, KeyEventArgs e)
+        {
             LoadProductList();
         }
 
@@ -84,5 +88,7 @@ namespace Stock_Management.Forms
             dgvProductList.DataSource = productList;
             dgvProductList.ClearSelection();
         }
+
+       
     }
 }

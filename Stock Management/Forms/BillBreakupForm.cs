@@ -42,22 +42,7 @@ namespace Stock_Management.Forms
 
         private void AmountAndQuantity_Changed(object sender, EventArgs e)
         {
-            try
-            {
-                if (numTotalAmount.Value == 0)
-                {
-                    numUnitPrice.Value = 0;
-                }
-                else
-                {
-                    numUnitPrice.Value = numTotalAmount.Value / numTotalQuantity.Value;
-                }
-                numTotalQuantity.Value = numTotalBoxes.Value * numQuantityInABox.Value;
-            }
-            catch (Exception ex)
-            {
-
-            }
+            CalculateQuantityAndUnitPrice();
         }
 
         private void btnSaveBillBreakups_Click(object sender, EventArgs e)
@@ -103,10 +88,15 @@ namespace Stock_Management.Forms
                 }
                 else
                 {
+                    if (dealerBillBreakup.Product != null)
+                    {
+                        txtSelectedProductName.Text = dealerBillBreakup.Product.Name;
+                    }
                     numTotalAmount.Value = dealerBillBreakup.TotalAmount;
                     numTotalBoxes.Value = dealerBillBreakup.TotalBoxes;
                     numQuantityInABox.Value = dealerBillBreakup.QuantityInBox;
                     numTotalQuantity.Value = dealerBillBreakup.TotalQuantity;
+                    numAvailableQuantity.Value = dealerBillBreakup.AvailableQuantity;
                     numUnitPrice.Value = dealerBillBreakup.UnitPrice;
                     numUnitSellingPrice.Value = dealerBillBreakup.UnitSellPrice;
                 }
@@ -128,6 +118,7 @@ namespace Stock_Management.Forms
             dealerBillBreakup.TotalQuantity = (int)numTotalQuantity.Value;
             dealerBillBreakup.UnitPrice = Math.Round(numUnitPrice.Value, 2);
             dealerBillBreakup.UnitSellPrice = numUnitSellingPrice.Value;
+            dealerBillBreakup.AvailableQuantity = (int)numAvailableQuantity.Value;
             dealerBillBreakup.ValidateDealerBillBreakup();
 
             if (dealerBillBreakup.EntityState.State == ValidationState.SUCCESS)
@@ -139,6 +130,32 @@ namespace Stock_Management.Forms
             {
                 MessageBox.Show(dealerBillBreakup.EntityState.StateMessage);
             }
+        }
+
+        private void CalculateQuantityAndUnitPrice()
+        {
+            try
+            {
+                numTotalQuantity.Value = numTotalBoxes.Value * numQuantityInABox.Value;
+                numAvailableQuantity.Value = numTotalQuantity.Value;
+                if (numTotalAmount.Value == 0)
+                {
+                    numUnitPrice.Value = 0;
+                }
+                else
+                {
+                    numUnitPrice.Value = numTotalAmount.Value / numTotalQuantity.Value;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void AmountChanging(object sender, KeyEventArgs e)
+        {
+            CalculateQuantityAndUnitPrice();
         }
     }
 }

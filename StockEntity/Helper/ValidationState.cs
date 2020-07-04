@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StockEntity.Helper
+﻿namespace StockEntity.Helper
 {
     public class ValidationState
     {
@@ -16,8 +10,7 @@ namespace StockEntity.Helper
 
         public ValidationState()
         {
-            State = ValidationState.SUCCESS;
-
+            State = SUCCESS; // By default entity state is success
         }
     }
 }

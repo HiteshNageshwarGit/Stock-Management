@@ -5,13 +5,16 @@ namespace StockEntity.Entity
 {
     public class DealerBillBreakup : BillBreakup
     {
-        public decimal UnitSellPrice { get; set; }
-        public int RemainigQuantity { get; set; }
-        public int DealerBillId { get; set; }
+        public string EntryDate { get; set; }
+        public int DealerBillId { get; set; } // Bill ID o
+        public decimal UnitSellPrice { get; set; } // Price to sell product to customers
+        public int AvailableQuantity { get; set; } // same as when making first entry, update when sold to customer
+        
+
         public DealerBill DealerBill { get; set; }
         public override string ToString()
         {
-            StringBuilder str = new StringBuilder("Rs. " + TotalAmount.ToString());
+            StringBuilder str = new StringBuilder(" " + TotalAmount.ToString());
             if (Product != null)
             {
                 str.Append(" - " + Product.ToString());

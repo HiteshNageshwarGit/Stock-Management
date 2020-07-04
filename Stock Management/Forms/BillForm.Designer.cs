@@ -90,9 +90,9 @@
             this.lblTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalAmount.Location = new System.Drawing.Point(6, 140);
             this.lblTotalAmount.Name = "lblTotalAmount";
-            this.lblTotalAmount.Size = new System.Drawing.Size(91, 15);
+            this.lblTotalAmount.Size = new System.Drawing.Size(55, 15);
             this.lblTotalAmount.TabIndex = 7;
-            this.lblTotalAmount.Text = "Total Amount";
+            this.lblTotalAmount.Text = "Amount";
             // 
             // btnSaveBill
             // 
@@ -192,7 +192,7 @@
             this.Controls.Add(this.groupBox1);
             this.MinimumSize = new System.Drawing.Size(400, 500);
             this.Name = "BillForm";
-            this.Text = "Bill";
+            this.Text = "Dealer Bill";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BillForm_FormClosing);
             this.Load += new System.EventHandler(this.BillForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numBillAmount)).EndInit();

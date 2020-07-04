@@ -14,13 +14,14 @@ namespace Stock_Management.Forms
         public DealerBill dealerBill;
         Dealer dealer;
         public int DealerId;
-        
+
         public BillForm()
         {
             InitializeComponent();
             dtBillDate.CustomFormat = DateHelper.DATE_FORMAT;
             dtBillEntryDate.CustomFormat = DateHelper.DATE_FORMAT;
-            this.EnumerateChildren();
+            dtBillDate.MaxDate = DateTime.Now;
+            //this.EnumerateChildren();
         }
 
         private void BillForm_Load(object sender, EventArgs e)
@@ -77,13 +78,13 @@ namespace Stock_Management.Forms
 
         private void SaveBill()
         {
-            dealerBill.EntityState = new ValidationState();
+            dealerBill.ResetValidationError();
             dealerBill.DealerId = dealer.Id;
             dealerBill.EntryDate = DateHelper.GetDateString(dtBillEntryDate.Value); //lblEntyDate.Text;
             dealerBill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
             dealerBill.TotalAmount = numBillAmount.Value;
             dealerBill.Remarks = txtRemarks.Text;
-            dealerBill.ValidateBill();
+            dealerBill.Validate();
             if (dealerBill.EntityState.State != ValidationState.SUCCESS)
             {
                 MessageBox.Show(dealerBill.EntityState.StateMessage);

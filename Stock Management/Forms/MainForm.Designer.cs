@@ -30,11 +30,11 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSellProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.adminToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dealerListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.productListToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCustomerList = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSellProduct = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             this.adminToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(884, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -56,6 +56,13 @@
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // menuSellProduct
+            // 
+            this.menuSellProduct.Name = "menuSellProduct";
+            this.menuSellProduct.Size = new System.Drawing.Size(92, 22);
+            this.menuSellProduct.Text = "Sell";
+            this.menuSellProduct.Click += new System.EventHandler(this.menuSellProduct_Click);
             // 
             // adminToolStripMenuItem
             // 
@@ -88,18 +95,11 @@
             this.menuCustomerList.Text = "Customer List";
             this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
             // 
-            // menuSellProduct
-            // 
-            this.menuSellProduct.Name = "menuSellProduct";
-            this.menuSellProduct.Size = new System.Drawing.Size(180, 22);
-            this.menuSellProduct.Text = "Sell";
-            this.menuSellProduct.Click += new System.EventHandler(this.menuSellProduct_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 662);
+            this.ClientSize = new System.Drawing.Size(884, 662);
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;

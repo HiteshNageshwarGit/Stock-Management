@@ -1,19 +1,17 @@
 ﻿using StockEntity.Helper;
-using System.Text;
 
 namespace StockEntity.Entity
 {
     public partial class BillBreakup : BaseEntity
     {
-        #region Entity Properties
-        
-        public int ProductId { get; set; }
-        public decimal TotalAmount { get; set; }
+        #region Entity Properties  
+        //public string EntryDate { get; set; }
+        public int ProductId { get; set; }       
         public int QuantityInBox { get; set; }
         public int TotalBoxes { get; set; }
         public int TotalQuantity { get; set; }
         public decimal UnitPrice { get; set; }
-        public string EntryDate { get; set; }
+        public decimal TotalAmount { get; set; }        
         #endregion
 
         public Product Product { get; set; }

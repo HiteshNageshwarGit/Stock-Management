@@ -18,6 +18,10 @@ namespace Stock_Management.Forms
             InitializeComponent();
         }
 
+        private void txtMobile_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            NumericFieldKeyPress(sender, e);
+        }
         private void DealerForm_Load(object sender, EventArgs e)
         {
             Text = PERSON_ID == 0 ? "Add" : "Edit";
@@ -71,6 +75,12 @@ namespace Stock_Management.Forms
                 txtMobile.Text = person.Mobile;
                 txtEmail.Text = person.Email;
                 txtRemarks.Text = person.Remarks;
+
+                if (person.Name.ToLower() == Person.DEFAULT_NAME.ToLower())
+                {
+                    txtDealerName.Enabled = false;
+                    btnSaveDealer.Enabled = false;
+                }
             }
             else
             {
@@ -87,11 +97,13 @@ namespace Stock_Management.Forms
 
         private void SaveDealer()
         {
-            person.Name = txtDealerName.Text;
-            person.Address = txtAddress.Text;
-            person.Mobile = txtMobile.Text;
-            person.Email = txtEmail.Text;
-            person.Remarks = txtRemarks.Text;
+            person.ResetValidationError();
+            person.Name = txtDealerName.Text.Trim();
+            person.Address = txtAddress.Text.Trim();
+            person.Mobile = txtMobile.Text.Trim();
+            person.Email = txtEmail.Text.Trim();
+            person.Remarks = txtRemarks.Text.Trim();
+
             person.Validate();
             if (person.EntityState.State != ValidationState.SUCCESS)
             {
@@ -119,5 +131,7 @@ namespace Stock_Management.Forms
             }
             Close();
         }
+
+
     }
 }

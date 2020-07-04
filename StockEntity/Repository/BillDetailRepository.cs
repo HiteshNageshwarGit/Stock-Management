@@ -1,5 +1,6 @@
 ﻿using StockEntity.Entity;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace StockEntity.Repository
@@ -26,6 +27,11 @@ namespace StockEntity.Repository
         public List<DealerBillBreakup> GetBillBreakupList(int billId)
         {
             return dbSet.Where(x => x.DealerBillId == billId).ToList();
+        }
+
+        public DealerBillBreakup GetBillBreakup(int billId)
+        {
+            return dbSet.Where(x => x.Id == billId).Include(x => x.Product).FirstOrDefault();
         }
     }
 }

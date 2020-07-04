@@ -1,9 +1,11 @@
 ﻿using StockEntity.Helper;
+using System.Text.RegularExpressions;
 
 namespace StockEntity.Entity
 {
     public class Person : BaseEntity
     {
+        public const string DEFAULT_NAME = "Default";
         public const int DEALER = 1;
         public const int CUSTOMER = 2;
 
@@ -16,21 +18,41 @@ namespace StockEntity.Entity
 
         public void Validate()
         {
-            EntityState.State = ValidationState.SUCCESS;
             if (string.IsNullOrWhiteSpace(Name))
             {
                 EntityState.State = ValidationState.ERROR;
-                EntityState.StateMessage = "Name is a " + Message.Required;
+                EntityState.StateMessage += "\n Name is required";
             }
             else if (Name.Length > 50)
             {
                 EntityState.State = ValidationState.ERROR;
-                EntityState.StateMessage = Message.MaxLength50;
+                EntityState.StateMessage += "\n Max length of Name can be 50 charectors";
+            }
+
+            if (!string.IsNullOrWhiteSpace(Mobile) && !Regex.IsMatch(Mobile, @"\+?[0-9]{10}"))
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage += "\n Mobile No. can have 10 digits only";
+            }
+
+            if (!string.IsNullOrWhiteSpace(Email) && !IsValidEmail(Email))
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage += "\n Eamil is not valid";
             }
         }
-        public override string ToString()
+
+        private bool IsValidEmail(string email)
         {
-            return Name;
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

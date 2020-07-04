@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvProductList = new System.Windows.Forms.DataGridView();
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +61,15 @@
             this.ColColor,
             this.ColDetails,
             this.ColSelect});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvProductList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProductList.Location = new System.Drawing.Point(-1, 3);
             this.dgvProductList.Name = "dgvProductList";
             this.dgvProductList.ReadOnly = true;
@@ -72,7 +82,7 @@
             // ColName
             // 
             this.ColName.DataPropertyName = "Name";
-            this.ColName.FillWeight = 1F;
+            this.ColName.FillWeight = 250F;
             this.ColName.HeaderText = "Name";
             this.ColName.Name = "ColName";
             this.ColName.ReadOnly = true;
@@ -80,7 +90,7 @@
             // ColCode
             // 
             this.ColCode.DataPropertyName = "Code";
-            this.ColCode.FillWeight = 1F;
+            this.ColCode.FillWeight = 80F;
             this.ColCode.HeaderText = "Code";
             this.ColCode.Name = "ColCode";
             this.ColCode.ReadOnly = true;
@@ -88,7 +98,7 @@
             // ColColor
             // 
             this.ColColor.DataPropertyName = "Color";
-            this.ColColor.FillWeight = 1F;
+            this.ColColor.FillWeight = 80F;
             this.ColColor.HeaderText = "Color";
             this.ColColor.Name = "ColColor";
             this.ColColor.ReadOnly = true;
@@ -96,7 +106,7 @@
             // ColDetails
             // 
             this.ColDetails.DataPropertyName = "Id";
-            this.ColDetails.FillWeight = 1F;
+            this.ColDetails.FillWeight = 80F;
             this.ColDetails.HeaderText = "Details";
             this.ColDetails.Name = "ColDetails";
             this.ColDetails.ReadOnly = true;
@@ -106,7 +116,7 @@
             // ColSelect
             // 
             this.ColSelect.DataPropertyName = "Id";
-            this.ColSelect.FillWeight = 1F;
+            this.ColSelect.FillWeight = 80F;
             this.ColSelect.HeaderText = "Select";
             this.ColSelect.Name = "ColSelect";
             this.ColSelect.ReadOnly = true;
@@ -133,6 +143,7 @@
             this.txtSearchProduct.Size = new System.Drawing.Size(282, 23);
             this.txtSearchProduct.TabIndex = 1;
             this.txtSearchProduct.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchProduct_KeyPress);
+            this.txtSearchProduct.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchProduct_KeyUp);
             // 
             // label1
             // 

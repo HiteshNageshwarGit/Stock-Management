@@ -33,12 +33,12 @@ namespace StockEntity.Entity
             if (string.IsNullOrWhiteSpace(Name))
             {
                 EntityState.State = ValidationState.ERROR;
-                EntityState.StateMessage = Message.Required;
+                EntityState.StateMessage = "Name is required";
             }
             else if (Name.Length > 50)
             {
                 EntityState.State = ValidationState.ERROR;
-                EntityState.StateMessage = Message.MaxLength50;
+                EntityState.StateMessage = "Max 50 charectors allowed for Name";
             }
         }
     }

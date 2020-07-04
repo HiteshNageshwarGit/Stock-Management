@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Text;
 
 namespace StockEntity.Entity
 {
     public class CustomerBill : Bill
     {
-        public int CustomerId { get; set; }
+        public int CustomerId { get; set; }        
         public Customer Customer { get; set; }
         public ICollection<CustomerBillBreakup> CustomerBillBreakupList { get; set; }
 

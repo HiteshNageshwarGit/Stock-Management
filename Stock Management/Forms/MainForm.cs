@@ -11,7 +11,7 @@ namespace Stock_Management
 {
     public partial class MainForm : BaseForm
     {
-
+        int RetryCount = 0;
         DealerListForm dealerListForm;
         ProductListForm productListForm;
         SellForm sellForm;
@@ -24,6 +24,12 @@ namespace Stock_Management
         {
             try
             {
+                if (RetryCount > 10)
+                {
+                    MessageBox.Show("Applicatoin initialization failed");
+                }
+
+                RetryCount++;
                 if (!DBFileHelper.IsDBFileAvailable(AppDomain.CurrentDomain.BaseDirectory))
                 {
                     MessageBox.Show("Please check DB file in app folder and it is not in read only mode");
@@ -40,18 +46,29 @@ namespace Stock_Management
                 }
                 else
                 {
-                    // If  file backup is success then only delete old files 
+
                     KeyValue keyValue = SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBBackupDir);
-                    if (keyValue != null)
+                    if (keyValue == null)
+                    {
+                        MessageBox.Show("DB backup directory is not configured. Please configure it ");
+                    }
+                    else
                     {
                         if (DBFileHelper.BackupDBFile(AppDomain.CurrentDomain.BaseDirectory, keyValue.Value))
                         {
+                            // If  file backup is success then only delete old files 
                             DBFileHelper.DeleteOldBackupFiles(keyValue.Value);
                         }
                         else
                         {
                             MessageBox.Show("Taking DB backup failed to " + SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBBackupDir).Value);
                         }
+                    }
+
+                    // Check for Default Dealer/Customer.
+                    if (!(SharedRepo.CustomerRepo.DoesDefaulCustomerNameExist() && SharedRepo.DealerRepo.DoesDefaulDealerNameExist()))
+                    {
+                        MessageBox.Show("Default dealer or default customer not found");
                     }
                 }
             }
@@ -87,6 +104,7 @@ namespace Stock_Management
         private void MainForm_Shown(object sender, EventArgs e)
         {
             SharedRepo.InitializeSession();
+            InitializeApplicatoin();
             //CloseMDIChildForms(this);
             //if (sellForm == null || sellForm.IsDisposed)
             //{
@@ -173,6 +191,6 @@ namespace Stock_Management
             return false;
         }
 
-       
+
     }
 }

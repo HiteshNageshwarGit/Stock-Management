@@ -42,30 +42,36 @@ namespace StockEntity.Repository
 
         public List<Product> GetProductListForAdmin(string productName)
         {
-            return dbSet.Where(x => x.Name.ToLower().Contains(productName.ToLower()) || productName == "").OrderBy(x => x.Name).ToList();
+            return dbSet.Where(x => x.Name.ToLower().Contains(productName.ToLower()) || productName == "").OrderBy(x => x.Name).Take(50).ToList();
         }
 
-        public List<ProductWithPrice> GetProductListForSelling(string productName)
+        public List<ProductInCart> GetProductListForSelling(string productName)
         {
-            List<ProductWithPrice> productLisForReport = (List<ProductWithPrice>)(from P in context.Products
-                                                                 where (P.Name.Contains(productName) || productName == "")
-                                                                 join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
-                                                                 join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
-                                                                 join D in context.Dealers on DB.DealerId equals D.Id
+            List<ProductInCart> productLisForReport = (from P in context.Products
+                                                       where (P.Name.Contains(productName) || productName == "")
+                                                       join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
+                                                       where (DBB.AvailableQuantity > 0)
+                                                       join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
+                                                       join D in context.Dealers on DB.DealerId equals D.Id
 
-                                                                 select new ProductWithPrice
-                                                                 {
-                                                                     ProductName = P.Name,
-                                                                     DealerName = D.Name,
-                                                                     BillDate = DB.BillDate,
-                                                                     TotalQuantity = DBB.TotalQuantity,
-                                                                     RemainigQuantity = DBB.RemainigQuantity,
-                                                                     UnitSellPrice = DBB.UnitSellPrice,
-                                                                     UnitPrice = DBB.UnitPrice,
-                                                                     //UnitPriceIncode = ProductWithPrice.GetPriceInCode(DBB.UnitPrice),
-                                                                     DealerBillBreakupId = DBB.Id
+                                                       select new ProductInCart
+                                                       {
+                                                           ProductId = P.Id,
+                                                           ProductName = P.Name,
+                                                           DealerName = D.Name,
+                                                           DealerBillDate = DB.BillDate,
+                                                           QuantityInBox = DBB.QuantityInBox,
+                                                           TotalBoxes = DBB.TotalBoxes,
+                                                           TotalQuantity = DBB.TotalQuantity,
+                                                           AvailableQuantity = DBB.AvailableQuantity,
+                                                           SellingUnitPrice = DBB.UnitSellPrice,
+                                                           DealerUnitPrice = DBB.UnitPrice,
+                                                           //UnitPriceIncode = ProductWithPrice.GetPriceInCode(DBB.UnitPrice),
+                                                           DealerBillBreakupId = DBB.Id,
+                                                           SellingQuantity = 1,
+                                                           SellingAmount = DBB.UnitPrice
 
-                                                                 }).Take(100).ToList();
+                                                       }).Take(100).ToList();
             return productLisForReport;
 
         }

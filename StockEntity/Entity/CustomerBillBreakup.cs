@@ -6,6 +6,7 @@ namespace StockEntity.Entity
     public class CustomerBillBreakup : BillBreakup
     {
         public int CustomerBillId { get; set; }
+        public int DealerBillBreakupId { get; set; } // To track which batch was sold
         public CustomerBill CustomerBill { get; set; }
 
         public override string ToString()

@@ -46,7 +46,6 @@ namespace Stock_Management.Forms
             SaveProduct();
         }
 
-
         private void EnableControls(bool enalble)
         {
             btnSaveProduct.Enabled = enalble;
@@ -77,11 +76,11 @@ namespace Stock_Management.Forms
 
         private void SaveProduct()
         {
-            product.EntityState = new ValidationState();
-            product.Name = txtName.Text;
-            product.Code = txtCode.Text;
-            product.Color = txtColor.Text;
-            product.Remarks = txtRemarks.Text;
+            product.ResetValidationError();
+            product.Name = txtName.Text.Trim();
+            product.Code = txtCode.Text.Trim();
+            product.Color = txtColor.Text.Trim();
+            product.Remarks = txtRemarks.Text.Trim();
 
             product.ValidateProduct();
             if (product.EntityState.State != ValidationState.SUCCESS)

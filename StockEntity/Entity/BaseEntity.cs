@@ -17,5 +17,10 @@ namespace StockEntity.Entity
         {
             EntityState = new ValidationState();
         }
+        public void ResetValidationError()
+        {
+            EntityState.State = ValidationState.SUCCESS;
+            EntityState.StateMessage = "";
+        }
     }
 }
