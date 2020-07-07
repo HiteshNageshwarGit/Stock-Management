@@ -13,7 +13,7 @@ namespace Stock_Management.Forms
         public ProductForm()
         {
             InitializeComponent();
-            this.EnumerateChildren();
+            //this.EnumerateChildren();
         }
 
         private void ProductForm_Load(object sender, EventArgs e)

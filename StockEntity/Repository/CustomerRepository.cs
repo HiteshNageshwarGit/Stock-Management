@@ -1,6 +1,5 @@
 ﻿using StockEntity.Entity;
 using StockEntity.EntityX;
-using StockEntity.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -77,20 +76,18 @@ namespace StockEntity.Repository
                 try
                 {
                     context.CustomerBills.Add(customerBill);
-                    //List<CustomerBillBreakup> customerBillBreakupList = new List<CustomerBillBreakup>();
-                    //List<DealerBillBreakup> dealerBillBreakupList = new List<DealerBillBreakup>();
                     foreach (ProductInCart productInCart in productListInCart)
                     {
                         CustomerBillBreakup customerBillBreakup = new CustomerBillBreakup();
 
                         customerBillBreakup.CustomerBillId = customerBill.Id;
                         customerBillBreakup.DealerBillBreakupId = productInCart.DealerBillBreakupId;
-                        //customerBillBreakup.EntryDate = DateHelper.GetTodayDateString();
                         customerBillBreakup.ProductId = productInCart.ProductId;
                         customerBillBreakup.TotalAmount = productInCart.SellingAmount;
                         customerBillBreakup.TotalQuantity = productInCart.SellingQuantity;
                         customerBillBreakup.UnitPrice = productInCart.SellingUnitPrice;
-                        //customerBillBreakupList.Add(customerBillBreakup);
+                        customerBillBreakup.TotalBoxes = productInCart.TotalBoxes;
+                        customerBillBreakup.QuantityInBox = productInCart.QuantityInBox;
                         context.CustomerBillBreakups.Add(customerBillBreakup);
 
                         // Reduce available quantity
@@ -106,10 +103,8 @@ namespace StockEntity.Repository
                             throw new Exception("Available quantity is less than sold quantity");
                         }
                         dealerBillBreakup.AvailableQuantity = dealerBillBreakup.AvailableQuantity - customerBillBreakup.TotalQuantity;
-                        //dealerBillBreakupList.Add(dealerBillBreakup);
                         UpdateDealerBillBreakup(dealerBillBreakup);
                     }
-                    //context.CustomerBillBreakups.AddRange(customerBillBreakupList);
 
                     dbContextTransaction.Commit();
                 }
@@ -125,6 +120,11 @@ namespace StockEntity.Repository
             context.DealerBillBreakups.Attach(dealerBillBreakup);
             context.Entry(dealerBillBreakup).State = EntityState.Modified;
             context.SaveChanges();
+        }
+
+        public List<CustomerBill> GetCustomerBillList(int customerId)
+        {
+            return context.CustomerBills.Where(x => x.CustomerId == customerId).OrderBy(x => x.BillDate).ToList();
         }
     }
 }

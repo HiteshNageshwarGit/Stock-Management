@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class BillBreakupListForm : BaseForm
+    public partial class DealerBillBreakupListForm : BaseForm
     {
         public int DEALER_BILL_ID { get; set; }
-        public BillBreakupListForm()
+        public DealerBillBreakupListForm()
         {
             InitializeComponent();
             dgvBillBreakupList.AutoGenerateColumns = false;
@@ -62,7 +62,7 @@ namespace Stock_Management.Forms
 
         private void btnAddBillBreakup_Click(object sender, EventArgs e)
         {
-            BillBreakupForm BillBreakupForm = new BillBreakupForm();
+            DealerBillBreakupForm BillBreakupForm = new DealerBillBreakupForm();
             BillBreakupForm.BillId = DEALER_BILL_ID;
             BillBreakupForm.BillBreakupId = 0;
             ShowFormAsFixedDialog(this, BillBreakupForm);
@@ -78,7 +78,7 @@ namespace Stock_Management.Forms
             if (GetSelectedCellText(dgvBillBreakupList, e) == "Details")
             {
                 DealerBillBreakup dealerBillBreakup = ((DealerBillBreakup)dgvBillBreakupList.Rows[e.RowIndex].DataBoundItem);
-                BillBreakupForm BillBreakupForm = new BillBreakupForm();
+                DealerBillBreakupForm BillBreakupForm = new DealerBillBreakupForm();
                 BillBreakupForm.BillId = DEALER_BILL_ID;
                 BillBreakupForm.BillBreakupId = dealerBillBreakup.Id;
                 ShowFormAsFixedDialog(this, BillBreakupForm);

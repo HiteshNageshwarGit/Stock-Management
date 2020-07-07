@@ -1,6 +1,6 @@
 ﻿namespace Stock_Management.Forms
 {
-    partial class DealerForm
+    partial class PersonForm
     {
         /// <summary>
         /// Required designer variable.
@@ -166,15 +166,15 @@
             this.txtRemarks.TabIndex = 9;
             this.txtRemarks.Text = "";
             // 
-            // DealerForm
+            // PersonForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 482);
             this.Controls.Add(this.groupBox1);
             this.MinimumSize = new System.Drawing.Size(400, 520);
-            this.Name = "DealerForm";
-            this.Text = "Dealer";
+            this.Name = "PersonForm";
+            this.Text = "Person";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DealerForm_FormClosing);
             this.Load += new System.EventHandler(this.DealerForm_Load);
             this.groupBox1.ResumeLayout(false);

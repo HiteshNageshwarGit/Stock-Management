@@ -54,14 +54,14 @@
             this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuSellProduct});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
-            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.reportsToolStripMenuItem.Text = "Reports";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.reportsToolStripMenuItem.Text = "Customer";
             // 
             // menuSellProduct
             // 
             this.menuSellProduct.Name = "menuSellProduct";
-            this.menuSellProduct.Size = new System.Drawing.Size(92, 22);
-            this.menuSellProduct.Text = "Sell";
+            this.menuSellProduct.Size = new System.Drawing.Size(180, 22);
+            this.menuSellProduct.Text = "Cart";
             this.menuSellProduct.Click += new System.EventHandler(this.menuSellProduct_Click);
             // 
             // adminToolStripMenuItem
@@ -103,7 +103,7 @@
             this.Controls.Add(this.menuStrip1);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(900, 700);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stock Management";

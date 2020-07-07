@@ -7,12 +7,12 @@ using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class BillBreakupForm : BaseForm
+    public partial class DealerBillBreakupForm : BaseForm
     {
         DealerBillBreakup dealerBillBreakup;
         public int BillId;
         public int BillBreakupId;
-        public BillBreakupForm()
+        public DealerBillBreakupForm()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace Stock_Management.Forms
             }
             else if (CallerForm.Name == "BillBreakupListForm")
             {
-                ((BillBreakupListForm)CallerForm).LoadBillBreakupList();
+                ((DealerBillBreakupListForm)CallerForm).LoadBillBreakupList();
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
@@ -13,38 +15,39 @@ namespace Stock_Management.Forms
                 e.Handled = true;
             }
         }
-        public void CloseMDIChildForms(Form parentForm)
-        {
-            FormCollection formCollection = Application.OpenForms;
-            if (formCollection != null && formCollection.Count > 0)
-            {
-                foreach (Form formItem in formCollection)
-                {
-                    if (formItem.Name != parentForm.Name
-                        //&& formItem.Name != childForm.Name
-                        )
-                    {
-                        formItem.Close();
-                        formItem.Dispose();
-                        //formItem.Hide();
-                        break;
-                    }
-                }
-            }
-        }
-        public void ShowFormAsMDIChild(Form parentForm, Form childForm)
-        {
-            parentForm.IsMdiContainer = true;
-            childForm.MdiParent = parentForm;
-            childForm.MaximizeBox = false;
-            childForm.MinimizeBox = false;
-            childForm.ShowInTaskbar = false;
-            childForm.FormBorderStyle = FormBorderStyle.None;
-            childForm.WindowState = FormWindowState.Normal;
-            childForm.Dock = DockStyle.Fill;
-            childForm.Show();
-            childForm.Focus();
-        }
+
+        //public void CloseMDIChildForms(Form parentForm)
+        //{
+        //    FormCollection formCollection = Application.OpenForms;
+        //    if (formCollection != null && formCollection.Count > 0)
+        //    {
+        //        foreach (Form formItem in formCollection)
+        //        {
+        //            if (formItem.Name != parentForm.Name
+        //                //&& formItem.Name != childForm.Name
+        //                )
+        //            {
+        //                formItem.Close();
+        //                formItem.Dispose();
+        //                //formItem.Hide();
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
+        //public void ShowFormAsMDIChild(Form parentForm, Form childForm)
+        //{
+        //    parentForm.IsMdiContainer = true;
+        //    childForm.MdiParent = parentForm;
+        //    childForm.MaximizeBox = false;
+        //    childForm.MinimizeBox = false;
+        //    childForm.ShowInTaskbar = false;
+        //    childForm.FormBorderStyle = FormBorderStyle.None;
+        //    childForm.WindowState = FormWindowState.Normal;
+        //    childForm.Dock = DockStyle.Fill;
+        //    childForm.Show();
+        //    childForm.Focus();
+        //}
 
         public void ShowFormAsFixedDialog(BaseForm parentForm, BaseForm childForm)
         {
@@ -63,8 +66,21 @@ namespace Stock_Management.Forms
             childForm.MinimizeBox = false;
             childForm.ShowInTaskbar = false;
             childForm.StartPosition = FormStartPosition.CenterParent;
-            childForm.WindowState = parentForm.MdiParent.WindowState; // if main form is maximized then dialog also should open in maximise state
+            childForm.Width = parentForm.Width - 20;
+            childForm.Height = parentForm.IsMdiChild ? parentForm.MdiParent.Height - 40 : parentForm.Height - 40;
+            //childForm.Text = "Form Name: " + childForm.Name + " (" + childForm.Width + "X" + childForm.Height + ")";
             childForm.ShowDialog();
+        }
+
+        public void ShowFormInPanel(Panel panel, BaseForm childForm)
+        {
+            panel.Controls.Clear();//contentpnl is the panelname
+            childForm.TopLevel = false;
+            childForm.AutoScroll = true;
+            panel.Controls.Add(childForm);
+            childForm.Dock = DockStyle.Fill;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Show();
         }
 
         public string GetSelectedCellText(DataGridView dataGridView, DataGridViewCellEventArgs e)

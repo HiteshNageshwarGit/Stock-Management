@@ -8,49 +8,29 @@ using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class SellForm : Form
+    public partial class CustomerBillBreakListForm : BaseForm
     {
         List<ProductInCart> productListCart = new List<ProductInCart>();
-        public SellForm()
+        CustomerBill customerBill = new CustomerBill();
+        public CustomerBillBreakListForm()
         {
             InitializeComponent();
-
-            dgvProductList.AutoGenerateColumns = false;
-            ColAddToCart.UseColumnTextForButtonValue = true;
 
             dgvCart.AutoGenerateColumns = false;
             CartColAddOne.UseColumnTextForButtonValue = true;
             CartColRemoveOne.UseColumnTextForButtonValue = true;
-            //Shared.SharedRepo.ProductRepo.GetProductListForSelling("p");
         }
 
-        private void SellForm_Load(object sender, System.EventArgs e)
+        private void CustomerBillBreakListForm_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void SellForm_Shown(object sender, System.EventArgs e)
+        private void btnSearchCustomer_Click(object sender, EventArgs e)
         {
-            LoadProductListWithPrice();
-        }
-
-        private void txtProductName_KeyUp(object sender, KeyEventArgs e)
-        {
-            LoadProductListWithPrice();
-        }
-
-        private void dgvProductList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex == -1 && e.ColumnIndex == -1)
-            {
-                return;
-            }
-
-            if (dgvProductList.Columns[e.ColumnIndex].Name == ColAddToCart.Name)
-            {
-                ProductInCart selectedProduct = (ProductInCart)dgvProductList.Rows[e.RowIndex].DataBoundItem;
-                AddProductToCart(selectedProduct);
-            }
+            PersonListForm personListForm = new PersonListForm();
+            personListForm.PERSON_TYPE = Person.CUSTOMER;
+            ShowFormAsFixedDialog(this, personListForm);
         }
 
         private void dgvCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -63,7 +43,7 @@ namespace Stock_Management.Forms
             if (dgvCart.Columns[e.ColumnIndex].Name == CartColAddOne.Name)
             {
                 ProductInCart selectedProduct = (ProductInCart)dgvCart.Rows[e.RowIndex].DataBoundItem;
-                if (selectedProduct.TotalQuantity > selectedProduct.SellingQuantity)
+                if (selectedProduct.AvailableQuantity > selectedProduct.SellingQuantity)
                 {
                     selectedProduct.SellingQuantity++;
                     CalculateTotalBillAmoutForCart();
@@ -82,33 +62,23 @@ namespace Stock_Management.Forms
 
         private void dgvCart_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(Column1_KeyPress);
-            if (dgvCart.CurrentCell.ColumnIndex == 2) //Desired Column
+            e.Control.KeyPress -= new KeyPressEventHandler(NumericFieldKeyPress);
+            if (dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColUnitSellPrice.Name].Index) //Desired Column
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(Column1_KeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(NumericFieldKeyPress);
                 }
             }
         }
 
-        private void Column1_KeyPress(object sender, KeyPressEventArgs e)
+        private void dgvCart_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
+            CalculateTotalBillAmoutForCart();
         }
 
-        public void LoadProductListWithPrice()
-        {
-            List<ProductInCart> list = SharedRepo.ProductRepo.GetProductListForSelling(txtProductName.Text.Trim());
-            dgvProductList.DataSource = list;
-            dgvProductList.ClearSelection();
-        }
-
-        private void AddProductToCart(ProductInCart productToBeAddedToCart)
+        internal void AddProductToCart(ProductInCart productToBeAddedToCart)
         {
             ProductInCart alredyProductInCart = productListCart.Find(x => x.DealerBillBreakupId == productToBeAddedToCart.DealerBillBreakupId);
             if (alredyProductInCart != null)
@@ -116,19 +86,20 @@ namespace Stock_Management.Forms
                 MessageBox.Show("Product already availble in cart");
                 return;
             }
-            dgvCart.DataSource = null;
 
             // Override box details
-
+            productToBeAddedToCart.QuantityInBox = 1;
+            productToBeAddedToCart.TotalBoxes = 1;
+            productListCart.Add(productToBeAddedToCart);
+            dgvCart.DataSource = null;
             dgvCart.DataSource = productListCart;
-            productListCart.Add(productToBeAddedToCart.ShallowCopy());
             dgvCart.Update();
             dgvCart.Refresh();
             dgvCart.ClearSelection();
             CalculateTotalBillAmoutForCart();
         }
 
-        private void CalculateTotalBillAmoutForCart()
+        internal void CalculateTotalBillAmoutForCart()
         {
             decimal totalBillAmountforCart = 0;
             int totalProductQuanityInCart = 0;
@@ -136,6 +107,7 @@ namespace Stock_Management.Forms
             {
                 product.SellingAmount = product.SellingUnitPrice * product.SellingQuantity;
                 totalBillAmountforCart += product.SellingAmount;
+                totalProductQuanityInCart += product.SellingQuantity;
             }
             dgvCart.Refresh();
 
@@ -149,18 +121,21 @@ namespace Stock_Management.Forms
         {
             try
             {
-                CustomerBill customerBill = new CustomerBill();
                 customerBill.BillDate = DateHelper.GetTodayDateString();
                 customerBill.TotalAmount = Convert.ToDecimal(txtTotalBillAmountForCart.Text);
-                customerBill.CustomerId = -1;
+                customerBill.Remarks = txtRemarks.Text;
 
-                if (customerBill.Id <= 0)
+                customerBill.ResetValidationError();
+                customerBill.Validate();
+                if (customerBill.EntityState.State != ValidationState.SUCCESS)
                 {
-                    customerBill.Id = SharedRepo.CustomerRepo.GetDefaultCustomer().Id;
+                    MessageBox.Show(customerBill.EntityState.StateMessage);
+                    return;
                 }
-
+                
                 SharedRepo.CustomerRepo.SaveCustomerBillBreakupList(customerBill, productListCart);
                 MessageBox.Show("Billing completed");
+
             }
             catch (Exception ex)
             {
@@ -168,6 +143,22 @@ namespace Stock_Management.Forms
             }
         }
 
+        private void CustomerBillBreakListForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (CallerForm != null && CallerForm.Name != null)
+            {
+                if (CallerForm.Name == "CustomerCart")
+                {
+                    CustomerCartForm customerCartForm = (CustomerCartForm)CallerForm;
+                    customerCartForm.Close();
+                }
+            }
+        }
 
+        internal void OnCustomerNameSelected(int customerId, string customerName)
+        {
+            customerBill.CustomerId = customerId;
+            txtCustomerName.Text = customerName;
+        }
     }
 }

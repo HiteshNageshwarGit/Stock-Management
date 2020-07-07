@@ -1,6 +1,6 @@
 ﻿namespace Stock_Management.Forms
 {
-    partial class BillForm
+    partial class DealerBillForm
     {
         /// <summary>
         /// Required designer variable.

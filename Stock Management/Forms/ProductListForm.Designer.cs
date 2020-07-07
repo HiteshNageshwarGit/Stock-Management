@@ -66,8 +66,8 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvProductList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvProductList.Location = new System.Drawing.Point(-1, 3);
@@ -75,7 +75,7 @@
             this.dgvProductList.ReadOnly = true;
             this.dgvProductList.RowHeadersVisible = false;
             this.dgvProductList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductList.Size = new System.Drawing.Size(660, 428);
+            this.dgvProductList.Size = new System.Drawing.Size(690, 408);
             this.dgvProductList.TabIndex = 1;
             this.dgvProductList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductList_CellClick);
             // 
@@ -127,7 +127,7 @@
             // 
             this.btnAddNewProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddNewProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddNewProduct.Location = new System.Drawing.Point(533, 9);
+            this.btnAddNewProduct.Location = new System.Drawing.Point(563, 9);
             this.btnAddNewProduct.Name = "btnAddNewProduct";
             this.btnAddNewProduct.Size = new System.Drawing.Size(122, 28);
             this.btnAddNewProduct.TabIndex = 3;
@@ -175,7 +175,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvProductList);
-            this.splitContainer1.Size = new System.Drawing.Size(660, 488);
+            this.splitContainer1.Size = new System.Drawing.Size(690, 468);
             this.splitContainer1.SplitterDistance = 52;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -183,9 +183,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 512);
+            this.ClientSize = new System.Drawing.Size(714, 492);
             this.Controls.Add(this.splitContainer1);
-            this.MinimumSize = new System.Drawing.Size(700, 500);
+            this.MinimumSize = new System.Drawing.Size(730, 530);
             this.Name = "ProductListForm";
             this.Text = "Product List";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProductListForm_FormClosing);

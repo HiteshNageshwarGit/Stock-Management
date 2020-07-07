@@ -1,13 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using StockEntity.Helper;
+using System.Collections.Generic;
 
 namespace StockEntity.Entity
 {
     public class CustomerBill : Bill
     {
-        public int CustomerId { get; set; }        
+        public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         public ICollection<CustomerBillBreakup> CustomerBillBreakupList { get; set; }
 
+        public new void Validate()
+        {
+            if (CustomerId <= 0)
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage += "\n Customer Id not found";
+            }
+            base.Validate();
+        }
         public override string ToString()
         {
             int breakupCount = 0;

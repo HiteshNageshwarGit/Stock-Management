@@ -12,9 +12,10 @@ namespace Stock_Management
     public partial class MainForm : BaseForm
     {
         int RetryCount = 0;
-        DealerListForm dealerListForm;
+        //DealerListForm dealerListForm;
+        PersonListForm personListForm;
         ProductListForm productListForm;
-        SellForm sellForm;
+        CustomerCartForm sellForm;
         public MainForm()
         {
             InitializeComponent();
@@ -105,54 +106,37 @@ namespace Stock_Management
         {
             SharedRepo.InitializeSession();
             InitializeApplicatoin();
-            //CloseMDIChildForms(this);
-            //if (sellForm == null || sellForm.IsDisposed)
-            //{
-            //    sellForm = new SellForm();
-            //}
-            //ShowFormAsMDIChild(this, sellForm);
-            //SharedRepo.InsertDummyData();
         }
 
         private void dealerListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CloseMDIChildForms(this);
-            if (dealerListForm == null || dealerListForm.IsDisposed)
-            {
-                dealerListForm = new DealerListForm();
-            }
-            dealerListForm.PERSON_TYPE = Person.DEALER;
-            ShowFormAsMDIChild(this, dealerListForm);
+            OpenPersonListForm(Person.DEALER);
         }
         private void menuCustomerList_Click(object sender, EventArgs e)
         {
-            CloseMDIChildForms(this);
-            if (dealerListForm == null || dealerListForm.IsDisposed)
-            {
-                dealerListForm = new DealerListForm();
-            }
-            dealerListForm.PERSON_TYPE = Person.CUSTOMER;
-            ShowFormAsMDIChild(this, dealerListForm);
+            OpenPersonListForm(Person.CUSTOMER);
         }
 
         private void productListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CloseMDIChildForms(this);
-            if (productListForm == null || productListForm.IsDisposed)
-            {
-                productListForm = new ProductListForm();
-            }
-            ShowFormAsMDIChild(this, productListForm);
+            //CloseMDIChildForms(this);
+            //if (productListForm == null || productListForm.IsDisposed)
+            //{
+            //    productListForm = new ProductListForm();
+            //}
+            //ShowFormAsMDIChild(this, productListForm);
+            ShowFormResizableAsDialog(this, new ProductListForm());
         }
 
         private void menuSellProduct_Click(object sender, EventArgs e)
         {
-            CloseMDIChildForms(this);
-            if (sellForm == null || sellForm.IsDisposed)
-            {
-                sellForm = new SellForm();
-            }
-            ShowFormAsMDIChild(this, sellForm);
+            //CloseMDIChildForms(this);
+            //if (sellForm == null || sellForm.IsDisposed)
+            //{
+            //    sellForm = new CustomerCart();
+            //}
+            //ShowFormAsMDIChild(this, sellForm);
+            ShowFormResizableAsDialog(this, new CustomerCartForm());
         }
 
         private void ShowAdminRelatedMenuItems()
@@ -189,6 +173,21 @@ namespace Stock_Management
                 }
             }
             return false;
+        }
+
+        private void OpenPersonListForm(int personType)
+        {
+            //CloseMDIChildForms(this);
+            //if (personListForm == null || personListForm.IsDisposed)
+            //{
+            //    personListForm = new PersonListForm();
+            //}
+            //personListForm.PERSON_TYPE = personType;
+            //ShowFormAsMDIChild(this, personListForm);
+
+            personListForm = new PersonListForm();
+            personListForm.PERSON_TYPE = personType;
+            ShowFormResizableAsDialog(this, personListForm);
         }
 
 

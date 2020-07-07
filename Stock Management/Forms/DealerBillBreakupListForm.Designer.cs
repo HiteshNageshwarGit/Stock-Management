@@ -1,6 +1,6 @@
 ﻿namespace Stock_Management.Forms
 {
-    partial class BillBreakupListForm
+    partial class DealerBillBreakupListForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAddBillBreakup = new System.Windows.Forms.Button();
             this.dgvBillBreakupList = new System.Windows.Forms.DataGridView();
@@ -101,6 +102,15 @@
             this.ColUnitPrice,
             this.ColUnitSellingPrice,
             this.ColDetail});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBillBreakupList.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvBillBreakupList.Location = new System.Drawing.Point(6, 53);
             this.dgvBillBreakupList.Name = "dgvBillBreakupList";
             this.dgvBillBreakupList.ReadOnly = true;
@@ -311,7 +321,7 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Bill Remarks";
             // 
-            // BillBreakupListForm
+            // DealerBillBreakupListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -319,7 +329,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.MinimumSize = new System.Drawing.Size(750, 550);
-            this.Name = "BillBreakupListForm";
+            this.Name = "DealerBillBreakupListForm";
             this.Text = "Bill Breakup List";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BillBreakupListForm_FormClosing);
             this.Load += new System.EventHandler(this.BillBreakupListForm_Load);

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class BillForm : BaseForm
+    public partial class DealerBillForm : BaseForm
     {
         public int PERSON_TYPE { get; set; }
         public int BILL_ID { get; set; }
@@ -15,7 +15,7 @@ namespace Stock_Management.Forms
         Dealer dealer;
         public int DealerId;
 
-        public BillForm()
+        public DealerBillForm()
         {
             InitializeComponent();
             dtBillDate.CustomFormat = DateHelper.DATE_FORMAT;
@@ -35,9 +35,9 @@ namespace Stock_Management.Forms
             {
                 return;
             }
-            else if (CallerForm.Name == "DealerListForm")
+            else if (CallerForm.Name == "BillListForm")
             {
-                ((DealerListForm)CallerForm).LoadBillList();
+                ((BillListForm)CallerForm).LoadBillList();
             }
         }
 

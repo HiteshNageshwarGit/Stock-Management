@@ -42,7 +42,7 @@ namespace Stock_Management.Forms
             }
             else if (selectedProduct != null && CallerForm.Name == "BillBreakupForm")
             {
-                ((BillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
+                ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
             }
         }
 

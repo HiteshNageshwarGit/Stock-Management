@@ -16,6 +16,7 @@ namespace Stock_Management.Forms
         {
             InitializeComponent();
             //this.EnumerateChildren();
+            ColSelect.Visible = false;
         }
 
         private void DealerListForm_Load(object sender, EventArgs e)
@@ -42,7 +43,7 @@ namespace Stock_Management.Forms
 
         private void btnAddDealer_Click(object sender, EventArgs e)
         {
-            DealerForm dealerForm = new DealerForm();
+            PersonForm dealerForm = new PersonForm();
             dealerForm.PERSON_ID = 0;
             dealerForm.PERSON_TYPE = PERSON_TYPE;
             ShowFormAsFixedDialog(this, dealerForm);
@@ -50,7 +51,7 @@ namespace Stock_Management.Forms
 
         private void btnAddBill_Click(object sender, EventArgs e)
         {
-            BillForm billForm = new BillForm();
+            DealerBillForm billForm = new DealerBillForm();
 
             billForm.DealerId = selectedePerson.Id;
             billForm.BILL_ID = 0;
@@ -66,7 +67,7 @@ namespace Stock_Management.Forms
 
             selectedePerson = ((Person)dgvDealerList.Rows[e.RowIndex].DataBoundItem);
 
-            DealerForm dealerForm = new DealerForm();
+            PersonForm dealerForm = new PersonForm();
             dealerForm.PERSON_TYPE = PERSON_TYPE;
             dealerForm.PERSON_ID = selectedePerson.Id;
             if (GetSelectedCellText(dgvDealerList, e) == "Details")
@@ -91,14 +92,14 @@ namespace Stock_Management.Forms
 
             if (GetSelectedCellText(dgvBillList, e) == "Details")
             {
-                BillForm billForm = new BillForm();
+                DealerBillForm billForm = new DealerBillForm();
                 billForm.DealerId = selectedePerson.Id;
                 billForm.BILL_ID = selectedBillId;
                 ShowFormAsFixedDialog(this, billForm);
             }
             else if (GetSelectedCellText(dgvBillList, e) == "Add Breakups")
             {
-                BillBreakupListForm billBreakupForm = new BillBreakupListForm();
+                DealerBillBreakupListForm billBreakupForm = new DealerBillBreakupListForm();
                 billBreakupForm.DEALER_BILL_ID = selectedBillId;
                 ShowFormResizableAsDialog(this, billBreakupForm);
             }
@@ -130,7 +131,8 @@ namespace Stock_Management.Forms
             }
             else if (PERSON_TYPE == Person.CUSTOMER)
             {
-
+                List<CustomerBill> billList = SharedRepo.CustomerRepo.GetCustomerBillList(selectedePerson.Id);
+                dgvBillList.DataSource = billList;
             }
             dgvBillList.ClearSelection();
         }
@@ -174,6 +176,29 @@ namespace Stock_Management.Forms
             dgvBillList.Enabled = enable;
         }
 
+        private void txtDealerName_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvBillList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvDealerList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

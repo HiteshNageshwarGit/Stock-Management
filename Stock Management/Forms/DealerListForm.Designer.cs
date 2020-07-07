@@ -40,17 +40,18 @@
             this.ColEmail = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDealerShowLink = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.ColSelect = new System.Windows.Forms.DataGridViewLinkColumn();
             this.dgvBillList = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnAddBill = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtDealerName = new System.Windows.Forms.TextBox();
             this.ColBillDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CollTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColEntryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBillShowLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.ColShowBillBreakups = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnAddBill = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtDealerName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDealerList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -63,11 +64,11 @@
             // 
             this.btnAddDealer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddDealer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddDealer.Location = new System.Drawing.Point(663, 10);
+            this.btnAddDealer.Location = new System.Drawing.Point(713, 10);
             this.btnAddDealer.Name = "btnAddDealer";
-            this.btnAddDealer.Size = new System.Drawing.Size(138, 28);
+            this.btnAddDealer.Size = new System.Drawing.Size(88, 28);
             this.btnAddDealer.TabIndex = 1;
-            this.btnAddDealer.Text = "Add Dealer";
+            this.btnAddDealer.Text = "Add";
             this.btnAddDealer.UseVisualStyleBackColor = true;
             this.btnAddDealer.Click += new System.EventHandler(this.btnAddDealer_Click);
             // 
@@ -80,6 +81,7 @@
             this.label1.Size = new System.Drawing.Size(87, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Dealer List";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // dgvDealerList
             // 
@@ -96,7 +98,8 @@
             this.ColMobile,
             this.ColEmail,
             this.ColAddress,
-            this.ColDealerShowLink});
+            this.ColDealerShowLink,
+            this.ColSelect});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -116,6 +119,7 @@
             this.dgvDealerList.Size = new System.Drawing.Size(810, 172);
             this.dgvDealerList.TabIndex = 0;
             this.dgvDealerList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDealerList_CellClick);
+            this.dgvDealerList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDealerList_CellContentClick);
             // 
             // ColName
             // 
@@ -158,6 +162,15 @@
             this.ColDealerShowLink.ReadOnly = true;
             this.ColDealerShowLink.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColDealerShowLink.Text = "Details";
+            // 
+            // ColSelect
+            // 
+            this.ColSelect.FillWeight = 1F;
+            this.ColSelect.HeaderText = "Select";
+            this.ColSelect.Name = "ColSelect";
+            this.ColSelect.ReadOnly = true;
+            this.ColSelect.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.ColSelect.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dgvBillList
             // 
@@ -211,63 +224,7 @@
             this.dgvBillList.Size = new System.Drawing.Size(810, 260);
             this.dgvBillList.TabIndex = 0;
             this.dgvBillList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillList_CellClick);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Bill List: ";
-            // 
-            // btnAddBill
-            // 
-            this.btnAddBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddBill.Location = new System.Drawing.Point(713, 16);
-            this.btnAddBill.Name = "btnAddBill";
-            this.btnAddBill.Size = new System.Drawing.Size(88, 28);
-            this.btnAddBill.TabIndex = 4;
-            this.btnAddBill.Text = "Add Bill";
-            this.btnAddBill.UseVisualStyleBackColor = true;
-            this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitContainer1.Location = new System.Drawing.Point(12, 12);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.dgvDealerList);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.btnAddDealer);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.txtDealerName);
-            this.splitContainer1.Panel2.Controls.Add(this.dgvBillList);
-            this.splitContainer1.Panel2.Controls.Add(this.btnAddBill);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
-            this.splitContainer1.Size = new System.Drawing.Size(810, 538);
-            this.splitContainer1.SplitterDistance = 217;
-            this.splitContainer1.TabIndex = 7;
-            // 
-            // txtDealerName
-            // 
-            this.txtDealerName.Enabled = false;
-            this.txtDealerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDealerName.Location = new System.Drawing.Point(80, 20);
-            this.txtDealerName.Name = "txtDealerName";
-            this.txtDealerName.Size = new System.Drawing.Size(286, 23);
-            this.txtDealerName.TabIndex = 7;
+            this.dgvBillList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillList_CellContentClick);
             // 
             // ColBillDate
             // 
@@ -320,6 +277,65 @@
             this.ColShowBillBreakups.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ColShowBillBreakups.Text = "Details";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 22);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 17);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Bill List: ";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
+            // btnAddBill
+            // 
+            this.btnAddBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddBill.Location = new System.Drawing.Point(713, 16);
+            this.btnAddBill.Name = "btnAddBill";
+            this.btnAddBill.Size = new System.Drawing.Size(88, 28);
+            this.btnAddBill.TabIndex = 4;
+            this.btnAddBill.Text = "Add Bill";
+            this.btnAddBill.UseVisualStyleBackColor = true;
+            this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitContainer1.Location = new System.Drawing.Point(12, 12);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.dgvDealerList);
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.btnAddDealer);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.txtDealerName);
+            this.splitContainer1.Panel2.Controls.Add(this.dgvBillList);
+            this.splitContainer1.Panel2.Controls.Add(this.btnAddBill);
+            this.splitContainer1.Panel2.Controls.Add(this.label2);
+            this.splitContainer1.Size = new System.Drawing.Size(810, 538);
+            this.splitContainer1.SplitterDistance = 217;
+            this.splitContainer1.TabIndex = 7;
+            // 
+            // txtDealerName
+            // 
+            this.txtDealerName.Enabled = false;
+            this.txtDealerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDealerName.Location = new System.Drawing.Point(80, 20);
+            this.txtDealerName.Name = "txtDealerName";
+            this.txtDealerName.Size = new System.Drawing.Size(286, 23);
+            this.txtDealerName.TabIndex = 7;
+            this.txtDealerName.TextChanged += new System.EventHandler(this.txtDealerName_TextChanged);
+            // 
             // DealerListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,16 +368,17 @@
         private System.Windows.Forms.Button btnAddBill;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox txtDealerName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColMobile;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColEmail;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColAddress;
-        private System.Windows.Forms.DataGridViewLinkColumn ColDealerShowLink;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColBillDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn CollTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColEntryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColRemarks;
         private System.Windows.Forms.DataGridViewLinkColumn ColBillShowLink;
         private System.Windows.Forms.DataGridViewLinkColumn ColShowBillBreakups;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColMobile;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColEmail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColAddress;
+        private System.Windows.Forms.DataGridViewLinkColumn ColDealerShowLink;
+        private System.Windows.Forms.DataGridViewLinkColumn ColSelect;
     }
 }

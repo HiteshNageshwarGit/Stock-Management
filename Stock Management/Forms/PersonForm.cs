@@ -6,14 +6,14 @@ using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class DealerForm : BaseForm
+    public partial class PersonForm : BaseForm
     {
         public int PERSON_TYPE { get; set; } // Can be Dealer or Customer
         public int PERSON_ID { get; set; } // Can be Dealer ID or Customer ID
 
         Person person;
 
-        public DealerForm()
+        public PersonForm()
         {
             InitializeComponent();
         }
@@ -47,9 +47,9 @@ namespace Stock_Management.Forms
             {
                 return;
             }
-            else if (CallerForm.Name == "DealerListForm")
+            else if (CallerForm.Name == "PersonListForm")
             {
-                ((DealerListForm)CallerForm).LoadDealerList();
+                ((PersonListForm)CallerForm).LoadPersonList();
             }
         }
         private void btnSaveDealer_Click(object sender, EventArgs e)
@@ -124,7 +124,7 @@ namespace Stock_Management.Forms
             {
                 if (SharedRepo.CustomerRepo.DoesCustomerNameExists((Customer)person))
                 {
-                    MessageBox.Show("Dealer name already exists", "Error");
+                    MessageBox.Show("Customer name already exists", "Error");
                     return;
                 }
                 SharedRepo.CustomerRepo.Save((Customer)person);
