@@ -21,7 +21,6 @@ namespace Stock_Management.Forms
             dtBillDate.CustomFormat = DateHelper.DATE_FORMAT;
             dtBillEntryDate.CustomFormat = DateHelper.DATE_FORMAT;
             dtBillDate.MaxDate = DateTime.Now;
-            //this.EnumerateChildren();
         }
 
         private void BillForm_Load(object sender, EventArgs e)
@@ -48,7 +47,6 @@ namespace Stock_Management.Forms
 
         private void EditBill()
         {
-            //lblDealerName.Text = Session.DealerName;
             dealer = SharedRepo.DealerRepo.GetByID(DealerId);
             if (dealer == null)
             {
@@ -56,23 +54,22 @@ namespace Stock_Management.Forms
                 Close();
                 return;
             }
-            //lblDealerName.Text = dealer.Name;
             txtDealerName.Text = dealer.Name;
 
             if (BILL_ID != 0)
             {
+                Text = "Edit Dealer Bill";
                 dealerBill = SharedRepo.DealerBillRepo.GetByID(BILL_ID);
                 dtBillEntryDate.Value = DateHelper.GetDateObject(dealerBill.EntryDate);
-                // lblEntyDate.Text = bill.EntryDate.ToString();
                 dtBillDate.Value = DateHelper.GetDateObject(dealerBill.BillDate);
                 numBillAmount.Value = dealerBill.TotalAmount;
                 txtRemarks.Text = dealerBill.Remarks;
             }
             else
             {
+                Text = "Add Dealer Bill";
                 dealerBill = new DealerBill();
                 dtBillEntryDate.Value = DateHelper.GetTodayDateObject();
-                //lblEntyDate.Text = DateHelper.GetTodayDateString();
             }
         }
 

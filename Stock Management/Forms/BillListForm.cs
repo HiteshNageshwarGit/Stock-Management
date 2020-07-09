@@ -19,13 +19,13 @@ namespace Stock_Management.Forms
         {
             if (PERSON_TYPE == Person.DEALER)
             {
-                Text = "Dealer";
+                Text = "Dealer Bill List";
             }
             else if (PERSON_TYPE == Person.CUSTOMER)
             {
-                Text = "Customer";
+                Text = "Customer Bill List";
                 ColBillShowLink.Visible = false;
-                ColShowBillBreakups.Visible = false;
+                //ColShowBillBreakups.Visible = false;
             }
             else
             {
@@ -33,7 +33,7 @@ namespace Stock_Management.Forms
                 return;
             }
 
-            EnableAddBillButton();
+            SetFormBehaviour();
 
             dgvBillList.AutoGenerateColumns = false;
             ColBillShowLink.UseColumnTextForLinkValue = true;
@@ -57,9 +57,9 @@ namespace Stock_Management.Forms
                 return;
             }
 
+            int selectedBillId = ((Bill)dgvBillList.Rows[e.RowIndex].DataBoundItem).Id;
             if (PERSON_TYPE == Person.DEALER)
             {
-                int selectedBillId = ((Bill)dgvBillList.Rows[e.RowIndex].DataBoundItem).Id;
                 if (GetSelectedCellText(dgvBillList, e) == "Details")
                 {
                     DealerBillForm billForm = new DealerBillForm();
@@ -74,34 +74,55 @@ namespace Stock_Management.Forms
                     ShowFormResizableAsDialog(this, billBreakupForm);
                 }
             }
+            else if (PERSON_TYPE == Person.CUSTOMER)
+            {
+                if (GetSelectedCellText(dgvBillList, e) == "Details")
+                {
+                    CustomerBillBreakListForm customerBillBreakListForm = new CustomerBillBreakListForm();
+                    customerBillBreakListForm.CUSTOMER_BILL_ID = selectedBillId;
+                    ShowFormResizableAsDialog(this, customerBillBreakListForm);
+                }
+            }
         }
 
         internal void LoadBillList()
         {
-            //txtDealerName.Text = selectedePerson.Name;
             if (PERSON_TYPE == Person.DEALER)
             {
+                Dealer dealer = SharedRepo.DealerRepo.GetByID(PERSON_ID);
+                if (dealer == null)
+                {
+                    MessageBox.Show("Dealer not found");
+                    return;
+                }
+                txtPersonName.Text = dealer.Name;
                 List<DealerBill> billList = SharedRepo.DealerBillRepo.GetBillList(PERSON_ID);
                 dgvBillList.DataSource = billList;
             }
             else if (PERSON_TYPE == Person.CUSTOMER)
             {
+                Customer customer = SharedRepo.CustomerRepo.GetByID(PERSON_ID);
+                if (customer == null)
+                {
+                    MessageBox.Show("Dealer not found");
+                    return;
+                }
+                txtPersonName.Text = customer.Name;
                 List<CustomerBill> billList = SharedRepo.CustomerRepo.GetCustomerBillList(PERSON_ID);
                 dgvBillList.DataSource = billList;
             }
             dgvBillList.ClearSelection();
         }
 
-        public void EnableAddBillButton()
+        public void SetFormBehaviour()
         {
-            if (PERSON_TYPE == Person.CUSTOMER)
-            {
-                btnAddBill.Visible = false;
-                btnAddBill.Enabled = false;
-                return;
-            }
+            //if (PERSON_TYPE == Person.CUSTOMER)
+            //{
+            //    btnAddBill.Visible = false;
+            //    btnAddBill.Enabled = false;
+            //    return;
+            //}
         }
-
 
     }
 }

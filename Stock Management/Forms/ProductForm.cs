@@ -9,11 +9,10 @@ namespace Stock_Management.Forms
     public partial class ProductForm : BaseForm
     {
         Product product;
-        public int ProductId;
+        public int PRODUCT_ID { get; set; }
         public ProductForm()
         {
             InitializeComponent();
-            //this.EnumerateChildren();
         }
 
         private void ProductForm_Load(object sender, EventArgs e)
@@ -21,51 +20,34 @@ namespace Stock_Management.Forms
             EditProduct();
         }
 
-        private void ProductForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (CallerForm == null)
-            {
-                return;
-            }
-            else if (CallerForm.Name == "ReportForm")
-            {
-
-            }
-            else if (CallerForm.Name == "BillBreakupListForm")
-            {
-
-            }
-            else if (CallerForm.Name == "ProductListForm")
-            {
-                ((ProductListForm)CallerForm).LoadProductList();
-            }
-        }
-
         private void btnSaveProduct_Click(object sender, EventArgs e)
         {
+            if (btnSaveProduct.Text == CRUD_OP_EDIT)
+            {
+                SetFormBehaviour(CRUD_OP_EDIT);
+                return;
+            }
             SaveProduct();
         }
 
-        private void EnableControls(bool enalble)
-        {
-            btnSaveProduct.Enabled = enalble;
-        }
         private void EditProduct()
         {
-            if (ProductId == 0)
+            if (PRODUCT_ID == 0)
             {
+                SetFormBehaviour(CRUD_OP_ADD);
                 product = new Product();
             }
             else
             {
-                product = SharedRepo.ProductRepo.GetByID(ProductId);
+                product = SharedRepo.ProductRepo.GetByID(PRODUCT_ID);
                 if (product == null)
                 {
                     MessageBox.Show("Product not found");
-                    EnableControls(false);
+                    SetFormBehaviour(CRUD_OP_VIEW);
                 }
                 else
                 {
+                    SetFormBehaviour(CRUD_OP_VIEW);
                     txtName.Text = product.Name;
                     txtCode.Text = product.Code;
                     txtColor.Text = product.Color;
@@ -94,7 +76,45 @@ namespace Stock_Management.Forms
                 return;
             }
             SharedRepo.ProductRepo.Save(product);
+            if (CallerForm == null || CallerForm.Name == null)
+            {
+                return;
+            }
+            else if (CallerForm.Name == "ProductListForm")
+            {
+                ((ProductListForm)CallerForm).LoadProductList();
+            }
             Close();
+        }
+
+        private void EnableControls(bool enalbleInputs)
+        {
+            txtName.Enabled = enalbleInputs;
+            txtCode.Enabled = enalbleInputs;
+            txtColor.Enabled = enalbleInputs;
+            txtRemarks.Enabled = enalbleInputs;
+        }
+
+        private void SetFormBehaviour(string CRUD_OP)
+        {
+            switch (CRUD_OP)
+            {
+                case CRUD_OP_ADD:
+                    Text = "Add Product";
+                    EnableControls(true);
+                    btnSaveProduct.Text = CRUD_OP_ADD;
+                    break;
+                case CRUD_OP_EDIT:
+                    Text = "Edit Product";
+                    EnableControls(true);
+                    btnSaveProduct.Text = CRUD_OP_UPDATE;
+                    break;
+                case CRUD_OP_VIEW:
+                    Text = "View Product";
+                    EnableControls(false);
+                    btnSaveProduct.Text = CRUD_OP_EDIT;
+                    break;
+            }
         }
     }
 }

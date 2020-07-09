@@ -126,5 +126,10 @@ namespace StockEntity.Repository
         {
             return context.CustomerBills.Where(x => x.CustomerId == customerId).OrderBy(x => x.BillDate).ToList();
         }
+
+        public List<CustomerBillBreakup> GetCustomerBillBreakupList(int customerBillId)
+        {
+            return context.CustomerBillBreakups.Where(x => x.CustomerBillId == customerBillId).OrderBy(x => x.Id).ToList();
+        }
     }
 }

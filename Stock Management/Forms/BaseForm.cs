@@ -6,6 +6,12 @@ namespace Stock_Management.Forms
 {
     public class BaseForm : Form
     {
+        #region
+        public const string CRUD_OP_ADD = "Add";
+        public const string CRUD_OP_VIEW = "View";
+        public const string CRUD_OP_EDIT = "Edit";
+        public const string CRUD_OP_UPDATE = "Update";
+        #endregion
         public BaseForm CallerForm { get; set; }
 
         public void NumericFieldKeyPress(object sender, KeyPressEventArgs e)

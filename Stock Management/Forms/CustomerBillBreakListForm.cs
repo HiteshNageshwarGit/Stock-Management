@@ -10,6 +10,7 @@ namespace Stock_Management.Forms
 {
     public partial class CustomerBillBreakListForm : BaseForm
     {
+        public int CUSTOMER_BILL_ID { get; set; } // To load existing bills
         List<ProductInCart> productListCart = new List<ProductInCart>();
         CustomerBill customerBill = new CustomerBill();
         public CustomerBillBreakListForm()
@@ -23,7 +24,11 @@ namespace Stock_Management.Forms
 
         private void CustomerBillBreakListForm_Load(object sender, EventArgs e)
         {
-
+            if (CUSTOMER_BILL_ID != 0)
+            {
+                loadCustomerBillBreakupList();
+            }
+            SetFormBehaviour();
         }
 
         private void btnSearchCustomer_Click(object sender, EventArgs e)
@@ -40,9 +45,9 @@ namespace Stock_Management.Forms
                 return;
             }
 
+            ProductInCart selectedProduct = (ProductInCart)dgvCart.Rows[e.RowIndex].DataBoundItem;
             if (dgvCart.Columns[e.ColumnIndex].Name == CartColAddOne.Name)
             {
-                ProductInCart selectedProduct = (ProductInCart)dgvCart.Rows[e.RowIndex].DataBoundItem;
                 if (selectedProduct.AvailableQuantity > selectedProduct.SellingQuantity)
                 {
                     selectedProduct.SellingQuantity++;
@@ -51,7 +56,6 @@ namespace Stock_Management.Forms
             }
             else if (dgvCart.Columns[e.ColumnIndex].Name == CartColRemoveOne.Name)
             {
-                ProductInCart selectedProduct = (ProductInCart)dgvCart.Rows[e.RowIndex].DataBoundItem;
                 if (selectedProduct.SellingQuantity > 0)
                 {
                     selectedProduct.SellingQuantity--;
@@ -108,13 +112,13 @@ namespace Stock_Management.Forms
                 product.SellingAmount = product.SellingUnitPrice * product.SellingQuantity;
                 totalBillAmountforCart += product.SellingAmount;
                 totalProductQuanityInCart += product.SellingQuantity;
+
             }
             dgvCart.Refresh();
 
             txtTotalBillAmountForCart.Text = totalBillAmountforCart.ToString();
             txtTotalProductCountInCart.Text = productListCart.Count.ToString();
             txtTotalProductQuantityInCart.Text = totalProductQuanityInCart.ToString();
-
         }
 
         private void btnFinishBilling_Click(object sender, EventArgs e)
@@ -132,7 +136,7 @@ namespace Stock_Management.Forms
                     MessageBox.Show(customerBill.EntityState.StateMessage);
                     return;
                 }
-                
+
                 SharedRepo.CustomerRepo.SaveCustomerBillBreakupList(customerBill, productListCart);
                 MessageBox.Show("Billing completed");
 
@@ -159,6 +163,25 @@ namespace Stock_Management.Forms
         {
             customerBill.CustomerId = customerId;
             txtCustomerName.Text = customerName;
+        }
+
+        internal void loadCustomerBillBreakupList()
+        {
+            List<CustomerBillBreakup> customerBillBreakupList = SharedRepo.CustomerRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
+            dgvCart.DataSource = customerBillBreakupList;
+            dgvCart.ClearSelection();
+            DataGridViewButtonColumn btnAddOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
+            btnAddOne.Visible = false;
+            DataGridViewButtonColumn btnRemoveOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
+            btnRemoveOne.Visible = false;
+            dgvCart.ReadOnly = true;
+
+            btnFinishBilling.Visible = false;
+        }
+
+        private void SetFormBehaviour()
+        {
+
         }
     }
 }

@@ -152,7 +152,6 @@
             this.MinimumSize = new System.Drawing.Size(400, 450);
             this.Name = "ProductForm";
             this.Text = "Product";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProductForm_FormClosing);
             this.Load += new System.EventHandler(this.ProductForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

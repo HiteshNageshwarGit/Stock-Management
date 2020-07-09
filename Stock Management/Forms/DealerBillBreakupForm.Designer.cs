@@ -43,6 +43,8 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.numAvailableQuantity = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.numUnitSellingPrice = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.txtSelectedProductName = new System.Windows.Forms.TextBox();
@@ -58,17 +60,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.numAvailableQuantity = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAvailableQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitSellingPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantityInABox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalBoxes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalAmount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAvailableQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSaveBillBreakups
@@ -245,6 +245,41 @@
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bill Breakup Details";
+            // 
+            // numAvailableQuantity
+            // 
+            this.numAvailableQuantity.BackColor = System.Drawing.SystemColors.Control;
+            this.numAvailableQuantity.Enabled = false;
+            this.numAvailableQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numAvailableQuantity.Location = new System.Drawing.Point(347, 160);
+            this.numAvailableQuantity.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAvailableQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numAvailableQuantity.Name = "numAvailableQuantity";
+            this.numAvailableQuantity.Size = new System.Drawing.Size(221, 23);
+            this.numAvailableQuantity.TabIndex = 24;
+            this.numAvailableQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(344, 140);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(121, 15);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Available Quantity";
             // 
             // numUnitSellingPrice
             // 
@@ -469,42 +504,7 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Total Amount";
             // 
-            // numAvailableQuantity
-            // 
-            this.numAvailableQuantity.BackColor = System.Drawing.SystemColors.Control;
-            this.numAvailableQuantity.Enabled = false;
-            this.numAvailableQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numAvailableQuantity.Location = new System.Drawing.Point(347, 160);
-            this.numAvailableQuantity.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numAvailableQuantity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numAvailableQuantity.Name = "numAvailableQuantity";
-            this.numAvailableQuantity.Size = new System.Drawing.Size(221, 23);
-            this.numAvailableQuantity.TabIndex = 24;
-            this.numAvailableQuantity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(344, 140);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(121, 15);
-            this.label12.TabIndex = 23;
-            this.label12.Text = "Available Quantity";
-            // 
-            // BillBreakupForm
+            // DealerBillBreakupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -512,21 +512,21 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.MinimumSize = new System.Drawing.Size(700, 550);
-            this.Name = "BillBreakupForm";
-            this.Text = "Bill Breakup";
+            this.Name = "DealerBillBreakupForm";
+            this.Text = "Dealer Bill Breakup";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BillBreakupForm_FormClosing);
             this.Load += new System.EventHandler(this.BillBreakupForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAvailableQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitSellingPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUnitPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numQuantityInABox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalBoxes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTotalAmount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numAvailableQuantity)).EndInit();
             this.ResumeLayout(false);
 
         }

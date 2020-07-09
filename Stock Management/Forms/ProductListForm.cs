@@ -22,7 +22,7 @@ namespace Stock_Management.Forms
             ColDetails.UseColumnTextForLinkValue = true;
             ColSelect.UseColumnTextForLinkValue = true;
 
-            if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "BillBreakupForm")
+            if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "DealerBillBreakupForm")
             {
                 ColSelect.Visible = true;
             }
@@ -58,7 +58,7 @@ namespace Stock_Management.Forms
         private void btnAddNewProduct_Click(object sender, EventArgs e)
         {
             ProductForm productForm = new ProductForm();
-            productForm.ProductId = 0;
+            productForm.PRODUCT_ID = 0;
             ShowFormAsFixedDialog(this, productForm);
         }
 
@@ -73,7 +73,7 @@ namespace Stock_Management.Forms
             if (GetSelectedCellText(dgvProductList, e) == "Details")
             {
                 ProductForm productForm = new ProductForm();
-                productForm.ProductId = selectedProduct.Id;
+                productForm.PRODUCT_ID = selectedProduct.Id;
                 ShowFormAsFixedDialog(this, productForm);
             }
             else if (GetSelectedCellText(dgvProductList, e) == "Select")

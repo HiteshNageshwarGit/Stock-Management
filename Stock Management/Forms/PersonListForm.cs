@@ -20,13 +20,13 @@ namespace Stock_Management.Forms
         {
             if (PERSON_TYPE == Person.DEALER)
             {
-                Text = "Dealer";
+                Text = "Dealer List";
                 lblSearchPerson.Text = "Search Dealer";
                 btnAddPerson.Text = "Add Dealer";
             }
             else if (PERSON_TYPE == Person.CUSTOMER)
             {
-                Text = "Customer";
+                Text = "Customer List";
                 lblSearchPerson.Text = "Search Customer";
                 btnAddPerson.Text = "Add Customer";
             }

@@ -24,14 +24,7 @@ namespace Stock_Management.Forms
 
         private void BillBreakupForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CallerForm == null)
-            {
-                return;
-            }
-            else if (CallerForm.Name == "BillBreakupListForm")
-            {
-                ((DealerBillBreakupListForm)CallerForm).LoadBillBreakupList();
-            }
+            
         }
 
         private void btnSearchProduct_Click(object sender, EventArgs e)
@@ -80,6 +73,7 @@ namespace Stock_Management.Forms
 
             if (BillBreakupId != 0)
             {
+                Text = "Edit Dealer Bill Breakup";
                 dealerBillBreakup = SharedRepo.DealerBillBreakupRepo.GetByID(BillBreakupId);
                 if (dealerBillBreakup == null)
                 {
@@ -103,6 +97,7 @@ namespace Stock_Management.Forms
             }
             else
             {
+                Text = "Add Dealer Bill Breakup";
                 dealerBillBreakup = new DealerBillBreakup();
                 dealerBillBreakup.DealerBillId = BillId;
                 dealerBillBreakup.EntryDate = DateHelper.GetTodayDateString();
@@ -124,6 +119,14 @@ namespace Stock_Management.Forms
             if (dealerBillBreakup.EntityState.State == ValidationState.SUCCESS)
             {
                 SharedRepo.DealerBillBreakupRepo.Save(dealerBillBreakup);
+                if (CallerForm == null || CallerForm.Name == null)
+                {
+                    return;
+                }
+                else if (CallerForm.Name == "DealerBillBreakupListForm")
+                {
+                    ((DealerBillBreakupListForm)CallerForm).LoadBillBreakupList();
+                }
                 Close();
             }
             else

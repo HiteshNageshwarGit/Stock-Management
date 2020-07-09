@@ -31,7 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.txtDealerName = new System.Windows.Forms.TextBox();
+            this.txtPersonName = new System.Windows.Forms.TextBox();
             this.dgvBillList = new System.Windows.Forms.DataGridView();
             this.ColBillDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CollTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,13 +46,13 @@
             // 
             // txtDealerName
             // 
-            this.txtDealerName.BackColor = System.Drawing.SystemColors.Control;
-            this.txtDealerName.Enabled = false;
-            this.txtDealerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDealerName.Location = new System.Drawing.Point(93, 21);
-            this.txtDealerName.Name = "txtDealerName";
-            this.txtDealerName.Size = new System.Drawing.Size(286, 23);
-            this.txtDealerName.TabIndex = 11;
+            this.txtPersonName.BackColor = System.Drawing.SystemColors.Control;
+            this.txtPersonName.Enabled = false;
+            this.txtPersonName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPersonName.Location = new System.Drawing.Point(93, 21);
+            this.txtPersonName.Name = "txtDealerName";
+            this.txtPersonName.Size = new System.Drawing.Size(286, 23);
+            this.txtPersonName.TabIndex = 11;
             // 
             // dgvBillList
             // 
@@ -185,7 +185,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.txtDealerName);
+            this.Controls.Add(this.txtPersonName);
             this.Controls.Add(this.dgvBillList);
             this.Controls.Add(this.btnAddBill);
             this.Controls.Add(this.label2);
@@ -201,7 +201,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtDealerName;
+        private System.Windows.Forms.TextBox txtPersonName;
         private System.Windows.Forms.DataGridView dgvBillList;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColBillDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn CollTotalAmount;
