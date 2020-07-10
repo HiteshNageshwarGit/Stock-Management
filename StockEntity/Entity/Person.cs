@@ -29,6 +29,17 @@ namespace StockEntity.Entity
                 EntityState.StateMessage += "\n Max length of Name can be 50 charectors";
             }
 
+            if (string.IsNullOrWhiteSpace(Address))
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage += "\n Address is required";
+            }
+            else if (Address.Length > 50)
+            {
+                EntityState.State = ValidationState.ERROR;
+                EntityState.StateMessage += "\n Max length of Address can be 50 charectors";
+            }
+
             if (!string.IsNullOrWhiteSpace(Mobile) && !Regex.IsMatch(Mobile, @"\+?[0-9]{10}"))
             {
                 EntityState.State = ValidationState.ERROR;

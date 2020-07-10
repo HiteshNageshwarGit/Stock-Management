@@ -284,6 +284,7 @@
             // numUnitSellingPrice
             // 
             this.numUnitSellingPrice.BackColor = System.Drawing.SystemColors.Window;
+            this.numUnitSellingPrice.DecimalPlaces = 2;
             this.numUnitSellingPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUnitSellingPrice.Location = new System.Drawing.Point(347, 280);
             this.numUnitSellingPrice.Maximum = new decimal(new int[] {
@@ -417,6 +418,7 @@
             // 
             // numTotalAmount
             // 
+            this.numTotalAmount.DecimalPlaces = 2;
             this.numTotalAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numTotalAmount.Location = new System.Drawing.Point(9, 100);
             this.numTotalAmount.Maximum = new decimal(new int[] {

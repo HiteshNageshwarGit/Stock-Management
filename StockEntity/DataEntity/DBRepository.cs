@@ -1,9 +1,11 @@
 ﻿using StockEntity.Entity;
 using StockEntity.EntityX;
+using StockEntity.Helper;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace StockEntity
 {
@@ -163,7 +165,10 @@ namespace StockEntity
 
         public bool DoesCustomerNameExists(Customer customer)
         {
-            Person existingCustomer = context.Customers.Where(x => (x.Id != customer.Id && x.Name.Trim().ToLower() == customer.Name.Trim().ToLower())).FirstOrDefault();
+            Person existingCustomer = context.Customers
+                .Where(x => (x.Id != customer.Id && (x.Name.Trim().ToLower() == customer.Name.Trim().ToLower()))
+                                                 && (x.Address.Trim().ToLower() == customer.Address.Trim().ToLower()))
+                .FirstOrDefault();
             if (existingCustomer == null)
             {
                 return false;
@@ -208,6 +213,77 @@ namespace StockEntity
         {
             return context.Customers.Find(id);
         }
+        #endregion
+
+        #region Dealer Bill
+        public void SaveDealerBill(DealerBill bill)
+        {
+            if (bill.Id == 0)
+            {
+                context.DealerBills.Add(bill);
+                context.SaveChanges();
+            }
+            else
+            {
+                context.DealerBills.Attach(bill);
+                context.Entry(bill).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        public DealerBill GetDealerBillByID(int id)
+        {
+            return context.DealerBills.Find(id);
+        }
+
+        public List<DealerBill> GetDealerBillList(int dealerId)
+        {
+            return context.DealerBills.Where(x => x.DealerId == dealerId).Include(x => x.DealerBillBreakupList).OrderByDescending(x => x.EntryDate).ToList();
+        }
+        #endregion
+
+        #region Dealer Bill Breakup
+        public void SaveDealerBillBreakup(DealerBillBreakup BillBreakup)
+        {
+            if (BillBreakup.Id == 0)
+            {
+                context.DealerBillBreakups.Add(BillBreakup);
+                context.SaveChanges();
+            }
+            else
+            {
+                context.DealerBillBreakups.Attach(BillBreakup);
+                context.Entry(BillBreakup).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        public DealerBillBreakup GetDealerBillBreakupByID(int id)
+        {
+            return context.DealerBillBreakups.Find(id);
+        }
+
+        public List<DealerBillBreakup> GetDealerBillBreakupList(int billId)
+        {
+            return context.DealerBillBreakups.Where(x => x.DealerBillId == billId).OrderByDescending(x => x.EntryDate).ToList();
+        }
+
+        public DealerBillBreakup GetBillBreakup(int billId)
+        {
+            return context.DealerBillBreakups.Where(x => x.Id == billId).Include(x => x.Product).FirstOrDefault();
+        }
+        #endregion
+
+        #region Customer Bill & BillBreakup
+        public List<CustomerBill> GetCustomerBillList(int customerId)
+        {
+            return context.CustomerBills.Where(x => x.CustomerId == customerId).OrderBy(x => x.BillDate).ToList();
+        }
+
+        public List<CustomerBillBreakup> GetCustomerBillBreakupList(int customerBillId)
+        {
+            return context.CustomerBillBreakups.Where(x => x.CustomerBillId == customerBillId).OrderBy(x => x.Id).ToList();
+        }
 
         public void SaveCustomerBillBreakupList(CustomerBill customerBill, List<ProductInCart> productListInCart)
         {
@@ -243,7 +319,7 @@ namespace StockEntity
                             throw new Exception("Available quantity is less than sold quantity");
                         }
                         dealerBillBreakup.AvailableQuantity = dealerBillBreakup.AvailableQuantity - customerBillBreakup.TotalQuantity;
-                        UpdateDealerBillBreakup(dealerBillBreakup);
+                        SaveDealerBillBreakup(dealerBillBreakup);
                     }
 
                     dbContextTransaction.Commit();
@@ -255,111 +331,68 @@ namespace StockEntity
             }
         }
 
-        public void UpdateDealerBillBreakup(DealerBillBreakup dealerBillBreakup)
-        {
-            context.DealerBillBreakups.Attach(dealerBillBreakup);
-            context.Entry(dealerBillBreakup).State = EntityState.Modified;
-            context.SaveChanges();
-        }
 
-        public List<CustomerBill> GetCustomerBillList(int customerId)
-        {
-            return context.CustomerBills.Where(x => x.CustomerId == customerId).OrderBy(x => x.BillDate).ToList();
-        }
-
-        public List<CustomerBillBreakup> GetCustomerBillBreakupList(int customerBillId)
-        {
-            return context.CustomerBillBreakups.Where(x => x.CustomerBillId == customerBillId).OrderBy(x => x.Id).ToList();
-        }
-        #endregion
-
-        #region
-        public void SaveDealerBill(DealerBill bill)
-        {
-            if (bill.Id == 0)
-            {
-                context.DealerBills.Add(bill);
-                context.SaveChanges();
-            }
-            else
-            {
-                context.DealerBills.Attach(bill);
-                context.Entry(bill).State = EntityState.Modified;
-                context.SaveChanges();
-            }
-        }
-
-        public DealerBill GetDealerBillByID(int id)
-        {
-            return context.DealerBills.Find(id);
-        }
-
-        public List<DealerBill> GetDealerBillList(int dealerId)
-        {
-            return context.DealerBills.Where(x => x.DealerId == dealerId).Include(x => x.DealerBillBreakupList).OrderBy(x => x.BillDate).ToList();
-        }
-        #endregion
-
-        #region Dealer Bill Breakup
-        public void SaveDealerBillBreakup(DealerBillBreakup BillBreakup)
-        {
-            if (BillBreakup.Id == 0)
-            {
-                context.DealerBillBreakups.Add(BillBreakup);
-                context.SaveChanges();
-            }
-            else
-            {
-                context.DealerBillBreakups.Attach(BillBreakup);
-                context.Entry(BillBreakup).State = EntityState.Modified;
-                context.SaveChanges();
-            }
-        }
-        public DealerBillBreakup GetDealerBillBreakupByID(int id)
-        {
-            return context.DealerBillBreakups.Find(id);
-        }
-
-        public List<DealerBillBreakup> GetDealerBillBreakupList(int billId)
-        {
-            return context.DealerBillBreakups.Where(x => x.DealerBillId == billId).ToList();
-        }
-
-        public DealerBillBreakup GetBillBreakup(int billId)
-        {
-            return context.DealerBillBreakups.Where(x => x.Id == billId).Include(x => x.Product).FirstOrDefault();
-        }
         #endregion
 
         public List<ProductInCart> GetProductListForSelling(string productName)
         {
-            List<ProductInCart> productLisForReport = (from P in context.Products
-                                                       where (P.Name.Contains(productName) || productName == "")
-                                                       join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
-                                                       where (DBB.AvailableQuantity > 0)
-                                                       join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
-                                                       join D in context.Dealers on DB.DealerId equals D.Id
+            productName = productName.ToLower();
+            List<ProductInCart> exactMatchProductList = (from P in context.Products
+                                                         where (P.Name.ToLower().Contains(productName))
+                                                         join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
+                                                         where (DBB.AvailableQuantity > 0)
+                                                         join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
+                                                         join D in context.Dealers on DB.DealerId equals D.Id
 
-                                                       select new ProductInCart
-                                                       {
-                                                           ProductId = P.Id,
-                                                           ProductName = P.Name,
-                                                           DealerName = D.Name,
-                                                           DealerBillDate = DB.BillDate,
-                                                           QuantityInBox = DBB.QuantityInBox,
-                                                           TotalBoxes = DBB.TotalBoxes,
-                                                           TotalQuantity = DBB.TotalQuantity,
-                                                           AvailableQuantity = DBB.AvailableQuantity,
-                                                           SellingUnitPrice = DBB.UnitSellPrice,
-                                                           DealerUnitPrice = DBB.UnitPrice,
-                                                           //UnitPriceIncode = ProductWithPrice.GetPriceInCode(DBB.UnitPrice),
-                                                           DealerBillBreakupId = DBB.Id,
-                                                           SellingQuantity = 1,
-                                                           SellingAmount = DBB.UnitPrice
+                                                         select new ProductInCart
+                                                         {
+                                                             ProductId = P.Id,
+                                                             ProductName = P.Name,
+                                                             DealerName = D.Name,
+                                                             DealerBillDate = DB.BillDate,
+                                                             QuantityInBox = DBB.QuantityInBox,
+                                                             TotalBoxes = DBB.TotalBoxes,
+                                                             TotalQuantity = DBB.TotalQuantity,
+                                                             AvailableQuantity = DBB.AvailableQuantity,
+                                                             SellingUnitPrice = DBB.UnitSellPrice,
+                                                             DealerUnitPrice = DBB.UnitPrice,
+                                                             DealerBillBreakupId = DBB.Id,
+                                                             SellingQuantity = 1,
+                                                             SellingAmount = DBB.UnitPrice
 
-                                                       }).Take(100).ToList();
-            return productLisForReport;
+                                                         }).Take(50).ToList();
 
+            // Search each word of product name
+            string[] splittedProductNames = productName.Split(' ');
+            List<ProductInCart> splittedNameProductList = (from P in context.Products
+                                                           where (splittedProductNames.Any(x => P.Name.ToLower().Contains(x)))
+                                                           join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
+                                                           where (DBB.AvailableQuantity > 0)
+                                                           join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
+                                                           join D in context.Dealers on DB.DealerId equals D.Id
+
+                                                           select new ProductInCart
+                                                           {
+                                                               ProductId = P.Id,
+                                                               ProductName = P.Name,
+                                                               DealerName = D.Name,
+                                                               DealerBillDate = DB.BillDate,
+                                                               QuantityInBox = DBB.QuantityInBox,
+                                                               TotalBoxes = DBB.TotalBoxes,
+                                                               TotalQuantity = DBB.TotalQuantity,
+                                                               AvailableQuantity = DBB.AvailableQuantity,
+                                                               SellingUnitPrice = DBB.UnitSellPrice,
+                                                               DealerUnitPrice = DBB.UnitPrice,
+                                                               DealerBillBreakupId = DBB.Id,
+                                                               SellingQuantity = 1,
+                                                               SellingAmount = DBB.UnitPrice
+
+                                                           }).Take(50).ToList();
+
+            var mergedList = exactMatchProductList.Union(splittedNameProductList, new ProductInCartComparer()).ToList(); // merge by removing duplicate
+            return mergedList;
         }
     }
+
+
 }
