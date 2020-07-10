@@ -34,7 +34,7 @@ namespace Stock_Management.Forms
 
         internal void LoadBillBreakupList()
         {
-            DealerBill bill = SharedRepo.DealerBillRepo.GetByID(DEALER_BILL_ID);
+            DealerBill bill = SharedRepo.DBRepo.GetDealerBillByID(DEALER_BILL_ID);
             if (bill == null)
             {
                 MessageBox.Show("Bill not found");
@@ -55,7 +55,7 @@ namespace Stock_Management.Forms
             txtTotalBreakupAmount.Text = bill.DealerBillBreakupList.Sum(x => x.TotalAmount).ToString();
             txtRemarks.Text = bill.Remarks;
 
-            List<DealerBillBreakup> BillBreakupsList = SharedRepo.DealerBillBreakupRepo.GetBillBreakupList(DEALER_BILL_ID);
+            List<DealerBillBreakup> BillBreakupsList = SharedRepo.DBRepo.GetDealerBillBreakupList(DEALER_BILL_ID);
             dgvBillBreakupList.DataSource = BillBreakupsList;
             dgvBillBreakupList.ClearSelection();
         }

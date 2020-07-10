@@ -109,7 +109,7 @@ namespace Stock_Management.Forms
 
         public void LoadProductListWithPrice()
         {
-            List<ProductInCart> list = SharedRepo.ProductRepo.GetProductListForSelling(txtProductName.Text.Trim());
+            List<ProductInCart> list = SharedRepo.DBRepo.GetProductListForSelling(txtProductName.Text.Trim());
             dgvProductList.DataSource = list;
             dgvProductList.ClearSelection();
         }

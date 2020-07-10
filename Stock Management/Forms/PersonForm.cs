@@ -63,11 +63,11 @@ namespace Stock_Management.Forms
             {
                 if (PERSON_TYPE == Person.DEALER)
                 {
-                    person = SharedRepo.DealerRepo.GetByID(PERSON_ID);
+                    person = SharedRepo.DBRepo.GetDealerByID(PERSON_ID);
                 }
                 else if (PERSON_TYPE == Person.CUSTOMER)
                 {
-                    person = SharedRepo.CustomerRepo.GetByID(PERSON_ID);
+                    person = SharedRepo.DBRepo.GetCustomerByID(PERSON_ID);
                 }
 
                 txtDealerName.Text = person.Name;
@@ -113,21 +113,21 @@ namespace Stock_Management.Forms
 
             if (PERSON_TYPE == Person.DEALER)
             {
-                if (SharedRepo.DealerRepo.DoesDelaerNameExists((Dealer)person))
+                if (SharedRepo.DBRepo.DoesDealerNameExists((Dealer)person))
                 {
                     MessageBox.Show("Dealer name already exists", "Error");
                     return;
                 }
-                SharedRepo.DealerRepo.Save((Dealer)person);
+                SharedRepo.DBRepo.SaveDealer((Dealer)person);
             }
             else
             {
-                if (SharedRepo.CustomerRepo.DoesCustomerNameExists((Customer)person))
+                if (SharedRepo.DBRepo.DoesCustomerNameExists((Customer)person))
                 {
                     MessageBox.Show("Customer name already exists", "Error");
                     return;
                 }
-                SharedRepo.CustomerRepo.Save((Customer)person);
+                SharedRepo.DBRepo.SaveCustomer((Customer)person);
             }
             Close();
         }

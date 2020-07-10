@@ -36,14 +36,14 @@ namespace Stock_Management.Forms
         }
         private void ProductListForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CallerForm == null)
-            {
-                return;
-            }
-            else if (selectedProduct != null && CallerForm.Name == "BillBreakupForm")
-            {
-                ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
-            }
+            //if (CallerForm == null && CallerForm.Name != null)
+            //{
+            //    return;
+            //}
+            //else if (selectedProduct != null && CallerForm.Name == "DealerBillBreakupForm")
+            //{
+            //    ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
+            //}
         }
 
         private void txtSearchProduct_KeyPress(object sender, KeyPressEventArgs e)
@@ -78,13 +78,21 @@ namespace Stock_Management.Forms
             }
             else if (GetSelectedCellText(dgvProductList, e) == "Select")
             {
+                if (CallerForm == null && CallerForm.Name != null)
+                {
+                    return;
+                }
+                else if (selectedProduct != null && CallerForm.Name == "DealerBillBreakupForm")
+                {
+                    ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
+                }
                 Close(); // close form and on closing call BillBreakupForm method to set product Id and Name
             }
         }
 
         public void LoadProductList()
         {
-            productList = SharedRepo.ProductRepo.GetProductListForAdmin(txtSearchProduct.Text.Trim());
+            productList = SharedRepo.DBRepo.GetProductListForAdmin(txtSearchProduct.Text.Trim());
             dgvProductList.DataSource = productList;
             dgvProductList.ClearSelection();
         }

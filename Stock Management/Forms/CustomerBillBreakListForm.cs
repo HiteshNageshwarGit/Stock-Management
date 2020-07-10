@@ -137,7 +137,7 @@ namespace Stock_Management.Forms
                     return;
                 }
 
-                SharedRepo.CustomerRepo.SaveCustomerBillBreakupList(customerBill, productListCart);
+                SharedRepo.DBRepo.SaveCustomerBillBreakupList(customerBill, productListCart);
                 MessageBox.Show("Billing completed");
 
             }
@@ -167,7 +167,7 @@ namespace Stock_Management.Forms
 
         internal void loadCustomerBillBreakupList()
         {
-            List<CustomerBillBreakup> customerBillBreakupList = SharedRepo.CustomerRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
+            List<CustomerBillBreakup> customerBillBreakupList = SharedRepo.DBRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
             dgvCart.DataSource = customerBillBreakupList;
             dgvCart.ClearSelection();
             DataGridViewButtonColumn btnAddOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];

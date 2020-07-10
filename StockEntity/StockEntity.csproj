@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repository\DBRepository.cs" />
     <Compile Include="EntityX\ProductInCart.cs" />
     <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\CustomerBill.cs" />

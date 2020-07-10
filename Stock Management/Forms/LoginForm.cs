@@ -23,8 +23,8 @@ namespace Stock_Management.Forms
             }
             else
             {
-                if (txtUserName.Text == SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.AdminUser).Value
-                    && txtPassword.Text == SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.AdminPassword).Value)
+                if (txtUserName.Text == SharedRepo.DBRepo.GetKeyValue(SharedRepo.AdminUser).Value
+                    && txtPassword.Text == SharedRepo.DBRepo.GetKeyValue(SharedRepo.AdminPassword).Value)
                 {
                     isLoginSucceeded = true;
                     SharedRepo.UserRole = SharedRepo.AdminUser;

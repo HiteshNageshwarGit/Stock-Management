@@ -51,7 +51,7 @@ namespace Stock_Management.Forms
 
         private void EditBillBreakuDetail()
         {
-            DealerBill bill = SharedRepo.DealerBillRepo.GetByID(BillId);
+            DealerBill bill = SharedRepo.DBRepo.GetDealerBillByID(BillId);
             if (bill == null)
             {
                 MessageBox.Show("Bill not found");
@@ -74,7 +74,7 @@ namespace Stock_Management.Forms
             if (BillBreakupId != 0)
             {
                 Text = "Edit Dealer Bill Breakup";
-                dealerBillBreakup = SharedRepo.DealerBillBreakupRepo.GetByID(BillBreakupId);
+                dealerBillBreakup = SharedRepo.DBRepo.GetDealerBillBreakupByID(BillBreakupId);
                 if (dealerBillBreakup == null)
                 {
                     btnSaveBillBreakups.Enabled = false;
@@ -118,7 +118,7 @@ namespace Stock_Management.Forms
 
             if (dealerBillBreakup.EntityState.State == ValidationState.SUCCESS)
             {
-                SharedRepo.DealerBillBreakupRepo.Save(dealerBillBreakup);
+                SharedRepo.DBRepo.SaveDealerBillBreakup(dealerBillBreakup);
                 if (CallerForm == null || CallerForm.Name == null)
                 {
                     return;

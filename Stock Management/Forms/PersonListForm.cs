@@ -106,12 +106,12 @@ namespace Stock_Management.Forms
         {
             if (PERSON_TYPE == Person.DEALER)
             {
-                List<Dealer> dealerList = SharedRepo.DealerRepo.GetDealerList();
+                List<Dealer> dealerList = SharedRepo.DBRepo.GetDealerList();
                 dgvDealerList.DataSource = dealerList;
             }
             else if (PERSON_TYPE == Person.CUSTOMER)
             {
-                List<Customer> dealerList = SharedRepo.CustomerRepo.GetCustomerList();
+                List<Customer> dealerList = SharedRepo.DBRepo.GetCustomerList();
                 dgvDealerList.DataSource = dealerList;
             }
             dgvDealerList.ClearSelection();

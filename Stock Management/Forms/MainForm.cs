@@ -48,7 +48,7 @@ namespace Stock_Management
                 else
                 {
 
-                    KeyValue keyValue = SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBBackupDir);
+                    KeyValue keyValue = SharedRepo.DBRepo.GetKeyValue(SharedRepo.DBBackupDir);
                     if (keyValue == null)
                     {
                         MessageBox.Show("DB backup directory is not configured. Please configure it ");
@@ -62,12 +62,12 @@ namespace Stock_Management
                         }
                         else
                         {
-                            MessageBox.Show("Taking DB backup failed to " + SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBBackupDir).Value);
+                            MessageBox.Show("Taking DB backup failed to " + SharedRepo.DBRepo.GetKeyValue(SharedRepo.DBBackupDir).Value);
                         }
                     }
 
                     // Check for Default Dealer/Customer.
-                    if (!(SharedRepo.CustomerRepo.DoesDefaulCustomerNameExist() && SharedRepo.DealerRepo.DoesDefaulDealerNameExist()))
+                    if (!(SharedRepo.DBRepo.DoesDefaulCustomerNameExist() && SharedRepo.DBRepo.DoesDefaulDealerNameExist()))
                     {
                         MessageBox.Show("Default dealer or default customer not found");
                     }
@@ -155,14 +155,14 @@ namespace Stock_Management
 
         private bool IsDBCompitable()
         {
-            var ff = SharedRepo.ProductRepo.GetProductListForAdmin("");
+            var ff = SharedRepo.DBRepo.GetProductListForAdmin("");
             string compitableDBVersion = ConfigurationManager.AppSettings["CompitableDBVersions"];
             if (!string.IsNullOrWhiteSpace(compitableDBVersion))
             {
                 string[] arr = compitableDBVersion.Split(',');
                 if (arr.Length > 0)
                 {
-                    string dbVersion = SharedRepo.keyValueRepo.GetKeyValue(SharedRepo.DBVersion).Value;
+                    string dbVersion = SharedRepo.DBRepo.GetKeyValue(SharedRepo.DBVersion).Value;
                     if (dbVersion != null && dbVersion.Length > 0)
                     {
                         if (arr.Contains(dbVersion))
@@ -177,19 +177,9 @@ namespace Stock_Management
 
         private void OpenPersonListForm(int personType)
         {
-            //CloseMDIChildForms(this);
-            //if (personListForm == null || personListForm.IsDisposed)
-            //{
-            //    personListForm = new PersonListForm();
-            //}
-            //personListForm.PERSON_TYPE = personType;
-            //ShowFormAsMDIChild(this, personListForm);
-
             personListForm = new PersonListForm();
             personListForm.PERSON_TYPE = personType;
             ShowFormResizableAsDialog(this, personListForm);
         }
-
-
     }
 }

@@ -89,26 +89,26 @@ namespace Stock_Management.Forms
         {
             if (PERSON_TYPE == Person.DEALER)
             {
-                Dealer dealer = SharedRepo.DealerRepo.GetByID(PERSON_ID);
+                Dealer dealer = SharedRepo.DBRepo.GetDealerByID(PERSON_ID);
                 if (dealer == null)
                 {
                     MessageBox.Show("Dealer not found");
                     return;
                 }
                 txtPersonName.Text = dealer.Name;
-                List<DealerBill> billList = SharedRepo.DealerBillRepo.GetBillList(PERSON_ID);
+                List<DealerBill> billList = SharedRepo.DBRepo.GetDealerBillList(PERSON_ID);
                 dgvBillList.DataSource = billList;
             }
             else if (PERSON_TYPE == Person.CUSTOMER)
             {
-                Customer customer = SharedRepo.CustomerRepo.GetByID(PERSON_ID);
+                Customer customer = SharedRepo.DBRepo.GetCustomerByID(PERSON_ID);
                 if (customer == null)
                 {
                     MessageBox.Show("Dealer not found");
                     return;
                 }
                 txtPersonName.Text = customer.Name;
-                List<CustomerBill> billList = SharedRepo.CustomerRepo.GetCustomerBillList(PERSON_ID);
+                List<CustomerBill> billList = SharedRepo.DBRepo.GetCustomerBillList(PERSON_ID);
                 dgvBillList.DataSource = billList;
             }
             dgvBillList.ClearSelection();

@@ -39,7 +39,7 @@ namespace Stock_Management.Forms
             }
             else
             {
-                product = SharedRepo.ProductRepo.GetByID(PRODUCT_ID);
+                product = SharedRepo.DBRepo.GetProductByID(PRODUCT_ID);
                 if (product == null)
                 {
                     MessageBox.Show("Product not found");
@@ -70,12 +70,12 @@ namespace Stock_Management.Forms
                 MessageBox.Show(product.EntityState.StateMessage, "Error");
                 return;
             }
-            if (SharedRepo.ProductRepo.DoesProductNameExists(product))
+            if (SharedRepo.DBRepo.DoesProductNameExists(product))
             {
                 MessageBox.Show("Product name already exists", "Error");
                 return;
             }
-            SharedRepo.ProductRepo.Save(product);
+            SharedRepo.DBRepo.SaveProduct(product);
             if (CallerForm == null || CallerForm.Name == null)
             {
                 return;

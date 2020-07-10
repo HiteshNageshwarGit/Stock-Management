@@ -47,7 +47,7 @@ namespace Stock_Management.Forms
 
         private void EditBill()
         {
-            dealer = SharedRepo.DealerRepo.GetByID(DealerId);
+            dealer = SharedRepo.DBRepo.GetDealerByID(DealerId);
             if (dealer == null)
             {
                 MessageBox.Show("Dealer details not found");
@@ -59,7 +59,7 @@ namespace Stock_Management.Forms
             if (BILL_ID != 0)
             {
                 Text = "Edit Dealer Bill";
-                dealerBill = SharedRepo.DealerBillRepo.GetByID(BILL_ID);
+                dealerBill = SharedRepo.DBRepo.GetDealerBillByID(BILL_ID);
                 dtBillEntryDate.Value = DateHelper.GetDateObject(dealerBill.EntryDate);
                 dtBillDate.Value = DateHelper.GetDateObject(dealerBill.BillDate);
                 numBillAmount.Value = dealerBill.TotalAmount;
@@ -87,7 +87,7 @@ namespace Stock_Management.Forms
                 MessageBox.Show(dealerBill.EntityState.StateMessage);
                 return;
             }
-            SharedRepo.DealerBillRepo.Save((DealerBill)dealerBill);
+            SharedRepo.DBRepo.SaveDealerBill((DealerBill)dealerBill);
             Close();
         }
 
