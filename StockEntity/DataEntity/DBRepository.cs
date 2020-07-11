@@ -23,6 +23,7 @@ namespace StockEntity
             return dd;
         }
         #endregion
+
         #region Product
         public void SaveProduct(Product product)
         {
@@ -123,7 +124,7 @@ namespace StockEntity
         {
             if (GetDefaultDealer() == null)
             {
-                SaveDealer(new Dealer() { Name = Person.DEFAULT_NAME });
+                SaveDealer(new Dealer() { Name = Person.DEFAULT_NAME, Address ="" });
                 if (GetDefaultDealer() == null)
                 {
                     return false;
@@ -189,7 +190,7 @@ namespace StockEntity
         {
             if (GetDefaultCustomer() == null)
             {
-                SaveCustomer(new Customer() { Name = Person.DEFAULT_NAME });
+                SaveCustomer(new Customer() { Name = Person.DEFAULT_NAME, Address ="" });
                 if (GetDefaultCustomer() == null)
                 {
                     return false;
@@ -207,7 +208,7 @@ namespace StockEntity
 
         public Customer GetDefaultCustomer()
         {
-            return context.Customers.Where(x => x.Name == Person.DEFAULT_NAME).FirstOrDefault();
+            return context.Customers.Where(x => x.Name.ToLower() == Person.DEFAULT_NAME.ToLower()).FirstOrDefault();
         }
 
         public List<Customer> GetCustomerList()
@@ -245,6 +246,11 @@ namespace StockEntity
 
         public List<DealerBill> GetDealerBillList(int dealerId)
         {
+            //var dd = context.DealerBills.Where(db => db.DealerId == dealerId).Select(db => new DealerBill
+            //{
+            //    BillBreakupCount = db.DealerBillBreakupList.Count
+            //}).ToList();
+
             return context.DealerBills.Where(x => x.DealerId == dealerId).Include(x => x.DealerBillBreakupList).OrderByDescending(x => x.EntryDate).ToList();
         }
         #endregion
@@ -371,27 +377,19 @@ namespace StockEntity
         //    return context.CustomerBillBreakups.Where(x => x.CustomerBillId == customerBillId).OrderBy(x => x.Id).ToList();
         //}
 
-        public List<CustomerBillBreakup> GetCustomerBillBreakupList(int billId)
+        public List<CustomerBillBreakupRPT> GetCustomerBillBreakupList(int billId)
         {
-            List<CustomerBillBreakup> exactMatchProductList = (from P in context.Products
-                                                               join CBB in context.CustomerBillBreakups on P.Id equals CBB.ProductId
-                                                               //join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId                                                         
-                                                               //join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
-                                                               //join D in context.Dealers on DB.DealerId equals D.Id
-                                                               where CBB.CustomerBillId == billId
-
-                                                               select new CustomerBillBreakup
-                                                               {
-                                                                   ProductId = P.Id,
-                                                                   ProductName = P.Name,
-                                                                   TotalBoxes = CBB.TotalBoxes,
-                                                                   QuantityInBox = CBB.QuantityInBox,
-                                                                   TotalQuantity = CBB.TotalQuantity,
-                                                                   UnitPrice = CBB.UnitPrice,
-                                                                   TotalAmount = CBB.TotalAmount,
-                                                                   TimeStamp = CBB.TimeStamp
-                                                               }).Take(50).ToList();
-            return exactMatchProductList;
+            List<CustomerBillBreakupRPT> list = (from CBB in context.CustomerBillBreakups
+                                                 join P in context.Products on CBB.ProductId equals P.Id
+                                                 where CBB.CustomerBillId == billId
+                                                 select new CustomerBillBreakupRPT
+                                                 {
+                                                     productName = P.Name,
+                                                     TotalAmount = CBB.TotalAmount,
+                                                     TotalQuantity = CBB.TotalQuantity,
+                                                     UnitPrice = CBB.UnitPrice
+                                                 }).ToList();
+            return list;
         }
 
         #endregion

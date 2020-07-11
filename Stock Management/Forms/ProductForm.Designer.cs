@@ -75,7 +75,8 @@
             this.btnSaveProduct.Name = "btnSaveProduct";
             this.btnSaveProduct.Size = new System.Drawing.Size(100, 30);
             this.btnSaveProduct.TabIndex = 8;
-            this.btnSaveProduct.Text = "Save";
+            this.btnSaveProduct.Tag = "Ctrl + S";
+            this.btnSaveProduct.Text = "&Save";
             this.btnSaveProduct.UseVisualStyleBackColor = true;
             this.btnSaveProduct.Click += new System.EventHandler(this.btnSaveProduct_Click);
             // 

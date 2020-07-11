@@ -13,6 +13,17 @@ namespace Stock_Management.Forms
         public ProductForm()
         {
             InitializeComponent();
+            PrepareTooltips(this);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.S))
+            {
+                SaveProduct();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void ProductForm_Load(object sender, EventArgs e)
@@ -27,11 +38,6 @@ namespace Stock_Management.Forms
 
         private void btnSaveProduct_Click(object sender, EventArgs e)
         {
-            if (btnSaveProduct.Text == CRUD_OP_EDIT)
-            {
-                SetFormBehaviour(CRUD_OP_EDIT);
-                return;
-            }
             SaveProduct();
         }
 
@@ -63,6 +69,12 @@ namespace Stock_Management.Forms
 
         private void SaveProduct()
         {
+            if (btnSaveProduct.Text == CRUD_OP_EDIT)
+            {
+                SetFormBehaviour(CRUD_OP_EDIT);
+                return;
+            }
+
             product.ResetValidationError();
             product.Name = txtName.Text.Trim();
             product.Code = txtCode.Text.Trim();
@@ -122,6 +134,6 @@ namespace Stock_Management.Forms
             }
         }
 
-        
+
     }
 }

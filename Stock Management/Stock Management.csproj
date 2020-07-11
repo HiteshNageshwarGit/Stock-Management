@@ -131,11 +131,17 @@
     <Compile Include="Forms\BillListForm.Designer.cs">
       <DependentUpon>BillListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CustomerBillBreakListForm.cs">
+    <Compile Include="Forms\CustomerBillBreakupListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomerBillBreakListForm.Designer.cs">
-      <DependentUpon>CustomerBillBreakListForm.cs</DependentUpon>
+    <Compile Include="Forms\CustomerBillBreakupListForm.Designer.cs">
+      <DependentUpon>CustomerBillBreakupListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CustomerCartDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CustomerCartDetailForm.Designer.cs">
+      <DependentUpon>CustomerCartDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DealerBillBreakupForm.cs">
       <SubType>Form</SubType>
@@ -203,8 +209,11 @@
     <EmbeddedResource Include="Forms\BillListForm.resx">
       <DependentUpon>BillListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomerBillBreakListForm.resx">
-      <DependentUpon>CustomerBillBreakListForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CustomerBillBreakupListForm.resx">
+      <DependentUpon>CustomerBillBreakupListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CustomerCartDetailForm.resx">
+      <DependentUpon>CustomerCartDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DealerBillBreakupForm.resx">
       <DependentUpon>DealerBillBreakupForm.cs</DependentUpon>

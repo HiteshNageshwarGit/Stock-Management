@@ -13,7 +13,6 @@ namespace Stock_Management.Forms
         {
             InitializeComponent();
             dgvDealerList.AutoGenerateColumns = false;
-
         }
 
         private void PersonListForm_Load(object sender, EventArgs e)
@@ -37,7 +36,7 @@ namespace Stock_Management.Forms
                 btnAddPerson.Text = "Add";
                 return; // no further execution
             }
-            if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "CustomerBillBreakListForm")
+            if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "CustomerCartDetailForm")
             {
                 ColSelectLink.Visible = true;
             }
@@ -80,9 +79,9 @@ namespace Stock_Management.Forms
             }
             else if (GetSelectedCellText(dgvDealerList, e) == "Select")
             {
-                if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "CustomerBillBreakListForm")
+                if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "CustomerCartDetailForm")
                 {
-                    CustomerBillBreakListForm customerBillBreakListForm = (CustomerBillBreakListForm)CallerForm;
+                    CustomerCartDetailForm customerBillBreakListForm = (CustomerCartDetailForm)CallerForm;
                     Person person = (Person)dgvDealerList.Rows[e.RowIndex].DataBoundItem;
                     customerBillBreakListForm.OnCustomerNameSelected(person.Id, person.Name);
                     Close();

@@ -8,7 +8,7 @@ namespace Stock_Management.Forms
 {
     public partial class CustomerCartForm : BaseForm
     {
-        CustomerBillBreakListForm customerBillBreakListForm = new CustomerBillBreakListForm();
+        CustomerCartDetailForm customerBillBreakListForm = new CustomerCartDetailForm();
         public CustomerCartForm()
         {
             InitializeComponent();
@@ -21,6 +21,19 @@ namespace Stock_Management.Forms
         private void SellForm_Load(object sender, System.EventArgs e)
         {
 
+        }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                customerBillBreakListForm.OpenPersonFindForm();
+            }
+            else if (keyData == (Keys.Control | Keys.S))
+            {
+                customerBillBreakListForm.FinalizeCustomerBill();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void SellForm_Shown(object sender, System.EventArgs e)
@@ -57,9 +70,13 @@ namespace Stock_Management.Forms
         internal void OnCustomerBillingFinish()
         {
             LoadProductListWithPrice();
-            customerBillBreakListForm = new CustomerBillBreakListForm();
+            customerBillBreakListForm = new CustomerCartDetailForm();
             ShowFormInPanel(this, pnlCustomerBillBreakup, customerBillBreakListForm);
         }
 
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

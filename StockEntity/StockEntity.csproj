@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataEntity\DBRepository.cs" />
+    <Compile Include="EntityX\CustomerBillBreakupRPT.cs" />
     <Compile Include="EntityX\ProductInCart.cs" />
     <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\CustomerBill.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DB\StockDB_V_1.sqlite" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

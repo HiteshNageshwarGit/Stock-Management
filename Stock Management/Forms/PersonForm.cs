@@ -16,6 +16,17 @@ namespace Stock_Management.Forms
         public PersonForm()
         {
             InitializeComponent();
+            PrepareTooltips(this);
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.S))
+            {
+                SavePerson();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         private void txtPersonName_KeyPress(object sender, KeyPressEventArgs e)

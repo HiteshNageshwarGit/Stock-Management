@@ -1,6 +1,6 @@
 ﻿namespace Stock_Management.Forms
 {
-    partial class CustomerBillBreakListForm
+    partial class CustomerCartDetailForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btnSearchCustomer = new System.Windows.Forms.Button();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.btnFindCustomer = new System.Windows.Forms.Button();
             this.txtRemarks = new System.Windows.Forms.RichTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -55,16 +55,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnSearchCustomer
+            // btnFindCustomer
             // 
-            this.btnSearchCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchCustomer.Location = new System.Drawing.Point(381, 17);
-            this.btnSearchCustomer.Name = "btnSearchCustomer";
-            this.btnSearchCustomer.Size = new System.Drawing.Size(88, 28);
-            this.btnSearchCustomer.TabIndex = 31;
-            this.btnSearchCustomer.Text = "Search";
-            this.btnSearchCustomer.UseVisualStyleBackColor = true;
-            this.btnSearchCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
+            this.btnFindCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindCustomer.Location = new System.Drawing.Point(381, 17);
+            this.btnFindCustomer.Name = "btnFindCustomer";
+            this.btnFindCustomer.Size = new System.Drawing.Size(88, 28);
+            this.btnFindCustomer.TabIndex = 31;
+            this.btnFindCustomer.Text = "&Find";
+            this.btnFindCustomer.UseVisualStyleBackColor = true;
+            this.btnFindCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
             // 
             // txtRemarks
             // 
@@ -117,11 +117,11 @@
             // 
             this.btnFinishBilling.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFinishBilling.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFinishBilling.Location = new System.Drawing.Point(746, 26);
+            this.btnFinishBilling.Location = new System.Drawing.Point(725, 26);
             this.btnFinishBilling.Name = "btnFinishBilling";
-            this.btnFinishBilling.Size = new System.Drawing.Size(67, 38);
+            this.btnFinishBilling.Size = new System.Drawing.Size(88, 38);
             this.btnFinishBilling.TabIndex = 25;
-            this.btnFinishBilling.Text = "Finish";
+            this.btnFinishBilling.Text = "Fini&sh";
             this.btnFinishBilling.UseVisualStyleBackColor = true;
             this.btnFinishBilling.Click += new System.EventHandler(this.btnFinishBilling_Click);
             // 
@@ -183,15 +183,15 @@
             this.CartColAddOne,
             this.CartColRemoveOne,
             this.CartColTotalAmount});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvCart.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgvCart.Location = new System.Drawing.Point(12, 94);
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -226,9 +226,9 @@
             // CartColUnitSellPrice
             // 
             this.CartColUnitSellPrice.DataPropertyName = "SellingUnitPrice";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.MistyRose;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.MistyRose;
-            this.CartColUnitSellPrice.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.MistyRose;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.MistyRose;
+            this.CartColUnitSellPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.CartColUnitSellPrice.HeaderText = "Unt Sell Price";
             this.CartColUnitSellPrice.MaxInputLength = 9999;
             this.CartColUnitSellPrice.Name = "CartColUnitSellPrice";
@@ -281,13 +281,13 @@
             this.txtCustomerName.Size = new System.Drawing.Size(184, 23);
             this.txtCustomerName.TabIndex = 32;
             // 
-            // CustomerBillBreakListForm
+            // CustomerCartDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(834, 612);
             this.Controls.Add(this.txtCustomerName);
-            this.Controls.Add(this.btnSearchCustomer);
+            this.Controls.Add(this.btnFindCustomer);
             this.Controls.Add(this.txtRemarks);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -300,7 +300,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dgvCart);
             this.MinimumSize = new System.Drawing.Size(800, 600);
-            this.Name = "CustomerBillBreakListForm";
+            this.Name = "CustomerCartDetailForm";
             this.Text = "CustomerCartForm";
             this.Load += new System.EventHandler(this.CustomerBillBreakListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
@@ -311,7 +311,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnSearchCustomer;
+        private System.Windows.Forms.Button btnFindCustomer;
         private System.Windows.Forms.RichTextBox txtRemarks;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;

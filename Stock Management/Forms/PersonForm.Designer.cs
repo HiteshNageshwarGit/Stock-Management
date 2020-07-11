@@ -129,14 +129,15 @@
             this.label5.TabIndex = 8;
             this.label5.Text = "Remarks";
             // 
-            // btnSaveDealer
+            // btnSavePerson
             // 
             this.btnSavePerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSavePerson.Location = new System.Drawing.Point(244, 407);
-            this.btnSavePerson.Name = "btnSaveDealer";
+            this.btnSavePerson.Name = "btnSavePerson";
             this.btnSavePerson.Size = new System.Drawing.Size(100, 30);
             this.btnSavePerson.TabIndex = 10;
-            this.btnSavePerson.Text = "Save";
+            this.btnSavePerson.Tag = "Ctrl + S";
+            this.btnSavePerson.Text = "&Save";
             this.btnSavePerson.UseVisualStyleBackColor = true;
             this.btnSavePerson.Click += new System.EventHandler(this.btnSavePerson_Click);
             // 

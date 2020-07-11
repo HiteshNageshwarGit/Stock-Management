@@ -33,14 +33,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtPersonName = new System.Windows.Forms.TextBox();
             this.dgvBillList = new System.Windows.Forms.DataGridView();
-            this.btnAddBill = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.ColBillDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CollTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColEntryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColBillBreakupCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBillShowLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.ColShowBillBreakups = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.btnAddBill = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,13 +78,14 @@
             this.CollTotalAmount,
             this.ColEntryDate,
             this.ColRemarks,
+            this.ColBillBreakupCount,
             this.ColBillShowLink,
             this.ColShowBillBreakups});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -106,28 +108,6 @@
             this.dgvBillList.Size = new System.Drawing.Size(760, 493);
             this.dgvBillList.TabIndex = 8;
             this.dgvBillList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillList_CellContentClick);
-            // 
-            // btnAddBill
-            // 
-            this.btnAddBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddBill.Location = new System.Drawing.Point(648, 17);
-            this.btnAddBill.Name = "btnAddBill";
-            this.btnAddBill.Size = new System.Drawing.Size(116, 34);
-            this.btnAddBill.TabIndex = 9;
-            this.btnAddBill.Text = "Add Dealer Bill";
-            this.btnAddBill.UseVisualStyleBackColor = true;
-            this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 17);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Bill List: ";
             // 
             // ColBillDate
             // 
@@ -162,6 +142,13 @@
             this.ColRemarks.Name = "ColRemarks";
             this.ColRemarks.ReadOnly = true;
             // 
+            // ColBillBreakupCount
+            // 
+            this.ColBillBreakupCount.DataPropertyName = "BillBreakupCount";
+            this.ColBillBreakupCount.HeaderText = "Breakup Count";
+            this.ColBillBreakupCount.Name = "ColBillBreakupCount";
+            this.ColBillBreakupCount.ReadOnly = true;
+            // 
             // ColBillShowLink
             // 
             this.ColBillShowLink.HeaderText = "Action";
@@ -179,6 +166,29 @@
             this.ColShowBillBreakups.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColShowBillBreakups.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ColShowBillBreakups.Text = "Details";
+            // 
+            // btnAddBill
+            // 
+            this.btnAddBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddBill.Location = new System.Drawing.Point(602, 17);
+            this.btnAddBill.Name = "btnAddBill";
+            this.btnAddBill.Size = new System.Drawing.Size(162, 34);
+            this.btnAddBill.TabIndex = 9;
+            this.btnAddBill.Tag = "Ctrl + N";
+            this.btnAddBill.Text = "Add Dealer Bill";
+            this.btnAddBill.UseVisualStyleBackColor = true;
+            this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(16, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 17);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Bill List: ";
             // 
             // BillListForm
             // 
@@ -209,6 +219,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn CollTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColEntryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColRemarks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColBillBreakupCount;
         private System.Windows.Forms.DataGridViewLinkColumn ColBillShowLink;
         private System.Windows.Forms.DataGridViewLinkColumn ColShowBillBreakups;
     }

@@ -20,12 +20,14 @@ namespace Stock_Management.Forms
             if (PERSON_TYPE == Person.DEALER)
             {
                 Text = "Dealer Bill List";
+                btnAddBill.Text = "Add Dealer Bill";
             }
             else if (PERSON_TYPE == Person.CUSTOMER)
             {
                 Text = "Customer Bill List";
+                btnAddBill.Text = "Add Customer Bill";
+                btnAddBill.Visible = false;
                 ColBillShowLink.Visible = false;
-                //ColShowBillBreakups.Visible = false;
             }
             else
             {
@@ -42,12 +44,18 @@ namespace Stock_Management.Forms
             LoadBillList();
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.N))
+            {
+                OpenDealerBillForm(0);
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void btnAddBill_Click(object sender, EventArgs e)
         {
-            DealerBillForm billForm = new DealerBillForm();
-            billForm.DealerId = PERSON_ID;
-            billForm.BILL_ID = 0;
-            ShowFormAsFixedDialog(this, billForm);
+            OpenDealerBillForm(0);
         }
 
         private void dgvBillList_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -62,10 +70,11 @@ namespace Stock_Management.Forms
             {
                 if (GetSelectedCellText(dgvBillList, e) == "Details")
                 {
-                    DealerBillForm billForm = new DealerBillForm();
-                    billForm.DealerId = PERSON_ID;
-                    billForm.BILL_ID = selectedBillId;
-                    ShowFormAsFixedDialog(this, billForm);
+                    OpenDealerBillForm(selectedBillId);
+                    //DealerBillForm billForm = new DealerBillForm();
+                    //billForm.DealerId = PERSON_ID;
+                    //billForm.BILL_ID = selectedBillId;
+                    //ShowFormAsFixedDialog(this, billForm);
                 }
                 else if (GetSelectedCellText(dgvBillList, e) == "Breakups")
                 {
@@ -78,9 +87,9 @@ namespace Stock_Management.Forms
             {
                 if (GetSelectedCellText(dgvBillList, e) == "Details")
                 {
-                    CustomerBillBreakListForm customerBillBreakListForm = new CustomerBillBreakListForm();
-                    customerBillBreakListForm.CUSTOMER_BILL_ID = selectedBillId;
-                    ShowFormResizableAsDialog(this, customerBillBreakListForm);
+                    CustomerBillBreakupListForm customerBillBreakupListForm = new CustomerBillBreakupListForm();
+                    customerBillBreakupListForm.CUSTOMER_BILL_ID = selectedBillId;
+                    ShowFormResizableAsDialog(this, customerBillBreakupListForm);
                 }
             }
         }
@@ -122,6 +131,14 @@ namespace Stock_Management.Forms
             //    btnAddBill.Enabled = false;
             //    return;
             //}
+        }
+
+        private void OpenDealerBillForm(int billId)
+        {
+            DealerBillForm billForm = new DealerBillForm();
+            billForm.DealerId = PERSON_ID;
+            billForm.BILL_ID = billId;
+            ShowFormAsFixedDialog(this, billForm);
         }
 
     }

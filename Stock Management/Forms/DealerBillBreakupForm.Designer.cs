@@ -30,7 +30,7 @@
         {
             this.btnSaveBillBreakups = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnSearchProduct = new System.Windows.Forms.Button();
+            this.btnFindProduct = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtTotalBreakupAmount = new System.Windows.Forms.TextBox();
             this.txtTotalBreakupCount = new System.Windows.Forms.TextBox();
@@ -77,8 +77,9 @@
             this.btnSaveBillBreakups.Location = new System.Drawing.Point(542, 334);
             this.btnSaveBillBreakups.Name = "btnSaveBillBreakups";
             this.btnSaveBillBreakups.Size = new System.Drawing.Size(104, 30);
-            this.btnSaveBillBreakups.TabIndex = 0;
-            this.btnSaveBillBreakups.Text = "Save";
+            this.btnSaveBillBreakups.TabIndex = 8;
+            this.btnSaveBillBreakups.Tag = "Ctrl + S";
+            this.btnSaveBillBreakups.Text = "&Save";
             this.btnSaveBillBreakups.UseVisualStyleBackColor = true;
             this.btnSaveBillBreakups.Click += new System.EventHandler(this.btnSaveBillBreakups_Click);
             // 
@@ -92,16 +93,17 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Product Name";
             // 
-            // btnSearchProduct
+            // btnFindProduct
             // 
-            this.btnSearchProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearchProduct.Location = new System.Drawing.Point(328, 37);
-            this.btnSearchProduct.Name = "btnSearchProduct";
-            this.btnSearchProduct.Size = new System.Drawing.Size(75, 28);
-            this.btnSearchProduct.TabIndex = 2;
-            this.btnSearchProduct.Text = "Search";
-            this.btnSearchProduct.UseVisualStyleBackColor = true;
-            this.btnSearchProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
+            this.btnFindProduct.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindProduct.Location = new System.Drawing.Point(328, 37);
+            this.btnFindProduct.Name = "btnFindProduct";
+            this.btnFindProduct.Size = new System.Drawing.Size(75, 28);
+            this.btnFindProduct.TabIndex = 2;
+            this.btnFindProduct.Tag = "Ctrl + F";
+            this.btnFindProduct.Text = "&Find";
+            this.btnFindProduct.UseVisualStyleBackColor = true;
+            this.btnFindProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
             // 
             // groupBox1
             // 
@@ -239,7 +241,7 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.btnSearchProduct);
+            this.groupBox2.Controls.Add(this.btnFindProduct);
             this.groupBox2.Location = new System.Drawing.Point(12, 134);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(710, 382);
@@ -300,7 +302,7 @@
             -2147483648});
             this.numUnitSellingPrice.Name = "numUnitSellingPrice";
             this.numUnitSellingPrice.Size = new System.Drawing.Size(221, 23);
-            this.numUnitSellingPrice.TabIndex = 22;
+            this.numUnitSellingPrice.TabIndex = 7;
             // 
             // label7
             // 
@@ -319,7 +321,7 @@
             this.txtSelectedProductName.Location = new System.Drawing.Point(6, 40);
             this.txtSelectedProductName.Name = "txtSelectedProductName";
             this.txtSelectedProductName.Size = new System.Drawing.Size(318, 24);
-            this.txtSelectedProductName.TabIndex = 18;
+            this.txtSelectedProductName.TabIndex = 1;
             // 
             // numUnitPrice
             // 
@@ -383,7 +385,7 @@
             0});
             this.numQuantityInABox.Name = "numQuantityInABox";
             this.numQuantityInABox.Size = new System.Drawing.Size(315, 23);
-            this.numQuantityInABox.TabIndex = 18;
+            this.numQuantityInABox.TabIndex = 5;
             this.numQuantityInABox.Value = new decimal(new int[] {
             1,
             0,
@@ -409,7 +411,7 @@
             0});
             this.numTotalBoxes.Name = "numTotalBoxes";
             this.numTotalBoxes.Size = new System.Drawing.Size(315, 23);
-            this.numTotalBoxes.TabIndex = 17;
+            this.numTotalBoxes.TabIndex = 4;
             this.numTotalBoxes.Value = new decimal(new int[] {
             1,
             0,
@@ -436,7 +438,7 @@
             -2147483648});
             this.numTotalAmount.Name = "numTotalAmount";
             this.numTotalAmount.Size = new System.Drawing.Size(315, 24);
-            this.numTotalAmount.TabIndex = 16;
+            this.numTotalAmount.TabIndex = 3;
             this.numTotalAmount.ValueChanged += new System.EventHandler(this.NumericControl_ValueChange);
             this.numTotalAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NumericControl_KeyUp);
             // 
@@ -446,7 +448,7 @@
             this.txtBillBreakupRemarks.Location = new System.Drawing.Point(9, 280);
             this.txtBillBreakupRemarks.Name = "txtBillBreakupRemarks";
             this.txtBillBreakupRemarks.Size = new System.Drawing.Size(315, 96);
-            this.txtBillBreakupRemarks.TabIndex = 15;
+            this.txtBillBreakupRemarks.TabIndex = 6;
             this.txtBillBreakupRemarks.Text = "";
             // 
             // label11
@@ -540,7 +542,7 @@
 
         private System.Windows.Forms.Button btnSaveBillBreakups;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnSearchProduct;
+        private System.Windows.Forms.Button btnFindProduct;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label2;

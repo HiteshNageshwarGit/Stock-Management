@@ -8,14 +8,15 @@ using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
-    public partial class CustomerBillBreakListForm : BaseForm
+    public partial class CustomerCartDetailForm : BaseForm
     {
-        public int CUSTOMER_BILL_ID { get; set; } // To load existing bills
+        //public int CUSTOMER_BILL_ID { get; set; } // To load existing bills
         List<ProductInCart> productListCart = new List<ProductInCart>();
         CustomerBill customerBill = new CustomerBill();
-        public CustomerBillBreakListForm()
+        public CustomerCartDetailForm()
         {
             InitializeComponent();
+            PrepareTooltips(this);
 
             dgvCart.AutoGenerateColumns = false;
             CartColAddOne.UseColumnTextForButtonValue = true;
@@ -24,18 +25,12 @@ namespace Stock_Management.Forms
 
         private void CustomerBillBreakListForm_Load(object sender, EventArgs e)
         {
-            if (CUSTOMER_BILL_ID != 0)
-            {
-                loadCustomerBillBreakupList();
-            }
             SetFormBehaviour();
         }
 
         private void btnSearchCustomer_Click(object sender, EventArgs e)
         {
-            PersonListForm personListForm = new PersonListForm();
-            personListForm.PERSON_TYPE = Person.CUSTOMER;
-            ShowFormAsFixedDialog(this, personListForm);
+            OpenPersonFindForm();
         }
 
         private void dgvCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -123,6 +118,44 @@ namespace Stock_Management.Forms
 
         private void btnFinishBilling_Click(object sender, EventArgs e)
         {
+            FinalizeCustomerBill();
+        }
+
+        internal void OnCustomerNameSelected(int customerId, string customerName)
+        {
+            customerBill.CustomerId = customerId;
+            txtCustomerName.Text = customerName;
+        }
+
+        //internal void loadCustomerBillBreakupList()
+        //{
+        //    List<CustomerBillBreakup> list = SharedRepo.DBRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
+        //    dgvCart.DataSource = list;
+        //    dgvCart.ClearSelection();
+        //    DataGridViewButtonColumn btnAddOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
+        //    btnAddOne.Visible = false;
+        //    DataGridViewButtonColumn btnRemoveOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
+        //    btnRemoveOne.Visible = false;
+        //    dgvCart.ReadOnly = true;
+
+        //    btnFinishBilling.Visible = false;
+        //}
+
+        private void SetFormBehaviour()
+        {
+
+        }
+
+        internal void OpenPersonFindForm()
+        {
+            PersonListForm personListForm = new PersonListForm();
+            personListForm.PERSON_TYPE = Person.CUSTOMER;
+            ShowFormAsFixedDialog(this, personListForm);
+        }
+
+        internal void FinalizeCustomerBill()
+        {
+
             try
             {
                 customerBill.BillDate = DateHelper.GetTodayDateString();
@@ -153,31 +186,6 @@ namespace Stock_Management.Forms
             {
                 MessageBox.Show("Billing failed");
             }
-        }
-
-        internal void OnCustomerNameSelected(int customerId, string customerName)
-        {
-            customerBill.CustomerId = customerId;
-            txtCustomerName.Text = customerName;
-        }
-
-        internal void loadCustomerBillBreakupList()
-        {
-            List<CustomerBillBreakup> list = SharedRepo.DBRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
-            dgvCart.DataSource = list;
-            dgvCart.ClearSelection();
-            DataGridViewButtonColumn btnAddOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
-            btnAddOne.Visible = false;
-            DataGridViewButtonColumn btnRemoveOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
-            btnRemoveOne.Visible = false;
-            dgvCart.ReadOnly = true;
-
-            btnFinishBilling.Visible = false;
-        }
-
-        private void SetFormBehaviour()
-        {
-
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Stock_Management
         public MainForm()
         {
             InitializeComponent();
+            WindowState = FormWindowState.Maximized;
         }
 
         private void InitializeApplicatoin()

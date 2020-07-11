@@ -1,5 +1,6 @@
 ﻿using StockEntity.Helper;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StockEntity.Entity
 {
@@ -10,6 +11,15 @@ namespace StockEntity.Entity
         public Dealer Dealer { get; set; }
 
         public ICollection<DealerBillBreakup> DealerBillBreakupList { get; set; }
+
+        [NotMapped]
+        public int BillBreakupCount
+        {
+            get
+            {
+                return DealerBillBreakupList == null ? 0 : DealerBillBreakupList.Count;
+            }
+        }
 
         public new void Validate()
         {

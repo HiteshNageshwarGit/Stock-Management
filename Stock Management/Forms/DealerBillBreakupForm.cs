@@ -16,6 +16,7 @@ namespace Stock_Management.Forms
         public DealerBillBreakupForm()
         {
             InitializeComponent();
+            PrepareTooltips(this);
         }
 
         private void BillBreakupForm_Load(object sender, EventArgs e)
@@ -27,11 +28,23 @@ namespace Stock_Management.Forms
         {
 
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F))
+            {
+                OpenSearchProductForm();
+            }
+            else if (keyData == (Keys.Control | Keys.S))
+            {
+                SaveBillBreakup();
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
         private void btnSearchProduct_Click(object sender, EventArgs e)
         {
-            ProductListForm productListForm = new ProductListForm();
-            ShowFormAsFixedDialog(this, productListForm);
+            OpenSearchProductForm();
         }
 
         private void NumericControl_ValueChange(object sender, EventArgs e)
@@ -150,7 +163,7 @@ namespace Stock_Management.Forms
                 }
                 else if (CallerForm.Name == "DealerBillBreakupListForm")
                 {
-                    ((DealerBillBreakupListForm)CallerForm).LoadBillBreakupList();
+                    ((DealerBillBreakupListForm)CallerForm).LoadBillBreakupList(true);
                 }
                 Close();
             }
@@ -186,6 +199,10 @@ namespace Stock_Management.Forms
             }
         }
 
-
+        private void OpenSearchProductForm()
+        {
+            ProductListForm productListForm = new ProductListForm();
+            ShowFormAsFixedDialog(this, productListForm);
+        }
     }
 }

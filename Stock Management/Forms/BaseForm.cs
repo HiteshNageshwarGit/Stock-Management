@@ -14,6 +14,7 @@ namespace Stock_Management.Forms
         public const string CRUD_OP_UPDATE = "Update";
         #endregion
         public BaseForm CallerForm { get; set; }
+        internal ToolTip toolTip;
 
         internal void NumericContyrolKeyPress(object sender, KeyPressEventArgs e)
         {
@@ -64,7 +65,7 @@ namespace Stock_Management.Forms
         //    childForm.Focus();
         //}
 
-        public void ShowFormAsFixedDialog(BaseForm parentForm, BaseForm childForm)
+        internal void ShowFormAsFixedDialog(BaseForm parentForm, BaseForm childForm)
         {
             childForm.CallerForm = parentForm;
             childForm.MaximizeBox = false;
@@ -75,7 +76,7 @@ namespace Stock_Management.Forms
             childForm.ShowDialog();
         }
 
-        public void ShowFormResizableAsDialog(BaseForm parentForm, BaseForm childForm)
+        internal void ShowFormResizableAsDialog(BaseForm parentForm, BaseForm childForm)
         {
             childForm.CallerForm = parentForm;
             childForm.MinimizeBox = false;
@@ -83,11 +84,10 @@ namespace Stock_Management.Forms
             childForm.StartPosition = FormStartPosition.CenterParent;
             childForm.Width = parentForm.Width - 20;
             childForm.Height = parentForm.IsMdiChild ? parentForm.MdiParent.Height - 40 : parentForm.Height - 40;
-            //childForm.Text = "Form Name: " + childForm.Name + " (" + childForm.Width + "X" + childForm.Height + ")";
             childForm.ShowDialog();
         }
 
-        public void ShowFormInPanel(BaseForm parentForm, Panel panel, BaseForm childForm)
+        internal void ShowFormInPanel(BaseForm parentForm, Panel panel, BaseForm childForm)
         {
             childForm.CallerForm = parentForm;
             panel.Controls.Clear();//contentpnl is the panelname
@@ -99,7 +99,7 @@ namespace Stock_Management.Forms
             childForm.Show();
         }
 
-        public string GetSelectedCellText(DataGridView dataGridView, DataGridViewCellEventArgs e)
+        internal string GetSelectedCellText(DataGridView dataGridView, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)
             {
@@ -114,10 +114,31 @@ namespace Stock_Management.Forms
                 return "";
             }
         }
-        public static void ToTitleCase(TextBox textBox)
+        internal static void ToTitleCase(TextBox textBox)
         {
-            textBox.Text =  Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(textBox.Text);
+            textBox.Text = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(textBox.Text);
             textBox.SelectionStart = textBox.Text.Length;
+        }
+
+        internal void PrepareTooltips(Control ctrlContainer)
+        {
+            toolTip = new ToolTip();
+            foreach (Control ctrl in ctrlContainer.Controls)
+            {
+                if (ctrl is GroupBox)
+                {
+                    PrepareTooltips(ctrl);
+                }
+
+                if (ctrl is Button && ctrl.Tag is string)
+                {
+                    ctrl.MouseHover += new EventHandler(delegate (Object o, EventArgs a)
+                    {
+                        var btn = (Control)o;
+                        toolTip.SetToolTip(btn, btn.Tag.ToString());
+                    });
+                }
+            }
         }
     }
 }

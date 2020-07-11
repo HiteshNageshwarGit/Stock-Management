@@ -10,8 +10,6 @@ namespace StockEntity.Entity
         public decimal TotalAmount { get; set; }
         #endregion
 
-        [NotMapped]
-        public int BillBreakupCount { get; set; }
 
         public void Validate()
         {            

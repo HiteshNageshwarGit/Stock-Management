@@ -118,10 +118,11 @@ CREATE TABLE CustomerBillBreakup (
 	TotalQuantity		INTEGER,
 	UnitPrice			REAL NOT NULL,
 	TotalAmount			REAL NOT NULL,
-	Remarks				Text,
+	-- Remarks				Text,
 	TimeStamp			TEXT NOT NULL,
 	FOREIGN KEY (CustomerBillId) REFERENCES CustomerBill(Id),
 	FOREIGN KEY (DealerBillBreakupId) REFERENCES DealerBillBreakup(Id),
 	FOREIGN KEY (ProductId) REFERENCES Product(Id)
-)		
+)	
+
  -- Versioning of DB starts here
