@@ -33,24 +33,24 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtPersonName = new System.Windows.Forms.TextBox();
             this.dgvBillList = new System.Windows.Forms.DataGridView();
+            this.btnAddBill = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.ColBillDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CollTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColEntryDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColRemarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColBillShowLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.ColShowBillBreakups = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.btnAddBill = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillList)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtDealerName
+            // txtPersonName
             // 
             this.txtPersonName.BackColor = System.Drawing.SystemColors.Control;
             this.txtPersonName.Enabled = false;
             this.txtPersonName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPersonName.Location = new System.Drawing.Point(93, 21);
-            this.txtPersonName.Name = "txtDealerName";
+            this.txtPersonName.Name = "txtPersonName";
             this.txtPersonName.Size = new System.Drawing.Size(286, 23);
             this.txtPersonName.TabIndex = 11;
             // 
@@ -107,6 +107,28 @@
             this.dgvBillList.TabIndex = 8;
             this.dgvBillList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillList_CellContentClick);
             // 
+            // btnAddBill
+            // 
+            this.btnAddBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddBill.Location = new System.Drawing.Point(648, 17);
+            this.btnAddBill.Name = "btnAddBill";
+            this.btnAddBill.Size = new System.Drawing.Size(116, 34);
+            this.btnAddBill.TabIndex = 9;
+            this.btnAddBill.Text = "Add Dealer Bill";
+            this.btnAddBill.UseVisualStyleBackColor = true;
+            this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(16, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(71, 17);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "Bill List: ";
+            // 
             // ColBillDate
             // 
             this.ColBillDate.DataPropertyName = "BillDate";
@@ -145,7 +167,7 @@
             this.ColBillShowLink.HeaderText = "Action";
             this.ColBillShowLink.Name = "ColBillShowLink";
             this.ColBillShowLink.ReadOnly = true;
-            this.ColBillShowLink.Text = "Add Breakups";
+            this.ColBillShowLink.Text = "Breakups";
             // 
             // ColShowBillBreakups
             // 
@@ -157,28 +179,6 @@
             this.ColShowBillBreakups.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColShowBillBreakups.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.ColShowBillBreakups.Text = "Details";
-            // 
-            // btnAddBill
-            // 
-            this.btnAddBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddBill.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddBill.Location = new System.Drawing.Point(648, 17);
-            this.btnAddBill.Name = "btnAddBill";
-            this.btnAddBill.Size = new System.Drawing.Size(116, 34);
-            this.btnAddBill.TabIndex = 9;
-            this.btnAddBill.Text = "Add Dealer Bill";
-            this.btnAddBill.UseVisualStyleBackColor = true;
-            this.btnAddBill.Click += new System.EventHandler(this.btnAddBill_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(16, 23);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 17);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "Bill List: ";
             // 
             // BillListForm
             // 
@@ -203,13 +203,13 @@
 
         private System.Windows.Forms.TextBox txtPersonName;
         private System.Windows.Forms.DataGridView dgvBillList;
+        private System.Windows.Forms.Button btnAddBill;
+        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColBillDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn CollTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColEntryDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColRemarks;
         private System.Windows.Forms.DataGridViewLinkColumn ColBillShowLink;
         private System.Windows.Forms.DataGridViewLinkColumn ColShowBillBreakups;
-        private System.Windows.Forms.Button btnAddBill;
-        private System.Windows.Forms.Label label2;
     }
 }

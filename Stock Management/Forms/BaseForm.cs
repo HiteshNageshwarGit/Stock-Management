@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms
@@ -14,9 +15,17 @@ namespace Stock_Management.Forms
         #endregion
         public BaseForm CallerForm { get; set; }
 
-        public void NumericFieldKeyPress(object sender, KeyPressEventArgs e)
+        internal void NumericContyrolKeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) // Only numeric values are allowed
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) // Only numeric values and decimal are allowed
+            {
+                e.Handled = true;
+            }
+        }
+
+        internal void NumericControlWithoutDecimalKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar)) // Only numeric values are allowed, decimal also not allowed
             {
                 e.Handled = true;
             }
@@ -78,8 +87,9 @@ namespace Stock_Management.Forms
             childForm.ShowDialog();
         }
 
-        public void ShowFormInPanel(Panel panel, BaseForm childForm)
+        public void ShowFormInPanel(BaseForm parentForm, Panel panel, BaseForm childForm)
         {
+            childForm.CallerForm = parentForm;
             panel.Controls.Clear();//contentpnl is the panelname
             childForm.TopLevel = false;
             childForm.AutoScroll = true;
@@ -103,6 +113,11 @@ namespace Stock_Management.Forms
             {
                 return "";
             }
+        }
+        public static void ToTitleCase(TextBox textBox)
+        {
+            textBox.Text =  Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(textBox.Text);
+            textBox.SelectionStart = textBox.Text.Length;
         }
     }
 }

@@ -18,11 +18,21 @@ namespace Stock_Management.Forms
             InitializeComponent();
         }
 
+        private void txtPersonName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ToTitleCase(txtName);
+        }
+
+        private void txtAddress_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ToTitleCase(txtAddress);
+        }
+
         private void txtMobile_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumericFieldKeyPress(sender, e);
+            NumericContyrolKeyPress(sender, e);
         }
-        private void DealerForm_Load(object sender, EventArgs e)
+        private void PersonForm_Load(object sender, EventArgs e)
         {
             Text = PERSON_ID == 0 ? "Add" : "Edit";
             if (PERSON_TYPE == Person.DEALER)
@@ -35,29 +45,29 @@ namespace Stock_Management.Forms
             }
             else
             {
-                btnSaveDealer.Enabled = false;
+                btnSavePerson.Enabled = false;
                 return;
             }
-            EditDealer();
+            EditPerson();
         }
 
-        private void DealerForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void PersonForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CallerForm == null)
-            {
-                return;
-            }
-            else if (CallerForm.Name == "PersonListForm")
-            {
-                ((PersonListForm)CallerForm).LoadPersonList();
-            }
+            //if (CallerForm == null && CallerForm.Name !=null)
+            //{
+            //    return;
+            //}
+            //else if (CallerForm.Name == "PersonListForm")
+            //{
+            //    ((PersonListForm)CallerForm).LoadPersonList();
+            //}
         }
-        private void btnSaveDealer_Click(object sender, EventArgs e)
+        private void btnSavePerson_Click(object sender, EventArgs e)
         {
-            SaveDealer();
+            SavePerson();
         }
 
-        private void EditDealer()
+        private void EditPerson()
         {
             if (PERSON_ID != 0)
             {
@@ -70,7 +80,7 @@ namespace Stock_Management.Forms
                     person = SharedRepo.DBRepo.GetCustomerByID(PERSON_ID);
                 }
 
-                txtDealerName.Text = person.Name;
+                txtName.Text = person.Name;
                 txtAddress.Text = person.Address;
                 txtMobile.Text = person.Mobile;
                 txtEmail.Text = person.Email;
@@ -78,8 +88,8 @@ namespace Stock_Management.Forms
 
                 if (person.Name.ToLower() == Person.DEFAULT_NAME.ToLower())
                 {
-                    txtDealerName.Enabled = false;
-                    btnSaveDealer.Enabled = false;
+                    txtName.Enabled = false;
+                    btnSavePerson.Enabled = false;
                 }
             }
             else
@@ -95,10 +105,10 @@ namespace Stock_Management.Forms
             }
         }
 
-        private void SaveDealer()
+        private void SavePerson()
         {
             person.ResetValidationError();
-            person.Name = txtDealerName.Text.Trim();
+            person.Name = txtName.Text.Trim();
             person.Address = txtAddress.Text.Trim();
             person.Mobile = txtMobile.Text.Trim();
             person.Email = txtEmail.Text.Trim();
@@ -129,9 +139,17 @@ namespace Stock_Management.Forms
                 }
                 SharedRepo.DBRepo.SaveCustomer((Customer)person);
             }
+
+            if (CallerForm == null && CallerForm.Name != null)
+            {
+                return;
+            }
+            else if (CallerForm.Name == "PersonListForm")
+            {
+                ((PersonListForm)CallerForm).LoadPersonList();
+            }
+
             Close();
         }
-
-
     }
 }

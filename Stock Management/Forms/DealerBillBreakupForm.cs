@@ -2,6 +2,7 @@
 using StockEntity.Entity;
 using StockEntity.Helper;
 using System;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -24,7 +25,7 @@ namespace Stock_Management.Forms
 
         private void BillBreakupForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
         }
 
         private void btnSearchProduct_Click(object sender, EventArgs e)
@@ -33,9 +34,18 @@ namespace Stock_Management.Forms
             ShowFormAsFixedDialog(this, productListForm);
         }
 
-        private void AmountAndQuantity_Changed(object sender, EventArgs e)
+        private void NumericControl_ValueChange(object sender, EventArgs e)
         {
             CalculateQuantityAndUnitPrice();
+        }
+        private void NumericControl_KeyUp(object sender, KeyEventArgs e)
+        {
+            CalculateQuantityAndUnitPrice();
+        }
+
+        private void NumericControlWithoutDecimal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            NumericControlWithoutDecimalKeyPress(sender, e);
         }
 
         private void btnSaveBillBreakups_Click(object sender, EventArgs e)
@@ -69,7 +79,22 @@ namespace Stock_Management.Forms
             txtBillDate.Text = bill.BillDate;
             txtTotalBillAmount.Text = bill.TotalAmount.ToString();
             txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
-            txtTotalBreakupAmount.Text = bill.DealerBillBreakupList.Sum(x => x.TotalAmount).ToString();
+            decimal breakupSum = bill.DealerBillBreakupList.Sum(x => x.TotalAmount);
+            txtTotalBreakupAmount.Text = breakupSum.ToString();
+
+            if (breakupSum == bill.TotalAmount)
+            {
+                txtTotalBreakupAmount.BackColor = System.Drawing.Color.LightGreen;
+            }
+            else if (breakupSum > bill.TotalAmount)
+            {
+                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Orange;
+            }
+
 
             if (BillBreakupId != 0)
             {
@@ -107,7 +132,7 @@ namespace Stock_Management.Forms
         private void SaveBillBreakup()
         {
             dealerBillBreakup.EntityState = new ValidationState();
-            dealerBillBreakup.TotalAmount = numTotalAmount.Value;
+            dealerBillBreakup.TotalAmount = Math.Round(numTotalAmount.Value, 2);
             dealerBillBreakup.QuantityInBox = (int)numQuantityInABox.Value;
             dealerBillBreakup.TotalBoxes = (int)numTotalBoxes.Value;
             dealerBillBreakup.TotalQuantity = (int)numTotalQuantity.Value;
@@ -135,19 +160,24 @@ namespace Stock_Management.Forms
             }
         }
 
+
         private void CalculateQuantityAndUnitPrice()
         {
             try
             {
-                numTotalQuantity.Value = numTotalBoxes.Value * numQuantityInABox.Value;
+                decimal totalAmount = decimal.Parse(numTotalAmount.Controls[1].Text); // Getting value direct from control with decimal resets cursor position to 0 indedx
+                decimal totalBoxes = decimal.Parse(numTotalBoxes.Controls[1].Text);
+                decimal quantityInABox = decimal.Parse(numQuantityInABox.Controls[1].Text);
+
+                numTotalQuantity.Value = totalBoxes * quantityInABox;
                 numAvailableQuantity.Value = numTotalQuantity.Value;
-                if (numTotalAmount.Value == 0)
+                if (totalAmount == 0)
                 {
                     numUnitPrice.Value = 0;
                 }
                 else
                 {
-                    numUnitPrice.Value = numTotalAmount.Value / numTotalQuantity.Value;
+                    numUnitPrice.Value = totalAmount / numTotalQuantity.Value;
                 }
             }
             catch (Exception ex)
@@ -156,9 +186,6 @@ namespace Stock_Management.Forms
             }
         }
 
-        private void AmountChanging(object sender, KeyEventArgs e)
-        {
-            CalculateQuantityAndUnitPrice();
-        }
+
     }
 }

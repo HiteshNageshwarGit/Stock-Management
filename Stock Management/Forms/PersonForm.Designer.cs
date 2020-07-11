@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.txtDealerName = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtMobile = new System.Windows.Forms.TextBox();
@@ -37,7 +37,7 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnSaveDealer = new System.Windows.Forms.Button();
+            this.btnSavePerson = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtRemarks = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
@@ -53,13 +53,14 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
-            // txtDealerName
+            // txtName
             // 
-            this.txtDealerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDealerName.Location = new System.Drawing.Point(9, 38);
-            this.txtDealerName.Name = "txtDealerName";
-            this.txtDealerName.Size = new System.Drawing.Size(345, 24);
-            this.txtDealerName.TabIndex = 1;
+            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtName.Location = new System.Drawing.Point(9, 38);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(345, 24);
+            this.txtName.TabIndex = 1;
+            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPersonName_KeyPress);
             // 
             // txtAddress
             // 
@@ -68,6 +69,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(345, 24);
             this.txtAddress.TabIndex = 3;
+            this.txtAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddress_KeyPress);
             // 
             // label2
             // 
@@ -129,21 +131,21 @@
             // 
             // btnSaveDealer
             // 
-            this.btnSaveDealer.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveDealer.Location = new System.Drawing.Point(244, 407);
-            this.btnSaveDealer.Name = "btnSaveDealer";
-            this.btnSaveDealer.Size = new System.Drawing.Size(100, 30);
-            this.btnSaveDealer.TabIndex = 10;
-            this.btnSaveDealer.Text = "Save";
-            this.btnSaveDealer.UseVisualStyleBackColor = true;
-            this.btnSaveDealer.Click += new System.EventHandler(this.btnSaveDealer_Click);
+            this.btnSavePerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSavePerson.Location = new System.Drawing.Point(244, 407);
+            this.btnSavePerson.Name = "btnSaveDealer";
+            this.btnSavePerson.Size = new System.Drawing.Size(100, 30);
+            this.btnSavePerson.TabIndex = 10;
+            this.btnSavePerson.Text = "Save";
+            this.btnSavePerson.UseVisualStyleBackColor = true;
+            this.btnSavePerson.Click += new System.EventHandler(this.btnSavePerson_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.txtRemarks);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.btnSaveDealer);
-            this.groupBox1.Controls.Add(this.txtDealerName);
+            this.groupBox1.Controls.Add(this.btnSavePerson);
+            this.groupBox1.Controls.Add(this.txtName);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.txtEmail);
             this.groupBox1.Controls.Add(this.txtMobile);
@@ -175,8 +177,8 @@
             this.MinimumSize = new System.Drawing.Size(400, 520);
             this.Name = "PersonForm";
             this.Text = "Person";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DealerForm_FormClosing);
-            this.Load += new System.EventHandler(this.DealerForm_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PersonForm_FormClosing);
+            this.Load += new System.EventHandler(this.PersonForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -186,7 +188,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDealerName;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtMobile;
@@ -194,7 +196,7 @@
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnSaveDealer;
+        private System.Windows.Forms.Button btnSavePerson;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox txtRemarks;
     }

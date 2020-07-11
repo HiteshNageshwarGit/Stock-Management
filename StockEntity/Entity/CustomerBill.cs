@@ -5,7 +5,10 @@ namespace StockEntity.Entity
 {
     public class CustomerBill : Bill
     {
+        #region Entity Properties  
         public int CustomerId { get; set; }
+        #endregion
+
         public Customer Customer { get; set; }
         public ICollection<CustomerBillBreakup> CustomerBillBreakupList { get; set; }
 

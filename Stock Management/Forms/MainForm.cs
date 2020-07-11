@@ -12,10 +12,7 @@ namespace Stock_Management
     public partial class MainForm : BaseForm
     {
         int RetryCount = 0;
-        //DealerListForm dealerListForm;
         PersonListForm personListForm;
-        ProductListForm productListForm;
-        CustomerCartForm sellForm;
         public MainForm()
         {
             InitializeComponent();
@@ -75,7 +72,7 @@ namespace Stock_Management
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong. \n " + ex.Message);
+                MessageBox.Show("Something went wrong. \n " + ex.Message + "\n " + ex.InnerException.Message);
             }
         }
 
@@ -90,11 +87,6 @@ namespace Stock_Management
             {
                 Close();
             }
-        }
-
-        private void On_Menu_Selectoin_Change()
-        {
-
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -119,23 +111,11 @@ namespace Stock_Management
 
         private void productListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //CloseMDIChildForms(this);
-            //if (productListForm == null || productListForm.IsDisposed)
-            //{
-            //    productListForm = new ProductListForm();
-            //}
-            //ShowFormAsMDIChild(this, productListForm);
             ShowFormResizableAsDialog(this, new ProductListForm());
         }
 
         private void menuSellProduct_Click(object sender, EventArgs e)
         {
-            //CloseMDIChildForms(this);
-            //if (sellForm == null || sellForm.IsDisposed)
-            //{
-            //    sellForm = new CustomerCart();
-            //}
-            //ShowFormAsMDIChild(this, sellForm);
             ShowFormResizableAsDialog(this, new CustomerCartForm());
         }
 
@@ -180,6 +160,11 @@ namespace Stock_Management
             personListForm = new PersonListForm();
             personListForm.PERSON_TYPE = personType;
             ShowFormResizableAsDialog(this, personListForm);
+        }
+
+        private void productReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

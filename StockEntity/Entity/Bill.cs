@@ -1,4 +1,5 @@
 ﻿using StockEntity.Helper;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StockEntity.Entity
 {
@@ -8,6 +9,9 @@ namespace StockEntity.Entity
         public string BillDate { get; set; }
         public decimal TotalAmount { get; set; }
         #endregion
+
+        [NotMapped]
+        public int BillBreakupCount { get; set; }
 
         public void Validate()
         {            

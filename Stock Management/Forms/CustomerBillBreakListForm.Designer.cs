@@ -302,7 +302,6 @@
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "CustomerBillBreakListForm";
             this.Text = "CustomerCartForm";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomerBillBreakListForm_FormClosing);
             this.Load += new System.EventHandler(this.CustomerBillBreakListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
             this.ResumeLayout(false);

@@ -124,6 +124,7 @@
             // 
             // txtTotalBreakupAmount
             // 
+            this.txtTotalBreakupAmount.BackColor = System.Drawing.Color.Orange;
             this.txtTotalBreakupAmount.Enabled = false;
             this.txtTotalBreakupAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTotalBreakupAmount.Location = new System.Drawing.Point(517, 50);
@@ -388,8 +389,9 @@
             0,
             0,
             0});
-            this.numQuantityInABox.ValueChanged += new System.EventHandler(this.AmountAndQuantity_Changed);
-            this.numQuantityInABox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AmountChanging);
+            this.numQuantityInABox.ValueChanged += new System.EventHandler(this.NumericControl_ValueChange);
+            this.numQuantityInABox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericControlWithoutDecimal_KeyPress);
+            this.numQuantityInABox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NumericControl_KeyUp);
             // 
             // numTotalBoxes
             // 
@@ -413,8 +415,9 @@
             0,
             0,
             0});
-            this.numTotalBoxes.ValueChanged += new System.EventHandler(this.AmountAndQuantity_Changed);
-            this.numTotalBoxes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AmountChanging);
+            this.numTotalBoxes.ValueChanged += new System.EventHandler(this.NumericControl_ValueChange);
+            this.numTotalBoxes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericControlWithoutDecimal_KeyPress);
+            this.numTotalBoxes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NumericControl_KeyUp);
             // 
             // numTotalAmount
             // 
@@ -434,8 +437,8 @@
             this.numTotalAmount.Name = "numTotalAmount";
             this.numTotalAmount.Size = new System.Drawing.Size(315, 24);
             this.numTotalAmount.TabIndex = 16;
-            this.numTotalAmount.ValueChanged += new System.EventHandler(this.AmountAndQuantity_Changed);
-            this.numTotalAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AmountChanging);
+            this.numTotalAmount.ValueChanged += new System.EventHandler(this.NumericControl_ValueChange);
+            this.numTotalAmount.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NumericControl_KeyUp);
             // 
             // txtBillBreakupRemarks
             // 

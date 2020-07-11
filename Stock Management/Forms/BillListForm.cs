@@ -67,7 +67,7 @@ namespace Stock_Management.Forms
                     billForm.BILL_ID = selectedBillId;
                     ShowFormAsFixedDialog(this, billForm);
                 }
-                else if (GetSelectedCellText(dgvBillList, e) == "Add Breakups")
+                else if (GetSelectedCellText(dgvBillList, e) == "Breakups")
                 {
                     DealerBillBreakupListForm billBreakupForm = new DealerBillBreakupListForm();
                     billBreakupForm.DEALER_BILL_ID = selectedBillId;

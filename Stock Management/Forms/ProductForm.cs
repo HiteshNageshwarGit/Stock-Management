@@ -20,6 +20,11 @@ namespace Stock_Management.Forms
             EditProduct();
         }
 
+        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ToTitleCase(txtName);
+        }
+
         private void btnSaveProduct_Click(object sender, EventArgs e)
         {
             if (btnSaveProduct.Text == CRUD_OP_EDIT)
@@ -116,5 +121,7 @@ namespace Stock_Management.Forms
                     break;
             }
         }
+
+        
     }
 }

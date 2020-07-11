@@ -24,7 +24,7 @@ namespace StockEntity.Helper
                 string sourceFilePath = Path.Combine(dbDirPath, DBFileName);
                 if (File.Exists(sourceFilePath))
                 {
-                    string destFilePath = DateHelper.GetTodayDateString_yyyyMMddHHmmss() + "_" + DBFileName;
+                    string destFilePath = DateHelper.GetDateNowString_Sortable() + "_" + DBFileName;
                     destFilePath = Path.Combine(destDirPath, destFilePath);
                     File.Copy(sourceFilePath, destFilePath);
                     if (File.Exists(destFilePath))
@@ -58,8 +58,8 @@ namespace StockEntity.Helper
                         if (fileInfo.Exists)
                         {
                             string datePart = fileInfo.Name.Substring(0, fileInfo.Name.IndexOf("_"));
-                            DateTime fileBackupDate = DateHelper.GetDateObject_yyyyMMddHHmmss(datePart);
-                            DateTime todaysDate = DateHelper.GetTodayDateObject();
+                            DateTime fileBackupDate = DateHelper.GetDateObject_Sortable(datePart);
+                            DateTime todaysDate = DateHelper.GetDateNowObject();
                             if ((todaysDate - fileBackupDate).TotalDays > 31)
                             {
 

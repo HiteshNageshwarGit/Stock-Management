@@ -195,16 +195,16 @@
             this.pnlCustomerBillBreakup.Size = new System.Drawing.Size(784, 357);
             this.pnlCustomerBillBreakup.TabIndex = 20;
             // 
-            // CustomerCart
+            // CustomerCartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.splitContainer1);
             this.MinimumSize = new System.Drawing.Size(800, 600);
-            this.Name = "CustomerCart";
+            this.Name = "CustomerCartForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.Text = "Sell";
+            this.Text = "Customer Cart";
             this.Load += new System.EventHandler(this.SellForm_Load);
             this.Shown += new System.EventHandler(this.SellForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).EndInit();

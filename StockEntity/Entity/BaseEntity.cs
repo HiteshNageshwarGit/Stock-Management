@@ -8,6 +8,7 @@ namespace StockEntity.Entity
         #region Entity Properties
         public int Id { get; set; }
         public string Remarks { get; set; }
+        public string TimeStamp { get; set; }
         #endregion
 
         [NotMapped]

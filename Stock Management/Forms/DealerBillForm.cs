@@ -69,7 +69,7 @@ namespace Stock_Management.Forms
             {
                 Text = "Add Dealer Bill";
                 dealerBill = new DealerBill();
-                dtBillEntryDate.Value = DateHelper.GetTodayDateObject();
+                dtBillEntryDate.Value = DateHelper.GetDateNowObject();
             }
         }
 
@@ -79,7 +79,7 @@ namespace Stock_Management.Forms
             dealerBill.DealerId = dealer.Id;
             dealerBill.EntryDate = DateHelper.GetDateString(dtBillEntryDate.Value); //lblEntyDate.Text;
             dealerBill.BillDate = DateHelper.GetDateString(dtBillDate.Value);
-            dealerBill.TotalAmount = numBillAmount.Value;
+            dealerBill.TotalAmount = Math.Round(numBillAmount.Value, 2);
             dealerBill.Remarks = txtRemarks.Text;
             dealerBill.Validate();
             if (dealerBill.EntityState.State != ValidationState.SUCCESS)

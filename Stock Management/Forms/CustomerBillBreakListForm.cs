@@ -66,13 +66,13 @@ namespace Stock_Management.Forms
 
         private void dgvCart_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(NumericFieldKeyPress);
+            e.Control.KeyPress -= new KeyPressEventHandler(NumericContyrolKeyPress);
             if (dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColUnitSellPrice.Name].Index) //Desired Column
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(NumericFieldKeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(NumericContyrolKeyPress);
                 }
             }
         }
@@ -140,22 +140,18 @@ namespace Stock_Management.Forms
                 SharedRepo.DBRepo.SaveCustomerBillBreakupList(customerBill, productListCart);
                 MessageBox.Show("Billing completed");
 
+                if (CallerForm != null && CallerForm.Name != null)
+                {
+                    if (CallerForm.Name == "CustomerCartForm")
+                    {
+                        CustomerCartForm customerCartForm = (CustomerCartForm)CallerForm;
+                        customerCartForm.OnCustomerBillingFinish();
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Billing failed");
-            }
-        }
-
-        private void CustomerBillBreakListForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (CallerForm != null && CallerForm.Name != null)
-            {
-                if (CallerForm.Name == "CustomerCart")
-                {
-                    CustomerCartForm customerCartForm = (CustomerCartForm)CallerForm;
-                    customerCartForm.Close();
-                }
             }
         }
 
@@ -167,8 +163,8 @@ namespace Stock_Management.Forms
 
         internal void loadCustomerBillBreakupList()
         {
-            List<CustomerBillBreakup> customerBillBreakupList = SharedRepo.DBRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
-            dgvCart.DataSource = customerBillBreakupList;
+            List<CustomerBillBreakup> list = SharedRepo.DBRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
+            dgvCart.DataSource = list;
             dgvCart.ClearSelection();
             DataGridViewButtonColumn btnAddOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
             btnAddOne.Visible = false;

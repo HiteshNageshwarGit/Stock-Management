@@ -5,13 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace StockEntity
 {
     public class DBRepository
     {
-        private StockDBContext context;
+        private StockDBContext context; // do not allow caller to access the DBContext
         public DBRepository()
         {
             context = StockDBContext.GetStockDBContext();
@@ -27,6 +26,8 @@ namespace StockEntity
         #region Product
         public void SaveProduct(Product product)
         {
+            product.TimeStamp = DateHelper.GetDateNowString_Sortable();
+            product.Name = product.Name.Trim();
             if (product.Id == 0)
             {
                 context.Products.Add(product);
@@ -84,7 +85,9 @@ namespace StockEntity
         #region Dealer
         public void SaveDealer(Dealer dealer)
         {
-
+            dealer.TimeStamp = DateHelper.GetDateNowString_Sortable();
+            dealer.Name = dealer.Name.Trim();
+            dealer.Address = dealer.Address.Trim();
             if (dealer.Id == 0)
             {
                 context.Dealers.Add(dealer);
@@ -150,6 +153,9 @@ namespace StockEntity
         #region Customer
         public void SaveCustomer(Customer customer)
         {
+            customer.TimeStamp = DateHelper.GetDateNowString_Sortable();
+            customer.Name = customer.Name.Trim();
+            customer.Address = customer.Address.Trim();
             if (customer.Id == 0)
             {
                 context.Customers.Add(customer);
@@ -218,6 +224,7 @@ namespace StockEntity
         #region Dealer Bill
         public void SaveDealerBill(DealerBill bill)
         {
+            bill.TimeStamp = DateHelper.GetDateNowString_Sortable();
             if (bill.Id == 0)
             {
                 context.DealerBills.Add(bill);
@@ -245,6 +252,7 @@ namespace StockEntity
         #region Dealer Bill Breakup
         public void SaveDealerBillBreakup(DealerBillBreakup BillBreakup)
         {
+            BillBreakup.TimeStamp = DateHelper.GetDateNowString_Sortable();
             if (BillBreakup.Id == 0)
             {
                 context.DealerBillBreakups.Add(BillBreakup);
@@ -268,30 +276,56 @@ namespace StockEntity
             return context.DealerBillBreakups.Where(x => x.DealerBillId == billId).OrderByDescending(x => x.EntryDate).ToList();
         }
 
-        public DealerBillBreakup GetBillBreakup(int billId)
+        public DealerBillBreakup GetDealerBillBreakup(int billId)
         {
-            return context.DealerBillBreakups.Where(x => x.Id == billId).Include(x => x.Product).FirstOrDefault();
+            return context.DealerBillBreakups.Where(x => x.Id == billId).FirstOrDefault();
         }
         #endregion
 
         #region Customer Bill & BillBreakup
+        public void SaveCustomerBill(CustomerBill customerBill)
+        {
+            customerBill.TimeStamp = DateHelper.GetDateNowString_Sortable();
+            if (customerBill.Id == 0)
+            {
+                context.CustomerBills.Add(customerBill);
+                context.SaveChanges();
+            }
+            else
+            {
+                context.CustomerBills.Attach(customerBill);
+                context.Entry(customerBill).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
         public List<CustomerBill> GetCustomerBillList(int customerId)
         {
             return context.CustomerBills.Where(x => x.CustomerId == customerId).OrderBy(x => x.BillDate).ToList();
         }
 
-        public List<CustomerBillBreakup> GetCustomerBillBreakupList(int customerBillId)
+        public void SaveCustomerBillBreakup(CustomerBillBreakup customerBillBreakup)
         {
-            return context.CustomerBillBreakups.Where(x => x.CustomerBillId == customerBillId).OrderBy(x => x.Id).ToList();
+            customerBillBreakup.TimeStamp = DateHelper.GetDateNowString_Sortable();
+            if (customerBillBreakup.Id == 0)
+            {
+                context.CustomerBillBreakups.Add(customerBillBreakup);
+                context.SaveChanges();
+            }
+            else
+            {
+                context.CustomerBillBreakups.Attach(customerBillBreakup);
+                context.Entry(customerBillBreakup).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
-
         public void SaveCustomerBillBreakupList(CustomerBill customerBill, List<ProductInCart> productListInCart)
         {
             using (var dbContextTransaction = context.Database.BeginTransaction())
             {
                 try
                 {
-                    context.CustomerBills.Add(customerBill);
+                    SaveCustomerBill(customerBill);
                     foreach (ProductInCart productInCart in productListInCart)
                     {
                         CustomerBillBreakup customerBillBreakup = new CustomerBillBreakup();
@@ -304,7 +338,7 @@ namespace StockEntity
                         customerBillBreakup.UnitPrice = productInCart.SellingUnitPrice;
                         customerBillBreakup.TotalBoxes = productInCart.TotalBoxes;
                         customerBillBreakup.QuantityInBox = productInCart.QuantityInBox;
-                        context.CustomerBillBreakups.Add(customerBillBreakup);
+                        SaveCustomerBillBreakup(customerBillBreakup);
 
                         // Reduce available quantity
                         DealerBillBreakup dealerBillBreakup = context.DealerBillBreakups.Find(customerBillBreakup.DealerBillBreakupId);
@@ -327,18 +361,46 @@ namespace StockEntity
                 catch (Exception ex)
                 {
                     dbContextTransaction.Rollback();
+                    throw new Exception("Billing failed" + ex.Message);
                 }
             }
         }
 
+        //public List<CustomerBillBreakup> GetCustomerBillBreakupList(int customerBillId)
+        //{
+        //    return context.CustomerBillBreakups.Where(x => x.CustomerBillId == customerBillId).OrderBy(x => x.Id).ToList();
+        //}
+
+        public List<CustomerBillBreakup> GetCustomerBillBreakupList(int billId)
+        {
+            List<CustomerBillBreakup> exactMatchProductList = (from P in context.Products
+                                                               join CBB in context.CustomerBillBreakups on P.Id equals CBB.ProductId
+                                                               //join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId                                                         
+                                                               //join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
+                                                               //join D in context.Dealers on DB.DealerId equals D.Id
+                                                               where CBB.CustomerBillId == billId
+
+                                                               select new CustomerBillBreakup
+                                                               {
+                                                                   ProductId = P.Id,
+                                                                   ProductName = P.Name,
+                                                                   TotalBoxes = CBB.TotalBoxes,
+                                                                   QuantityInBox = CBB.QuantityInBox,
+                                                                   TotalQuantity = CBB.TotalQuantity,
+                                                                   UnitPrice = CBB.UnitPrice,
+                                                                   TotalAmount = CBB.TotalAmount,
+                                                                   TimeStamp = CBB.TimeStamp
+                                                               }).Take(50).ToList();
+            return exactMatchProductList;
+        }
 
         #endregion
 
         public List<ProductInCart> GetProductListForSelling(string productName)
         {
-            productName = productName.ToLower();
+            productName = productName.Trim().ToLower();
             List<ProductInCart> exactMatchProductList = (from P in context.Products
-                                                         where (P.Name.ToLower().Contains(productName))
+                                                         where (productName == "" || P.Name.ToLower().Contains(productName))
                                                          join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
                                                          where (DBB.AvailableQuantity > 0)
                                                          join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
@@ -361,6 +423,11 @@ namespace StockEntity
                                                              SellingAmount = DBB.UnitPrice
 
                                                          }).Take(50).ToList();
+
+            if (productName.Trim().Split(' ').Length == 1)
+            {
+                return exactMatchProductList;
+            }
 
             // Search each word of product name
             string[] splittedProductNames = productName.Split(' ');

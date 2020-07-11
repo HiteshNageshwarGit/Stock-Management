@@ -51,9 +51,24 @@ namespace Stock_Management.Forms
             txtDealerName.Text = bill.Dealer.Name;
             txtBillDate.Text = bill.BillDate;
             txtTotalBillAmount.Text = bill.TotalAmount.ToString();
-            txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
-            txtTotalBreakupAmount.Text = bill.DealerBillBreakupList.Sum(x => x.TotalAmount).ToString();
             txtRemarks.Text = bill.Remarks;
+            txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
+            decimal breakupSum = bill.DealerBillBreakupList.Sum(x => x.TotalAmount);
+            txtTotalBreakupAmount.Text = breakupSum.ToString();
+
+            if (breakupSum == bill.TotalAmount)
+            {
+                txtTotalBreakupAmount.BackColor = System.Drawing.Color.LightGreen;
+            }
+            else if (breakupSum > bill.TotalAmount)
+            {
+                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Red;
+            }
+            else
+            {
+                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Orange;
+            }
+
 
             List<DealerBillBreakup> BillBreakupsList = SharedRepo.DBRepo.GetDealerBillBreakupList(DEALER_BILL_ID);
             dgvBillBreakupList.DataSource = BillBreakupsList;
@@ -73,7 +88,7 @@ namespace Stock_Management.Forms
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
-            }            
+            }
 
             if (GetSelectedCellText(dgvBillBreakupList, e) == "Details")
             {

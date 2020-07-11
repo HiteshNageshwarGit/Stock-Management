@@ -8,6 +8,7 @@ namespace StockEntity.Entity
         public int DealerId { get; set; }
         public string EntryDate { get; set; }
         public Dealer Dealer { get; set; }
+
         public ICollection<DealerBillBreakup> DealerBillBreakupList { get; set; }
 
         public new void Validate()
@@ -19,14 +20,14 @@ namespace StockEntity.Entity
                 EntityState.StateMessage += "\n Bill Date can not be future Date";
             }
         }
-        public override string ToString()
-        {
-            int breakupCount = 0;
-            if (DealerBillBreakupList != null && DealerBillBreakupList.Count > 0)
-            {
-                breakupCount = DealerBillBreakupList.Count;
-            }
-            return breakupCount.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    int breakupCount = 0;
+        //    if (DealerBillBreakupList != null && DealerBillBreakupList.Count > 0)
+        //    {
+        //        breakupCount = DealerBillBreakupList.Count;
+        //    }
+        //    return breakupCount.ToString();
+        //}
     }
 }
