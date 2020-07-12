@@ -17,6 +17,28 @@ namespace StockEntity
         }
 
         #region Key Value
+        public void SaveKeyalue(KeyValue keyValue)
+        {
+            keyValue.TimeStamp = DateHelper.GetDateNowString_Sortable();
+            if (keyValue.Id == 0)
+            {
+                context.KeyValues.Add(keyValue);
+                context.SaveChanges();
+            }
+            else
+            {
+                context.KeyValues.Attach(keyValue);
+                context.Entry(keyValue).State = EntityState.Modified;
+                context.SaveChanges();
+            }
+        }
+
+        public void SavePriceCode(KeyValue keyValue)
+        {
+            PriceCode.CodeLoadedFromDB = false;
+            SaveKeyalue(keyValue);
+        }
+
         public KeyValue GetKeyValue(string key)
         {
             var dd = context.KeyValues.Where(x => x.Key == key).FirstOrDefault();
@@ -124,7 +146,7 @@ namespace StockEntity
         {
             if (GetDefaultDealer() == null)
             {
-                SaveDealer(new Dealer() { Name = Person.DEFAULT_NAME, Address ="" });
+                SaveDealer(new Dealer() { Name = Person.DEFAULT_NAME, Address = "" });
                 if (GetDefaultDealer() == null)
                 {
                     return false;
@@ -190,7 +212,7 @@ namespace StockEntity
         {
             if (GetDefaultCustomer() == null)
             {
-                SaveCustomer(new Customer() { Name = Person.DEFAULT_NAME, Address ="" });
+                SaveCustomer(new Customer() { Name = Person.DEFAULT_NAME, Address = "" });
                 if (GetDefaultCustomer() == null)
                 {
                     return false;

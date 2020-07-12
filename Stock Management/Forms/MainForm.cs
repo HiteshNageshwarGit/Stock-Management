@@ -167,5 +167,11 @@ namespace Stock_Management
         {
 
         }
+
+        private void menuSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm();
+            ShowFormAsFixedDialog(this, settingsForm);
+        }
     }
 }

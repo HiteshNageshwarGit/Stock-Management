@@ -13,7 +13,7 @@ namespace StockEntity.Entity
         #endregion
 
 
-        public DealerBill DealerBill { get; set; }
+       public DealerBill DealerBill { get; set; }
 
         //public override string ToString()
         //{

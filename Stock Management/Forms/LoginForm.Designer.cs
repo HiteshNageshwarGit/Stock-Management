@@ -52,7 +52,7 @@
             // btnNoAdmin
             // 
             this.btnNoAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNoAdmin.Location = new System.Drawing.Point(6, 131);
+            this.btnNoAdmin.Location = new System.Drawing.Point(203, 183);
             this.btnNoAdmin.Name = "btnNoAdmin";
             this.btnNoAdmin.Size = new System.Drawing.Size(148, 28);
             this.btnNoAdmin.TabIndex = 3;
@@ -70,7 +70,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(359, 204);
+            this.groupBox1.Size = new System.Drawing.Size(359, 229);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
@@ -88,9 +88,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 70);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 15);
+            this.label2.Size = new System.Drawing.Size(69, 15);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Code";
+            this.label2.Text = "Password";
             // 
             // txtUserName
             // 
@@ -114,7 +114,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 232);
+            this.ClientSize = new System.Drawing.Size(384, 254);
             this.ControlBox = false;
             this.Controls.Add(this.groupBox1);
             this.MinimumSize = new System.Drawing.Size(400, 270);

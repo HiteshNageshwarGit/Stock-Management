@@ -21,6 +21,7 @@ namespace Stock_Management.Forms
             if (keyData == (Keys.Control | Keys.S))
             {
                 SaveProduct();
+                return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

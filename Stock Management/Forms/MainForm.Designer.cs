@@ -37,6 +37,7 @@
             this.menuCustomerList = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productReportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,7 +73,8 @@
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dealerListToolStripMenuItem1,
             this.productListToolStripMenuItem1,
-            this.menuCustomerList});
+            this.menuCustomerList,
+            this.menuSettings});
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.adminToolStripMenuItem.Text = "Admin";
@@ -80,21 +82,21 @@
             // dealerListToolStripMenuItem1
             // 
             this.dealerListToolStripMenuItem1.Name = "dealerListToolStripMenuItem1";
-            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.dealerListToolStripMenuItem1.Text = "Dealer List";
             this.dealerListToolStripMenuItem1.Click += new System.EventHandler(this.dealerListToolStripMenuItem_Click);
             // 
             // productListToolStripMenuItem1
             // 
             this.productListToolStripMenuItem1.Name = "productListToolStripMenuItem1";
-            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.productListToolStripMenuItem1.Text = "Product List";
             this.productListToolStripMenuItem1.Click += new System.EventHandler(this.productListToolStripMenuItem_Click);
             // 
             // menuCustomerList
             // 
             this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.Size = new System.Drawing.Size(147, 22);
+            this.menuCustomerList.Size = new System.Drawing.Size(180, 22);
             this.menuCustomerList.Text = "Customer List";
             this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
             // 
@@ -109,9 +111,16 @@
             // productReportToolStripMenuItem
             // 
             this.productReportToolStripMenuItem.Name = "productReportToolStripMenuItem";
-            this.productReportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.productReportToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.productReportToolStripMenuItem.Text = "Product Report";
             this.productReportToolStripMenuItem.Click += new System.EventHandler(this.productReportToolStripMenuItem_Click);
+            // 
+            // menuSettings
+            // 
+            this.menuSettings.Name = "menuSettings";
+            this.menuSettings.Size = new System.Drawing.Size(180, 22);
+            this.menuSettings.Text = "Settings";
+            this.menuSettings.Click += new System.EventHandler(this.menuSettings_Click);
             // 
             // MainForm
             // 
@@ -144,6 +153,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuSellProduct;
         private System.Windows.Forms.ToolStripMenuItem reportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productReportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuSettings;
     }
 }
 
