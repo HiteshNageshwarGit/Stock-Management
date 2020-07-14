@@ -17,6 +17,7 @@ namespace Stock_Management.Shared
         public static void InitializeSession()
         {
             DBRepo = new DBRepository();
+            DBRepo.GetProductReport();
         }
 
         //public static void InsertDummyData()

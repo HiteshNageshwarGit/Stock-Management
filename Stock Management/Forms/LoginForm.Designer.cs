@@ -44,7 +44,7 @@
             this.btnLogin.Location = new System.Drawing.Point(203, 131);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(148, 28);
-            this.btnLogin.TabIndex = 2;
+            this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Admin Login";
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
@@ -55,7 +55,7 @@
             this.btnNoAdmin.Location = new System.Drawing.Point(203, 183);
             this.btnNoAdmin.Name = "btnNoAdmin";
             this.btnNoAdmin.Size = new System.Drawing.Size(148, 28);
-            this.btnNoAdmin.TabIndex = 3;
+            this.btnNoAdmin.TabIndex = 4;
             this.btnNoAdmin.Text = "Non Admin Login";
             this.btnNoAdmin.UseVisualStyleBackColor = true;
             this.btnNoAdmin.Click += new System.EventHandler(this.btnNoAdmin_Click);
@@ -79,8 +79,9 @@
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(6, 90);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(345, 24);
-            this.txtPassword.TabIndex = 7;
+            this.txtPassword.TabIndex = 2;
             // 
             // label2
             // 
@@ -98,7 +99,7 @@
             this.txtUserName.Location = new System.Drawing.Point(6, 30);
             this.txtUserName.Name = "txtUserName";
             this.txtUserName.Size = new System.Drawing.Size(345, 24);
-            this.txtUserName.TabIndex = 5;
+            this.txtUserName.TabIndex = 1;
             // 
             // label1
             // 

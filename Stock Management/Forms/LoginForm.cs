@@ -13,7 +13,33 @@ namespace Stock_Management.Forms
             InitializeComponent();
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                ProcessLogin();
+                return true;
+            }
+            else if (keyData == Keys.Escape)
+            {
+                LoginAsNonAdmin();
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
+        {
+            ProcessLogin();
+        }
+
+        private void btnNoAdmin_Click(object sender, EventArgs e)
+        {
+            LoginAsNonAdmin();
+        }
+
+        private void ProcessLogin()
         {
             isLoginSucceeded = false;
             if (string.IsNullOrWhiteSpace(txtUserName.Text) || string.IsNullOrWhiteSpace(txtPassword.Text))
@@ -57,7 +83,7 @@ namespace Stock_Management.Forms
             }
         }
 
-        private void btnNoAdmin_Click(object sender, EventArgs e)
+        private void LoginAsNonAdmin()
         {
             isLoginSucceeded = true;
             SharedRepo.UserRole = SharedRepo.GeneralUser;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -15,6 +16,20 @@ namespace Stock_Management.Forms
         #endregion
         public BaseForm CallerForm { get; set; }
         internal ToolTip toolTip;
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (Name != "MainForm") // do not close main form on Esc button press
+            {
+                if (keyData == Keys.Escape)
+                {
+                    Close();
+                    return true;
+                }
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
         internal void NumericContyrolKeyPress(object sender, KeyPressEventArgs e)
         {
@@ -116,8 +131,14 @@ namespace Stock_Management.Forms
         }
         internal static void ToTitleCase(TextBox textBox)
         {
-            textBox.Text = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(textBox.Text);
-            textBox.SelectionStart = textBox.Text.Length;
+            // Save the selection's start and length.
+            int sel_start = textBox.SelectionStart;
+            int sel_length = textBox.SelectionLength;
+            CultureInfo culture_info = Thread.CurrentThread.CurrentCulture;
+            TextInfo text_info = culture_info.TextInfo;
+            textBox.Text = text_info.ToTitleCase(textBox.Text);
+            // Restore the selection's start and length.
+            textBox.Select(sel_start, sel_length);
         }
 
         internal void PrepareTooltips(Control ctrlContainer)

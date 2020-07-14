@@ -15,9 +15,9 @@ namespace Stock_Management.Forms
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (keyData == (Keys.Control | Keys.Escape))
+            if (keyData == (Keys.Control | Keys.S))
             {
-                Close();
+                SavePriceDodes();
                 return true;
             }
 
@@ -37,19 +37,7 @@ namespace Stock_Management.Forms
        
         private void btnSavePriceCode_Click(object sender, EventArgs e)
         {
-
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_1, Value = txt1.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_2, Value = txt2.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_3, Value = txt3.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_4, Value = txt4.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_5, Value = txt5.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_6, Value = txt6.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_7, Value = txt7.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_8, Value = txt8.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_8, Value = txt9.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_0, Value = txt0.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_DOT, Value = txtDot.Text });
-            MessageBox.Show("Saved");
+            SavePriceDodes();
         }
 
         private void EditPriceCode()
@@ -66,5 +54,22 @@ namespace Stock_Management.Forms
             txt0.Text = PriceCode.GetPriceCodeForNumber(0);
             txtDot.Text = PriceCode.GetPriceCodeForNumber(".");
         }
+
+        private void SavePriceDodes()
+        {
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_1, Value = txt1.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_2, Value = txt2.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_3, Value = txt3.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_4, Value = txt4.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_5, Value = txt5.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_6, Value = txt6.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_7, Value = txt7.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_8, Value = txt8.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_8, Value = txt9.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_0, Value = txt0.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_DOT, Value = txtDot.Text });
+            MessageBox.Show("Saved");
+        }
+
     }
 }

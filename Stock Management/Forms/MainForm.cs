@@ -165,7 +165,8 @@ namespace Stock_Management
 
         private void productReportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ProductReportForm productReportForm = new ProductReportForm();
+            ShowFormResizableAsDialog(this, productReportForm);
         }
 
         private void menuSettings_Click(object sender, EventArgs e)

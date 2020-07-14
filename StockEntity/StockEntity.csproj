@@ -54,6 +54,7 @@
     <Compile Include="DataEntity\DBRepository.cs" />
     <Compile Include="EntityX\CustomerBillBreakupRPT.cs" />
     <Compile Include="EntityX\ProductInCart.cs" />
+    <Compile Include="EntityX\ProductReport.cs" />
     <Compile Include="Entity\Customer.cs" />
     <Compile Include="Entity\CustomerBill.cs" />
     <Compile Include="Entity\CustomerBillBreakup.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Entity\Product.cs" />
     <Compile Include="Helper\PriceCode.cs" />
     <Compile Include="Helper\ProductInCartComparer.cs" />
+    <Compile Include="Helper\RefCode.cs" />
     <Compile Include="Helper\ValidationState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

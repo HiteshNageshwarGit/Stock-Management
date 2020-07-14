@@ -4,15 +4,19 @@ using StockEntity.EntityX;
 using StockEntity.Helper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
     public partial class CustomerCartDetailForm : BaseForm
     {
-        //public int CUSTOMER_BILL_ID { get; set; } // To load existing bills
         List<ProductInCart> productListCart = new List<ProductInCart>();
         CustomerBill customerBill = new CustomerBill();
+
+        decimal previousSellingPrice;
+        int previousQuantityInCart;
+
         public CustomerCartDetailForm()
         {
             InitializeComponent();
@@ -35,7 +39,7 @@ namespace Stock_Management.Forms
 
         private void dgvCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 && e.ColumnIndex == -1)
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
             }
@@ -51,7 +55,11 @@ namespace Stock_Management.Forms
             }
             else if (dgvCart.Columns[e.ColumnIndex].Name == CartColRemoveOne.Name)
             {
-                if (selectedProduct.SellingQuantity > 0)
+                if (selectedProduct.SellingQuantity == 1)
+                {
+                    RemoveProductFromCart(selectedProduct.DealerBillBreakupId);
+                }
+                else if (selectedProduct.SellingQuantity > 1)
                 {
                     selectedProduct.SellingQuantity--;
                     CalculateTotalBillAmoutForCart();
@@ -62,18 +70,60 @@ namespace Stock_Management.Forms
         private void dgvCart_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
             e.Control.KeyPress -= new KeyPressEventHandler(NumericContyrolKeyPress);
-            if (dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColUnitSellPrice.Name].Index) //Desired Column
+            if (dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColUnitSellPrice.Name].Index // Edit Unit selling price
+               || dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColProductQuantityInCart.Name].Index // Edit product quantity in cart 
+               )
             {
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(NumericContyrolKeyPress);
+                    tb.KeyPress += new KeyPressEventHandler(NumericContyrolKeyPress); // allow only numeric keys
                 }
+            }
+
+            if (dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColUnitSellPrice.Name].Index)
+            {
+                previousSellingPrice = decimal.Parse(dgvCart.CurrentCell.Value.ToString()); // store previous value to restore when validation failed
+            }
+            else if (dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColProductQuantityInCart.Name].Index)
+            {
+                previousQuantityInCart = int.Parse(dgvCart.CurrentCell.Value.ToString()); // store previous value to restore when validation failed
             }
         }
 
         private void dgvCart_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.ColumnIndex == dgvCart.Columns[CartColUnitSellPrice.Name].Index) // Editing Unit selling price
+            {
+                if (decimal.Parse(dgvCart.CurrentCell.Value.ToString())
+                    <= decimal.Parse(dgvCart.Rows[e.RowIndex].Cells[dgvCart.Columns[CartColUnitPrice.Name].Index].Value.ToString()))
+                {
+                    MessageBox.Show("Selling price is tool low");
+                    dgvCart.CurrentCell.Value = previousSellingPrice;
+                    return;
+                }
+            }
+            else if (e.ColumnIndex == dgvCart.Columns[CartColProductQuantityInCart.Name].Index) // Edit product quantity in cart 
+            {
+                if (int.Parse(dgvCart.CurrentCell.Value.ToString()) == 0)
+                {
+                    ProductInCart selectedProduct = (ProductInCart)dgvCart.Rows[e.RowIndex].DataBoundItem;
+                    if (!RemoveProductFromCart(selectedProduct.DealerBillBreakupId))
+                    {
+                        dgvCart.CurrentCell.Value = previousQuantityInCart;
+                    }
+                    return;
+                }
+
+                else if (int.Parse(dgvCart.CurrentCell.Value.ToString()) >
+                    int.Parse(dgvCart.Rows[e.RowIndex].Cells[dgvCart.Columns[CartColTotalQuantity.Name].Index].Value.ToString()))
+                {
+                    MessageBox.Show("Selling Quantity can not be more than Available Quantity");
+                    dgvCart.CurrentCell.Value = previousQuantityInCart;
+                    return;
+                }
+            }
+
             CalculateTotalBillAmoutForCart();
         }
 
@@ -90,12 +140,29 @@ namespace Stock_Management.Forms
             productToBeAddedToCart.QuantityInBox = 1;
             productToBeAddedToCart.TotalBoxes = 1;
             productListCart.Add(productToBeAddedToCart);
-            dgvCart.DataSource = null;
-            dgvCart.DataSource = productListCart;
-            dgvCart.Update();
-            dgvCart.Refresh();
-            dgvCart.ClearSelection();
-            CalculateTotalBillAmoutForCart();
+            RefreshCustomerCart();
+            //dgvCart.DataSource = null;
+            //dgvCart.DataSource = productListCart;
+            //dgvCart.Update();
+            //dgvCart.Refresh();
+            //dgvCart.ClearSelection();
+            //CalculateTotalBillAmoutForCart();
+        }
+
+        internal bool RemoveProductFromCart(int dealerBillBreakupId)
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want delete", "Delete from cart", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                var productToRemove = productListCart.Where(x => x.DealerBillBreakupId == dealerBillBreakupId).First();
+                productListCart.Remove(productToRemove);
+                RefreshCustomerCart();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         internal void CalculateTotalBillAmoutForCart()
@@ -127,20 +194,6 @@ namespace Stock_Management.Forms
             txtCustomerName.Text = customerName;
         }
 
-        //internal void loadCustomerBillBreakupList()
-        //{
-        //    List<CustomerBillBreakup> list = SharedRepo.DBRepo.GetCustomerBillBreakupList(CUSTOMER_BILL_ID);
-        //    dgvCart.DataSource = list;
-        //    dgvCart.ClearSelection();
-        //    DataGridViewButtonColumn btnAddOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
-        //    btnAddOne.Visible = false;
-        //    DataGridViewButtonColumn btnRemoveOne = (DataGridViewButtonColumn)dgvCart.Columns[CartColAddOne.Name];
-        //    btnRemoveOne.Visible = false;
-        //    dgvCart.ReadOnly = true;
-
-        //    btnFinishBilling.Visible = false;
-        //}
-
         private void SetFormBehaviour()
         {
 
@@ -155,7 +208,6 @@ namespace Stock_Management.Forms
 
         internal void FinalizeCustomerBill()
         {
-
             try
             {
                 customerBill.BillDate = DateHelper.GetTodayDateString();
@@ -187,5 +239,16 @@ namespace Stock_Management.Forms
                 MessageBox.Show("Billing failed");
             }
         }
+
+        internal void RefreshCustomerCart()
+        {
+            dgvCart.DataSource = null;
+            dgvCart.DataSource = productListCart;
+            dgvCart.Update();
+            dgvCart.Refresh();
+            dgvCart.ClearSelection();
+            CalculateTotalBillAmoutForCart();
+        }
+
     }
 }

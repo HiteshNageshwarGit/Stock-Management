@@ -32,7 +32,7 @@ namespace Stock_Management.Forms
             EditProduct();
         }
 
-        private void txtName_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtName_KeyUp(object sender, KeyEventArgs e)
         {
             ToTitleCase(txtName);
         }

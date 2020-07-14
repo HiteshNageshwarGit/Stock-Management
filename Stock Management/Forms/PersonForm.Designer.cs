@@ -60,7 +60,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(345, 24);
             this.txtName.TabIndex = 1;
-            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPersonName_KeyPress);
+            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
             // 
             // txtAddress
             // 
@@ -69,7 +69,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(345, 24);
             this.txtAddress.TabIndex = 3;
-            this.txtAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtAddress_KeyPress);
+            this.txtAddress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtAddress_KeyUp);
             // 
             // label2
             // 

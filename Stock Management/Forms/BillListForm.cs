@@ -49,6 +49,7 @@ namespace Stock_Management.Forms
             if (keyData == (Keys.Control | Keys.N))
             {
                 OpenDealerBillForm(0);
+                return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }

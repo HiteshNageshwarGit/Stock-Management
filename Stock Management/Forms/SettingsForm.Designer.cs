@@ -94,11 +94,11 @@
             // btnSavePriceCode
             // 
             this.btnSavePriceCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSavePriceCode.Location = new System.Drawing.Point(98, 209);
+            this.btnSavePriceCode.Location = new System.Drawing.Point(98, 210);
             this.btnSavePriceCode.Name = "btnSavePriceCode";
-            this.btnSavePriceCode.Size = new System.Drawing.Size(223, 34);
-            this.btnSavePriceCode.TabIndex = 38;
-            this.btnSavePriceCode.Text = "Save";
+            this.btnSavePriceCode.Size = new System.Drawing.Size(223, 33);
+            this.btnSavePriceCode.TabIndex = 13;
+            this.btnSavePriceCode.Text = "&Save";
             this.btnSavePriceCode.UseVisualStyleBackColor = true;
             this.btnSavePriceCode.Click += new System.EventHandler(this.btnSavePriceCode_Click);
             // 
@@ -110,7 +110,7 @@
             this.txtFake.MaxLength = 1;
             this.txtFake.Name = "txtFake";
             this.txtFake.Size = new System.Drawing.Size(35, 23);
-            this.txtFake.TabIndex = 37;
+            this.txtFake.TabIndex = 12;
             this.txtFake.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label17
@@ -123,14 +123,14 @@
             this.label17.TabIndex = 36;
             this.label17.Text = "Fake";
             // 
-            // txtNine
+            // txt9
             // 
             this.txt9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt9.Location = new System.Drawing.Point(382, 114);
             this.txt9.MaxLength = 1;
-            this.txt9.Name = "txtNine";
+            this.txt9.Name = "txt9";
             this.txt9.Size = new System.Drawing.Size(35, 23);
-            this.txt9.TabIndex = 35;
+            this.txt9.TabIndex = 9;
             this.txt9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label18
@@ -143,14 +143,14 @@
             this.label18.TabIndex = 34;
             this.label18.Text = "Nine";
             // 
-            // txtSix
+            // txt6
             // 
             this.txt6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt6.Location = new System.Drawing.Point(382, 73);
             this.txt6.MaxLength = 1;
-            this.txt6.Name = "txtSix";
+            this.txt6.Name = "txt6";
             this.txt6.Size = new System.Drawing.Size(35, 23);
-            this.txt6.TabIndex = 33;
+            this.txt6.TabIndex = 6;
             this.txt6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label19
@@ -163,14 +163,14 @@
             this.label19.TabIndex = 32;
             this.label19.Text = "Six";
             // 
-            // txtThree
+            // txt3
             // 
             this.txt3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt3.Location = new System.Drawing.Point(382, 34);
             this.txt3.MaxLength = 1;
-            this.txt3.Name = "txtThree";
+            this.txt3.Name = "txt3";
             this.txt3.Size = new System.Drawing.Size(35, 23);
-            this.txt3.TabIndex = 31;
+            this.txt3.TabIndex = 3;
             this.txt3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label20
@@ -190,7 +190,7 @@
             this.txtDot.MaxLength = 1;
             this.txtDot.Name = "txtDot";
             this.txtDot.Size = new System.Drawing.Size(35, 23);
-            this.txtDot.TabIndex = 17;
+            this.txtDot.TabIndex = 11;
             this.txtDot.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label7
@@ -203,14 +203,14 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "Dot";
             // 
-            // txtEight
+            // txt8
             // 
             this.txt8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt8.Location = new System.Drawing.Point(217, 115);
             this.txt8.MaxLength = 1;
-            this.txt8.Name = "txtEight";
+            this.txt8.Name = "txt8";
             this.txt8.Size = new System.Drawing.Size(35, 23);
-            this.txt8.TabIndex = 15;
+            this.txt8.TabIndex = 8;
             this.txt8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label8
@@ -223,14 +223,14 @@
             this.label8.TabIndex = 14;
             this.label8.Text = "Eight";
             // 
-            // txtFive
+            // txt5
             // 
             this.txt5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt5.Location = new System.Drawing.Point(217, 74);
             this.txt5.MaxLength = 1;
-            this.txt5.Name = "txtFive";
+            this.txt5.Name = "txt5";
             this.txt5.Size = new System.Drawing.Size(35, 23);
-            this.txt5.TabIndex = 13;
+            this.txt5.TabIndex = 5;
             this.txt5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
@@ -243,14 +243,14 @@
             this.label9.TabIndex = 12;
             this.label9.Text = "Five";
             // 
-            // txtTwo
+            // txt2
             // 
             this.txt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt2.Location = new System.Drawing.Point(217, 35);
             this.txt2.MaxLength = 1;
-            this.txt2.Name = "txtTwo";
+            this.txt2.Name = "txt2";
             this.txt2.Size = new System.Drawing.Size(35, 23);
-            this.txt2.TabIndex = 11;
+            this.txt2.TabIndex = 2;
             this.txt2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
@@ -263,14 +263,14 @@
             this.label10.TabIndex = 10;
             this.label10.Text = "Two";
             // 
-            // txtZero
+            // txt0
             // 
             this.txt0.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt0.Location = new System.Drawing.Point(70, 157);
             this.txt0.MaxLength = 1;
-            this.txt0.Name = "txtZero";
+            this.txt0.Name = "txt0";
             this.txt0.Size = new System.Drawing.Size(35, 23);
-            this.txt0.TabIndex = 7;
+            this.txt0.TabIndex = 10;
             this.txt0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
@@ -283,14 +283,14 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "Zero";
             // 
-            // txtSeven
+            // txt7
             // 
             this.txt7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt7.Location = new System.Drawing.Point(70, 116);
             this.txt7.MaxLength = 1;
-            this.txt7.Name = "txtSeven";
+            this.txt7.Name = "txt7";
             this.txt7.Size = new System.Drawing.Size(35, 23);
-            this.txt7.TabIndex = 5;
+            this.txt7.TabIndex = 7;
             this.txt7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label3
@@ -303,14 +303,14 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Seven";
             // 
-            // txtFour
+            // txt4
             // 
             this.txt4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt4.Location = new System.Drawing.Point(70, 75);
             this.txt4.MaxLength = 1;
-            this.txt4.Name = "txtFour";
+            this.txt4.Name = "txt4";
             this.txt4.Size = new System.Drawing.Size(35, 23);
-            this.txt4.TabIndex = 3;
+            this.txt4.TabIndex = 4;
             this.txt4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -323,12 +323,12 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Four";
             // 
-            // txtOne
+            // txt1
             // 
             this.txt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt1.Location = new System.Drawing.Point(70, 36);
             this.txt1.MaxLength = 1;
-            this.txt1.Name = "txtOne";
+            this.txt1.Name = "txt1";
             this.txt1.Size = new System.Drawing.Size(35, 23);
             this.txt1.TabIndex = 1;
             this.txt1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;

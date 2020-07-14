@@ -27,10 +27,12 @@ namespace Stock_Management.Forms
             if (keyData == (Keys.Control | Keys.F))
             {
                 customerBillBreakListForm.OpenPersonFindForm();
+                return true;
             }
             else if (keyData == (Keys.Control | Keys.S))
             {
                 customerBillBreakListForm.FinalizeCustomerBill();
+                return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);

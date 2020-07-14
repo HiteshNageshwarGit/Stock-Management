@@ -61,9 +61,11 @@
             // 
             // txtRemarks
             // 
+            this.txtRemarks.Enabled = false;
             this.txtRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRemarks.Location = new System.Drawing.Point(9, 220);
             this.txtRemarks.Name = "txtRemarks";
+            this.txtRemarks.ReadOnly = true;
             this.txtRemarks.Size = new System.Drawing.Size(345, 90);
             this.txtRemarks.TabIndex = 7;
             this.txtRemarks.Text = "";
@@ -92,9 +94,11 @@
             // 
             // txtColor
             // 
+            this.txtColor.Enabled = false;
             this.txtColor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtColor.Location = new System.Drawing.Point(9, 160);
             this.txtColor.Name = "txtColor";
+            this.txtColor.ReadOnly = true;
             this.txtColor.Size = new System.Drawing.Size(345, 24);
             this.txtColor.TabIndex = 5;
             // 
@@ -110,9 +114,11 @@
             // 
             // txtCode
             // 
+            this.txtCode.Enabled = false;
             this.txtCode.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCode.Location = new System.Drawing.Point(9, 100);
             this.txtCode.Name = "txtCode";
+            this.txtCode.ReadOnly = true;
             this.txtCode.Size = new System.Drawing.Size(345, 24);
             this.txtCode.TabIndex = 3;
             // 
@@ -133,7 +139,7 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(345, 24);
             this.txtName.TabIndex = 1;
-            this.txtName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtName_KeyPress);
+            this.txtName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtName_KeyUp);
             // 
             // label1
             // 

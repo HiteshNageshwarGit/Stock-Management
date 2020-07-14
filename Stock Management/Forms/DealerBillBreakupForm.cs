@@ -33,6 +33,7 @@ namespace Stock_Management.Forms
             if (keyData == (Keys.Control | Keys.F))
             {
                 OpenSearchProductForm();
+                return true;
             }
             else if (keyData == (Keys.Control | Keys.S))
             {

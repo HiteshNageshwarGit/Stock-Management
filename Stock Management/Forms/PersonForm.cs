@@ -24,17 +24,18 @@ namespace Stock_Management.Forms
             if (keyData == (Keys.Control | Keys.S))
             {
                 SavePerson();
+                return true;
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        private void txtPersonName_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtName_KeyUp(object sender, KeyEventArgs e)
         {
             ToTitleCase(txtName);
         }
 
-        private void txtAddress_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtAddress_KeyUp(object sender, KeyEventArgs e)
         {
             ToTitleCase(txtAddress);
         }
@@ -162,5 +163,7 @@ namespace Stock_Management.Forms
 
             Close();
         }
+
+
     }
 }
