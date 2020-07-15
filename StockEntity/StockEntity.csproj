@@ -72,6 +72,7 @@
     <Compile Include="Entity\Dealer.cs" />
     <Compile Include="Entity\History.cs" />
     <Compile Include="Entity\Product.cs" />
+    <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\PriceCode.cs" />
     <Compile Include="Helper\ProductInCartComparer.cs" />
     <Compile Include="Helper\RefCode.cs" />

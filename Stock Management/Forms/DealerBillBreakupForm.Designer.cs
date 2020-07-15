@@ -60,6 +60,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnSaveDBBNClose = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numAvailableQuantity)).BeginInit();
@@ -74,12 +75,12 @@
             // btnSaveBillBreakups
             // 
             this.btnSaveBillBreakups.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSaveBillBreakups.Location = new System.Drawing.Point(542, 334);
+            this.btnSaveBillBreakups.Location = new System.Drawing.Point(353, 328);
             this.btnSaveBillBreakups.Name = "btnSaveBillBreakups";
-            this.btnSaveBillBreakups.Size = new System.Drawing.Size(104, 30);
+            this.btnSaveBillBreakups.Size = new System.Drawing.Size(112, 30);
             this.btnSaveBillBreakups.TabIndex = 8;
             this.btnSaveBillBreakups.Tag = "Ctrl + S";
-            this.btnSaveBillBreakups.Text = "&Save";
+            this.btnSaveBillBreakups.Text = "&Save + New";
             this.btnSaveBillBreakups.UseVisualStyleBackColor = true;
             this.btnSaveBillBreakups.Click += new System.EventHandler(this.btnSaveBillBreakups_Click);
             // 
@@ -222,6 +223,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnSaveDBBNClose);
             this.groupBox2.Controls.Add(this.numAvailableQuantity);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.numUnitSellingPrice);
@@ -511,6 +513,18 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Total Amount";
             // 
+            // btnSaveDBBNClose
+            // 
+            this.btnSaveDBBNClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveDBBNClose.Location = new System.Drawing.Point(482, 328);
+            this.btnSaveDBBNClose.Name = "btnSaveDBBNClose";
+            this.btnSaveDBBNClose.Size = new System.Drawing.Size(124, 30);
+            this.btnSaveDBBNClose.TabIndex = 9;
+            this.btnSaveDBBNClose.Tag = "Ctrl + S";
+            this.btnSaveDBBNClose.Text = "&Save + Close";
+            this.btnSaveDBBNClose.UseVisualStyleBackColor = true;
+            this.btnSaveDBBNClose.Click += new System.EventHandler(this.btnSaveDBBNClose_Click);
+            // 
             // DealerBillBreakupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -572,5 +586,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.NumericUpDown numAvailableQuantity;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btnSaveDBBNClose;
     }
 }

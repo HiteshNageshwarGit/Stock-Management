@@ -103,7 +103,18 @@ namespace StockEntity
 
         public List<Product> GetProductListForAdmin(string productName)
         {
-            return context.Products.Where(x => x.Name.ToLower().Contains(productName.ToLower()) || productName == "").OrderBy(x => x.Name).Take(50).ToList();
+            productName = productName.Trim().ToLower();
+            List<Product> exactMatchProductList = context.Products.Where(x => productName == "" || x.Name.ToLower().Contains(productName)).OrderBy(x => x.Name).Take(50).ToList();
+            if (productName.Trim().Split(' ').Length == 1)
+            {
+                return exactMatchProductList;
+            }
+
+            // Search each word of product name
+            string[] splittedProductNames = productName.Split(' ');
+            List<Product> splittedNameProductList = context.Products.Where(p => splittedProductNames.Any(x => p.Name.ToLower().Contains(x))).OrderBy(x => x.Name).Take(50).ToList();
+            var mergedList = exactMatchProductList.Union(splittedNameProductList, new ProductComparer()).ToList(); // merge by removing duplicate
+            return mergedList;
         }
         #endregion
 

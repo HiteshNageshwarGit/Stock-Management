@@ -45,11 +45,6 @@ namespace Stock_Management.Forms
             //    ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
             //}
         }
-
-        private void txtSearchProduct_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
         private void txtSearchProduct_KeyUp(object sender, KeyEventArgs e)
         {
             LoadProductList();

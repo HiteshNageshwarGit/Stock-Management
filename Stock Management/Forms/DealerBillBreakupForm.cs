@@ -37,7 +37,7 @@ namespace Stock_Management.Forms
             }
             else if (keyData == (Keys.Control | Keys.S))
             {
-                SaveBillBreakup();
+                SaveBillBreakup(false);
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
@@ -64,7 +64,12 @@ namespace Stock_Management.Forms
 
         private void btnSaveBillBreakups_Click(object sender, EventArgs e)
         {
-            SaveBillBreakup();
+            SaveBillBreakup(true);
+        }
+
+        private void btnSaveDBBNClose_Click(object sender, EventArgs e)
+        {
+            SaveBillBreakup(false);
         }
 
         internal void OnProductSelect(int produectId, string productName)
@@ -143,7 +148,7 @@ namespace Stock_Management.Forms
             }
         }
 
-        private void SaveBillBreakup()
+        private void SaveBillBreakup(bool saveAndNew)
         {
             dealerBillBreakup.EntityState = new ValidationState();
             dealerBillBreakup.TotalAmount = Math.Round(numTotalAmount.Value, 2);
@@ -164,7 +169,7 @@ namespace Stock_Management.Forms
                 }
                 else if (CallerForm.Name == "DealerBillBreakupListForm")
                 {
-                    ((DealerBillBreakupListForm)CallerForm).LoadBillBreakupList(true);
+                    ((DealerBillBreakupListForm)CallerForm).LoadBillBreakupList(saveAndNew);
                 }
                 Close();
             }
@@ -205,5 +210,7 @@ namespace Stock_Management.Forms
             ProductListForm productListForm = new ProductListForm();
             ShowFormAsFixedDialog(this, productListForm);
         }
+
+        
     }
 }

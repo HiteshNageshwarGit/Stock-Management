@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using StockEntity.Helper;
 
 namespace Stock_Management
 {
@@ -16,7 +15,20 @@ namespace Stock_Management
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.ThreadException += new ThreadExceptionEventHandler(Application_ThreadException);
             Application.Run(new MainForm());
+        }
+
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            if (e.Exception.InnerException != null)
+            {
+                MessageBox.Show(e.Exception.InnerException.Message.ToString() + "\n" + e.Exception.ExceptionInfo());
+            }
+            else
+            {
+                MessageBox.Show(e.Exception.ToString() + "\n" +e.Exception.ExceptionInfo());
+            }
         }
     }
 }

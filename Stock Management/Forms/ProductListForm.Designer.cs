@@ -142,7 +142,6 @@
             this.txtSearchProduct.Name = "txtSearchProduct";
             this.txtSearchProduct.Size = new System.Drawing.Size(282, 23);
             this.txtSearchProduct.TabIndex = 1;
-            this.txtSearchProduct.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSearchProduct_KeyPress);
             this.txtSearchProduct.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchProduct_KeyUp);
             // 
             // label1

@@ -1,4 +1,5 @@
-﻿using StockEntity.EntityX;
+﻿using StockEntity.Entity;
+using StockEntity.EntityX;
 using System.Collections.Generic;
 
 namespace StockEntity.Helper
@@ -9,10 +10,21 @@ namespace StockEntity.Helper
         {
             return x.DealerBillBreakupId == y.DealerBillBreakupId;
         }
-
         public int GetHashCode(ProductInCart obj)
         {
             return obj.DealerBillBreakupId.GetHashCode();
+        }
+    }
+
+    class ProductComparer : IEqualityComparer<Product>
+    {
+        public bool Equals(Product x, Product y)
+        {
+            return x.Id == y.Id;
+        }
+        public int GetHashCode(Product obj)
+        {
+            return obj.Id.GetHashCode();
         }
     }
 }
