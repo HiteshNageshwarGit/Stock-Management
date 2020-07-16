@@ -114,6 +114,18 @@ namespace Stock_Management.Forms
             childForm.Show();
         }
 
+        internal void ShowFormInGroupBox(BaseForm parentForm, GroupBox groupBox, BaseForm childForm)
+        {
+            childForm.CallerForm = parentForm;
+            groupBox.Controls.Clear();//contentpnl is the panelname
+            childForm.TopLevel = false;
+            childForm.AutoScroll = true;
+            groupBox.Controls.Add(childForm);
+            childForm.Dock = DockStyle.Fill;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Show();
+        }
+
         internal string GetSelectedCellText(DataGridView dataGridView, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1)

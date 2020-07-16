@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="DataEntity\DBRepository.cs" />
     <Compile Include="EntityX\CustomerBillBreakupRPT.cs" />
+    <Compile Include="EntityX\DealerBillReport.cs" />
     <Compile Include="EntityX\ProductInCart.cs" />
     <Compile Include="EntityX\ProductReport.cs" />
     <Compile Include="Entity\Customer.cs" />

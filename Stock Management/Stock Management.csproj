@@ -143,6 +143,12 @@
     <Compile Include="Forms\CustomerCartDetailForm.Designer.cs">
       <DependentUpon>CustomerCartDetailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DealerBillBreakupCountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DealerBillBreakupCountForm.Designer.cs">
+      <DependentUpon>DealerBillBreakupCountForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DealerBillBreakupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -226,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CustomerCartDetailForm.resx">
       <DependentUpon>CustomerCartDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DealerBillBreakupCountForm.resx">
+      <DependentUpon>DealerBillBreakupCountForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DealerBillBreakupForm.resx">
       <DependentUpon>DealerBillBreakupForm.cs</DependentUpon>

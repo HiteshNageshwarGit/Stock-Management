@@ -1,5 +1,6 @@
 ﻿using Stock_Management.Shared;
 using StockEntity.Entity;
+using StockEntity.EntityX;
 using StockEntity.Helper;
 using System;
 using System.Drawing;
@@ -80,39 +81,43 @@ namespace Stock_Management.Forms
 
         private void EditBillBreakuDetail()
         {
-            DealerBill bill = SharedRepo.DBRepo.GetDealerBillByID(BillId);
-            if (bill == null)
-            {
-                MessageBox.Show("Bill not found");
-                Close();
-                return;
-            }
-            else if (bill.Dealer == null)
-            {
-                MessageBox.Show("Dealer not found");
-                Close();
-                return;
-            }
+            DealerBillReport dealerBillReport = SharedRepo.DBRepo.GetDealerBillReport(BillId);
 
-            txtDealerName.Text = bill.Dealer.Name;
-            txtBillDate.Text = bill.BillDate;
-            txtTotalBillAmount.Text = bill.TotalAmount.ToString();
-            txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
-            decimal breakupSum = bill.DealerBillBreakupList.Sum(x => x.TotalAmount);
-            txtTotalBreakupAmount.Text = breakupSum.ToString();
+            ShowFormInGroupBox(this, grpBoxBrakupCount, new DealerBillBreakupCountForm(BillId));
 
-            if (breakupSum == bill.TotalAmount)
-            {
-                txtTotalBreakupAmount.BackColor = System.Drawing.Color.LightGreen;
-            }
-            else if (breakupSum > bill.TotalAmount)
-            {
-                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Red;
-            }
-            else
-            {
-                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Orange;
-            }
+            //DealerBill bill = SharedRepo.DBRepo.GetDealerBillByID(BillId);
+            //if (bill == null)
+            //{
+            //    MessageBox.Show("Bill not found");
+            //    Close();
+            //    return;
+            //}
+            //else if (bill.Dealer == null)
+            //{
+            //    MessageBox.Show("Dealer not found");
+            //    Close();
+            //    return;
+            //}
+
+            //txtDealerName.Text = bill.Dealer.Name;
+            //txtBillDate.Text = bill.BillDate;
+            //txtTotalBillAmount.Text = bill.TotalAmount.ToString();
+            //txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
+            //decimal breakupSum = bill.DealerBillBreakupList.Sum(x => x.TotalAmount);
+            //txtTotalBreakupAmount.Text = breakupSum.ToString();
+
+            //if (breakupSum == bill.TotalAmount)
+            //{
+            //    txtTotalBreakupAmount.BackColor = Color.LightGreen;
+            //}
+            //else if (breakupSum > bill.TotalAmount)
+            //{
+            //    txtTotalBreakupAmount.BackColor = Color.Red;
+            //}
+            //else
+            //{
+            //    txtTotalBreakupAmount.BackColor = Color.Orange;
+            //}
 
 
             if (BillBreakupId != 0)
@@ -211,6 +216,6 @@ namespace Stock_Management.Forms
             ShowFormAsFixedDialog(this, productListForm);
         }
 
-        
+
     }
 }

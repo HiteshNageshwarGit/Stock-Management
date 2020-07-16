@@ -12,7 +12,6 @@ namespace StockEntity.Entity
         public string Color { get; set; }
         #endregion
 
-        public ICollection<DealerBillBreakup> DealerBillBreakupList { get; set; }
 
         public override string ToString()
         {

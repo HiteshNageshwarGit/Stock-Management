@@ -10,7 +10,6 @@ namespace StockEntity.Entity
         #endregion
 
         public Customer Customer { get; set; }
-        public ICollection<CustomerBillBreakup> CustomerBillBreakupList { get; set; }
 
         public new void Validate()
         {
@@ -24,10 +23,10 @@ namespace StockEntity.Entity
         public override string ToString()
         {
             int breakupCount = 0;
-            if (CustomerBillBreakupList != null && CustomerBillBreakupList.Count > 0)
-            {
-                breakupCount = CustomerBillBreakupList.Count;
-            }
+            //if (CustomerBillBreakupList != null && CustomerBillBreakupList.Count > 0)
+            //{
+            //    breakupCount = CustomerBillBreakupList.Count;
+            //}
             return breakupCount.ToString();
         }
     }

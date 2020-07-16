@@ -10,14 +10,18 @@ namespace StockEntity.Entity
         public string EntryDate { get; set; }
         public Dealer Dealer { get; set; }
 
-        public ICollection<DealerBillBreakup> DealerBillBreakupList { get; set; }
+
+
+
+        [NotMapped]
+        public string DealerName { get; set; }
 
         [NotMapped]
         public int BillBreakupCount
         {
             get
             {
-                return DealerBillBreakupList == null ? 0 : DealerBillBreakupList.Count;
+                return 0;// DealerBillBreakupList == null ? 0 : DealerBillBreakupList.Count;
             }
         }
 

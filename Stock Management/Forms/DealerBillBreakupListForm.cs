@@ -2,7 +2,6 @@
 using StockEntity.Entity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms
@@ -34,41 +33,7 @@ namespace Stock_Management.Forms
 
         internal void LoadBillBreakupList(bool reopenBillBreakupForm)
         {
-            DealerBill bill = SharedRepo.DBRepo.GetDealerBillByID(DEALER_BILL_ID);
-            if (bill == null)
-            {
-                MessageBox.Show("Bill not found");
-                Close();
-                return;
-            }
-            else if (bill.Dealer == null)
-            {
-                MessageBox.Show("Dealer not found");
-                Close();
-                return;
-            }
-
-            txtDealerName.Text = bill.Dealer.Name;
-            txtBillDate.Text = bill.BillDate;
-            txtTotalBillAmount.Text = bill.TotalAmount.ToString();
-            txtRemarks.Text = bill.Remarks;
-            txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
-            decimal breakupSum = bill.DealerBillBreakupList.Sum(x => x.TotalAmount);
-            txtTotalBreakupAmount.Text = breakupSum.ToString();
-
-            if (breakupSum == bill.TotalAmount)
-            {
-                txtTotalBreakupAmount.BackColor = System.Drawing.Color.LightGreen;
-            }
-            else if (breakupSum > bill.TotalAmount)
-            {
-                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Red;
-            }
-            else
-            {
-                txtTotalBreakupAmount.BackColor = System.Drawing.Color.Orange;
-            }
-
+            ShowFormInGroupBox(this, grpBoxBrakupCount, new DealerBillBreakupCountForm(DEALER_BILL_ID));
             List<DealerBillBreakup> BillBreakupsList = SharedRepo.DBRepo.GetDealerBillBreakupList(DEALER_BILL_ID);
             dgvBillBreakupList.DataSource = BillBreakupsList;
             dgvBillBreakupList.ClearSelection();
@@ -82,10 +47,6 @@ namespace Stock_Management.Forms
         private void btnAddBillBreakup_Click(object sender, EventArgs e)
         {
             OpenBillBreakupForm(0);
-            //DealerBillBreakupForm BillBreakupForm = new DealerBillBreakupForm();
-            //BillBreakupForm.BillId = DEALER_BILL_ID;
-            //BillBreakupForm.BillBreakupId = 0;
-            //ShowFormAsFixedDialog(this, BillBreakupForm);
         }
 
         private void dgvBillBreakupList_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -108,12 +69,6 @@ namespace Stock_Management.Forms
             BillBreakupForm.BillId = DEALER_BILL_ID;
             BillBreakupForm.BillBreakupId = dealerBillBreakupId;
             ShowFormAsFixedDialog(this, BillBreakupForm);
-
-
-            //DealerBillBreakupForm BillBreakupForm = new DealerBillBreakupForm();
-            //BillBreakupForm.BillId = DEALER_BILL_ID;
-            //BillBreakupForm.BillBreakupId = 0;
-            //ShowFormAsFixedDialog(this, BillBreakupForm);
         }
 
     }

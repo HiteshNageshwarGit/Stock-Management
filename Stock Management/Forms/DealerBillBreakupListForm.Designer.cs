@@ -40,22 +40,9 @@
             this.ColUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnitSellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDetail = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtDealerName = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.txtBillDate = new System.Windows.Forms.TextBox();
-            this.txtTotalBillAmount = new System.Windows.Forms.TextBox();
-            this.txtTotalBreakupCount = new System.Windows.Forms.TextBox();
-            this.txtTotalBreakupAmount = new System.Windows.Forms.TextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtRemarks = new System.Windows.Forms.RichTextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.grpBoxBrakupCount = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -65,9 +52,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.btnAddBillBreakup);
             this.groupBox2.Controls.Add(this.dgvBillBreakupList);
-            this.groupBox2.Location = new System.Drawing.Point(13, 223);
+            this.groupBox2.Location = new System.Drawing.Point(13, 154);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(739, 407);
+            this.groupBox2.Size = new System.Drawing.Size(739, 476);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Bill Breakup";
@@ -116,7 +103,7 @@
             this.dgvBillBreakupList.ReadOnly = true;
             this.dgvBillBreakupList.RowHeadersVisible = false;
             this.dgvBillBreakupList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBillBreakupList.Size = new System.Drawing.Size(727, 348);
+            this.dgvBillBreakupList.Size = new System.Drawing.Size(727, 417);
             this.dgvBillBreakupList.TabIndex = 0;
             this.dgvBillBreakupList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillBreakupList_CellContentClick);
             // 
@@ -184,149 +171,23 @@
             this.ColDetail.ReadOnly = true;
             this.ColDetail.Text = "Details";
             // 
-            // label8
+            // grpBoxBrakupCount
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(6, 24);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(50, 15);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Dealer";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(344, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(111, 15);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "No. Of Breakups";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 53);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 15);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Bill Date";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(6, 82);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Bill Amount";
-            // 
-            // txtDealerName
-            // 
-            this.txtDealerName.Enabled = false;
-            this.txtDealerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDealerName.Location = new System.Drawing.Point(100, 24);
-            this.txtDealerName.Name = "txtDealerName";
-            this.txtDealerName.Size = new System.Drawing.Size(224, 23);
-            this.txtDealerName.TabIndex = 12;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(344, 53);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(148, 15);
-            this.label14.TabIndex = 10;
-            this.label14.Text = "Total Breakup Amount";
-            // 
-            // txtBillDate
-            // 
-            this.txtBillDate.Enabled = false;
-            this.txtBillDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBillDate.Location = new System.Drawing.Point(100, 53);
-            this.txtBillDate.Name = "txtBillDate";
-            this.txtBillDate.Size = new System.Drawing.Size(224, 23);
-            this.txtBillDate.TabIndex = 13;
-            // 
-            // txtTotalBillAmount
-            // 
-            this.txtTotalBillAmount.Enabled = false;
-            this.txtTotalBillAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalBillAmount.Location = new System.Drawing.Point(100, 82);
-            this.txtTotalBillAmount.Name = "txtTotalBillAmount";
-            this.txtTotalBillAmount.Size = new System.Drawing.Size(224, 23);
-            this.txtTotalBillAmount.TabIndex = 14;
-            // 
-            // txtTotalBreakupCount
-            // 
-            this.txtTotalBreakupCount.Enabled = false;
-            this.txtTotalBreakupCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalBreakupCount.Location = new System.Drawing.Point(517, 21);
-            this.txtTotalBreakupCount.Name = "txtTotalBreakupCount";
-            this.txtTotalBreakupCount.Size = new System.Drawing.Size(137, 23);
-            this.txtTotalBreakupCount.TabIndex = 15;
-            // 
-            // txtTotalBreakupAmount
-            // 
-            this.txtTotalBreakupAmount.Enabled = false;
-            this.txtTotalBreakupAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTotalBreakupAmount.Location = new System.Drawing.Point(517, 50);
-            this.txtTotalBreakupAmount.Name = "txtTotalBreakupAmount";
-            this.txtTotalBreakupAmount.Size = new System.Drawing.Size(137, 23);
-            this.txtTotalBreakupAmount.TabIndex = 17;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.txtRemarks);
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Controls.Add(this.txtTotalBreakupAmount);
-            this.groupBox3.Controls.Add(this.txtTotalBreakupCount);
-            this.groupBox3.Controls.Add(this.txtTotalBillAmount);
-            this.groupBox3.Controls.Add(this.txtBillDate);
-            this.groupBox3.Controls.Add(this.label14);
-            this.groupBox3.Controls.Add(this.txtDealerName);
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.label6);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Location = new System.Drawing.Point(12, 12);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(660, 209);
-            this.groupBox3.TabIndex = 5;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Dealer And Bill Details";
-            // 
-            // txtRemarks
-            // 
-            this.txtRemarks.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtRemarks.Enabled = false;
-            this.txtRemarks.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtRemarks.Location = new System.Drawing.Point(100, 120);
-            this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(554, 60);
-            this.txtRemarks.TabIndex = 19;
-            this.txtRemarks.Text = "";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 120);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 15);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Bill Remarks";
+            this.grpBoxBrakupCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBoxBrakupCount.Location = new System.Drawing.Point(12, 12);
+            this.grpBoxBrakupCount.Name = "grpBoxBrakupCount";
+            this.grpBoxBrakupCount.Size = new System.Drawing.Size(734, 122);
+            this.grpBoxBrakupCount.TabIndex = 5;
+            this.grpBoxBrakupCount.TabStop = false;
+            this.grpBoxBrakupCount.Text = "Dealer And Bill Details";
             // 
             // DealerBillBreakupListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 642);
-            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.grpBoxBrakupCount);
             this.Controls.Add(this.groupBox2);
             this.MinimumSize = new System.Drawing.Size(750, 550);
             this.Name = "DealerBillBreakupListForm";
@@ -335,8 +196,6 @@
             this.Load += new System.EventHandler(this.BillBreakupListForm_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -345,19 +204,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dgvBillBreakupList;
         private System.Windows.Forms.Button btnAddBillBreakup;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtDealerName;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtBillDate;
-        private System.Windows.Forms.TextBox txtTotalBillAmount;
-        private System.Windows.Forms.TextBox txtTotalBreakupCount;
-        private System.Windows.Forms.TextBox txtTotalBreakupAmount;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RichTextBox txtRemarks;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColQuantityInBox;
@@ -366,5 +212,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColUnitPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColUnitSellingPrice;
         private System.Windows.Forms.DataGridViewLinkColumn ColDetail;
+        private System.Windows.Forms.GroupBox grpBoxBrakupCount;
     }
 }

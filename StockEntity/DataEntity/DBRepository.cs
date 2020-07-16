@@ -2,6 +2,7 @@
 using StockEntity.EntityX;
 using StockEntity.Helper;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -279,14 +280,61 @@ namespace StockEntity
             return context.DealerBills.Find(id);
         }
 
+        public DealerBillReport GetDealerBillReport(int billId)
+        {
+            var billBreakupGroped = from DBB in context.DealerBillBreakups
+                              group DBB by DBB.DealerBillId into g
+                              select new
+                              {
+                                  DealerBillId = g.Key,
+                                  DBBCount = g.Count(),
+                                  DBBAmount = g.Sum(x => x.TotalAmount)
+                              };
+
+            var joinQuery = from D in context.Dealers
+                            from DB in context.DealerBills.Where(x => x.Id == billId)                            
+                            from DBB in billBreakupGroped.Where(g => g.DealerBillId == DB.Id).DefaultIfEmpty()
+                            select new DealerBillReport
+                            {
+                                DealerId = DB.DealerId,
+                                Id = DB.Id,
+                                DealerName = D.Name,
+                                BillDate = DB.BillDate,
+                                TotalAmount = DB.TotalAmount,
+                                BreakupCount = DBB == null ? 0 : DBB.DBBCount,
+                                BreakupSum = DBB == null ? 0 : DBB.DBBAmount,
+                            };
+            return joinQuery.FirstOrDefault();
+        }
+
         public List<DealerBill> GetDealerBillList(int dealerId)
         {
-            //var dd = context.DealerBills.Where(db => db.DealerId == dealerId).Select(db => new DealerBill
-            //{
-            //    BillBreakupCount = db.DealerBillBreakupList.Count
-            //}).ToList();
+            //return context.DealerBills.Where(x => x.DealerId == dealerId).Include(x => x.DealerBillBreakupList).OrderByDescending(x => x.EntryDate).ToList();
+            return context.DealerBills.Where(x => x.DealerId == dealerId).OrderByDescending(x => x.EntryDate).ToList();
 
-            return context.DealerBills.Where(x => x.DealerId == dealerId).Include(x => x.DealerBillBreakupList).OrderByDescending(x => x.EntryDate).ToList();
+            //var dbbGrpQuery = from DBB in context.DealerBillBreakups
+            //                  group DBB by DBB.DealerBillId into g
+            //                  select new
+            //                  {
+            //                      DealerBillId = g.Key,
+            //                      DBBCount = g.Count(),
+            //                      DBBAmount = g.Sum(x => x.TotalAmount)
+            //                  };
+            //var tt = dbbGrpQuery.ToList();
+
+            //var joinQuery = from DB in context.DealerBills.Where(x => x.DealerId == dealerId)
+            //                from DBB in dbbGrpQuery.Where(g => g.DealerBillId == DB.Id).DefaultIfEmpty()
+            //                select new DealerBillReport
+            //                {
+            //                    DealerId = DB.DealerId,
+            //                    Id = DB.Id,
+            //                    BillDate = DB.BillDate,
+            //                    TotalAmount = DB.TotalAmount,
+            //                    BreakupCount = DBB == null ? 0 : DBB.DBBCount,
+            //                    BreakupSum = DBB == null ? 0 : DBB.DBBAmount,
+            //                };
+            //List<DealerBillReport> list = joinQuery.ToList();
+            //return list;
         }
         #endregion
 
@@ -492,7 +540,6 @@ namespace StockEntity
         public List<ProductReport> GetProductReport()
         {
             var groupQuery = from DBB in context.DealerBillBreakups
-                                 //group DBB by DBB.ProductId into groupedBillBreakup
                              group DBB by new { DBB.ProductId, DBB.UnitPrice } into groupedBillBreakup
                              select new
                              {
