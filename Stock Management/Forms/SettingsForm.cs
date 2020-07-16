@@ -29,12 +29,13 @@ namespace Stock_Management.Forms
             {
                 MessageBox.Show("Please login as Admin to access this page");
                 Close();
+                return;
             }
 
             EditPriceCode();
         }
 
-       
+
         private void btnSavePriceCode_Click(object sender, EventArgs e)
         {
             SavePriceDodes();
@@ -65,11 +66,10 @@ namespace Stock_Management.Forms
             SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_6, Value = txt6.Text });
             SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_7, Value = txt7.Text });
             SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_8, Value = txt8.Text });
-            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_8, Value = txt9.Text });
+            SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_9, Value = txt9.Text });
             SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_0, Value = txt0.Text });
             SharedRepo.DBRepo.SavePriceCode(new KeyValue() { Key = PriceCode.KEY_DOT, Value = txtDot.Text });
             MessageBox.Show("Saved");
         }
-
     }
 }

@@ -39,6 +39,7 @@ namespace StockEntity.Helper
 
             SetValueFromDB();
         }
+
         public static void SetValueFromDB()
         {
             DBRepository dB = new DBRepository();
@@ -54,12 +55,15 @@ namespace StockEntity.Helper
                     keyValue.Value = "^";
                 }
             }
-
             PriceCodeList.Add(new KeyValue { Key = "FAKE", Value = "#" });
             CodeLoadedFromDB = true;
         }
 
         public static string GetPriceCodeForNumber(decimal number)
+        {
+            return GetPriceCodeForNumber(number.ToString());
+        }
+        public static string GetPriceCodeForNumber(string priceAsString)
         {
             if (!CodeLoadedFromDB)
             {
@@ -71,7 +75,6 @@ namespace StockEntity.Helper
                 return "XXXXX";
             }
 
-            string priceAsString = number.ToString();
             StringBuilder priceAsCode = new StringBuilder();
             foreach (char c in priceAsString)
             {
@@ -82,10 +85,6 @@ namespace StockEntity.Helper
                 }
             }
             return priceAsCode.ToString();
-        }
-        public static string GetPriceCodeForNumber(string number)
-        {
-            return GetPriceCodeForNumber(decimal.Parse(number));
         }
     }
 }

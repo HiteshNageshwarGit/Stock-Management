@@ -2,7 +2,6 @@
 using StockEntity.EntityX;
 using StockEntity.Helper;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -23,15 +22,29 @@ namespace StockEntity
             keyValue.TimeStamp = DateHelper.GetDateNowString_Sortable();
             if (keyValue.Id == 0)
             {
-                context.KeyValues.Add(keyValue);
-                context.SaveChanges();
+                KeyValue existingKeyValue = context.KeyValues.Where(x => x.Key.Trim().ToLower() == keyValue.Key.Trim().ToLower()).FirstOrDefault();
+                if (existingKeyValue == null)
+                {
+                    context.KeyValues.Add(keyValue);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    existingKeyValue.TimeStamp = DateHelper.GetDateNowString_Sortable();
+                    UpadateKeyValue(existingKeyValue);
+                }
             }
             else
             {
-                context.KeyValues.Attach(keyValue);
-                context.Entry(keyValue).State = EntityState.Modified;
-                context.SaveChanges();
+                UpadateKeyValue(keyValue);
             }
+        }
+
+        private void UpadateKeyValue(KeyValue keyValue)
+        {
+            context.KeyValues.Attach(keyValue);
+            context.Entry(keyValue).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         public void SavePriceCode(KeyValue keyValue)
@@ -283,16 +296,16 @@ namespace StockEntity
         public DealerBillReport GetDealerBillReport(int billId)
         {
             var billBreakupGroped = from DBB in context.DealerBillBreakups
-                              group DBB by DBB.DealerBillId into g
-                              select new
-                              {
-                                  DealerBillId = g.Key,
-                                  DBBCount = g.Count(),
-                                  DBBAmount = g.Sum(x => x.TotalAmount)
-                              };
+                                    group DBB by DBB.DealerBillId into g
+                                    select new
+                                    {
+                                        DealerBillId = g.Key,
+                                        DBBCount = g.Count(),
+                                        DBBAmount = g.Sum(x => x.TotalAmount)
+                                    };
 
             var joinQuery = from D in context.Dealers
-                            from DB in context.DealerBills.Where(x => x.Id == billId)                            
+                            from DB in context.DealerBills.Where(x => x.Id == billId)
                             from DBB in billBreakupGroped.Where(g => g.DealerBillId == DB.Id).DefaultIfEmpty()
                             select new DealerBillReport
                             {
