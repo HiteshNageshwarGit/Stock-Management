@@ -420,7 +420,6 @@
             this.MinimumSize = new System.Drawing.Size(700, 550);
             this.Name = "DealerBillBreakupForm";
             this.Text = "Dealer Bill Breakup";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BillBreakupForm_FormClosing);
             this.Load += new System.EventHandler(this.BillBreakupForm_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

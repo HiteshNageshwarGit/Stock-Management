@@ -8,8 +8,8 @@ namespace Stock_Management.Forms
 {
     public partial class ProductListForm : BaseForm
     {
-        List<Product> productList;
-        Product selectedProduct;
+        private List<Product> productList;
+        private Product selectedProduct;
 
         public ProductListForm()
         {
@@ -34,17 +34,7 @@ namespace Stock_Management.Forms
 
             LoadProductList();
         }
-        private void ProductListForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //if (CallerForm == null && CallerForm.Name != null)
-            //{
-            //    return;
-            //}
-            //else if (selectedProduct != null && CallerForm.Name == "DealerBillBreakupForm")
-            //{
-            //    ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
-            //}
-        }
+       
         private void txtSearchProduct_KeyUp(object sender, KeyEventArgs e)
         {
             LoadProductList();
@@ -52,8 +42,7 @@ namespace Stock_Management.Forms
 
         private void btnAddNewProduct_Click(object sender, EventArgs e)
         {
-            ProductForm productForm = new ProductForm();
-            productForm.PRODUCT_ID = 0;
+            ProductForm productForm = new ProductForm(0);
             ShowFormAsFixedDialog(this, productForm);
         }
 
@@ -67,8 +56,7 @@ namespace Stock_Management.Forms
             selectedProduct = (Product)dgvProductList.Rows[e.RowIndex].DataBoundItem;
             if (GetSelectedCellText(dgvProductList, e) == "Details")
             {
-                ProductForm productForm = new ProductForm();
-                productForm.PRODUCT_ID = selectedProduct.Id;
+                ProductForm productForm = new ProductForm(selectedProduct.Id);
                 ShowFormAsFixedDialog(this, productForm);
             }
             else if (GetSelectedCellText(dgvProductList, e) == "Select")
@@ -91,7 +79,5 @@ namespace Stock_Management.Forms
             dgvProductList.DataSource = productList;
             dgvProductList.ClearSelection();
         }
-
-       
     }
 }

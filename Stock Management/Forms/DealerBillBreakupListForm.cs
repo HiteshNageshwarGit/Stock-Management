@@ -8,10 +8,11 @@ namespace Stock_Management.Forms
 {
     public partial class DealerBillBreakupListForm : BaseForm
     {
-        public int DEALER_BILL_ID { get; set; }
-        public DealerBillBreakupListForm()
+        private int _dealetBillId { get; set; }
+        public DealerBillBreakupListForm(int dealetBillId)
         {
             InitializeComponent();
+            _dealetBillId = dealetBillId;
             dgvBillBreakupList.AutoGenerateColumns = false;
             ColDetail.UseColumnTextForLinkValue = true;
         }
@@ -21,11 +22,6 @@ namespace Stock_Management.Forms
             LoadBillBreakupList(false);
         }
 
-        private void BillBreakupListForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
@@ -33,8 +29,8 @@ namespace Stock_Management.Forms
 
         internal void LoadBillBreakupList(bool reopenBillBreakupForm)
         {
-            ShowFormInGroupBox(this, grpBoxBrakupCount, new DealerBillBreakupCountForm(DEALER_BILL_ID));
-            List<DealerBillBreakup> BillBreakupsList = SharedRepo.DBRepo.GetDealerBillBreakupList(DEALER_BILL_ID);
+            ShowFormInGroupBox(this, grpBoxBrakupCount, new DealerBillBreakupCountForm(_dealetBillId));
+            List<DealerBillBreakup> BillBreakupsList = SharedRepo.DBRepo.GetDealerBillBreakupList(_dealetBillId);
             dgvBillBreakupList.DataSource = BillBreakupsList;
             dgvBillBreakupList.ClearSelection();
 
@@ -65,9 +61,7 @@ namespace Stock_Management.Forms
 
         private void OpenBillBreakupForm(int dealerBillBreakupId)
         {
-            DealerBillBreakupForm BillBreakupForm = new DealerBillBreakupForm();
-            BillBreakupForm.BillId = DEALER_BILL_ID;
-            BillBreakupForm.BillBreakupId = dealerBillBreakupId;
+            DealerBillBreakupForm BillBreakupForm = new DealerBillBreakupForm(_dealetBillId, dealerBillBreakupId);
             ShowFormAsFixedDialog(this, BillBreakupForm);
         }
 

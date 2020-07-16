@@ -192,7 +192,6 @@
             this.MinimumSize = new System.Drawing.Size(750, 550);
             this.Name = "DealerBillBreakupListForm";
             this.Text = "Dealer Bill Breakup List";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BillBreakupListForm_FormClosing);
             this.Load += new System.EventHandler(this.BillBreakupListForm_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).EndInit();

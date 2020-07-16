@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -46,39 +45,6 @@ namespace Stock_Management.Forms
                 e.Handled = true;
             }
         }
-
-        //public void CloseMDIChildForms(Form parentForm)
-        //{
-        //    FormCollection formCollection = Application.OpenForms;
-        //    if (formCollection != null && formCollection.Count > 0)
-        //    {
-        //        foreach (Form formItem in formCollection)
-        //        {
-        //            if (formItem.Name != parentForm.Name
-        //                //&& formItem.Name != childForm.Name
-        //                )
-        //            {
-        //                formItem.Close();
-        //                formItem.Dispose();
-        //                //formItem.Hide();
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-        //public void ShowFormAsMDIChild(Form parentForm, Form childForm)
-        //{
-        //    parentForm.IsMdiContainer = true;
-        //    childForm.MdiParent = parentForm;
-        //    childForm.MaximizeBox = false;
-        //    childForm.MinimizeBox = false;
-        //    childForm.ShowInTaskbar = false;
-        //    childForm.FormBorderStyle = FormBorderStyle.None;
-        //    childForm.WindowState = FormWindowState.Normal;
-        //    childForm.Dock = DockStyle.Fill;
-        //    childForm.Show();
-        //    childForm.Focus();
-        //}
 
         internal void ShowFormAsFixedDialog(BaseForm parentForm, BaseForm childForm)
         {

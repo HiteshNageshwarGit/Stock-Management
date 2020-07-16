@@ -11,8 +11,8 @@ namespace Stock_Management
 {
     public partial class MainForm : BaseForm
     {
-        int RetryCount = 0;
-        PersonListForm personListForm;
+        private int RetryCount = 0;
+        private PersonListForm personListForm;
         public MainForm()
         {
             InitializeComponent();
@@ -158,8 +158,7 @@ namespace Stock_Management
 
         private void OpenPersonListForm(int personType)
         {
-            personListForm = new PersonListForm();
-            personListForm.PERSON_TYPE = personType;
+            personListForm = new PersonListForm(personType);
             ShowFormResizableAsDialog(this, personListForm);
         }
 

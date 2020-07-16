@@ -3,20 +3,20 @@ using StockEntity.Entity;
 using StockEntity.EntityX;
 using StockEntity.Helper;
 using System;
-using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms
 {
     public partial class DealerBillBreakupForm : BaseForm
     {
-        DealerBillBreakup dealerBillBreakup;
-        public int BillId;
-        public int BillBreakupId;
-        public DealerBillBreakupForm()
+        private DealerBillBreakup dealerBillBreakup;
+        private  int _dealerBillId;
+        private  int _dealerBillBreakupId;
+        public DealerBillBreakupForm(int dealerBillId, int dealerBillBreakupId)
         {
             InitializeComponent();
+            _dealerBillId = dealerBillId;
+            _dealerBillBreakupId = dealerBillBreakupId;
             PrepareTooltips(this);
         }
 
@@ -25,10 +25,6 @@ namespace Stock_Management.Forms
             EditBillBreakuDetail();
         }
 
-        private void BillBreakupForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.F))
@@ -51,11 +47,15 @@ namespace Stock_Management.Forms
 
         private void NumericControl_ValueChange(object sender, EventArgs e)
         {
-            CalculateQuantityAndUnitPrice();
+            // On up/down key get value direct from control
+            CalculateQuantityAndUnitPrice(numTotalAmount.Value, numTotalBoxes.Value, numQuantityInABox.Value);
         }
         private void NumericControl_KeyUp(object sender, KeyEventArgs e)
         {
-            CalculateQuantityAndUnitPrice();
+            // On key up explicitly get value from text box
+            CalculateQuantityAndUnitPrice(decimal.Parse(numTotalAmount.Controls[1].Text),
+                                                        decimal.Parse(numTotalBoxes.Controls[1].Text),
+                                                        decimal.Parse(numQuantityInABox.Controls[1].Text));
         }
 
         private void NumericControlWithoutDecimal_KeyPress(object sender, KeyPressEventArgs e)
@@ -81,49 +81,12 @@ namespace Stock_Management.Forms
 
         private void EditBillBreakuDetail()
         {
-            DealerBillReport dealerBillReport = SharedRepo.DBRepo.GetDealerBillReport(BillId);
+            ShowFormInGroupBox(this, grpBoxBrakupCount, new DealerBillBreakupCountForm(_dealerBillId));
 
-            ShowFormInGroupBox(this, grpBoxBrakupCount, new DealerBillBreakupCountForm(BillId));
-
-            //DealerBill bill = SharedRepo.DBRepo.GetDealerBillByID(BillId);
-            //if (bill == null)
-            //{
-            //    MessageBox.Show("Bill not found");
-            //    Close();
-            //    return;
-            //}
-            //else if (bill.Dealer == null)
-            //{
-            //    MessageBox.Show("Dealer not found");
-            //    Close();
-            //    return;
-            //}
-
-            //txtDealerName.Text = bill.Dealer.Name;
-            //txtBillDate.Text = bill.BillDate;
-            //txtTotalBillAmount.Text = bill.TotalAmount.ToString();
-            //txtTotalBreakupCount.Text = bill.DealerBillBreakupList.Count.ToString();
-            //decimal breakupSum = bill.DealerBillBreakupList.Sum(x => x.TotalAmount);
-            //txtTotalBreakupAmount.Text = breakupSum.ToString();
-
-            //if (breakupSum == bill.TotalAmount)
-            //{
-            //    txtTotalBreakupAmount.BackColor = Color.LightGreen;
-            //}
-            //else if (breakupSum > bill.TotalAmount)
-            //{
-            //    txtTotalBreakupAmount.BackColor = Color.Red;
-            //}
-            //else
-            //{
-            //    txtTotalBreakupAmount.BackColor = Color.Orange;
-            //}
-
-
-            if (BillBreakupId != 0)
+            if (_dealerBillBreakupId != 0)
             {
                 Text = "Edit Dealer Bill Breakup";
-                dealerBillBreakup = SharedRepo.DBRepo.GetDealerBillBreakupByID(BillBreakupId);
+                dealerBillBreakup = SharedRepo.DBRepo.GetDealerBillBreakupByID(_dealerBillBreakupId);
                 if (dealerBillBreakup == null)
                 {
                     btnSaveBillBreakups.Enabled = false;
@@ -148,7 +111,7 @@ namespace Stock_Management.Forms
             {
                 Text = "Add Dealer Bill Breakup";
                 dealerBillBreakup = new DealerBillBreakup();
-                dealerBillBreakup.DealerBillId = BillId;
+                dealerBillBreakup.DealerBillId = _dealerBillId;
                 dealerBillBreakup.EntryDate = DateHelper.GetTodayDateString();
             }
         }
@@ -185,14 +148,10 @@ namespace Stock_Management.Forms
         }
 
 
-        private void CalculateQuantityAndUnitPrice()
+        private void CalculateQuantityAndUnitPrice(decimal totalAmount, decimal totalBoxes, decimal quantityInABox)
         {
             try
             {
-                decimal totalAmount = decimal.Parse(numTotalAmount.Controls[1].Text); // Getting value direct from control with decimal resets cursor position to 0 indedx
-                decimal totalBoxes = decimal.Parse(numTotalBoxes.Controls[1].Text);
-                decimal quantityInABox = decimal.Parse(numQuantityInABox.Controls[1].Text);
-
                 numTotalQuantity.Value = totalBoxes * quantityInABox;
                 numAvailableQuantity.Value = numTotalQuantity.Value;
                 if (totalAmount == 0)

@@ -1,6 +1,5 @@
 ﻿using Stock_Management.Shared;
 using StockEntity.EntityX;
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -8,7 +7,7 @@ namespace Stock_Management.Forms
 {
     public partial class CustomerCartForm : BaseForm
     {
-        CustomerCartDetailForm customerBillBreakListForm = new CustomerCartDetailForm();
+        private CustomerCartDetailForm customerBillBreakListForm = new CustomerCartDetailForm();
         public CustomerCartForm()
         {
             InitializeComponent();

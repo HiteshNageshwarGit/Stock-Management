@@ -187,7 +187,6 @@
             this.MinimumSize = new System.Drawing.Size(730, 530);
             this.Name = "ProductListForm";
             this.Text = "Product List";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProductListForm_FormClosing);
             this.Load += new System.EventHandler(this.ProductListForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);

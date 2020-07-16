@@ -8,11 +8,12 @@ namespace Stock_Management.Forms
 {
     public partial class ProductForm : BaseForm
     {
-        Product product;
-        public int PRODUCT_ID { get; set; }
-        public ProductForm()
+        private Product product;
+        private int _productId;
+        public ProductForm(int productId)
         {
             InitializeComponent();
+            _productId = productId;
             PrepareTooltips(this);
         }
 
@@ -45,14 +46,14 @@ namespace Stock_Management.Forms
 
         private void EditProduct()
         {
-            if (PRODUCT_ID == 0)
+            if (_productId == 0)
             {
                 SetFormBehaviour(CRUD_OP_ADD);
                 product = new Product();
             }
             else
             {
-                product = SharedRepo.DBRepo.GetProductByID(PRODUCT_ID);
+                product = SharedRepo.DBRepo.GetProductByID(_productId);
                 if (product == null)
                 {
                     MessageBox.Show("Product not found");

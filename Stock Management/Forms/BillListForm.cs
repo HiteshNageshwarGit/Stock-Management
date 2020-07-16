@@ -8,21 +8,23 @@ namespace Stock_Management.Forms
 {
     public partial class BillListForm : BaseForm
     {
-        public int PERSON_TYPE { get; set; } // Can be Dealer or Customer
-        public int PERSON_ID { get; set; } // Can be Dealer ID or Customer ID
-        public BillListForm()
+        private int _personType; // Can be Dealer or Customer
+        private int _personId; // Can be Dealer ID or Customer ID
+        public BillListForm(int personType, int personId)
         {
             InitializeComponent();
+            _personType = personType;
+            _personId = personId;
         }
 
         private void BillListForm_Load(object sender, EventArgs e)
         {
-            if (PERSON_TYPE == Person.DEALER)
+            if (_personType == Person.DEALER)
             {
                 Text = "Dealer Bill List";
                 btnAddBill.Text = "Add Dealer Bill";
             }
-            else if (PERSON_TYPE == Person.CUSTOMER)
+            else if (_personType == Person.CUSTOMER)
             {
                 Text = "Customer Bill List";
                 btnAddBill.Text = "Add Customer Bill";
@@ -67,29 +69,23 @@ namespace Stock_Management.Forms
             }
 
             int selectedBillId = ((Bill)dgvBillList.Rows[e.RowIndex].DataBoundItem).Id;
-            if (PERSON_TYPE == Person.DEALER)
+            if (_personType == Person.DEALER)
             {
                 if (GetSelectedCellText(dgvBillList, e) == "Details")
                 {
                     OpenDealerBillForm(selectedBillId);
-                    //DealerBillForm billForm = new DealerBillForm();
-                    //billForm.DealerId = PERSON_ID;
-                    //billForm.BILL_ID = selectedBillId;
-                    //ShowFormAsFixedDialog(this, billForm);
                 }
                 else if (GetSelectedCellText(dgvBillList, e) == "Breakups")
                 {
-                    DealerBillBreakupListForm billBreakupForm = new DealerBillBreakupListForm();
-                    billBreakupForm.DEALER_BILL_ID = selectedBillId;
+                    DealerBillBreakupListForm billBreakupForm = new DealerBillBreakupListForm(selectedBillId);
                     ShowFormResizableAsDialog(this, billBreakupForm);
                 }
             }
-            else if (PERSON_TYPE == Person.CUSTOMER)
+            else if (_personType == Person.CUSTOMER)
             {
                 if (GetSelectedCellText(dgvBillList, e) == "Details")
                 {
-                    CustomerBillBreakupListForm customerBillBreakupListForm = new CustomerBillBreakupListForm();
-                    customerBillBreakupListForm.CUSTOMER_BILL_ID = selectedBillId;
+                    CustomerBillBreakupListForm customerBillBreakupListForm = new CustomerBillBreakupListForm(selectedBillId);
                     ShowFormResizableAsDialog(this, customerBillBreakupListForm);
                 }
             }
@@ -97,28 +93,28 @@ namespace Stock_Management.Forms
 
         internal void LoadBillList()
         {
-            if (PERSON_TYPE == Person.DEALER)
+            if (_personType == Person.DEALER)
             {
-                Dealer dealer = SharedRepo.DBRepo.GetDealerByID(PERSON_ID);
+                Dealer dealer = SharedRepo.DBRepo.GetDealerByID(_personId);
                 if (dealer == null)
                 {
                     MessageBox.Show("Dealer not found");
                     return;
                 }
                 txtPersonName.Text = dealer.Name;
-                List<DealerBill> billList = SharedRepo.DBRepo.GetDealerBillList(PERSON_ID);
+                List<DealerBill> billList = SharedRepo.DBRepo.GetDealerBillList(_personId);
                 dgvBillList.DataSource = billList;
             }
-            else if (PERSON_TYPE == Person.CUSTOMER)
+            else if (_personType == Person.CUSTOMER)
             {
-                Customer customer = SharedRepo.DBRepo.GetCustomerByID(PERSON_ID);
+                Customer customer = SharedRepo.DBRepo.GetCustomerByID(_personId);
                 if (customer == null)
                 {
                     MessageBox.Show("Dealer not found");
                     return;
                 }
                 txtPersonName.Text = customer.Name;
-                List<CustomerBill> billList = SharedRepo.DBRepo.GetCustomerBillList(PERSON_ID);
+                List<CustomerBill> billList = SharedRepo.DBRepo.GetCustomerBillList(_personId);
                 dgvBillList.DataSource = billList;
             }
             dgvBillList.ClearSelection();
@@ -126,21 +122,12 @@ namespace Stock_Management.Forms
 
         public void SetFormBehaviour()
         {
-            //if (PERSON_TYPE == Person.CUSTOMER)
-            //{
-            //    btnAddBill.Visible = false;
-            //    btnAddBill.Enabled = false;
-            //    return;
-            //}
         }
 
         private void OpenDealerBillForm(int billId)
         {
-            DealerBillForm billForm = new DealerBillForm();
-            billForm.DealerId = PERSON_ID;
-            billForm.BILL_ID = billId;
+            DealerBillForm billForm = new DealerBillForm(_personId, billId);
             ShowFormAsFixedDialog(this, billForm);
         }
-
     }
 }

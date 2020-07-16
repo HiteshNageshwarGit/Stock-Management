@@ -8,14 +8,15 @@ namespace Stock_Management.Forms
 {
     public partial class PersonForm : BaseForm
     {
-        public int PERSON_TYPE { get; set; } // Can be Dealer or Customer
-        public int PERSON_ID { get; set; } // Can be Dealer ID or Customer ID
+        private int _personType; // Can be Dealer or Customer
+        private int _personId;// Can be Dealer ID or Customer ID
+        private Person person;
 
-        Person person;
-
-        public PersonForm()
+        public PersonForm(int personType, int personId)
         {
             InitializeComponent();
+            _personType = personType;
+            _personId = personId;
             PrepareTooltips(this);
         }
 
@@ -46,12 +47,12 @@ namespace Stock_Management.Forms
         }
         private void PersonForm_Load(object sender, EventArgs e)
         {
-            Text = PERSON_ID == 0 ? "Add" : "Edit";
-            if (PERSON_TYPE == Person.DEALER)
+            Text = _personId == 0 ? "Add" : "Edit";
+            if (_personType == Person.DEALER)
             {
                 Text = Text + " " + "Dealer";
             }
-            else if (PERSON_TYPE == Person.CUSTOMER)
+            else if (_personType == Person.CUSTOMER)
             {
                 Text = Text + " " + "Customer";
             }
@@ -62,18 +63,7 @@ namespace Stock_Management.Forms
             }
             EditPerson();
         }
-
-        private void PersonForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            //if (CallerForm == null && CallerForm.Name !=null)
-            //{
-            //    return;
-            //}
-            //else if (CallerForm.Name == "PersonListForm")
-            //{
-            //    ((PersonListForm)CallerForm).LoadPersonList();
-            //}
-        }
+      
         private void btnSavePerson_Click(object sender, EventArgs e)
         {
             SavePerson();
@@ -81,15 +71,15 @@ namespace Stock_Management.Forms
 
         private void EditPerson()
         {
-            if (PERSON_ID != 0)
+            if (_personId != 0)
             {
-                if (PERSON_TYPE == Person.DEALER)
+                if (_personType == Person.DEALER)
                 {
-                    person = SharedRepo.DBRepo.GetDealerByID(PERSON_ID);
+                    person = SharedRepo.DBRepo.GetDealerByID(_personId);
                 }
-                else if (PERSON_TYPE == Person.CUSTOMER)
+                else if (_personType == Person.CUSTOMER)
                 {
-                    person = SharedRepo.DBRepo.GetCustomerByID(PERSON_ID);
+                    person = SharedRepo.DBRepo.GetCustomerByID(_personId);
                 }
 
                 txtName.Text = person.Name;
@@ -106,7 +96,7 @@ namespace Stock_Management.Forms
             }
             else
             {
-                if (PERSON_TYPE == Person.DEALER)
+                if (_personType == Person.DEALER)
                 {
                     person = new Dealer();
                 }
@@ -133,7 +123,7 @@ namespace Stock_Management.Forms
                 return;
             }
 
-            if (PERSON_TYPE == Person.DEALER)
+            if (_personType == Person.DEALER)
             {
                 if (SharedRepo.DBRepo.DoesDealerNameExists((Dealer)person))
                 {

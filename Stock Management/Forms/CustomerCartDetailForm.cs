@@ -11,8 +11,8 @@ namespace Stock_Management.Forms
 {
     public partial class CustomerCartDetailForm : BaseForm
     {
-        List<ProductInCart> productListCart = new List<ProductInCart>();
-        CustomerBill customerBill = new CustomerBill();
+        private List<ProductInCart> productListCart = new List<ProductInCart>();
+        private CustomerBill customerBill = new CustomerBill();
 
         decimal previousSellingPrice;
         int previousQuantityInCart;
@@ -201,8 +201,7 @@ namespace Stock_Management.Forms
 
         internal void OpenPersonFindForm()
         {
-            PersonListForm personListForm = new PersonListForm();
-            personListForm.PERSON_TYPE = Person.CUSTOMER;
+            PersonListForm personListForm = new PersonListForm(Person.CUSTOMER);
             ShowFormAsFixedDialog(this, personListForm);
         }
 

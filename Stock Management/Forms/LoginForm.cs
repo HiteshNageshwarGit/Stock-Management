@@ -6,8 +6,8 @@ namespace Stock_Management.Forms
 {
     public partial class LoginForm : BaseForm
     {
-        int loginAttempcount;
-        bool isLoginSucceeded;
+        private int loginAttempcount;
+        private bool isLoginSucceeded;
         public LoginForm()
         {
             InitializeComponent();

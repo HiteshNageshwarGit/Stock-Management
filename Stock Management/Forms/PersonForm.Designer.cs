@@ -178,7 +178,6 @@
             this.MinimumSize = new System.Drawing.Size(400, 520);
             this.Name = "PersonForm";
             this.Text = "Person";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PersonForm_FormClosing);
             this.Load += new System.EventHandler(this.PersonForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

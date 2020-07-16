@@ -8,16 +8,16 @@ namespace Stock_Management.Forms
 {
     public partial class DealerBillForm : BaseForm
     {
-        public int PERSON_TYPE { get; set; }
-        public int BILL_ID { get; set; }
+        private int _dealerBillId;
+        private int _dealerId;
+        private DealerBill dealerBill;
+        private Dealer dealer;
 
-        public DealerBill dealerBill;
-        Dealer dealer;
-        public int DealerId;
-
-        public DealerBillForm()
+        public DealerBillForm(int dealerId, int dealerBillId)
         {
             InitializeComponent();
+            _dealerId = dealerId;
+            _dealerBillId = dealerBillId;
             dtBillDate.CustomFormat = DateHelper.DATE_FORMAT;
             dtBillEntryDate.CustomFormat = DateHelper.DATE_FORMAT;
             dtBillDate.MaxDate = DateTime.Now;
@@ -47,7 +47,7 @@ namespace Stock_Management.Forms
 
         private void EditBill()
         {
-            dealer = SharedRepo.DBRepo.GetDealerByID(DealerId);
+            dealer = SharedRepo.DBRepo.GetDealerByID(_dealerId);
             if (dealer == null)
             {
                 MessageBox.Show("Dealer details not found");
@@ -56,10 +56,10 @@ namespace Stock_Management.Forms
             }
             txtDealerName.Text = dealer.Name;
 
-            if (BILL_ID != 0)
+            if (_dealerBillId != 0)
             {
                 Text = "Edit Dealer Bill";
-                dealerBill = SharedRepo.DBRepo.GetDealerBillByID(BILL_ID);
+                dealerBill = SharedRepo.DBRepo.GetDealerBillByID(_dealerBillId);
                 dtBillEntryDate.Value = DateHelper.GetDateObject(dealerBill.EntryDate);
                 dtBillDate.Value = DateHelper.GetDateObject(dealerBill.BillDate);
                 numBillAmount.Value = dealerBill.TotalAmount;
