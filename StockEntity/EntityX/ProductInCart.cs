@@ -1,8 +1,9 @@
-﻿using StockEntity.Helper;
+﻿using StockEntity.Entity;
+using StockEntity.Helper;
 
 namespace StockEntity.EntityX
 {
-    public class ProductInCart
+    public class ProductInCart : BaseEntity
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }

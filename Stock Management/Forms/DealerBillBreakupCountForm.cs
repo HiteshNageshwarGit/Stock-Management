@@ -21,14 +21,14 @@ namespace Stock_Management.Forms
 
         private void LoadDealerBillBreakupCount()
         {
-            DealerBillReport dealerBillReport = SharedRepo.DBRepo.GetDealerBillReport(_dealerBillId);
+            BillReport dealerBillReport = SharedRepo.DBRepo.GetDealerBillReport(_dealerBillId);
             if (dealerBillReport == null)
             {
                 MessageBox.Show("Could not load breakup count");
                 return;
             }
 
-            txtDealerName.Text = dealerBillReport.DealerName;
+            txtDealerName.Text = dealerBillReport.PersonName;
             txtBillDate.Text = dealerBillReport.BillDate;
             txtTotalBillAmount.Text = dealerBillReport.TotalAmount.ToString();
             txtTotalBreakupCount.Text = dealerBillReport.BreakupCount.ToString();

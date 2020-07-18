@@ -18,7 +18,7 @@ namespace Stock_Management.Forms
 
         private void CustomerBillBreakupListForm_Load(object sender, EventArgs e)
         {
-            List<CustomerBillBreakupRPT> list = SharedRepo.DBRepo.GetCustomerBillBreakupList(_customererBillId);
+            List<CustomerBillBreakupReport> list = SharedRepo.DBRepo.GetCustomerBillBreakupList(_customererBillId);
             dgvCustomerBillBreakupList.DataSource = list;
             dgvCustomerBillBreakupList.ClearSelection();
         }

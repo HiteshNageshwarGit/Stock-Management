@@ -3,13 +3,11 @@ using System.Collections.Generic;
 
 namespace StockEntity.Entity
 {
-    public class CustomerBill : Bill
+    public class CustomerBill : BillBase
     {
         #region Entity Properties  
         public int CustomerId { get; set; }
         #endregion
-
-        public Customer Customer { get; set; }
 
         public new void Validate()
         {
@@ -19,15 +17,6 @@ namespace StockEntity.Entity
                 EntityState.StateMessage += "\n Customer Id not found";
             }
             base.Validate();
-        }
-        public override string ToString()
-        {
-            int breakupCount = 0;
-            //if (CustomerBillBreakupList != null && CustomerBillBreakupList.Count > 0)
-            //{
-            //    breakupCount = CustomerBillBreakupList.Count;
-            //}
-            return breakupCount.ToString();
         }
     }
 }

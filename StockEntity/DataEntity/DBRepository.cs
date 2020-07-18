@@ -16,6 +16,7 @@ namespace StockEntity
             context = StockDBContext.GetStockDBContext();
         }
 
+
         #region Key Value
         public void SaveKeyalue(KeyValue keyValue)
         {
@@ -121,6 +122,7 @@ namespace StockEntity
             List<Product> exactMatchProductList = context.Products.Where(x => productName == "" || x.Name.ToLower().Contains(productName)).OrderBy(x => x.Name).Take(50).ToList();
             if (productName.Trim().Split(' ').Length == 1)
             {
+                BaseEntity.ResetRowNumberInList(exactMatchProductList);
                 return exactMatchProductList;
             }
 
@@ -128,6 +130,7 @@ namespace StockEntity
             string[] splittedProductNames = productName.Split(' ');
             List<Product> splittedNameProductList = context.Products.Where(p => splittedProductNames.Any(x => p.Name.ToLower().Contains(x))).OrderBy(x => x.Name).Take(50).ToList();
             var mergedList = exactMatchProductList.Union(splittedNameProductList, new ProductComparer()).ToList(); // merge by removing duplicate
+            BaseEntity.ResetRowNumberInList(mergedList);
             return mergedList;
         }
         #endregion
@@ -173,7 +176,7 @@ namespace StockEntity
         {
             if (GetDefaultDealer() == null)
             {
-                SaveDealer(new Dealer() { Name = Person.DEFAULT_NAME, Address = "" });
+                SaveDealer(new Dealer() { Name = PersonBase.DEFAULT_NAME, Address = "" });
                 if (GetDefaultDealer() == null)
                 {
                     return false;
@@ -191,12 +194,14 @@ namespace StockEntity
 
         public Dealer GetDefaultDealer()
         {
-            return context.Dealers.Where(x => x.Name.ToLower() == Person.DEFAULT_NAME.ToLower()).FirstOrDefault();
+            return context.Dealers.Where(x => x.Name.ToLower() == PersonBase.DEFAULT_NAME.ToLower()).FirstOrDefault();
         }
 
         public List<Dealer> GetDealerList()
         {
-            return context.Dealers.OrderBy(x => x.Name).ToList();
+            List<Dealer> dealerList = context.Dealers.OrderBy(x => x.Name).ToList();
+            BaseEntity.ResetRowNumberInList(dealerList);
+            return dealerList;
         }
         #endregion
 
@@ -221,7 +226,7 @@ namespace StockEntity
 
         public bool DoesCustomerNameExists(Customer customer)
         {
-            Person existingCustomer = context.Customers
+            PersonBase existingCustomer = context.Customers
                 .Where(x => (x.Id != customer.Id && (x.Name.Trim().ToLower() == customer.Name.Trim().ToLower()))
                                                  && (x.Address.Trim().ToLower() == customer.Address.Trim().ToLower()))
                 .FirstOrDefault();
@@ -239,7 +244,7 @@ namespace StockEntity
         {
             if (GetDefaultCustomer() == null)
             {
-                SaveCustomer(new Customer() { Name = Person.DEFAULT_NAME, Address = "" });
+                SaveCustomer(new Customer() { Name = PersonBase.DEFAULT_NAME, Address = "" });
                 if (GetDefaultCustomer() == null)
                 {
                     return false;
@@ -257,12 +262,14 @@ namespace StockEntity
 
         public Customer GetDefaultCustomer()
         {
-            return context.Customers.Where(x => x.Name.ToLower() == Person.DEFAULT_NAME.ToLower()).FirstOrDefault();
+            return context.Customers.Where(x => x.Name.ToLower() == PersonBase.DEFAULT_NAME.ToLower()).FirstOrDefault();
         }
 
         public List<Customer> GetCustomerList()
         {
-            return context.Customers.OrderBy(x => x.Name).ToList();
+            List<Customer> customerList = context.Customers.OrderBy(x => x.Name).ToList();
+            BaseEntity.ResetRowNumberInList(customerList);
+            return customerList;
         }
 
         public Customer GetCustomerByID(int id)
@@ -293,9 +300,9 @@ namespace StockEntity
             return context.DealerBills.Find(id);
         }
 
-        public DealerBillReport GetDealerBillReport(int billId)
+        public BillReport GetDealerBillReport(int billId)
         {
-            var billBreakupGroped = from DBB in context.DealerBillBreakups
+            var billBreakupGroped = from DBB in context.DealerBillBreakups.Where(x => x.DealerBillId == billId)
                                     group DBB by DBB.DealerBillId into g
                                     select new
                                     {
@@ -303,51 +310,56 @@ namespace StockEntity
                                         DBBCount = g.Count(),
                                         DBBAmount = g.Sum(x => x.TotalAmount)
                                     };
+            //var list1 = billBreakupGroped.ToList(); // Always 1 record
 
             var joinQuery = from D in context.Dealers
-                            from DB in context.DealerBills.Where(x => x.Id == billId)
+                            from DB in context.DealerBills.Where(x => x.Id == billId && x.DealerId == D.Id)
                             from DBB in billBreakupGroped.Where(g => g.DealerBillId == DB.Id).DefaultIfEmpty()
-                            select new DealerBillReport
+                            select new BillReport
                             {
-                                DealerId = DB.DealerId,
                                 Id = DB.Id,
-                                DealerName = D.Name,
+                                PersonName = D.Name,
                                 BillDate = DB.BillDate,
                                 TotalAmount = DB.TotalAmount,
                                 BreakupCount = DBB == null ? 0 : DBB.DBBCount,
                                 BreakupSum = DBB == null ? 0 : DBB.DBBAmount,
+                                Remarks = DB.Remarks
                             };
+            //var list2 = joinQuery.ToList(); // Count should be total breakup of the Bill
+
             return joinQuery.FirstOrDefault();
         }
 
-        public List<DealerBill> GetDealerBillList(int dealerId)
+        public List<BillReport> GetDealerBillReportList(int dealerId)
         {
-            //return context.DealerBills.Where(x => x.DealerId == dealerId).Include(x => x.DealerBillBreakupList).OrderByDescending(x => x.EntryDate).ToList();
-            return context.DealerBills.Where(x => x.DealerId == dealerId).OrderByDescending(x => x.EntryDate).ToList();
+            var billBreakupGroped = from DB in context.DealerBills.Where(x => x.DealerId == dealerId)
+                                    from DBB in context.DealerBillBreakups.Where(x => x.DealerBillId == DB.Id) // Inner Join
+                                    group DBB by DBB.DealerBillId into g
+                                    select new
+                                    {
+                                        DealerBillId = g.Key,
+                                        DBBCount = g.Count(),
+                                        DBBAmount = g.Sum(x => x.TotalAmount)
+                                    };
+            //var list1 = billBreakupGroped.ToList();
 
-            //var dbbGrpQuery = from DBB in context.DealerBillBreakups
-            //                  group DBB by DBB.DealerBillId into g
-            //                  select new
-            //                  {
-            //                      DealerBillId = g.Key,
-            //                      DBBCount = g.Count(),
-            //                      DBBAmount = g.Sum(x => x.TotalAmount)
-            //                  };
-            //var tt = dbbGrpQuery.ToList();
+            var joinQuery = from D in context.Dealers.Where(x => x.Id == dealerId)
+                            from DB in context.DealerBills.Where(x => x.DealerId == D.Id) // Inner Join
+                            from DBB in billBreakupGroped.Where(g => g.DealerBillId == DB.Id).DefaultIfEmpty() // Left join
+                            select new BillReport
+                            {
+                                Id = DB.Id,
+                                PersonName = D.Name,
+                                BillDate = DB.BillDate,
+                                TotalAmount = DB.TotalAmount,
+                                BreakupCount = DBB == null ? 0 : DBB.DBBCount,
+                                BreakupSum = DBB == null ? 0 : DBB.DBBAmount,
+                                Remarks = DB.Remarks
+                            };
 
-            //var joinQuery = from DB in context.DealerBills.Where(x => x.DealerId == dealerId)
-            //                from DBB in dbbGrpQuery.Where(g => g.DealerBillId == DB.Id).DefaultIfEmpty()
-            //                select new DealerBillReport
-            //                {
-            //                    DealerId = DB.DealerId,
-            //                    Id = DB.Id,
-            //                    BillDate = DB.BillDate,
-            //                    TotalAmount = DB.TotalAmount,
-            //                    BreakupCount = DBB == null ? 0 : DBB.DBBCount,
-            //                    BreakupSum = DBB == null ? 0 : DBB.DBBAmount,
-            //                };
-            //List<DealerBillReport> list = joinQuery.ToList();
-            //return list;
+            List<BillReport> list = joinQuery.OrderBy(x => x.BillDate).ToList(); // Count should be same as list 1
+            BaseEntity.ResetRowNumberInList(list);
+            return list;
         }
         #endregion
 
@@ -375,7 +387,9 @@ namespace StockEntity
 
         public List<DealerBillBreakup> GetDealerBillBreakupList(int billId)
         {
-            return context.DealerBillBreakups.Where(x => x.DealerBillId == billId).OrderByDescending(x => x.EntryDate).ToList();
+            List<DealerBillBreakup> dealerBillBreakupList = context.DealerBillBreakups.Where(x => x.DealerBillId == billId).OrderByDescending(x => x.EntryDate).ToList();
+            BaseEntity.ResetRowNumberInList(dealerBillBreakupList);
+            return dealerBillBreakupList;
         }
 
         public DealerBillBreakup GetDealerBillBreakup(int billId)
@@ -401,9 +415,37 @@ namespace StockEntity
             }
         }
 
-        public List<CustomerBill> GetCustomerBillList(int customerId)
+        public List<BillReport> GetCustomerBillList(int customerId)
         {
-            return context.CustomerBills.Where(x => x.CustomerId == customerId).OrderBy(x => x.BillDate).ToList();
+            var billBreakupGroped = from CB in context.CustomerBills.Where(x => x.CustomerId == customerId)
+                                    from CBB in context.CustomerBillBreakups.Where(x => x.CustomerBillId == CB.Id) // Inner Join
+                                    group CBB by CBB.CustomerBillId into g
+                                    select new
+                                    {
+                                        DealerBillId = g.Key,
+                                        CBBCount = g.Count(),
+                                        CBBAmount = g.Sum(x => x.TotalAmount)
+                                    };
+            var list1 = billBreakupGroped.ToList();
+
+            var joinQuery = from C in context.Customers.Where(x => x.Id == customerId)
+                            from CB in context.CustomerBills.Where(x => x.CustomerId == C.Id) // Inner Join
+                            from CBB in billBreakupGroped.Where(g => g.DealerBillId == CB.Id).DefaultIfEmpty() // Left join
+                            select new BillReport
+                            {
+                                Id = CB.Id,
+                                PersonName = C.Name,
+                                BillDate = CB.BillDate,
+                                TotalAmount = CB.TotalAmount,
+                                BreakupCount = CBB == null ? 0 : CBB.CBBCount,
+                                BreakupSum = CBB == null ? 0 : CBB.CBBAmount,
+                                Remarks = CB.Remarks
+                            };
+
+            List<BillReport> customerBillList = joinQuery.OrderBy(x => x.BillDate).ToList(); // Count should be same as list1
+
+            BaseEntity.ResetRowNumberInList(customerBillList);
+            return customerBillList;
         }
 
         public void SaveCustomerBillBreakup(CustomerBillBreakup customerBillBreakup)
@@ -468,19 +510,21 @@ namespace StockEntity
             }
         }
 
-        public List<CustomerBillBreakupRPT> GetCustomerBillBreakupList(int billId)
+        public List<CustomerBillBreakupReport> GetCustomerBillBreakupList(int billId)
         {
-            List<CustomerBillBreakupRPT> list = (from CBB in context.CustomerBillBreakups
-                                                 join P in context.Products on CBB.ProductId equals P.Id
-                                                 where CBB.CustomerBillId == billId
-                                                 select new CustomerBillBreakupRPT
-                                                 {
-                                                     productName = P.Name,
-                                                     TotalAmount = CBB.TotalAmount,
-                                                     TotalQuantity = CBB.TotalQuantity,
-                                                     UnitPrice = CBB.UnitPrice
-                                                 }).ToList();
-            return list;
+            List<CustomerBillBreakupReport> customerBillBreakupReportList =
+                (from CBB in context.CustomerBillBreakups
+                 join P in context.Products on CBB.ProductId equals P.Id
+                 where CBB.CustomerBillId == billId
+                 select new CustomerBillBreakupReport
+                 {
+                     productName = P.Name,
+                     TotalAmount = CBB.TotalAmount,
+                     TotalQuantity = CBB.TotalQuantity,
+                     UnitPrice = CBB.UnitPrice
+                 }).ToList();
+            BaseEntity.ResetRowNumberInList(customerBillBreakupReportList);
+            return customerBillBreakupReportList;
         }
 
         #endregion
@@ -511,10 +555,11 @@ namespace StockEntity
                                                              SellingQuantity = 1,
                                                              SellingAmount = DBB.UnitPrice
 
-                                                         }).Take(50).ToList();
+                                                         }).OrderBy(x => x.ProductName).Take(50).ToList();
 
             if (productName.Trim().Split(' ').Length == 1)
             {
+                BaseEntity.ResetRowNumberInList(exactMatchProductList);
                 return exactMatchProductList;
             }
 
@@ -543,9 +588,10 @@ namespace StockEntity
                                                                SellingQuantity = 1,
                                                                SellingAmount = DBB.UnitPrice
 
-                                                           }).Take(50).ToList();
+                                                           }).OrderBy(x => x.ProductName).Take(50).ToList();
 
-            var mergedList = exactMatchProductList.Union(splittedNameProductList, new ProductInCartComparer()).ToList(); // merge by removing duplicate
+            var mergedList = exactMatchProductList.Union(splittedNameProductList, new Comparer()).ToList(); // merge by removing duplicate
+            BaseEntity.ResetRowNumberInList(mergedList);
             return mergedList;
         }
 
@@ -569,8 +615,9 @@ namespace StockEntity
                                 AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
                                 UnitPrice = grp == null ? 0 : grp.DBBGroupKey.UnitPrice
                             };
-            List<ProductReport> list = joinQuery.ToList();
-            return list;
+            List<ProductReport> productReportList = joinQuery.ToList();
+            BaseEntity.ResetRowNumberInList(productReportList);
+            return productReportList;
         }
         #endregion
     }

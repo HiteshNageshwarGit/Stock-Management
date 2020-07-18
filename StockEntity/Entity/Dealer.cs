@@ -1,6 +1,6 @@
 ﻿namespace StockEntity.Entity
 {
-    public partial class Dealer : Person
+    public partial class Dealer : PersonBase
     {
     }
 }

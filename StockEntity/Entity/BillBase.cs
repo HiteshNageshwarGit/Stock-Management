@@ -1,15 +1,13 @@
 ﻿using StockEntity.Helper;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StockEntity.Entity
 {
-    public partial class Bill : BaseEntity
+    public partial class BillBase : BaseEntity
     {
         #region Entity Properties           
         public string BillDate { get; set; }
         public decimal TotalAmount { get; set; }
         #endregion
-
 
         public void Validate()
         {            
@@ -19,6 +17,5 @@ namespace StockEntity.Entity
                 EntityState.StateMessage += "\n Bill amount should be greate than 0";
             }           
         }
-
     }
 }

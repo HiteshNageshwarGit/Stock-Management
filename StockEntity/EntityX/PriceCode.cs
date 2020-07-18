@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StockEntity.Helper
 {
-    public class PriceCode
+    public class PriceCode 
     {
         public static List<KeyValue> PriceCodeList;
         public static bool CodeLoadedFromDB;

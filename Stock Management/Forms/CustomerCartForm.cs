@@ -14,6 +14,7 @@ namespace Stock_Management.Forms
 
             dgvProductList.AutoGenerateColumns = false;
             ColAddToCart.UseColumnTextForButtonValue = true;
+            SetDataGridViewProperties(dgvProductList);
             ShowFormInPanel(this, pnlCustomerBillBreakup, customerBillBreakListForm);
         }
 
@@ -49,7 +50,7 @@ namespace Stock_Management.Forms
 
         private void dgvProductList_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == -1 && e.ColumnIndex == -1)
+            if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
             }
@@ -79,5 +80,6 @@ namespace Stock_Management.Forms
         {
 
         }
+
     }
 }

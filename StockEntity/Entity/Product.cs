@@ -1,5 +1,4 @@
 ﻿using StockEntity.Helper;
-using System.Collections.Generic;
 using System.Text;
 
 namespace StockEntity.Entity
@@ -11,7 +10,6 @@ namespace StockEntity.Entity
         public string Code { get; set; }
         public string Color { get; set; }
         #endregion
-
 
         public override string ToString()
         {

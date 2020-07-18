@@ -25,6 +25,7 @@ namespace Stock_Management.Forms
             dgvCart.AutoGenerateColumns = false;
             CartColAddOne.UseColumnTextForButtonValue = true;
             CartColRemoveOne.UseColumnTextForButtonValue = true;
+            SetDataGridViewProperties(dgvCart);
         }
 
         private void CustomerBillBreakListForm_Load(object sender, EventArgs e)
@@ -140,13 +141,8 @@ namespace Stock_Management.Forms
             productToBeAddedToCart.QuantityInBox = 1;
             productToBeAddedToCart.TotalBoxes = 1;
             productListCart.Add(productToBeAddedToCart);
+            CalculateTotalBillAmoutForCart();
             RefreshCustomerCart();
-            //dgvCart.DataSource = null;
-            //dgvCart.DataSource = productListCart;
-            //dgvCart.Update();
-            //dgvCart.Refresh();
-            //dgvCart.ClearSelection();
-            //CalculateTotalBillAmoutForCart();
         }
 
         internal bool RemoveProductFromCart(int dealerBillBreakupId)
@@ -176,7 +172,7 @@ namespace Stock_Management.Forms
                 totalProductQuanityInCart += product.SellingQuantity;
 
             }
-            dgvCart.Refresh();
+            RefreshCustomerCart();
 
             txtTotalBillAmountForCart.Text = totalBillAmountforCart.ToString();
             txtTotalProductCountInCart.Text = productListCart.Count.ToString();
@@ -201,7 +197,7 @@ namespace Stock_Management.Forms
 
         internal void OpenPersonFindForm()
         {
-            PersonListForm personListForm = new PersonListForm(Person.CUSTOMER);
+            PersonListForm personListForm = new PersonListForm(PersonBase.CUSTOMER);
             ShowFormAsFixedDialog(this, personListForm);
         }
 
@@ -241,12 +237,13 @@ namespace Stock_Management.Forms
 
         internal void RefreshCustomerCart()
         {
+            BaseEntity.ResetRowNumberInList(productListCart);
             dgvCart.DataSource = null;
             dgvCart.DataSource = productListCart;
             dgvCart.Update();
             dgvCart.Refresh();
             dgvCart.ClearSelection();
-            CalculateTotalBillAmoutForCart();
+            //CalculateTotalBillAmoutForCart();
         }
 
     }

@@ -1,6 +1,8 @@
-﻿namespace StockEntity.EntityX
+﻿using StockEntity.Entity;
+
+namespace StockEntity.EntityX
 {
-    public class CustomerBillBreakupRPT
+    public class CustomerBillBreakupReport : BaseEntity
     {
         public string productName { get; set; }
         public decimal UnitPrice { get; set; }

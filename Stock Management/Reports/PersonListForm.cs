@@ -13,18 +13,18 @@ namespace Stock_Management.Forms
         {
             InitializeComponent();
             _personType = personType;
-            dgvDealerList.AutoGenerateColumns = false;
+            SetDataGridViewProperties(dgvPersonList);
         }
 
         private void PersonListForm_Load(object sender, EventArgs e)
         {
-            if (_personType == Person.DEALER)
+            if (_personType == PersonBase.DEALER)
             {
                 Text = "Dealer List";
                 lblSearchPerson.Text = "Search Dealer";
                 btnAddPerson.Text = "Add Dealer";
             }
-            else if (_personType == Person.CUSTOMER)
+            else if (_personType == PersonBase.CUSTOMER)
             {
                 Text = "Customer List";
                 lblSearchPerson.Text = "Search Customer";
@@ -62,22 +62,22 @@ namespace Stock_Management.Forms
                 return;
             }
 
-            if (GetSelectedCellText(dgvDealerList, e) == "Details")
+            if (GetSelectedCellText(dgvPersonList, e) == "Details")
             {
-                PersonForm dealerForm = new PersonForm(_personType, ((Person)dgvDealerList.Rows[e.RowIndex].DataBoundItem).Id);
+                PersonForm dealerForm = new PersonForm(_personType, ((PersonBase)dgvPersonList.Rows[e.RowIndex].DataBoundItem).Id);
                 ShowFormAsFixedDialog(this, dealerForm);
             }
-            else if (GetSelectedCellText(dgvDealerList, e) == "Bills")
+            else if (GetSelectedCellText(dgvPersonList, e) == "Bills")
             {
-                BillListForm billListForm = new BillListForm(_personType, ((Person)dgvDealerList.Rows[e.RowIndex].DataBoundItem).Id);
+                BillListForm billListForm = new BillListForm(_personType, ((PersonBase)dgvPersonList.Rows[e.RowIndex].DataBoundItem).Id);
                 ShowFormResizableAsDialog(this, billListForm);
             }
-            else if (GetSelectedCellText(dgvDealerList, e) == "Select")
+            else if (GetSelectedCellText(dgvPersonList, e) == "Select")
             {
                 if (CallerForm != null && CallerForm.Name != null && CallerForm.Name == "CustomerCartDetailForm")
                 {
                     CustomerCartDetailForm customerBillBreakListForm = (CustomerCartDetailForm)CallerForm;
-                    Person person = (Person)dgvDealerList.Rows[e.RowIndex].DataBoundItem;
+                    PersonBase person = (PersonBase)dgvPersonList.Rows[e.RowIndex].DataBoundItem;
                     customerBillBreakListForm.OnCustomerNameSelected(person.Id, person.Name);
                     Close();
                 }
@@ -98,17 +98,18 @@ namespace Stock_Management.Forms
 
         internal void LoadPersonList()
         {
-            if (_personType == Person.DEALER)
+            if (_personType == PersonBase.DEALER)
             {
                 List<Dealer> dealerList = SharedRepo.DBRepo.GetDealerList();
-                dgvDealerList.DataSource = dealerList;
+                dgvPersonList.DataSource = dealerList;
             }
-            else if (_personType == Person.CUSTOMER)
+            else if (_personType == PersonBase.CUSTOMER)
             {
                 List<Customer> dealerList = SharedRepo.DBRepo.GetCustomerList();
-                dgvDealerList.DataSource = dealerList;
+                dgvPersonList.DataSource = dealerList;
             }
-            dgvDealerList.ClearSelection();
+            dgvPersonList.ClearSelection();
+
         }
     }
 }

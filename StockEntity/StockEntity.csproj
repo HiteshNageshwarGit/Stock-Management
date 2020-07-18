@@ -52,8 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataEntity\DBRepository.cs" />
-    <Compile Include="EntityX\CustomerBillBreakupRPT.cs" />
-    <Compile Include="EntityX\DealerBillReport.cs" />
+    <Compile Include="EntityX\CustomerBillBreakupReport.cs" />
+    <Compile Include="EntityX\BillReport.cs" />
     <Compile Include="EntityX\ProductInCart.cs" />
     <Compile Include="EntityX\ProductReport.cs" />
     <Compile Include="Entity\Customer.cs" />
@@ -62,22 +62,22 @@
     <Compile Include="Entity\DealerBill.cs" />
     <Compile Include="Entity\DealerBillBreakup.cs" />
     <Compile Include="Entity\KeyValue.cs" />
-    <Compile Include="Entity\Person.cs" />
+    <Compile Include="Entity\PersonBase.cs" />
     <Compile Include="Entity\ProductProperty.cs" />
     <Compile Include="Helper\DateHelper.cs" />
     <Compile Include="Helper\DBFileHelper.cs" />
     <Compile Include="DataEntity\StockDBContext.cs" />
     <Compile Include="Entity\BaseEntity.cs" />
-    <Compile Include="Entity\Bill.cs" />
-    <Compile Include="Entity\BillBreakup.cs" />
+    <Compile Include="Entity\BillBase.cs" />
+    <Compile Include="Entity\BillBreakupBase.cs" />
     <Compile Include="Entity\Dealer.cs" />
     <Compile Include="Entity\History.cs" />
     <Compile Include="Entity\Product.cs" />
     <Compile Include="Helper\Extensions.cs" />
-    <Compile Include="Helper\PriceCode.cs" />
-    <Compile Include="Helper\ProductInCartComparer.cs" />
+    <Compile Include="EntityX\PriceCode.cs" />
+    <Compile Include="Helper\Comparer.cs" />
     <Compile Include="Helper\RefCode.cs" />
-    <Compile Include="Helper\ValidationState.cs" />
+    <Compile Include="EntityX\ValidationState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

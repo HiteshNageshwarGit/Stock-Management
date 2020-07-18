@@ -15,6 +15,7 @@ namespace Stock_Management.Forms
             _dealetBillId = dealetBillId;
             dgvBillBreakupList.AutoGenerateColumns = false;
             ColDetail.UseColumnTextForLinkValue = true;
+            SetDataGridViewProperties(dgvBillBreakupList);
         }
 
         private void BillBreakupListForm_Load(object sender, EventArgs e)

@@ -2,7 +2,7 @@
 
 namespace StockEntity.Entity
 {
-    public partial class BillBreakup : BaseEntity
+    public partial class BillBreakupBase : BaseEntity
     {
         #region Entity Properties  
         public int ProductId { get; set; }

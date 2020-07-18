@@ -103,11 +103,11 @@ namespace Stock_Management
 
         private void dealerListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenPersonListForm(Person.DEALER);
+            OpenPersonListForm(PersonBase.DEALER);
         }
         private void menuCustomerList_Click(object sender, EventArgs e)
         {
-            OpenPersonListForm(Person.CUSTOMER);
+            OpenPersonListForm(PersonBase.CUSTOMER);
         }
 
         private void productListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,6 +118,11 @@ namespace Stock_Management
         private void menuSellProduct_Click(object sender, EventArgs e)
         {
             ShowFormResizableAsDialog(this, new CustomerCartForm());
+        }
+
+        private void menuAbout_Click(object sender, EventArgs e)
+        {
+            ShowFormAsFixedDialog(this, new AboutForm());
         }
 
         private void ShowAdminRelatedMenuItems()
@@ -173,5 +178,7 @@ namespace Stock_Management
             SettingsForm settingsForm = new SettingsForm();
             ShowFormAsFixedDialog(this, settingsForm);
         }
+
+
     }
 }

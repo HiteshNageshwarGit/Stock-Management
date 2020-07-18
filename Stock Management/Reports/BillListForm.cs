@@ -1,7 +1,9 @@
 ﻿using Stock_Management.Shared;
 using StockEntity.Entity;
+using StockEntity.EntityX;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Stock_Management.Forms
@@ -19,12 +21,12 @@ namespace Stock_Management.Forms
 
         private void BillListForm_Load(object sender, EventArgs e)
         {
-            if (_personType == Person.DEALER)
+            if (_personType == PersonBase.DEALER)
             {
                 Text = "Dealer Bill List";
                 btnAddBill.Text = "Add Dealer Bill";
             }
-            else if (_personType == Person.CUSTOMER)
+            else if (_personType == PersonBase.CUSTOMER)
             {
                 Text = "Customer Bill List";
                 btnAddBill.Text = "Add Customer Bill";
@@ -39,9 +41,9 @@ namespace Stock_Management.Forms
 
             SetFormBehaviour();
 
-            dgvBillList.AutoGenerateColumns = false;
+            ColShowBillBreakupsLink.UseColumnTextForLinkValue = true;
             ColBillShowLink.UseColumnTextForLinkValue = true;
-            ColShowBillBreakups.UseColumnTextForLinkValue = true;
+            SetDataGridViewProperties(dgvBillList);
 
             LoadBillList();
         }
@@ -68,8 +70,8 @@ namespace Stock_Management.Forms
                 return;
             }
 
-            int selectedBillId = ((Bill)dgvBillList.Rows[e.RowIndex].DataBoundItem).Id;
-            if (_personType == Person.DEALER)
+            int selectedBillId = ((BillReport)dgvBillList.Rows[e.RowIndex].DataBoundItem).Id;
+            if (_personType == PersonBase.DEALER)
             {
                 if (GetSelectedCellText(dgvBillList, e) == "Details")
                 {
@@ -81,19 +83,24 @@ namespace Stock_Management.Forms
                     ShowFormResizableAsDialog(this, billBreakupForm);
                 }
             }
-            else if (_personType == Person.CUSTOMER)
+            else if (_personType == PersonBase.CUSTOMER)
             {
                 if (GetSelectedCellText(dgvBillList, e) == "Details")
                 {
                     CustomerBillBreakupListForm customerBillBreakupListForm = new CustomerBillBreakupListForm(selectedBillId);
                     ShowFormResizableAsDialog(this, customerBillBreakupListForm);
                 }
+                else if (GetSelectedCellText(dgvBillList, e) == "Breakups")
+                {
+                    CustomerBillBreakupListForm billBreakupForm = new CustomerBillBreakupListForm(selectedBillId);
+                    ShowFormResizableAsDialog(this, billBreakupForm);
+                }
             }
         }
 
         internal void LoadBillList()
         {
-            if (_personType == Person.DEALER)
+            if (_personType == PersonBase.DEALER)
             {
                 Dealer dealer = SharedRepo.DBRepo.GetDealerByID(_personId);
                 if (dealer == null)
@@ -102,10 +109,10 @@ namespace Stock_Management.Forms
                     return;
                 }
                 txtPersonName.Text = dealer.Name;
-                List<DealerBill> billList = SharedRepo.DBRepo.GetDealerBillList(_personId);
+                List<BillReport> billList = SharedRepo.DBRepo.GetDealerBillReportList(_personId);
                 dgvBillList.DataSource = billList;
             }
-            else if (_personType == Person.CUSTOMER)
+            else if (_personType == PersonBase.CUSTOMER)
             {
                 Customer customer = SharedRepo.DBRepo.GetCustomerByID(_personId);
                 if (customer == null)
@@ -114,7 +121,7 @@ namespace Stock_Management.Forms
                     return;
                 }
                 txtPersonName.Text = customer.Name;
-                List<CustomerBill> billList = SharedRepo.DBRepo.GetCustomerBillList(_personId);
+                List<BillReport> billList = SharedRepo.DBRepo.GetCustomerBillList(_personId);
                 dgvBillList.DataSource = billList;
             }
             dgvBillList.ClearSelection();
@@ -128,6 +135,27 @@ namespace Stock_Management.Forms
         {
             DealerBillForm billForm = new DealerBillForm(_personId, billId);
             ShowFormAsFixedDialog(this, billForm);
+        }
+
+        private void dgvBillList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
+            if (e.ColumnIndex == ColBreakupSum.Index)
+            {
+                BillReport dealerBillReport = (BillReport)dgvBillList.Rows[e.RowIndex].DataBoundItem;
+                if (dealerBillReport.BreakupSum == dealerBillReport.TotalAmount)
+                {
+                    e.CellStyle.BackColor = Color.LightGreen;
+                }
+                else if (dealerBillReport.BreakupSum > dealerBillReport.TotalAmount)
+                {
+                    e.CellStyle.BackColor = Color.Red;
+                }
+                else
+                {
+                    e.CellStyle.BackColor = Color.Orange;
+                }
+            }
         }
     }
 }

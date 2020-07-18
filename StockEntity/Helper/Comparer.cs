@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StockEntity.Helper
 {
-    class ProductInCartComparer : IEqualityComparer<ProductInCart>
+    class Comparer : IEqualityComparer<ProductInCart>
     {
         public bool Equals(ProductInCart x, ProductInCart y)
         {

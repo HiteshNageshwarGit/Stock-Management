@@ -1,10 +1,9 @@
 ﻿using StockEntity.Helper;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace StockEntity.Entity
 {
-    public class CustomerBillBreakup : BillBreakup
+    public class CustomerBillBreakup : BillBreakupBase
     {
         #region Entity Properties  
         public int CustomerBillId { get; set; }
@@ -12,25 +11,6 @@ namespace StockEntity.Entity
         [NotMapped]
         public new string Remarks { get; set; }
         #endregion
-
-        public CustomerBill CustomerBill { get; set; }
-
-
-        //public string ProductName { get; set; }
-
-        //public override string ToString()
-        //{
-        //    StringBuilder str = new StringBuilder("Rs. " + TotalAmount.ToString());
-        //    if (Product != null)
-        //    {
-        //        str.Append(" - " + Product.ToString());
-        //    }
-        //    if (CustomerBill != null)
-        //    {
-        //        str.Append(" - " + CustomerBill.ToString());
-        //    }
-        //    return str.ToString();
-        //}
 
         public void ValidateDealerBillBreakup()
         {

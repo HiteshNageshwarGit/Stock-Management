@@ -14,6 +14,7 @@ namespace Stock_Management.Forms
         public ProductListForm()
         {
             InitializeComponent();
+            SetDataGridViewProperties(dgvProductList);
         }
 
         private void ProductListForm_Load(object sender, EventArgs e)
@@ -34,7 +35,7 @@ namespace Stock_Management.Forms
 
             LoadProductList();
         }
-       
+
         private void txtSearchProduct_KeyUp(object sender, KeyEventArgs e)
         {
             LoadProductList();
@@ -78,6 +79,11 @@ namespace Stock_Management.Forms
             productList = SharedRepo.DBRepo.GetProductListForAdmin(txtSearchProduct.Text.Trim());
             dgvProductList.DataSource = productList;
             dgvProductList.ClearSelection();
+        }
+
+        private void dgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
@@ -137,6 +138,64 @@ namespace Stock_Management.Forms
                         toolTip.SetToolTip(btn, btn.Tag.ToString());
                     });
                 }
+            }
+        }
+
+        internal void SetDataGridViewProperties(DataGridView datagridView)
+        {
+            datagridView.AutoGenerateColumns = false;
+            DataGridViewCellStyle aleternateCellStyle = new DataGridViewCellStyle();
+            DataGridViewCellStyle columnHeaderCellStyle = new DataGridViewCellStyle();
+            DataGridViewCellStyle rowHeaderCellStyle = new DataGridViewCellStyle();
+            DataGridViewCellStyle rowDefaultCellStyle = new DataGridViewCellStyle();
+            datagridView.AllowUserToAddRows = false;
+            datagridView.AllowUserToDeleteRows = false;
+            datagridView.AllowUserToOrderColumns = true;
+            datagridView.AllowUserToResizeRows = false;
+            datagridView.GridColor = SystemColors.Control;
+            datagridView.MultiSelect = false;
+            datagridView.ReadOnly = true;
+            datagridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            datagridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;           
+            datagridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+            datagridView.CellBorderStyle = DataGridViewCellBorderStyle.Raised;
+            datagridView.AllowUserToOrderColumns = true;
+
+            aleternateCellStyle.BackColor = Color.Azure;
+            datagridView.AlternatingRowsDefaultCellStyle = aleternateCellStyle;
+            columnHeaderCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            columnHeaderCellStyle.BackColor = SystemColors.Control;
+            columnHeaderCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+            columnHeaderCellStyle.ForeColor = Color.DimGray;
+            columnHeaderCellStyle.Padding = new Padding(3);
+            columnHeaderCellStyle.SelectionBackColor = Color.Tomato;
+            columnHeaderCellStyle.SelectionForeColor = SystemColors.ControlText;
+            columnHeaderCellStyle.WrapMode = DataGridViewTriState.True;
+            datagridView.ColumnHeadersDefaultCellStyle = columnHeaderCellStyle;            
+            rowHeaderCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            rowHeaderCellStyle.BackColor = SystemColors.Control;
+            rowHeaderCellStyle.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            rowHeaderCellStyle.ForeColor = SystemColors.WindowText;
+            rowHeaderCellStyle.Padding = new Padding(3);
+            rowHeaderCellStyle.SelectionBackColor = SystemColors.Highlight;
+            rowHeaderCellStyle.SelectionForeColor = SystemColors.HighlightText;
+            rowHeaderCellStyle.WrapMode = DataGridViewTriState.True;
+            datagridView.RowHeadersDefaultCellStyle = rowHeaderCellStyle;
+            rowDefaultCellStyle.BackColor = Color.Beige;
+            rowDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            rowDefaultCellStyle.Padding = new Padding(3);
+            rowDefaultCellStyle.SelectionBackColor = Color.Tomato;
+            rowDefaultCellStyle.SelectionForeColor = SystemColors.ControlText;
+            datagridView.RowsDefaultCellStyle = rowDefaultCellStyle;
+            datagridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+        internal void DataGridView_Selected_Cell_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var dataGridView = sender as DataGridView;
+            if (dataGridView.Rows[e.RowIndex].Selected)
+            {
+                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+                e.CellStyle.SelectionBackColor = Color.Tomato;
             }
         }
     }

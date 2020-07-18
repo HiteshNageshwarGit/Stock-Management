@@ -10,7 +10,7 @@ namespace Stock_Management.Forms
     {
         private int _personType; // Can be Dealer or Customer
         private int _personId;// Can be Dealer ID or Customer ID
-        private Person person;
+        private PersonBase person;
 
         public PersonForm(int personType, int personId)
         {
@@ -48,11 +48,11 @@ namespace Stock_Management.Forms
         private void PersonForm_Load(object sender, EventArgs e)
         {
             Text = _personId == 0 ? "Add" : "Edit";
-            if (_personType == Person.DEALER)
+            if (_personType == PersonBase.DEALER)
             {
                 Text = Text + " " + "Dealer";
             }
-            else if (_personType == Person.CUSTOMER)
+            else if (_personType == PersonBase.CUSTOMER)
             {
                 Text = Text + " " + "Customer";
             }
@@ -73,11 +73,11 @@ namespace Stock_Management.Forms
         {
             if (_personId != 0)
             {
-                if (_personType == Person.DEALER)
+                if (_personType == PersonBase.DEALER)
                 {
                     person = SharedRepo.DBRepo.GetDealerByID(_personId);
                 }
-                else if (_personType == Person.CUSTOMER)
+                else if (_personType == PersonBase.CUSTOMER)
                 {
                     person = SharedRepo.DBRepo.GetCustomerByID(_personId);
                 }
@@ -88,7 +88,7 @@ namespace Stock_Management.Forms
                 txtEmail.Text = person.Email;
                 txtRemarks.Text = person.Remarks;
 
-                if (person.Name.ToLower() == Person.DEFAULT_NAME.ToLower())
+                if (person.Name.ToLower() == PersonBase.DEFAULT_NAME.ToLower())
                 {
                     txtName.Enabled = false;
                     btnSavePerson.Enabled = false;
@@ -96,7 +96,7 @@ namespace Stock_Management.Forms
             }
             else
             {
-                if (_personType == Person.DEALER)
+                if (_personType == PersonBase.DEALER)
                 {
                     person = new Dealer();
                 }
@@ -123,7 +123,7 @@ namespace Stock_Management.Forms
                 return;
             }
 
-            if (_personType == Person.DEALER)
+            if (_personType == PersonBase.DEALER)
             {
                 if (SharedRepo.DBRepo.DoesDealerNameExists((Dealer)person))
                 {

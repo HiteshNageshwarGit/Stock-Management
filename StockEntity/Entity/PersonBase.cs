@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace StockEntity.Entity
 {
-    public class Person : BaseEntity
+    public class PersonBase : BaseEntity
     {
         public const string DEFAULT_NAME = "Default";
         public const int DEALER = 1;

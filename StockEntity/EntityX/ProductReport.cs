@@ -1,6 +1,8 @@
-﻿namespace StockEntity.EntityX
+﻿using StockEntity.Entity;
+
+namespace StockEntity.EntityX
 {
-    public class ProductReport
+    public class ProductReport:BaseEntity
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
