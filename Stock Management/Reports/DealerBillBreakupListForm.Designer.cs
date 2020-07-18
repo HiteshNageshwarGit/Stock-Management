@@ -40,6 +40,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAddBillBreakup = new System.Windows.Forms.Button();
             this.dgvBillBreakupList = new System.Windows.Forms.DataGridView();
+            this.grpBoxBrakupCount = new System.Windows.Forms.GroupBox();
             this.ColSNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,7 +50,6 @@
             this.ColUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnitSellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDetail = new System.Windows.Forms.DataGridViewLinkColumn();
-            this.grpBoxBrakupCount = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).BeginInit();
             this.SuspendLayout();
@@ -118,6 +118,17 @@
             this.dgvBillBreakupList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillBreakupList_CellContentClick);
             this.dgvBillBreakupList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBillBreakupList_CellFormatting);
             // 
+            // grpBoxBrakupCount
+            // 
+            this.grpBoxBrakupCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBoxBrakupCount.Location = new System.Drawing.Point(12, 12);
+            this.grpBoxBrakupCount.Name = "grpBoxBrakupCount";
+            this.grpBoxBrakupCount.Size = new System.Drawing.Size(734, 122);
+            this.grpBoxBrakupCount.TabIndex = 5;
+            this.grpBoxBrakupCount.TabStop = false;
+            this.grpBoxBrakupCount.Text = "Dealer And Bill Details";
+            // 
             // ColSNo
             // 
             this.ColSNo.DataPropertyName = "SNo";
@@ -144,10 +155,11 @@
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColTotalAmount.DefaultCellStyle = dataGridViewCellStyle2;
             this.ColTotalAmount.FillWeight = 80F;
-            this.ColTotalAmount.HeaderText = "Total Amount";
+            this.ColTotalAmount.HeaderText = "Tot Amnt";
             this.ColTotalAmount.MinimumWidth = 80;
             this.ColTotalAmount.Name = "ColTotalAmount";
             this.ColTotalAmount.ReadOnly = true;
+            this.ColTotalAmount.ToolTipText = "Total Amount";
             // 
             // ColQuantityInBox
             // 
@@ -155,10 +167,11 @@
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColQuantityInBox.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColQuantityInBox.FillWeight = 80F;
-            this.ColQuantityInBox.HeaderText = "Quantity In Box";
+            this.ColQuantityInBox.HeaderText = "Qty in Bx ";
             this.ColQuantityInBox.MinimumWidth = 80;
             this.ColQuantityInBox.Name = "ColQuantityInBox";
             this.ColQuantityInBox.ReadOnly = true;
+            this.ColQuantityInBox.ToolTipText = "Quantity In Box";
             // 
             // Col
             // 
@@ -166,10 +179,11 @@
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.Col.DefaultCellStyle = dataGridViewCellStyle4;
             this.Col.FillWeight = 80F;
-            this.Col.HeaderText = "Total Boxes";
+            this.Col.HeaderText = "Tot Bxs";
             this.Col.MinimumWidth = 80;
             this.Col.Name = "Col";
             this.Col.ReadOnly = true;
+            this.Col.ToolTipText = "Total Boxes";
             // 
             // ColTotalQuantity
             // 
@@ -177,10 +191,11 @@
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColTotalQuantity.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColTotalQuantity.FillWeight = 80F;
-            this.ColTotalQuantity.HeaderText = "Total Quantity";
+            this.ColTotalQuantity.HeaderText = "Tot Qty";
             this.ColTotalQuantity.MinimumWidth = 80;
             this.ColTotalQuantity.Name = "ColTotalQuantity";
             this.ColTotalQuantity.ReadOnly = true;
+            this.ColTotalQuantity.ToolTipText = "Total Quantity";
             // 
             // ColUnitPrice
             // 
@@ -188,10 +203,11 @@
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColUnitPrice.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColUnitPrice.FillWeight = 80F;
-            this.ColUnitPrice.HeaderText = "Unit Price";
+            this.ColUnitPrice.HeaderText = "Unt Prc";
             this.ColUnitPrice.MinimumWidth = 80;
             this.ColUnitPrice.Name = "ColUnitPrice";
             this.ColUnitPrice.ReadOnly = true;
+            this.ColUnitPrice.ToolTipText = "Unit Price";
             // 
             // ColUnitSellingPrice
             // 
@@ -199,10 +215,11 @@
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColUnitSellingPrice.DefaultCellStyle = dataGridViewCellStyle7;
             this.ColUnitSellingPrice.FillWeight = 80F;
-            this.ColUnitSellingPrice.HeaderText = "Sell Price";
+            this.ColUnitSellingPrice.HeaderText = "Sell Prc";
             this.ColUnitSellingPrice.MinimumWidth = 80;
             this.ColUnitSellingPrice.Name = "ColUnitSellingPrice";
             this.ColUnitSellingPrice.ReadOnly = true;
+            this.ColUnitSellingPrice.ToolTipText = "Sell Price";
             // 
             // ColDetail
             // 
@@ -214,17 +231,6 @@
             this.ColDetail.Name = "ColDetail";
             this.ColDetail.ReadOnly = true;
             this.ColDetail.Text = "Details";
-            // 
-            // grpBoxBrakupCount
-            // 
-            this.grpBoxBrakupCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpBoxBrakupCount.Location = new System.Drawing.Point(12, 12);
-            this.grpBoxBrakupCount.Name = "grpBoxBrakupCount";
-            this.grpBoxBrakupCount.Size = new System.Drawing.Size(734, 122);
-            this.grpBoxBrakupCount.TabIndex = 5;
-            this.grpBoxBrakupCount.TabStop = false;
-            this.grpBoxBrakupCount.Text = "Dealer And Bill Details";
             // 
             // DealerBillBreakupListForm
             // 

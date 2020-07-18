@@ -68,6 +68,29 @@ namespace Stock_Management.Forms
 
         private void dgvBillBreakupList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            DealerBillBreakup dealerBillBreakup = (DealerBillBreakup)dgvBillBreakupList.Rows[e.RowIndex].DataBoundItem;
+
+            if (e.ColumnIndex == ColTotalAmount.Index)
+            {
+                if (dealerBillBreakup.QuantityInBox * dealerBillBreakup.TotalBoxes * dealerBillBreakup.UnitPrice != dealerBillBreakup.TotalAmount)
+                {
+                    e.CellStyle.BackColor = RAG_Red;
+                }
+            }
+            else if (e.ColumnIndex == ColTotalQuantity.Index)
+            {
+                if (dealerBillBreakup.QuantityInBox * dealerBillBreakup.TotalBoxes != dealerBillBreakup.TotalQuantity)
+                {
+                    e.CellStyle.BackColor = RAG_Red;
+                }
+            }
+            else if (e.ColumnIndex == ColUnitSellingPrice.Index)
+            {
+                if (dealerBillBreakup.UnitSellPrice <= dealerBillBreakup.UnitPrice)
+                {
+                    e.CellStyle.BackColor = RAG_Red;
+                }
+            }
             DataGridView_Selected_Cell_CellFormatting(sender, e);
         }
     }

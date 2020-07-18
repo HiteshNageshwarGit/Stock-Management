@@ -9,12 +9,17 @@ namespace Stock_Management.Forms
     public class BaseForm : Form
     {
         #region
-        public const string CRUD_OP_ADD = "Add";
+        public const string CRUD_OP_ADD = "Add";                                                                                                                                                                                                                                                                                                
         public const string CRUD_OP_VIEW = "View";
         public const string CRUD_OP_EDIT = "Edit";
         public const string CRUD_OP_UPDATE = "Update";
+
+        public static Color RAG_Red = Color.Red; 
+        public static Color RAG_Amber = Color.Orange;
+        public static Color RAG_Green = Color.LightGreen;
+
         #endregion
-        public BaseForm CallerForm { get; set; }
+        public BaseForm CallerForm { get; set; }         
         internal ToolTip toolTip;
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)

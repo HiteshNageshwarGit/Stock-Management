@@ -142,7 +142,6 @@ namespace Stock_Management.Forms
             productToBeAddedToCart.TotalBoxes = 1;
             productListCart.Add(productToBeAddedToCart);
             CalculateTotalBillAmoutForCart(false);
-            //RefreshCustomerCart();
         }
 
         internal bool RemoveProductFromCart(int dealerBillBreakupId)
@@ -247,7 +246,6 @@ namespace Stock_Management.Forms
             dgvCart.Update();
             dgvCart.Refresh();
             dgvCart.ClearSelection();
-            //CalculateTotalBillAmoutForCart();
         }
 
         private void dgvCart_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

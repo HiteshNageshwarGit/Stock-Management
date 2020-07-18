@@ -35,15 +35,19 @@ namespace Stock_Management.Forms
 
             StringBuilder histoty = new StringBuilder();
 
-            histoty.Append("V 1.0.1.0");
+            histoty.Append("\n\n V 1.0.1.1");
+            histoty.Append("\n # Showing RAG when discrepancies found");
+            histoty.Append("\n # RAG implemented in Dealer Bill Breakup list when. Recalculating Total Amount, Total Quantity");
+
+            histoty.Append("\n\nV 1.0.1.0");
             histoty.Append("\n # About detais included" +
                 "\n # Included serial number in grids" +
                 "\n # RAG implemented for Bill" +
-                "\n # Grid styled" );
+                "\n # Grid styled");
 
             histoty.Append("\n\n V 1.0.0.9");
             histoty.Append("\n # Unit Price calculatoin issue fixed" +
-                           "\n # Price Code settings issue fixed");           
+                           "\n # Price Code settings issue fixed");
 
             txtVersionHistory.Text = histoty.ToString();
         }

@@ -137,21 +137,17 @@ namespace Stock_Management.Forms
         }
 
         private void dgvBillList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {          
+        {
             if (e.ColumnIndex == ColBreakupSum.Index)
             {
                 BillReport dealerBillReport = (BillReport)dgvBillList.Rows[e.RowIndex].DataBoundItem;
-                if (dealerBillReport.BreakupSum == dealerBillReport.TotalAmount)
+                if (dealerBillReport.BreakupSum > dealerBillReport.TotalAmount)
                 {
-                    e.CellStyle.BackColor = Color.LightGreen;
+                    e.CellStyle.BackColor = RAG_Red;
                 }
-                else if (dealerBillReport.BreakupSum > dealerBillReport.TotalAmount)
+                else if (dealerBillReport.BreakupSum < dealerBillReport.TotalAmount)
                 {
-                    e.CellStyle.BackColor = Color.Red;
-                }
-                else
-                {
-                    e.CellStyle.BackColor = Color.Orange;
+                    e.CellStyle.BackColor = RAG_Amber;
                 }
             }
             DataGridView_Selected_Cell_CellFormatting(sender, e);
