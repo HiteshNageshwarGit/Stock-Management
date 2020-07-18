@@ -17,6 +17,10 @@ namespace Stock_Management.Forms
             InitializeComponent();
             _personType = personType;
             _personId = personId;
+
+            ColShowBillBreakupsLink.UseColumnTextForLinkValue = true;
+            ColBillShowLink.UseColumnTextForLinkValue = true;
+            SetDataGridViewProperties(dgvBillList);
         }
 
         private void BillListForm_Load(object sender, EventArgs e)
@@ -40,11 +44,6 @@ namespace Stock_Management.Forms
             }
 
             SetFormBehaviour();
-
-            ColShowBillBreakupsLink.UseColumnTextForLinkValue = true;
-            ColBillShowLink.UseColumnTextForLinkValue = true;
-            SetDataGridViewProperties(dgvBillList);
-
             LoadBillList();
         }
 
@@ -138,8 +137,7 @@ namespace Stock_Management.Forms
         }
 
         private void dgvBillList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            DataGridView_Selected_Cell_CellFormatting(sender, e);
+        {          
             if (e.ColumnIndex == ColBreakupSum.Index)
             {
                 BillReport dealerBillReport = (BillReport)dgvBillList.Rows[e.RowIndex].DataBoundItem;
@@ -156,6 +154,7 @@ namespace Stock_Management.Forms
                     e.CellStyle.BackColor = Color.Orange;
                 }
             }
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
         }
     }
 }

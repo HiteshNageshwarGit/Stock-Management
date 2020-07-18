@@ -103,6 +103,7 @@
             this.dgvProductList.Size = new System.Drawing.Size(760, 155);
             this.dgvProductList.TabIndex = 0;
             this.dgvProductList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProductList_CellContentClick);
+            this.dgvProductList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProductList_CellFormatting);
             // 
             // splitContainer1
             // 
@@ -177,12 +178,12 @@
             this.ColBillDate.DataPropertyName = "DealerBillDate";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColBillDate.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ColBillDate.FillWeight = 150F;
+            this.ColBillDate.FillWeight = 160F;
             this.ColBillDate.HeaderText = "Bill Date";
-            this.ColBillDate.MinimumWidth = 150;
+            this.ColBillDate.MinimumWidth = 160;
             this.ColBillDate.Name = "ColBillDate";
             this.ColBillDate.ReadOnly = true;
-            this.ColBillDate.Width = 150;
+            this.ColBillDate.Width = 160;
             // 
             // ColTotalQuantity
             // 

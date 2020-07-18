@@ -51,7 +51,7 @@ namespace Stock_Management.Forms
                 if (selectedProduct.AvailableQuantity > selectedProduct.SellingQuantity)
                 {
                     selectedProduct.SellingQuantity++;
-                    CalculateTotalBillAmoutForCart();
+                    CalculateTotalBillAmoutForCart(false);
                 }
             }
             else if (dgvCart.Columns[e.ColumnIndex].Name == CartColRemoveOne.Name)
@@ -63,7 +63,7 @@ namespace Stock_Management.Forms
                 else if (selectedProduct.SellingQuantity > 1)
                 {
                     selectedProduct.SellingQuantity--;
-                    CalculateTotalBillAmoutForCart();
+                    CalculateTotalBillAmoutForCart(false);
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace Stock_Management.Forms
                 }
             }
 
-            CalculateTotalBillAmoutForCart();
+            CalculateTotalBillAmoutForCart(true);
         }
 
         internal void AddProductToCart(ProductInCart productToBeAddedToCart)
@@ -141,8 +141,8 @@ namespace Stock_Management.Forms
             productToBeAddedToCart.QuantityInBox = 1;
             productToBeAddedToCart.TotalBoxes = 1;
             productListCart.Add(productToBeAddedToCart);
-            CalculateTotalBillAmoutForCart();
-            RefreshCustomerCart();
+            CalculateTotalBillAmoutForCart(false);
+            //RefreshCustomerCart();
         }
 
         internal bool RemoveProductFromCart(int dealerBillBreakupId)
@@ -152,7 +152,8 @@ namespace Stock_Management.Forms
             {
                 var productToRemove = productListCart.Where(x => x.DealerBillBreakupId == dealerBillBreakupId).First();
                 productListCart.Remove(productToRemove);
-                RefreshCustomerCart();
+                CalculateTotalBillAmoutForCart(false);
+                //RefreshCustomerCart();
                 return true;
             }
             else
@@ -161,7 +162,7 @@ namespace Stock_Management.Forms
             }
         }
 
-        internal void CalculateTotalBillAmoutForCart()
+        internal void CalculateTotalBillAmoutForCart(bool isCellEditing)
         {
             decimal totalBillAmountforCart = 0;
             int totalProductQuanityInCart = 0;
@@ -172,7 +173,7 @@ namespace Stock_Management.Forms
                 totalProductQuanityInCart += product.SellingQuantity;
 
             }
-            RefreshCustomerCart();
+            RefreshCustomerCart(isCellEditing);
 
             txtTotalBillAmountForCart.Text = totalBillAmountforCart.ToString();
             txtTotalProductCountInCart.Text = productListCart.Count.ToString();
@@ -235,16 +236,23 @@ namespace Stock_Management.Forms
             }
         }
 
-        internal void RefreshCustomerCart()
+        internal void RefreshCustomerCart(bool isCellEditing)
         {
             BaseEntity.ResetRowNumberInList(productListCart);
-            dgvCart.DataSource = null;
-            dgvCart.DataSource = productListCart;
+            if (!isCellEditing)
+            {
+                dgvCart.DataSource = null;
+                dgvCart.DataSource = productListCart;
+            }
             dgvCart.Update();
             dgvCart.Refresh();
             dgvCart.ClearSelection();
             //CalculateTotalBillAmoutForCart();
         }
 
+        private void dgvCart_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
+        }
     }
 }

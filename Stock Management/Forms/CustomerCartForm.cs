@@ -81,5 +81,9 @@ namespace Stock_Management.Forms
 
         }
 
+        private void dgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
+        }
     }
 }

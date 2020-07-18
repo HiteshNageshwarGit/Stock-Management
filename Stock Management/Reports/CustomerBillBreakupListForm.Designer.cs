@@ -69,6 +69,7 @@
             this.dgvCustomerBillBreakupList.ReadOnly = true;
             this.dgvCustomerBillBreakupList.Size = new System.Drawing.Size(760, 438);
             this.dgvCustomerBillBreakupList.TabIndex = 0;
+            this.dgvCustomerBillBreakupList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCustomerBillBreakupList_CellFormatting);
             // 
             // ColRSNo
             // 

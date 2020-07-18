@@ -111,5 +111,10 @@ namespace Stock_Management.Forms
             dgvPersonList.ClearSelection();
 
         }
+
+        private void dgvPersonList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
+        }
     }
 }

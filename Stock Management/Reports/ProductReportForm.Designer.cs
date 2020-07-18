@@ -61,7 +61,6 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.DimGray;
             dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.Tomato;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProductReport.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
@@ -81,7 +80,6 @@
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvProductReport.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
@@ -89,16 +87,16 @@
             dataGridViewCellStyle7.BackColor = System.Drawing.Color.Beige;
             dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle7.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Tomato;
             dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             this.dgvProductReport.RowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvProductReport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProductReport.Size = new System.Drawing.Size(775, 425);
             this.dgvProductReport.TabIndex = 0;
-            this.dgvProductReport.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            this.dgvProductReport.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProductReport_CellFormatting);
             // 
             // ColSNo
             // 
+            this.ColSNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColSNo.DataPropertyName = "SNo";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColSNo.DefaultCellStyle = dataGridViewCellStyle3;
@@ -119,6 +117,7 @@
             // 
             // ColUnitPrice
             // 
+            this.ColUnitPrice.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColUnitPrice.DataPropertyName = "UnitPrice";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColUnitPrice.DefaultCellStyle = dataGridViewCellStyle4;
@@ -129,6 +128,7 @@
             // 
             // ColAvailableQuantity
             // 
+            this.ColAvailableQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColAvailableQuantity.DataPropertyName = "AvailableQuantity";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColAvailableQuantity.DefaultCellStyle = dataGridViewCellStyle5;

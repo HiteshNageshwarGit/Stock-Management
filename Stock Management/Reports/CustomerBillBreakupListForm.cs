@@ -14,6 +14,7 @@ namespace Stock_Management.Forms
 
             _customererBillId = customererBillId;
             dgvCustomerBillBreakupList.AutoGenerateColumns = false;
+            SetDataGridViewProperties(dgvCustomerBillBreakupList);
         }
 
         private void CustomerBillBreakupListForm_Load(object sender, EventArgs e)
@@ -21,6 +22,11 @@ namespace Stock_Management.Forms
             List<CustomerBillBreakupReport> list = SharedRepo.DBRepo.GetCustomerBillBreakupList(_customererBillId);
             dgvCustomerBillBreakupList.DataSource = list;
             dgvCustomerBillBreakupList.ClearSelection();
+        }
+
+        private void dgvCustomerBillBreakupList_CellFormatting(object sender, System.Windows.Forms.DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
         }
     }
 }

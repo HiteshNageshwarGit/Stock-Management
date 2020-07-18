@@ -110,6 +110,7 @@
             // 
             // ColSNo
             // 
+            this.ColSNo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColSNo.DataPropertyName = "SNo";
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColSNo.DefaultCellStyle = dataGridViewCellStyle1;
@@ -121,6 +122,7 @@
             // 
             // ColBillDate
             // 
+            this.ColBillDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColBillDate.DataPropertyName = "BillDate";
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColBillDate.DefaultCellStyle = dataGridViewCellStyle2;
@@ -132,6 +134,7 @@
             // 
             // ColTotalAmount
             // 
+            this.ColTotalAmount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColTotalAmount.DataPropertyName = "TotalAmount";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColTotalAmount.DefaultCellStyle = dataGridViewCellStyle3;
@@ -142,6 +145,7 @@
             // 
             // ColBreakupSum
             // 
+            this.ColBreakupSum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColBreakupSum.DataPropertyName = "BreakupSum";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColBreakupSum.DefaultCellStyle = dataGridViewCellStyle4;
@@ -152,6 +156,7 @@
             // 
             // ColBreakupCount
             // 
+            this.ColBreakupCount.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.ColBreakupCount.DataPropertyName = "BreakupCount";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColBreakupCount.DefaultCellStyle = dataGridViewCellStyle5;
@@ -162,6 +167,7 @@
             // 
             // ColShowBillBreakupsLink
             // 
+            this.ColShowBillBreakupsLink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColShowBillBreakupsLink.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColShowBillBreakupsLink.HeaderText = "Action";
@@ -174,6 +180,7 @@
             // 
             // ColBillShowLink
             // 
+            this.ColBillShowLink.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ColBillShowLink.DefaultCellStyle = dataGridViewCellStyle7;
             this.ColBillShowLink.HeaderText = "Show";

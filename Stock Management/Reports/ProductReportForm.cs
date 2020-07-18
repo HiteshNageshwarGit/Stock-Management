@@ -11,6 +11,7 @@ namespace Stock_Management.Forms
         {
             InitializeComponent();
             dgvProductReport.AutoGenerateColumns = false;
+            SetDataGridViewProperties(dgvProductReport);
         }
 
         private void ProductReportForm_Load(object sender, EventArgs e)
@@ -18,14 +19,9 @@ namespace Stock_Management.Forms
             dgvProductReport.DataSource = SharedRepo.DBRepo.GetProductReport();
         }
 
-        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvProductReport_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var dataGridView = sender as DataGridView;
-            if (dataGridView.Rows[e.RowIndex].Selected)
-            {
-                e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
-                e.CellStyle.SelectionBackColor = Color.Tomato;
-            }
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
         }
     }
 }

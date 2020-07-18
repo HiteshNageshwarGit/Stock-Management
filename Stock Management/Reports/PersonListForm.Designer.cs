@@ -34,8 +34,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvPersonList = new System.Windows.Forms.DataGridView();
-            this.btnAddPerson = new System.Windows.Forms.Button();
-            this.lblSearchPerson = new System.Windows.Forms.Label();
             this.ColRowNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColMobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +42,8 @@
             this.ColSelectLink = new System.Windows.Forms.DataGridViewLinkColumn();
             this.ColBillsLinl = new System.Windows.Forms.DataGridViewLinkColumn();
             this.ColDetailsLink = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.btnAddPerson = new System.Windows.Forms.Button();
+            this.lblSearchPerson = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,7 +72,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            //dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvPersonList.DefaultCellStyle = dataGridViewCellStyle5;
@@ -85,28 +85,7 @@
             this.dgvPersonList.Size = new System.Drawing.Size(820, 527);
             this.dgvPersonList.TabIndex = 4;
             this.dgvPersonList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDealerList_CellContentClick);
-            // 
-            // btnAddPerson
-            // 
-            this.btnAddPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddPerson.Location = new System.Drawing.Point(718, 9);
-            this.btnAddPerson.Name = "btnAddPerson";
-            this.btnAddPerson.Size = new System.Drawing.Size(114, 28);
-            this.btnAddPerson.TabIndex = 5;
-            this.btnAddPerson.Text = "Add";
-            this.btnAddPerson.UseVisualStyleBackColor = true;
-            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
-            // 
-            // lblSearchPerson
-            // 
-            this.lblSearchPerson.AutoSize = true;
-            this.lblSearchPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchPerson.Location = new System.Drawing.Point(9, 9);
-            this.lblSearchPerson.Name = "lblSearchPerson";
-            this.lblSearchPerson.Size = new System.Drawing.Size(59, 17);
-            this.lblSearchPerson.TabIndex = 6;
-            this.lblSearchPerson.Text = "Search";
+            this.dgvPersonList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvPersonList_CellFormatting);
             // 
             // ColRowNo
             // 
@@ -199,6 +178,28 @@
             this.ColDetailsLink.Text = "Details";
             this.ColDetailsLink.UseColumnTextForLinkValue = true;
             this.ColDetailsLink.Width = 80;
+            // 
+            // btnAddPerson
+            // 
+            this.btnAddPerson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddPerson.Location = new System.Drawing.Point(718, 9);
+            this.btnAddPerson.Name = "btnAddPerson";
+            this.btnAddPerson.Size = new System.Drawing.Size(114, 28);
+            this.btnAddPerson.TabIndex = 5;
+            this.btnAddPerson.Text = "Add";
+            this.btnAddPerson.UseVisualStyleBackColor = true;
+            this.btnAddPerson.Click += new System.EventHandler(this.btnAddPerson_Click);
+            // 
+            // lblSearchPerson
+            // 
+            this.lblSearchPerson.AutoSize = true;
+            this.lblSearchPerson.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchPerson.Location = new System.Drawing.Point(9, 9);
+            this.lblSearchPerson.Name = "lblSearchPerson";
+            this.lblSearchPerson.Size = new System.Drawing.Size(59, 17);
+            this.lblSearchPerson.TabIndex = 6;
+            this.lblSearchPerson.Text = "Search";
             // 
             // PersonListForm
             // 

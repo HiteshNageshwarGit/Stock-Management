@@ -66,5 +66,9 @@ namespace Stock_Management.Forms
             ShowFormAsFixedDialog(this, BillBreakupForm);
         }
 
+        private void dgvBillBreakupList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            DataGridView_Selected_Cell_CellFormatting(sender, e);
+        }
     }
 }

@@ -154,7 +154,8 @@ namespace Stock_Management.Forms
             datagridView.AllowUserToResizeRows = false;
             datagridView.GridColor = SystemColors.Control;
             datagridView.MultiSelect = false;
-            datagridView.ReadOnly = true;
+            datagridView.RowHeadersWidth = 21;
+            //datagridView.ReadOnly = true;
             datagridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datagridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;           
             datagridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -168,7 +169,7 @@ namespace Stock_Management.Forms
             columnHeaderCellStyle.Font = new Font("Microsoft Sans Serif", 9.75F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
             columnHeaderCellStyle.ForeColor = Color.DimGray;
             columnHeaderCellStyle.Padding = new Padding(3);
-            columnHeaderCellStyle.SelectionBackColor = Color.Tomato;
+            //columnHeaderCellStyle.SelectionBackColor = Color.Tomato;
             columnHeaderCellStyle.SelectionForeColor = SystemColors.ControlText;
             columnHeaderCellStyle.WrapMode = DataGridViewTriState.True;
             datagridView.ColumnHeadersDefaultCellStyle = columnHeaderCellStyle;            
@@ -177,14 +178,14 @@ namespace Stock_Management.Forms
             rowHeaderCellStyle.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             rowHeaderCellStyle.ForeColor = SystemColors.WindowText;
             rowHeaderCellStyle.Padding = new Padding(3);
-            rowHeaderCellStyle.SelectionBackColor = SystemColors.Highlight;
+            //rowHeaderCellStyle.SelectionBackColor = SystemColors.Highlight;
             rowHeaderCellStyle.SelectionForeColor = SystemColors.HighlightText;
             rowHeaderCellStyle.WrapMode = DataGridViewTriState.True;
             datagridView.RowHeadersDefaultCellStyle = rowHeaderCellStyle;
             rowDefaultCellStyle.BackColor = Color.Beige;
             rowDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 11.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
             rowDefaultCellStyle.Padding = new Padding(3);
-            rowDefaultCellStyle.SelectionBackColor = Color.Tomato;
+            //rowDefaultCellStyle.SelectionBackColor = Color.Tomato;
             rowDefaultCellStyle.SelectionForeColor = SystemColors.ControlText;
             datagridView.RowsDefaultCellStyle = rowDefaultCellStyle;
             datagridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -195,7 +196,7 @@ namespace Stock_Management.Forms
             if (dataGridView.Rows[e.RowIndex].Selected)
             {
                 e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
-                e.CellStyle.SelectionBackColor = Color.Tomato;
+                e.CellStyle.SelectionBackColor = e.CellStyle.BackColor;
             }
         }
     }
