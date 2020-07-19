@@ -1,5 +1,5 @@
 ﻿using Stock_Management.Shared;
-using StockEntity.Entity;
+using StockEntity.EntityX;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -8,9 +8,6 @@ namespace Stock_Management.Forms
 {
     public partial class ProductListForm : BaseForm
     {
-        private List<Product> productList;
-        private Product selectedProduct;
-
         public ProductListForm()
         {
             InitializeComponent();
@@ -32,7 +29,6 @@ namespace Stock_Management.Forms
                 ColSelect.Visible = false;
             }
 
-
             LoadProductList();
         }
 
@@ -47,14 +43,13 @@ namespace Stock_Management.Forms
             ShowFormAsFixedDialog(this, productForm);
         }
 
-
         private void dgvProductList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex == -1 || e.ColumnIndex == -1)
             {
                 return;
             }
-            selectedProduct = (Product)dgvProductList.Rows[e.RowIndex].DataBoundItem;
+            ProductReport selectedProduct = (ProductReport)dgvProductList.Rows[e.RowIndex].DataBoundItem;
             if (GetSelectedCellText(dgvProductList, e) == "Details")
             {
                 ProductForm productForm = new ProductForm(selectedProduct.Id);
@@ -68,7 +63,7 @@ namespace Stock_Management.Forms
                 }
                 else if (selectedProduct != null && CallerForm.Name == "DealerBillBreakupForm")
                 {
-                    ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.Name);
+                    ((DealerBillBreakupForm)CallerForm).OnProductSelect(selectedProduct.Id, selectedProduct.ProductName);
                 }
                 Close(); // close form and on closing call BillBreakupForm method to set product Id and Name
             }
@@ -76,13 +71,29 @@ namespace Stock_Management.Forms
 
         public void LoadProductList()
         {
-            productList = SharedRepo.DBRepo.GetProductListForAdmin(txtSearchProduct.Text.Trim());
+            List<ProductReport> productList = SharedRepo.DBRepo.GetProductListForAdmin(txtSearchProduct.Text.Trim());
             dgvProductList.DataSource = productList;
             dgvProductList.ClearSelection();
         }
 
         private void dgvProductList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            if (e.ColumnIndex == ColAvailableQuantity.Index)
+            {
+                ProductReport productReport = (ProductReport)dgvProductList.Rows[e.RowIndex].DataBoundItem;
+                if (productReport.AvailableQuantity <= productReport.LowerLimit)
+                {
+                    e.CellStyle.BackColor = RAG_Red;
+                }
+                else if (productReport.AvailableQuantity >= productReport.UpperLimit)
+                {
+                    e.CellStyle.BackColor = RAG_Green;
+                }
+                else
+                {
+                    e.CellStyle.BackColor = RAG_Amber;
+                }
+            }
             DataGridView_Selected_Cell_CellFormatting(sender, e);
         }
     }

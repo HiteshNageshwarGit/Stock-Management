@@ -30,18 +30,8 @@ namespace Stock_Management.Forms
         }
 
         private void LoadProductReportList()
-        {
-            if (chkIncludeBills.Checked)
-            {
-                ColTotalQuantity.Visible = true;
-                ColUnitPrice.Visible = true;
-            }
-            else
-            {
-                ColTotalQuantity.Visible = false;
-                ColUnitPrice.Visible = false;
-            }
-            dgvProductReport.DataSource = SharedRepo.DBRepo.GetProductReport(chkIncludeBills.Checked, txtProductName.Text);
+        {           
+            dgvProductReport.DataSource = SharedRepo.DBRepo.GetProductReport(txtProductName.Text);
         }
     }
 }

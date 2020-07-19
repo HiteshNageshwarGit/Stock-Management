@@ -1,13 +1,4 @@
-﻿----DELETE FROM CustomerBillBreakup
-----DELETE FROM DealerBillBreakup
-----DELETE FROM CustomerBill
-----DELETE FROM DealerBill
-----DELETE FROM Customer
-----DELETE FROM Dealer
-----DELETE FROM ProductProperty
-----DELETE FROM Product
-
-
+﻿
 -- Create Tables on SQLite
 
 CREATE TABLE KeyValue (
@@ -126,3 +117,9 @@ CREATE TABLE CustomerBillBreakup (
 )	
 
  -- Versioning of DB starts here
+
+UPDATE KeyValue SET Value = 2 WHERE Key = 'DBVersion'
+ALTER TABLE Product ADD COLUMN LowerLimit INTEGER;
+ALTER TABLE Product ADD COLUMN UpperLimit INTEGER;
+UPDATE Product SET LowerLimit = 0 WHERE LowerLimit IS NULL
+UPDATE Product SET UpperLimit = 0 WHERE UpperLimit IS NULL

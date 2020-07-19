@@ -116,22 +116,54 @@ namespace StockEntity
             }
         }
 
-        public List<Product> GetProductListForAdmin(string productName)
+        public List<ProductReport> GetProductListForAdmin(string productName)
         {
             productName = productName.Trim().ToLower();
-            List<Product> exactMatchProductList = context.Products.Where(x => productName == "" || x.Name.ToLower().Contains(productName)).OrderBy(x => x.Name).Take(50).ToList();
+
+            var groupQuery = from DBB in context.DealerBillBreakups
+                             group DBB by new { DBB.ProductId } into groupedBillBreakup
+                             select new
+                             {
+                                 DBBGroupKey = groupedBillBreakup.Key,
+                                 AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity)
+                             };
+            //var list1 = groupQuery.ToList();
+
+            var exactMatchQuery = from P in context.Products.Where(x => productName == "" || x.Name.ToLower().Contains(productName))
+                                  from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
+                                  select new ProductReport
+                                  {
+                                      Id = P.Id,
+                                      ProductName = P.Name,
+                                      AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
+                                      LowerLimit = P.LowerLimit,
+                                      UpperLimit = P.UpperLimit
+                                  };
+            List<ProductReport> exactMatchProductList = exactMatchQuery.OrderBy(x => x.ProductName).ToList();
+
             if (productName.Trim().Split(' ').Length == 1)
             {
                 BaseEntity.ResetRowNumberInList(exactMatchProductList);
-                return exactMatchProductList;
+                return exactMatchProductList.Take(50).ToList();
             }
 
             // Search each word of product name
             string[] splittedProductNames = productName.Split(' ');
-            List<Product> splittedNameProductList = context.Products.Where(p => splittedProductNames.Any(x => p.Name.ToLower().Contains(x))).OrderBy(x => x.Name).Take(50).ToList();
-            var mergedList = exactMatchProductList.Union(splittedNameProductList, new ProductComparer()).ToList(); // merge by removing duplicate
+            var splitWordMatchQuery = from P in context.Products.Where(p => splittedProductNames.Any(x => p.Name.ToLower().Contains(x)))
+                                      from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
+                                      select new ProductReport
+                                      {
+                                          Id = P.Id,
+                                          ProductName = P.Name,
+                                          AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
+                                          LowerLimit = P.LowerLimit,
+                                          UpperLimit = P.UpperLimit
+                                      };
+            List<ProductReport> splittedNameProductList = splitWordMatchQuery.OrderBy(x => x.ProductName).ToList();
+
+            List<ProductReport> mergedList = exactMatchProductList.Union(splittedNameProductList, new ProductReportComparer()).ToList(); // merge by removing duplicate
             BaseEntity.ResetRowNumberInList(mergedList);
-            return mergedList;
+            return mergedList.Take(100).ToList();
         }
         #endregion
 
@@ -387,14 +419,14 @@ namespace StockEntity
 
         public List<DealerBillBreakup> GetDealerBillBreakupList(int billId)
         {
-            List<DealerBillBreakup> dealerBillBreakupList = context.DealerBillBreakups.Where(x => x.DealerBillId == billId).OrderByDescending(x => x.EntryDate).ToList();
+            List<DealerBillBreakup> dealerBillBreakupList = context.DealerBillBreakups.Include(x => x.Product).Where(x => x.DealerBillId == billId).OrderByDescending(x => x.EntryDate).ToList();
             BaseEntity.ResetRowNumberInList(dealerBillBreakupList);
             return dealerBillBreakupList;
         }
 
         public DealerBillBreakup GetDealerBillBreakup(int billId)
         {
-            return context.DealerBillBreakups.Where(x => x.Id == billId).FirstOrDefault();
+            return context.DealerBillBreakups.Include(x => x.Product).Where(x => x.Id == billId).FirstOrDefault();
         }
         #endregion
 
@@ -596,55 +628,31 @@ namespace StockEntity
         }
 
         #region Report
-        public List<ProductReport> GetProductReport(bool includeBills, string productName)
+        public List<ProductReport> GetProductReport(string productName)
         {
             List<ProductReport> productReportList = new List<ProductReport>();
-            if (includeBills) // Fetch available products at dealer bill level
-            {
-                var groupQuery = from DBB in context.DealerBillBreakups.Where(x => x.AvailableQuantity > 0) // do not fetch bills if products already sold
-                                 group DBB by new { DBB.ProductId, DBB.UnitPrice } into groupedBillBreakup
-                                 select new
-                                 {
-                                     DBBGroupKey = groupedBillBreakup.Key,
-                                     AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity),
-                                     TotalQuantity = groupedBillBreakup.Sum(x => x.TotalQuantity)
-                                 };
-                var list1 = groupQuery.ToList();
 
-                var joinQuery = from P in context.Products
-                                from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
-                                select new ProductReport
-                                {
-                                    ProductId = P.Id,
-                                    ProductName = P.Name,
-                                    TotalQuantity = grp == null ? 0 : grp.TotalQuantity,
-                                    AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
-                                    UnitPrice = grp == null ? 0 : grp.DBBGroupKey.UnitPrice
-                                };
-                productReportList = joinQuery.ToList();
-            }
-            else // Fetch available products at overall level
-            {
-                var groupQuery = from DBB in context.DealerBillBreakups
-                                 group DBB by new { DBB.ProductId } into groupedBillBreakup
-                                 select new
-                                 {
-                                     DBBGroupKey = groupedBillBreakup.Key,
-                                     AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity)
-                                 };
-                var list1 = groupQuery.ToList();
+            var groupQuery = from DBB in context.DealerBillBreakups.Where(x => x.AvailableQuantity > 0) // do not fetch bills if products already sold
+                             group DBB by new { DBB.ProductId, DBB.UnitPrice } into groupedBillBreakup
+                             select new
+                             {
+                                 DBBGroupKey = groupedBillBreakup.Key,
+                                 AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity),
+                                 TotalQuantity = groupedBillBreakup.Sum(x => x.TotalQuantity)
+                             };
+            var list1 = groupQuery.ToList();
 
-                var joinQuery = from P in context.Products
-                                from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
-                                select new ProductReport
-                                {
-                                    ProductId = P.Id,
-                                    ProductName = P.Name,
-                                    AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
-                                };
-                productReportList = joinQuery.ToList();
-            }
-
+            var joinQuery = from P in context.Products
+                            from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
+                            select new ProductReport
+                            {
+                                Id = P.Id,
+                                ProductName = P.Name,
+                                TotalQuantity = grp == null ? 0 : grp.TotalQuantity,
+                                AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
+                                UnitPrice = grp == null ? 0 : grp.DBBGroupKey.UnitPrice
+                            };
+            productReportList = joinQuery.ToList();
             BaseEntity.ResetRowNumberInList(productReportList);
             return productReportList;
         }

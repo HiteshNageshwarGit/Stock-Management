@@ -16,13 +16,13 @@ namespace StockEntity.Helper
         }
     }
 
-    class ProductComparer : IEqualityComparer<Product>
+    class ProductReportComparer : IEqualityComparer<ProductReport>
     {
-        public bool Equals(Product x, Product y)
+        public bool Equals(ProductReport x, ProductReport y)
         {
             return x.Id == y.Id;
         }
-        public int GetHashCode(Product obj)
+        public int GetHashCode(ProductReport obj)
         {
             return obj.Id.GetHashCode();
         }

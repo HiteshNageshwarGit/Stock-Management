@@ -36,7 +36,7 @@ namespace Stock_Management.Forms
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        internal void NumericContyrolKeyPress(object sender, KeyPressEventArgs e)
+        internal void NumericControlKeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) // Only numeric values and decimal are allowed
             {

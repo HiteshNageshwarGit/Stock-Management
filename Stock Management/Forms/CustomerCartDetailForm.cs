@@ -70,7 +70,7 @@ namespace Stock_Management.Forms
 
         private void dgvCart_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
-            e.Control.KeyPress -= new KeyPressEventHandler(NumericContyrolKeyPress);
+            e.Control.KeyPress -= new KeyPressEventHandler(NumericControlKeyPress);
             if (dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColUnitSellPrice.Name].Index // Edit Unit selling price
                || dgvCart.CurrentCell.ColumnIndex == dgvCart.Columns[CartColProductQuantityInCart.Name].Index // Edit product quantity in cart 
                )
@@ -78,7 +78,7 @@ namespace Stock_Management.Forms
                 TextBox tb = e.Control as TextBox;
                 if (tb != null)
                 {
-                    tb.KeyPress += new KeyPressEventHandler(NumericContyrolKeyPress); // allow only numeric keys
+                    tb.KeyPress += new KeyPressEventHandler(NumericControlKeyPress); // allow only numeric keys
                 }
             }
 

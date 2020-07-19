@@ -10,8 +10,8 @@ namespace Stock_Management.Forms
     public partial class DealerBillBreakupForm : BaseForm
     {
         private DealerBillBreakup dealerBillBreakup;
-        private  int _dealerBillId;
-        private  int _dealerBillBreakupId;
+        private int _dealerBillId;
+        private int _dealerBillBreakupId;
         public DealerBillBreakupForm(int dealerBillId, int dealerBillBreakupId)
         {
             InitializeComponent();
@@ -52,7 +52,11 @@ namespace Stock_Management.Forms
         }
         private void NumericControl_KeyUp(object sender, KeyEventArgs e)
         {
-            // On key up explicitly get value from text box
+            if (numTotalAmount.Controls[1].Text == "" || numTotalBoxes.Controls[1].Text == "" || numQuantityInABox.Controls[1].Text == "")
+            {
+                return;
+            }
+
             CalculateQuantityAndUnitPrice(decimal.Parse(numTotalAmount.Controls[1].Text),
                                                         decimal.Parse(numTotalBoxes.Controls[1].Text),
                                                         decimal.Parse(numQuantityInABox.Controls[1].Text));

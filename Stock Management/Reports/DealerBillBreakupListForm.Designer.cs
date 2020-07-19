@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAddBillBreakup = new System.Windows.Forms.Button();
             this.dgvBillBreakupList = new System.Windows.Forms.DataGridView();
@@ -44,11 +45,12 @@
             this.ColSNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColQuantityInBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColAvailableQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnitSellingPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Col = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColQuantityInBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDetail = new System.Windows.Forms.DataGridViewLinkColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).BeginInit();
@@ -94,21 +96,22 @@
             this.ColSNo,
             this.ColProduct,
             this.ColTotalAmount,
-            this.ColQuantityInBox,
-            this.Col,
             this.ColTotalQuantity,
+            this.ColAvailableQuantity,
             this.ColUnitPrice,
             this.ColUnitSellingPrice,
+            this.Col,
+            this.ColQuantityInBox,
             this.ColDetail});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.Padding = new System.Windows.Forms.Padding(3);
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvBillBreakupList.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.Padding = new System.Windows.Forms.Padding(3);
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvBillBreakupList.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgvBillBreakupList.Location = new System.Drawing.Point(6, 53);
             this.dgvBillBreakupList.Name = "dgvBillBreakupList";
             this.dgvBillBreakupList.ReadOnly = true;
@@ -161,35 +164,11 @@
             this.ColTotalAmount.ReadOnly = true;
             this.ColTotalAmount.ToolTipText = "Total Amount";
             // 
-            // ColQuantityInBox
-            // 
-            this.ColQuantityInBox.DataPropertyName = "QuantityInBox";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColQuantityInBox.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ColQuantityInBox.FillWeight = 80F;
-            this.ColQuantityInBox.HeaderText = "Qty in Bx ";
-            this.ColQuantityInBox.MinimumWidth = 80;
-            this.ColQuantityInBox.Name = "ColQuantityInBox";
-            this.ColQuantityInBox.ReadOnly = true;
-            this.ColQuantityInBox.ToolTipText = "Quantity In Box";
-            // 
-            // Col
-            // 
-            this.Col.DataPropertyName = "TotalBoxes";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.Col.DefaultCellStyle = dataGridViewCellStyle4;
-            this.Col.FillWeight = 80F;
-            this.Col.HeaderText = "Tot Bxs";
-            this.Col.MinimumWidth = 80;
-            this.Col.Name = "Col";
-            this.Col.ReadOnly = true;
-            this.Col.ToolTipText = "Total Boxes";
-            // 
             // ColTotalQuantity
             // 
             this.ColTotalQuantity.DataPropertyName = "TotalQuantity";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColTotalQuantity.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColTotalQuantity.DefaultCellStyle = dataGridViewCellStyle3;
             this.ColTotalQuantity.FillWeight = 80F;
             this.ColTotalQuantity.HeaderText = "Tot Qty";
             this.ColTotalQuantity.MinimumWidth = 80;
@@ -197,11 +176,25 @@
             this.ColTotalQuantity.ReadOnly = true;
             this.ColTotalQuantity.ToolTipText = "Total Quantity";
             // 
+            // ColAvailableQuantity
+            // 
+            this.ColAvailableQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.ColAvailableQuantity.DataPropertyName = "AvailableQuantity";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColAvailableQuantity.DefaultCellStyle = dataGridViewCellStyle4;
+            this.ColAvailableQuantity.FillWeight = 90F;
+            this.ColAvailableQuantity.HeaderText = "Avl Qty";
+            this.ColAvailableQuantity.MinimumWidth = 90;
+            this.ColAvailableQuantity.Name = "ColAvailableQuantity";
+            this.ColAvailableQuantity.ReadOnly = true;
+            this.ColAvailableQuantity.ToolTipText = "Available Quantity";
+            this.ColAvailableQuantity.Width = 90;
+            // 
             // ColUnitPrice
             // 
             this.ColUnitPrice.DataPropertyName = "UnitPrice";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColUnitPrice.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColUnitPrice.DefaultCellStyle = dataGridViewCellStyle5;
             this.ColUnitPrice.FillWeight = 80F;
             this.ColUnitPrice.HeaderText = "Unt Prc";
             this.ColUnitPrice.MinimumWidth = 80;
@@ -212,8 +205,8 @@
             // ColUnitSellingPrice
             // 
             this.ColUnitSellingPrice.DataPropertyName = "UnitSellPrice";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColUnitSellingPrice.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColUnitSellingPrice.DefaultCellStyle = dataGridViewCellStyle6;
             this.ColUnitSellingPrice.FillWeight = 80F;
             this.ColUnitSellingPrice.HeaderText = "Sell Prc";
             this.ColUnitSellingPrice.MinimumWidth = 80;
@@ -221,10 +214,34 @@
             this.ColUnitSellingPrice.ReadOnly = true;
             this.ColUnitSellingPrice.ToolTipText = "Sell Price";
             // 
+            // Col
+            // 
+            this.Col.DataPropertyName = "TotalBoxes";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.Col.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Col.FillWeight = 80F;
+            this.Col.HeaderText = "Tot Bxs";
+            this.Col.MinimumWidth = 80;
+            this.Col.Name = "Col";
+            this.Col.ReadOnly = true;
+            this.Col.ToolTipText = "Total Boxes";
+            // 
+            // ColQuantityInBox
+            // 
+            this.ColQuantityInBox.DataPropertyName = "QuantityInBox";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColQuantityInBox.DefaultCellStyle = dataGridViewCellStyle8;
+            this.ColQuantityInBox.FillWeight = 80F;
+            this.ColQuantityInBox.HeaderText = "Qty in Bx ";
+            this.ColQuantityInBox.MinimumWidth = 80;
+            this.ColQuantityInBox.Name = "ColQuantityInBox";
+            this.ColQuantityInBox.ReadOnly = true;
+            this.ColQuantityInBox.ToolTipText = "Quantity In Box";
+            // 
             // ColDetail
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ColDetail.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ColDetail.DefaultCellStyle = dataGridViewCellStyle9;
             this.ColDetail.FillWeight = 80F;
             this.ColDetail.HeaderText = "Action";
             this.ColDetail.MinimumWidth = 80;
@@ -257,11 +274,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColQuantityInBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTotalQuantity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColAvailableQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColUnitPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColUnitSellingPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Col;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColQuantityInBox;
         private System.Windows.Forms.DataGridViewLinkColumn ColDetail;
     }
 }

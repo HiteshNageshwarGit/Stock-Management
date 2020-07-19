@@ -36,7 +36,6 @@ namespace Stock_Management.Forms
         private void txtName_KeyUp(object sender, KeyEventArgs e)
         {
             ToTitleCase(txtName);
-            //AutoCompleteProductName();
         }
 
         private void btnSaveProduct_Click(object sender, EventArgs e)
@@ -63,8 +62,8 @@ namespace Stock_Management.Forms
                 {
                     SetFormBehaviour(CRUD_OP_VIEW);
                     txtName.Text = product.Name;
-                    txtCode.Text = product.Code;
-                    txtColor.Text = product.Color;
+                    numLowerLimit.Value = product.LowerLimit;
+                    numUpperLimit.Value = product.UpperLimit;
                     txtRemarks.Text = product.Remarks;
                 }
             }
@@ -80,8 +79,8 @@ namespace Stock_Management.Forms
 
             product.ResetValidationError();
             product.Name = txtName.Text.Trim();
-            product.Code = txtCode.Text.Trim();
-            product.Color = txtColor.Text.Trim();
+            product.LowerLimit = (int)numLowerLimit.Value;
+            product.UpperLimit = (int)numUpperLimit.Value;
             product.Remarks = txtRemarks.Text.Trim();
 
             product.ValidateProduct();
@@ -110,8 +109,8 @@ namespace Stock_Management.Forms
         private void EnableControls(bool enalbleInputs)
         {
             txtName.Enabled = enalbleInputs;
-            txtCode.Enabled = enalbleInputs;
-            txtColor.Enabled = enalbleInputs;
+            numLowerLimit.Enabled = enalbleInputs;
+            numUpperLimit.Enabled = enalbleInputs;
             txtRemarks.Enabled = enalbleInputs;
         }
 
@@ -136,30 +135,5 @@ namespace Stock_Management.Forms
                     break;
             }
         }
-
-        //private void AutoCompleteProductName()
-        //{
-        //    var source = new AutoCompleteStringCollection();
-        //    source.AddRange(new string[]
-        //                    {
-        //                "January",
-        //                "February",
-        //                "March",
-        //                "April",
-        //                "May",
-        //                "June",
-        //                "July",
-        //                "August",
-        //                "September",
-        //                "October",
-        //                "November",
-        //                "December"
-        //                    });
-        //    txtName.AutoCompleteCustomSource = source;
-        //    txtName.AutoCompleteMode = AutoCompleteMode.Suggest;
-        //    txtName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-        //}
-
-
     }
 }

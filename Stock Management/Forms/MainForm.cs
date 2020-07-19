@@ -37,6 +37,7 @@ namespace Stock_Management
                 else if (!IsDBCompitable())
                 {
                     MessageBox.Show("Current Database is not compitable, please update Database");
+                    Close();
                 }
                 else if (string.IsNullOrWhiteSpace(SharedRepo.UserRole))
                 {

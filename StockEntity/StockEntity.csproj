@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DB\StockDB_V_1.sqlite" />
+    <None Include="DB\StockDB_V_2.sqlite" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -9,19 +9,13 @@ namespace StockEntity.Entity
         public string Name { get; set; }
         public string Code { get; set; }
         public string Color { get; set; }
+        public int LowerLimit { get; set; }
+        public int UpperLimit { get; set; }
         #endregion
 
         public override string ToString()
         {
             StringBuilder str = new StringBuilder(Name);
-            if (!string.IsNullOrWhiteSpace(Code))
-            {
-                str.Append(" - " + Code);
-            }
-            if (!string.IsNullOrWhiteSpace(Color))
-            {
-                str.Append(" - " + Color);
-            }
             return str.ToString();
         }
 
@@ -36,6 +30,20 @@ namespace StockEntity.Entity
             {
                 EntityState.State = ValidationState.ERROR;
                 EntityState.StateMessage = "Max 50 charectors allowed for Name";
+            }
+
+            if (LowerLimit != 0  || UpperLimit != 0)// Validate RAG if value provided for any one
+            {
+                if (LowerLimit == 0 || UpperLimit == 0)
+                {
+                    EntityState.State = ValidationState.ERROR;
+                    EntityState.StateMessage = "All limit values must be greater than ZERO";
+                }
+                else if (LowerLimit > UpperLimit)
+                {
+                    EntityState.State = ValidationState.ERROR;
+                    EntityState.StateMessage = "Lower limit must be less than Upper limit";
+                }
             }
         }
     }

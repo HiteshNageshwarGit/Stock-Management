@@ -43,7 +43,7 @@ namespace Stock_Management.Forms
 
         private void txtMobile_KeyPress(object sender, KeyPressEventArgs e)
         {
-            NumericContyrolKeyPress(sender, e);
+            NumericControlKeyPress(sender, e);
         }
         private void PersonForm_Load(object sender, EventArgs e)
         {

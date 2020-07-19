@@ -36,14 +36,13 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvProductReport = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtProductName = new System.Windows.Forms.TextBox();
-            this.chkIncludeBills = new System.Windows.Forms.CheckBox();
             this.ColSNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColAvailableQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtProductName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductReport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,37 +97,6 @@
             this.dgvProductReport.Size = new System.Drawing.Size(775, 382);
             this.dgvProductReport.TabIndex = 0;
             this.dgvProductReport.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvProductReport_CellFormatting);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Product Name:";
-            // 
-            // txtProductName
-            // 
-            this.txtProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProductName.Location = new System.Drawing.Point(120, 15);
-            this.txtProductName.Name = "txtProductName";
-            this.txtProductName.ReadOnly = true;
-            this.txtProductName.Size = new System.Drawing.Size(282, 23);
-            this.txtProductName.TabIndex = 4;
-            // 
-            // chkIncludeBills
-            // 
-            this.chkIncludeBills.AutoSize = true;
-            this.chkIncludeBills.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkIncludeBills.Location = new System.Drawing.Point(439, 19);
-            this.chkIncludeBills.Name = "chkIncludeBills";
-            this.chkIncludeBills.Size = new System.Drawing.Size(114, 21);
-            this.chkIncludeBills.TabIndex = 6;
-            this.chkIncludeBills.Text = "Include Bills";
-            this.chkIncludeBills.UseVisualStyleBackColor = true;
-            this.chkIncludeBills.CheckedChanged += new System.EventHandler(this.chkIncludeBills_CheckedChanged);
             // 
             // ColSNo
             // 
@@ -186,12 +154,30 @@
             this.ColUnitPrice.ReadOnly = true;
             this.ColUnitPrice.ToolTipText = "Unit Price";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Product Name:";
+            // 
+            // txtProductName
+            // 
+            this.txtProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtProductName.Location = new System.Drawing.Point(120, 15);
+            this.txtProductName.Name = "txtProductName";
+            this.txtProductName.ReadOnly = true;
+            this.txtProductName.Size = new System.Drawing.Size(282, 23);
+            this.txtProductName.TabIndex = 4;
+            // 
             // ProductReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.chkIncludeBills);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtProductName);
             this.Controls.Add(this.dgvProductReport);
@@ -209,7 +195,6 @@
         private System.Windows.Forms.DataGridView dgvProductReport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtProductName;
-        private System.Windows.Forms.CheckBox chkIncludeBills;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColAvailableQuantity;
