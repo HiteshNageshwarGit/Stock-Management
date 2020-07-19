@@ -39,6 +39,7 @@
             this.txtProductName = new System.Windows.Forms.TextBox();
             this.dgvProductList = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label1 = new System.Windows.Forms.Label();
             this.pnlCustomerBillBreakup = new System.Windows.Forms.Panel();
             this.ColSNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,7 +61,7 @@
             // txtProductName
             // 
             this.txtProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtProductName.Location = new System.Drawing.Point(12, 12);
+            this.txtProductName.Location = new System.Drawing.Point(122, 11);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(300, 23);
             this.txtProductName.TabIndex = 2;
@@ -117,6 +118,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.dgvProductList);
             this.splitContainer1.Panel1.Controls.Add(this.txtProductName);
             this.splitContainer1.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
@@ -127,6 +129,16 @@
             this.splitContainer1.Size = new System.Drawing.Size(784, 562);
             this.splitContainer1.SplitterDistance = 203;
             this.splitContainer1.TabIndex = 3;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(11, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 15);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Product Name:";
             // 
             // pnlCustomerBillBreakup
             // 
@@ -220,6 +232,7 @@
             this.ColUnitPrice.Name = "ColUnitPrice";
             this.ColUnitPrice.ReadOnly = true;
             this.ColUnitPrice.ToolTipText = "Unit Price";
+            this.ColUnitPrice.Visible = false;
             // 
             // ColUnitPriceCode
             // 
@@ -288,6 +301,7 @@
         private System.Windows.Forms.DataGridView dgvProductList;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel pnlCustomerBillBreakup;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColSNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColProductName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColDealerName;

@@ -67,16 +67,16 @@
             // menuSellProduct
             // 
             this.menuSellProduct.Name = "menuSellProduct";
-            this.menuSellProduct.Size = new System.Drawing.Size(96, 22);
-            this.menuSellProduct.Text = "Cart";
+            this.menuSellProduct.Size = new System.Drawing.Size(180, 22);
+            this.menuSellProduct.Text = "Customer Cart";
             this.menuSellProduct.Click += new System.EventHandler(this.menuSellProduct_Click);
             // 
             // adminToolStripMenuItem
             // 
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dealerListToolStripMenuItem1,
-            this.productListToolStripMenuItem1,
             this.menuCustomerList,
+            this.productListToolStripMenuItem1,
             this.menuSettings});
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
             this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
@@ -85,28 +85,28 @@
             // dealerListToolStripMenuItem1
             // 
             this.dealerListToolStripMenuItem1.Name = "dealerListToolStripMenuItem1";
-            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
+            this.dealerListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.dealerListToolStripMenuItem1.Text = "Dealer List";
             this.dealerListToolStripMenuItem1.Click += new System.EventHandler(this.dealerListToolStripMenuItem_Click);
             // 
             // productListToolStripMenuItem1
             // 
             this.productListToolStripMenuItem1.Name = "productListToolStripMenuItem1";
-            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(147, 22);
-            this.productListToolStripMenuItem1.Text = "Product List";
+            this.productListToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.productListToolStripMenuItem1.Text = "Product Master List";
             this.productListToolStripMenuItem1.Click += new System.EventHandler(this.productListToolStripMenuItem_Click);
             // 
             // menuCustomerList
             // 
             this.menuCustomerList.Name = "menuCustomerList";
-            this.menuCustomerList.Size = new System.Drawing.Size(147, 22);
+            this.menuCustomerList.Size = new System.Drawing.Size(180, 22);
             this.menuCustomerList.Text = "Customer List";
             this.menuCustomerList.Click += new System.EventHandler(this.menuCustomerList_Click);
             // 
             // menuSettings
             // 
             this.menuSettings.Name = "menuSettings";
-            this.menuSettings.Size = new System.Drawing.Size(147, 22);
+            this.menuSettings.Size = new System.Drawing.Size(180, 22);
             this.menuSettings.Text = "Settings";
             this.menuSettings.Click += new System.EventHandler(this.menuSettings_Click);
             // 
@@ -115,14 +115,14 @@
             this.reportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuProductReport});
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
-            this.reportToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.reportToolStripMenuItem.Text = "Report";
+            this.reportToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.reportToolStripMenuItem.Text = "Reports";
             // 
             // menuProductReport
             // 
             this.menuProductReport.Name = "menuProductReport";
-            this.menuProductReport.Size = new System.Drawing.Size(180, 22);
-            this.menuProductReport.Text = "Product Report";
+            this.menuProductReport.Size = new System.Drawing.Size(186, 22);
+            this.menuProductReport.Text = "Product Stock Report";
             this.menuProductReport.Click += new System.EventHandler(this.productReportToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -136,7 +136,7 @@
             // menuAbout
             // 
             this.menuAbout.Name = "menuAbout";
-            this.menuAbout.Size = new System.Drawing.Size(180, 22);
+            this.menuAbout.Size = new System.Drawing.Size(107, 22);
             this.menuAbout.Text = "About";
             this.menuAbout.Click += new System.EventHandler(this.menuAbout_Click);
             // 

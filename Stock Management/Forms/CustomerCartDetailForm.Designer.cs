@@ -256,6 +256,7 @@
             this.CartColUnitPrice.Name = "CartColUnitPrice";
             this.CartColUnitPrice.ReadOnly = true;
             this.CartColUnitPrice.ToolTipText = "Unit Price";
+            this.CartColUnitPrice.Visible = false;
             // 
             // CartColUnitPticeCode
             // 

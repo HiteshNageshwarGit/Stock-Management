@@ -357,7 +357,7 @@ namespace StockEntity
                                 Remarks = DB.Remarks
                             };
 
-            List<BillReport> list = joinQuery.OrderBy(x => x.BillDate).ToList(); // Count should be same as list 1
+            List<BillReport> list = joinQuery.OrderByDescending(x => x.BillDate).ToList(); // Count should be same as list 1
             BaseEntity.ResetRowNumberInList(list);
             return list;
         }
@@ -442,7 +442,7 @@ namespace StockEntity
                                 Remarks = CB.Remarks
                             };
 
-            List<BillReport> customerBillList = joinQuery.OrderBy(x => x.BillDate).ToList(); // Count should be same as list1
+            List<BillReport> customerBillList = joinQuery.OrderByDescending(x => x.BillDate).ToList(); // Count should be same as list1
 
             BaseEntity.ResetRowNumberInList(customerBillList);
             return customerBillList;
@@ -596,26 +596,55 @@ namespace StockEntity
         }
 
         #region Report
-        public List<ProductReport> GetProductReport()
+        public List<ProductReport> GetProductReport(bool includeBills, string productName)
         {
-            var groupQuery = from DBB in context.DealerBillBreakups
-                             group DBB by new { DBB.ProductId, DBB.UnitPrice } into groupedBillBreakup
-                             select new
-                             {
-                                 DBBGroupKey = groupedBillBreakup.Key,
-                                 AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity)
-                             };
+            List<ProductReport> productReportList = new List<ProductReport>();
+            if (includeBills) // Fetch available products at dealer bill level
+            {
+                var groupQuery = from DBB in context.DealerBillBreakups.Where(x => x.AvailableQuantity > 0) // do not fetch bills if products already sold
+                                 group DBB by new { DBB.ProductId, DBB.UnitPrice } into groupedBillBreakup
+                                 select new
+                                 {
+                                     DBBGroupKey = groupedBillBreakup.Key,
+                                     AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity),
+                                     TotalQuantity = groupedBillBreakup.Sum(x => x.TotalQuantity)
+                                 };
+                var list1 = groupQuery.ToList();
 
-            var joinQuery = from P in context.Products
-                            from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
-                            select new ProductReport
-                            {
-                                ProductId = P.Id,
-                                ProductName = P.Name,
-                                AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
-                                UnitPrice = grp == null ? 0 : grp.DBBGroupKey.UnitPrice
-                            };
-            List<ProductReport> productReportList = joinQuery.ToList();
+                var joinQuery = from P in context.Products
+                                from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
+                                select new ProductReport
+                                {
+                                    ProductId = P.Id,
+                                    ProductName = P.Name,
+                                    TotalQuantity = grp == null ? 0 : grp.TotalQuantity,
+                                    AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
+                                    UnitPrice = grp == null ? 0 : grp.DBBGroupKey.UnitPrice
+                                };
+                productReportList = joinQuery.ToList();
+            }
+            else // Fetch available products at overall level
+            {
+                var groupQuery = from DBB in context.DealerBillBreakups
+                                 group DBB by new { DBB.ProductId } into groupedBillBreakup
+                                 select new
+                                 {
+                                     DBBGroupKey = groupedBillBreakup.Key,
+                                     AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity)
+                                 };
+                var list1 = groupQuery.ToList();
+
+                var joinQuery = from P in context.Products
+                                from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
+                                select new ProductReport
+                                {
+                                    ProductId = P.Id,
+                                    ProductName = P.Name,
+                                    AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
+                                };
+                productReportList = joinQuery.ToList();
+            }
+
             BaseEntity.ResetRowNumberInList(productReportList);
             return productReportList;
         }
