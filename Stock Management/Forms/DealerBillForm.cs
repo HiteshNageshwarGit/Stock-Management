@@ -30,13 +30,12 @@ namespace Stock_Management.Forms
 
         private void BillForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CallerForm == null)
+            if (CallerForm == null && CallerForm.Name != null)
             {
-                return;
-            }
-            else if (CallerForm.Name == "BillListForm")
-            {
-                ((BillListForm)CallerForm).LoadBillList();
+                if (CallerForm.Name == "BillListForm")
+                {
+                    ((BillListForm)CallerForm).LoadBillList();
+                }
             }
         }
 

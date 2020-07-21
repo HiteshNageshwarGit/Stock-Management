@@ -41,7 +41,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAddBillBreakup = new System.Windows.Forms.Button();
             this.dgvBillBreakupList = new System.Windows.Forms.DataGridView();
-            this.grpBoxBrakupCount = new System.Windows.Forms.GroupBox();
             this.ColSNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +51,7 @@
             this.Col = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColQuantityInBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColDetail = new System.Windows.Forms.DataGridViewLinkColumn();
+            this.grpBoxBrakupCount = new System.Windows.Forms.GroupBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).BeginInit();
             this.SuspendLayout();
@@ -120,17 +120,6 @@
             this.dgvBillBreakupList.TabIndex = 0;
             this.dgvBillBreakupList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBillBreakupList_CellContentClick);
             this.dgvBillBreakupList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvBillBreakupList_CellFormatting);
-            // 
-            // grpBoxBrakupCount
-            // 
-            this.grpBoxBrakupCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpBoxBrakupCount.Location = new System.Drawing.Point(12, 12);
-            this.grpBoxBrakupCount.Name = "grpBoxBrakupCount";
-            this.grpBoxBrakupCount.Size = new System.Drawing.Size(734, 122);
-            this.grpBoxBrakupCount.TabIndex = 5;
-            this.grpBoxBrakupCount.TabStop = false;
-            this.grpBoxBrakupCount.Text = "Dealer And Bill Details";
             // 
             // ColSNo
             // 
@@ -249,6 +238,17 @@
             this.ColDetail.ReadOnly = true;
             this.ColDetail.Text = "Details";
             // 
+            // grpBoxBrakupCount
+            // 
+            this.grpBoxBrakupCount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpBoxBrakupCount.Location = new System.Drawing.Point(12, 12);
+            this.grpBoxBrakupCount.Name = "grpBoxBrakupCount";
+            this.grpBoxBrakupCount.Size = new System.Drawing.Size(734, 122);
+            this.grpBoxBrakupCount.TabIndex = 5;
+            this.grpBoxBrakupCount.TabStop = false;
+            this.grpBoxBrakupCount.Text = "Dealer And Bill Details";
+            // 
             // DealerBillBreakupListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,6 +259,7 @@
             this.MinimumSize = new System.Drawing.Size(750, 550);
             this.Name = "DealerBillBreakupListForm";
             this.Text = "Dealer Bill Breakup List";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DealerBillBreakupListForm_FormClosing);
             this.Load += new System.EventHandler(this.BillBreakupListForm_Load);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvBillBreakupList)).EndInit();

@@ -291,7 +291,6 @@
             0,
             0});
             this.numQuantityInABox.ValueChanged += new System.EventHandler(this.NumericControl_ValueChange);
-            this.numQuantityInABox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericControlWithoutDecimal_KeyPress);
             this.numQuantityInABox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NumericControl_KeyUp);
             // 
             // numTotalBoxes
@@ -317,7 +316,6 @@
             0,
             0});
             this.numTotalBoxes.ValueChanged += new System.EventHandler(this.NumericControl_ValueChange);
-            this.numTotalBoxes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NumericControlWithoutDecimal_KeyPress);
             this.numTotalBoxes.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NumericControl_KeyUp);
             // 
             // numTotalAmount

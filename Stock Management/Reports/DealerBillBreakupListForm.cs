@@ -93,5 +93,23 @@ namespace Stock_Management.Forms
             }
             DataGridView_Selected_Cell_CellFormatting(sender, e);
         }
+
+        private void DealerBillBreakupListForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            NotifyCallerForm();
+        }
+
+        private void NotifyCallerForm()
+        {
+            if (CallerForm != null && CallerForm.Name != null)
+            {
+                if (CallerForm.Name == "BillListForm")
+                {
+                    ((BillListForm)CallerForm).LoadBillList();
+                }
+            }
+
+        }
+
     }
 }

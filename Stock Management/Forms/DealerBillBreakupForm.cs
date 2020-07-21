@@ -178,7 +178,5 @@ namespace Stock_Management.Forms
             ProductListForm productListForm = new ProductListForm();
             ShowFormAsFixedDialog(this, productListForm);
         }
-
-
     }
 }
