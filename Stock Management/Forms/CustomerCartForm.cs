@@ -17,11 +17,7 @@ namespace Stock_Management.Forms
             SetDataGridViewProperties(dgvProductList);
             ShowFormInPanel(this, pnlCustomerBillBreakup, customerBillBreakListForm);
         }
-
-        private void SellForm_Load(object sender, System.EventArgs e)
-        {
-
-        }
+               
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.F))

@@ -232,6 +232,7 @@
             this.CollBillDetails.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.CollBillDetails.Text = "Brkup";
             this.CollBillDetails.ToolTipText = "Show Bill";
+            this.CollBillDetails.Visible = false;
             // 
             // ProductReportForm
             // 

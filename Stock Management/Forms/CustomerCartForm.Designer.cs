@@ -265,14 +265,15 @@
             // ColAddToCart
             // 
             this.ColAddToCart.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ColAddToCart.HeaderText = "Add to Cart";
-            this.ColAddToCart.MinimumWidth = 100;
+            this.ColAddToCart.FillWeight = 80F;
+            this.ColAddToCart.HeaderText = "++Cart";
+            this.ColAddToCart.MinimumWidth = 80;
             this.ColAddToCart.Name = "ColAddToCart";
             this.ColAddToCart.ReadOnly = true;
             this.ColAddToCart.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.ColAddToCart.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.ColAddToCart.Text = "Add to Cart";
-            this.ColAddToCart.Width = 150;
+            this.ColAddToCart.Text = "++Cart";
+            this.ColAddToCart.Width = 80;
             // 
             // CustomerCartForm
             // 
@@ -284,7 +285,6 @@
             this.Name = "CustomerCartForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.Text = "Customer Cart";
-            this.Load += new System.EventHandler(this.SellForm_Load);
             this.Shown += new System.EventHandler(this.SellForm_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductList)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
