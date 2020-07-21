@@ -49,7 +49,6 @@
             this.txtTotalBillAmountForCart = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvCart = new System.Windows.Forms.DataGridView();
-            this.txtCustomerName = new System.Windows.Forms.TextBox();
             this.ColSNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CartColProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CartColUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +59,7 @@
             this.CartColAddOne = new System.Windows.Forms.DataGridViewButtonColumn();
             this.CartColRemoveOne = new System.Windows.Forms.DataGridViewButtonColumn();
             this.CartColTotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtCustomerName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -110,7 +110,6 @@
             this.txtTotalProductQuantityInCart.Name = "txtTotalProductQuantityInCart";
             this.txtTotalProductQuantityInCart.Size = new System.Drawing.Size(50, 23);
             this.txtTotalProductQuantityInCart.TabIndex = 27;
-            this.txtTotalProductQuantityInCart.Text = "9999";
             // 
             // label3
             // 
@@ -211,15 +210,6 @@
             this.dgvCart.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellEndEdit);
             this.dgvCart.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvCart_CellFormatting);
             this.dgvCart.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.dgvCart_EditingControlShowing);
-            // 
-            // txtCustomerName
-            // 
-            this.txtCustomerName.Enabled = false;
-            this.txtCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCustomerName.Location = new System.Drawing.Point(548, 9);
-            this.txtCustomerName.Name = "txtCustomerName";
-            this.txtCustomerName.Size = new System.Drawing.Size(209, 23);
-            this.txtCustomerName.TabIndex = 32;
             // 
             // ColSNo
             // 
@@ -354,6 +344,15 @@
             this.CartColTotalAmount.HeaderText = "Total";
             this.CartColTotalAmount.MinimumWidth = 100;
             this.CartColTotalAmount.Name = "CartColTotalAmount";
+            // 
+            // txtCustomerName
+            // 
+            this.txtCustomerName.Enabled = false;
+            this.txtCustomerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCustomerName.Location = new System.Drawing.Point(548, 9);
+            this.txtCustomerName.Name = "txtCustomerName";
+            this.txtCustomerName.Size = new System.Drawing.Size(209, 23);
+            this.txtCustomerName.TabIndex = 32;
             // 
             // CustomerCartDetailForm
             // 

@@ -57,7 +57,7 @@ namespace Stock_Management.Forms
             }
             else if (GetSelectedCellText(dgvProductList, e) == "Select")
             {
-                if (CallerForm == null && CallerForm.Name != null)
+                if (CallerForm == null && CallerForm.Name == null)
                 {
                     return;
                 }

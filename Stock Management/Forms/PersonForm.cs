@@ -142,7 +142,7 @@ namespace Stock_Management.Forms
                 SharedRepo.DBRepo.SaveCustomer((Customer)person);
             }
 
-            if (CallerForm == null && CallerForm.Name != null)
+            if (CallerForm == null && CallerForm.Name == null)
             {
                 return;
             }
