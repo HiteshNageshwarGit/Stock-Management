@@ -18,8 +18,7 @@ namespace StockEntity.EntityX
         public decimal SellingUnitPrice { get; set; }
         public int SellingQuantity { get; set; }
         public decimal SellingAmount { get; set; } // SellingUnitPrice * SellingQuantity
-
-        public string DealerUnitPriceInCode
+        public string DealerUnitPriceInCode // Read only
         {
             get
             {

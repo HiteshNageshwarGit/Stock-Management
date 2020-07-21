@@ -628,33 +628,70 @@ namespace StockEntity
         }
 
         #region Report
-        public List<ProductReport> GetProductReport(string productName)
+        public List<ProductInCart> LoadProductListWillBillDetails(string productName) // This method is same as GetProductListForSelling 
+                                                                                        // except getting bill where avl qty is 0
+                                                                                        // Also not loading all the fields
         {
-            List<ProductReport> productReportList = new List<ProductReport>();
+            productName = productName.Trim().ToLower();
+            List<ProductInCart> exactMatchProductList = (from P in context.Products
+                                                         where (productName == "" || P.Name.ToLower().Contains(productName))
+                                                         join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
+                                                         join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
+                                                         join D in context.Dealers on DB.DealerId equals D.Id
 
-            var groupQuery = from DBB in context.DealerBillBreakups.Where(x => x.AvailableQuantity > 0) // do not fetch bills if products already sold
-                             group DBB by new { DBB.ProductId, DBB.UnitPrice } into groupedBillBreakup
-                             select new
-                             {
-                                 DBBGroupKey = groupedBillBreakup.Key,
-                                 AvaiableQuantity = groupedBillBreakup.Sum(x => x.AvailableQuantity),
-                                 TotalQuantity = groupedBillBreakup.Sum(x => x.TotalQuantity)
-                             };
-            var list1 = groupQuery.ToList();
+                                                         select new ProductInCart
+                                                         {
+                                                             ProductId = P.Id,
+                                                             ProductName = P.Name,
+                                                             DealerName = D.Name,
+                                                             DealerBillDate = DB.BillDate,
+                                                             QuantityInBox = DBB.QuantityInBox,
+                                                             TotalBoxes = DBB.TotalBoxes,
+                                                             TotalQuantity = DBB.TotalQuantity,
+                                                             AvailableQuantity = DBB.AvailableQuantity,
+                                                             SellingUnitPrice = DBB.UnitSellPrice,
+                                                             DealerUnitPrice = DBB.UnitPrice,
+                                                             DealerBillBreakupId = DBB.Id,
+                                                             SellingQuantity = 1,
+                                                             SellingAmount = DBB.UnitPrice
 
-            var joinQuery = from P in context.Products
-                            from grp in groupQuery.Where(g => g.DBBGroupKey.ProductId == P.Id).DefaultIfEmpty()// Left join Product on GroupedQuery
-                            select new ProductReport
-                            {
-                                Id = P.Id,
-                                ProductName = P.Name,
-                                TotalQuantity = grp == null ? 0 : grp.TotalQuantity,
-                                AvailableQuantity = grp == null ? 0 : grp.AvaiableQuantity,
-                                UnitPrice = grp == null ? 0 : grp.DBBGroupKey.UnitPrice
-                            };
-            productReportList = joinQuery.ToList();
-            BaseEntity.ResetRowNumberInList(productReportList);
-            return productReportList;
+                                                         }).OrderBy(x => x.ProductName).Take(50).ToList();
+
+            if (productName.Trim().Split(' ').Length == 1)
+            {
+                BaseEntity.ResetRowNumberInList(exactMatchProductList);
+                return exactMatchProductList;
+            }
+
+            // Search each word of product name
+            string[] splittedProductNames = productName.Split(' ');
+            List<ProductInCart> splittedNameProductList = (from P in context.Products
+                                                           where (splittedProductNames.Any(x => P.Name.ToLower().Contains(x)))
+                                                           join DBB in context.DealerBillBreakups on P.Id equals DBB.ProductId
+                                                           join DB in context.DealerBills on DBB.DealerBillId equals DB.Id
+                                                           join D in context.Dealers on DB.DealerId equals D.Id
+
+                                                           select new ProductInCart
+                                                           {
+                                                               ProductId = P.Id,
+                                                               ProductName = P.Name,
+                                                               DealerName = D.Name,
+                                                               DealerBillDate = DB.BillDate,
+                                                               QuantityInBox = DBB.QuantityInBox,
+                                                               TotalBoxes = DBB.TotalBoxes,
+                                                               TotalQuantity = DBB.TotalQuantity,
+                                                               AvailableQuantity = DBB.AvailableQuantity,
+                                                               SellingUnitPrice = DBB.UnitSellPrice,
+                                                               DealerUnitPrice = DBB.UnitPrice,
+                                                               DealerBillBreakupId = DBB.Id,
+                                                               SellingQuantity = 1,
+                                                               SellingAmount = DBB.UnitPrice
+
+                                                           }).OrderBy(x => x.ProductName).Take(50).ToList();
+
+            var mergedList = exactMatchProductList.Union(splittedNameProductList, new Comparer()).ToList(); // merge by removing duplicate
+            BaseEntity.ResetRowNumberInList(mergedList);
+            return mergedList;
         }
         #endregion
     }
